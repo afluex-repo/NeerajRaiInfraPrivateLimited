@@ -85,6 +85,8 @@ namespace NeerajraiInfra.Models
         public string CommPercentage { get; set; }
         public string PK_PaidPayoutId { get; set; }
 
+        public string AssociateImage { get; set; }
+
         #endregion
 
         public DataSet GetExpenseNameList()
@@ -111,6 +113,10 @@ namespace NeerajraiInfra.Models
             DataSet ds = Connection.ExecuteQuery("GetAssociate", para);
             return ds;
         }
+
+
+
+
         public DataSet GetEmployeeList()
         {
             
@@ -237,7 +243,7 @@ namespace NeerajraiInfra.Models
         public string Total { get; set; }
 
         public string Status { get; set; }
-
+        
         public string TotalBooking { get; set; }
 
         public string Month { get; set; }
@@ -283,6 +289,9 @@ namespace NeerajraiInfra.Models
 
         public string LastName { get; set; }
 
+        public string FatherName { get; set; }
+        
+
         public string Email { get; set; }
 
         public string PanNo { get; set; }
@@ -290,6 +299,17 @@ namespace NeerajraiInfra.Models
         public string Address { get; set; }
         public string ActionStatus { get; set; }
         public string NewsFor { get; set; }
+
+
+        public string Nomani { get; set; }
+        public string NomineeAge { get; set; }
+        public string NomineeRelation { get; set; }
+
+
+
+        //public string LoginID { get; set; }
+
+
 
         #region EditProfile
 
@@ -596,6 +616,161 @@ namespace NeerajraiInfra.Models
             DataSet ds = Connection.ExecuteQuery("GetPayoutWiseIncomeDetails", para);
             return ds;
         }
+
+
+
+        public DataSet GetBranchList()
+        {
+            DataSet ds = Connection.ExecuteQuery("GetBranchList");
+            return ds;
+        }
+
+
+
+        public DataSet GetDesignationList()
+        {
+
+            SqlParameter[] para = {
+
+                                      new SqlParameter("@Percentage", Percentage)
+
+                                  };
+            DataSet ds = Connection.ExecuteQuery("GetDesignationList", para);
+
+            return ds;
+        }
+
+
+        public DataSet GetAssociateLists()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginID", LoginId) };
+            DataSet ds = Connection.ExecuteQuery("AssociateListTraditional", para);
+            return ds;
+        }
+
+
+        public DataSet AssociateRegistration()
+        {
+            SqlParameter[] para = { new SqlParameter("@BranchID", 1) ,
+                                  new SqlParameter("@SponsorID", UserID) ,
+                                  new SqlParameter("@DesignationID", DesignationID) ,
+                                  new SqlParameter("@RoleID", 2) ,
+                                  new SqlParameter("@FirstName", FirstName) ,
+                                  new SqlParameter("@LastName", LastName) ,
+                                  new SqlParameter("@Contact", Contact) ,
+                                  new SqlParameter("@Email", Email) ,
+                                  new SqlParameter("@Pincode", Pincode) ,
+                                  new SqlParameter("@State", State) ,
+                                  new SqlParameter("@City", City) ,
+                                  new SqlParameter("@Address", Address) ,
+                                  new SqlParameter("@PanNo", PanNo) ,
+                                  new SqlParameter("@PanImage", PanImage) ,
+                                  new SqlParameter("@AddedBy", AddedBy) ,
+                                  new SqlParameter("@Password", Password) ,
+
+                                  new SqlParameter("@AdharNumber", AdharNumber) ,
+                                  new SqlParameter("@BankAccountNo", BankAccountNo) ,
+                                  new SqlParameter("@BankName", BankName) ,
+                                  new SqlParameter("@BankBranch", BankBranch) ,
+                                  new SqlParameter("@IFSCCode", IFSCCode) ,
+
+                                    new SqlParameter("@ProfilePic", ProfilePic) ,
+                                      new SqlParameter("@Signature", Signature) ,
+
+                                  };
+            DataSet ds = Connection.ExecuteQuery("AssociateRegistrationTraditional", para);
+            return ds;
+        }
+        public string Signature { get; set; }
+        public string SponsorDesignationID { get; set; }
+        public List<SelectListItem> ddlDesignation { get; set; }
+
+
+        //public DataSet GetSponsorName()
+        //{
+        //    SqlParameter[] para = { new SqlParameter("@LoginID", LoginId) };
+        //    DataSet ds = Connection.ExecuteQuery("GetSponsorForCustomerRegistraton", para);
+        //    return ds;
+        //}
+
+
+        public DataSet GetSponsorName()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginID", LoginId) };
+            DataSet ds = Connection.ExecuteQuery("GetSponsorForCustomerRegistraton", para);
+            return ds;
+        }
+
+
+        public DataSet CustomerRegistration()
+        {
+            SqlParameter[] para = { new SqlParameter("@BranchID", BranchID) ,
+                                  new SqlParameter("@SponsorID", UserID) ,
+                                  new SqlParameter("@RoleID",3) ,
+                                  new SqlParameter("@FatherName", FatherName),
+                                   new SqlParameter("@Nomani", Nomani) ,
+                                   new SqlParameter("@NomineeAge", NomineeAge) ,
+                                   new SqlParameter("@NomineeRelation", NomineeRelation) ,
+                                    new SqlParameter("@FirstName", FirstName) ,
+                                  new SqlParameter("@LastName", LastName) ,
+                                  new SqlParameter("@Contact", Contact) ,
+                                  new SqlParameter("@Email", Email) ,
+                                  new SqlParameter("@Pincode", Pincode) ,
+                                  new SqlParameter("@State", State) ,
+                                  new SqlParameter("@City", City) ,
+                                  new SqlParameter("@Address", Address) ,
+                                  new SqlParameter("@PanNo", PanNo) ,
+                                  new SqlParameter("@AddedBy", AddedBy) ,
+                                  new SqlParameter("@Password", Password)
+                                  };
+            DataSet ds = Connection.ExecuteQuery("CustomerRegistration", para);
+            return ds;
+        }
+
+
+        public DataSet GetAssociateListss()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginID", LoginId) };
+            DataSet ds = Connection.ExecuteQuery("AssociateListTraditional", para);
+            return ds;
+        }
+
+        public DataSet GetSponsorForCustomerRegistraton()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginID", LoginId) };
+            DataSet ds = Connection.ExecuteQuery("GetSponsorForCustomerRegistraton", para);
+            return ds;
+        }
+
+
+
+        public DataSet GetSponsorNameFOrCustomer()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginID", LoginId) };
+            DataSet ds = Connection.ExecuteQuery("GetSponsorForCustomerRegistraton", para);
+            return ds;
+        }
+
+
+
+        public DataSet GettingUserProfile()
+        {
+            SqlParameter[] para = {
+                                        new SqlParameter("@LoginId", LoginId)};
+            DataSet ds = Connection.ExecuteQuery("GetUserProfile", para);
+            return ds;
+        }
+
+
+        public DataSet GetAssociateListsssss()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginID", LoginId) };
+            DataSet ds = Connection.ExecuteQuery("AssociateListTraditional", para);
+            return ds;
+        }
+
+
+        
 
     }
 

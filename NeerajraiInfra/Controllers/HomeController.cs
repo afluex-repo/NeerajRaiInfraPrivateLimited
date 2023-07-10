@@ -446,6 +446,12 @@ namespace NeerajraiInfra.Controllers
                             Session["Status"] = ds.Tables[0].Rows[0]["Status"].ToString();
                             Session["CssClass"] = ds.Tables[0].Rows[0]["StatusColor"].ToString();
                             Session["DesignationName"] = ds.Tables[0].Rows[0]["DesignationName"].ToString();
+                            Session["Percentage"] = ds.Tables[0].Rows[0]["Percentage"].ToString();
+
+
+                            
+
+
                             FormName = "AssociateDashBoard";
                             Controller = "AssociateDashboard";
                         }

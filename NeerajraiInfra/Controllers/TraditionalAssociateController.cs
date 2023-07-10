@@ -277,6 +277,9 @@ namespace NeerajraiInfra.Controllers
 
             return RedirectToAction(FormName, Controller);
         }
+
+
+
         public ActionResult UpdateAssociate(string UserID)
         {
             TraditionalAssociate model = new TraditionalAssociate();
