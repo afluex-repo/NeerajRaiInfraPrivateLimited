@@ -16,6 +16,7 @@
     <!-- Custom style CSS -->
     <link rel="stylesheet" href="../AssociateCSS/assets/css/custom.css">
     <link rel='shortcut icon' type='image/x-icon' href="~/WebsiteCss/assets/images/favicon_img.jpg" />
+    <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
 </head>
 
 <body>
@@ -108,11 +109,23 @@
                         @*<li class="dropdown">
                             <a href="/AssociateDashboard/Registration" class="nav-link"><i data-feather="check-circle"></i><span>Registration</span></a>
                         </li>*@
+
+                        <li class="dropdown">
+                            <a href="#" class="menu-toggle nav-link has-dropdown">
+                                <i data-feather="shopping-bag"></i><span>Associate</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="nav-link" href="/AssociateDashboard/AssociateRegistration">Associate Registration</a></li>
+                            </ul>
+                        </li>
+
+
                         <li class="dropdown">
                             <a href="#" class="menu-toggle nav-link has-dropdown">
                                 <i data-feather="shopping-bag"></i><span>Customer</span>
                             </a>
                             <ul class="dropdown-menu">
+                                <li><a class="nav-link" href="/AssociateDashboard/CustomerRegistration">Customer Registration</a></li>
                                 <li><a class="nav-link" href="/AssociateDashboard/CustomerList">Customer Details</a></li>
                             </ul>
                         </li>
@@ -210,6 +223,7 @@
     </div>
     <!-- General JS Scripts -->
     <script src="../AssociateCSS/assets/js/app.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <!-- JS Libraies -->
     <script src="../AssociateCSS/assets/bundles/apexcharts/apexcharts.min.js"></script>
     <script src="../AssociateCSS/assets/bundles/jqvmap/dist/jquery.vmap.min.js"></script>
