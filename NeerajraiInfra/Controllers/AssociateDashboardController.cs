@@ -7,6 +7,8 @@ using NeerajraiInfra.Filter;
 using NeerajraiInfra.Models;
 using System.Data;
 using System.IO;
+using System.Net;
+using System.Net.Mail;
 
 namespace NeerajraiInfra.Controllers
 {
@@ -1799,5 +1801,557 @@ namespace NeerajraiInfra.Controllers
         {
             return View();
         }
+
+
+       
+        /////////////////////////////////////////////////////////////////////////////////////
+      
+
+
+        public ActionResult GetStateCity(string Pincode)
+        {
+            try
+            {
+                Common model = new Common();
+                model.Pincode = Pincode;
+
+                #region GetStateCity
+                DataSet dsStateCity = model.GetStateCity();
+                if (dsStateCity != null && dsStateCity.Tables[0].Rows.Count > 0)
+                {
+                    model.State = dsStateCity.Tables[0].Rows[0]["State"].ToString();
+                    model.City = dsStateCity.Tables[0].Rows[0]["City"].ToString();
+                    model.Result = "yes";
+                }
+                else
+                {
+                    model.State = model.City = "";
+                    model.Result = "no";
+                }
+                #endregion
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return View(ex.Message);
+            }
+        }
+
+
+        public ActionResult GetSponsorName(string SponsorID)
+        {
+            try
+            {
+                AssociateBooking model = new AssociateBooking();
+                model.LoginId = SponsorID;
+
+                #region GetSiteRate
+                DataSet dssponsor = model.GetAssociateListss();
+                if (dssponsor != null && dssponsor.Tables[0].Rows.Count > 0)
+                {
+                    model.SponsorName = dssponsor.Tables[0].Rows[0]["Name"].ToString();
+                    model.UserID = dssponsor.Tables[0].Rows[0]["PK_UserID"].ToString();
+                    model.SponsorDesignationID = dssponsor.Tables[0].Rows[0]["FK_DesignationID"].ToString();
+                    model.Percentage = dssponsor.Tables[0].Rows[0]["Percentage"].ToString();
+                    int desgnationCount = 0;
+
+                    DataSet dsdesignation = model.GetDesignationList();
+                    List<SelectListItem> ddlDesignation = new List<SelectListItem>();
+                    if (dsdesignation != null && dsdesignation.Tables.Count > 0 && dsdesignation.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (DataRow r in dsdesignation.Tables[0].Rows)
+                        {
+                            if (desgnationCount == 0)
+                            {
+                                ddlDesignation.Add(new SelectListItem { Text = "Select Designation", Value = "0" });
+                            }
+                            ddlDesignation.Add(new SelectListItem { Text = r["DesignationName"].ToString(), Value = r["PK_DesignationID"].ToString() });
+                            desgnationCount = desgnationCount + 1;
+                        }
+                    }
+
+                    // ViewBag.ddlDesignation = ddlDesignation;
+
+                    model.ddlDesignation = ddlDesignation;
+                    model.Result = "yes";
+                }
+                else
+                {
+                    model.SponsorName = "";
+                    model.Result = "no";
+                }
+                #endregion
+
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return View(ex.Message);
+            }
+        }
+
+        public ActionResult GetSponsorForCustomerRegistraton(string SponsorID)
+        {
+            try
+            {
+                AssociateBooking model = new AssociateBooking();
+                model.LoginId = SponsorID;
+
+                #region GetSiteRate
+                DataSet dsSponsorName = model.GetSponsorForCustomerRegistraton();
+                if (dsSponsorName != null && dsSponsorName.Tables[0].Rows.Count > 0)
+                {
+                    model.SponsorName = dsSponsorName.Tables[0].Rows[0]["Name"].ToString();
+                    model.UserID = dsSponsorName.Tables[0].Rows[0]["PK_UserID"].ToString();
+                    model.AssociateImage = dsSponsorName.Tables[0].Rows[0]["profilepic"].ToString();
+                    model.Result = "yes";
+                }
+                else
+                {
+                    model.SponsorName = "";
+                    model.Result = "no";
+                }
+                #endregion
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return View(ex.Message);
+            }
+        }
+        
+
+        public ActionResult GetUserList()
+        {
+            Reports obj = new Reports();
+            List<Reports> lst = new List<Reports>();
+            obj.LoginId = Session["LoginId"].ToString();
+            DataSet ds = obj.GettingUserProfile();
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Reports objList = new Reports();
+                    objList.UserName = dr["Fullname"].ToString();
+                    objList.LoginIDD = dr["LoginId"].ToString();
+                    lst.Add(objList);
+                }
+            }
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
+
+        
+
+        public ActionResult GetSponsorNameFOrCustomer(string SponsorID)
+        {
+            try
+            {
+                AssociateBooking model = new AssociateBooking();
+                model.LoginId = SponsorID;
+
+                #region GetSiteRate
+                DataSet dsSponsorName = model.GetSponsorNameFOrCustomer();
+                if (dsSponsorName != null && dsSponsorName.Tables[0].Rows.Count > 0)
+                {
+                    model.SponsorName = dsSponsorName.Tables[0].Rows[0]["Name"].ToString();
+                    model.UserID = dsSponsorName.Tables[0].Rows[0]["PK_UserID"].ToString();
+                    model.AssociateImage = dsSponsorName.Tables[0].Rows[0]["profilepic"].ToString();
+                    model.Result = "yes";
+                }
+                else
+                {
+                    model.SponsorName = "";
+                    model.Result = "no";
+                }
+                #endregion
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return View(ex.Message);
+            }
+        }
+
+
+
+
+
+
+        public ActionResult GetSponsorNames(string SponsorID)
+        {
+            try
+            {
+                AssociateBooking model = new AssociateBooking();
+                model.LoginId = SponsorID;
+
+                #region GetSiteRate
+                DataSet dssponsor = model.GetAssociateListsssss();
+                if (dssponsor != null && dssponsor.Tables[0].Rows.Count > 0)
+                {
+                    model.SponsorName = dssponsor.Tables[0].Rows[0]["Name"].ToString();
+                    model.UserID = dssponsor.Tables[0].Rows[0]["PK_UserID"].ToString();
+                    model.SponsorDesignationID = dssponsor.Tables[0].Rows[0]["FK_DesignationID"].ToString();
+                    model.Percentage = dssponsor.Tables[0].Rows[0]["Percentage"].ToString();
+                    int desgnationCount = 0;
+
+                    DataSet dsdesignation = model.GetDesignationList();
+                    List<SelectListItem> ddlDesignation = new List<SelectListItem>();
+                    if (dsdesignation != null && dsdesignation.Tables.Count > 0 && dsdesignation.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (DataRow r in dsdesignation.Tables[0].Rows)
+                        {
+                            if (desgnationCount == 0)
+                            {
+                                ddlDesignation.Add(new SelectListItem { Text = "Select Designation", Value = "0" });
+                            }
+                            ddlDesignation.Add(new SelectListItem { Text = r["DesignationName"].ToString(), Value = r["PK_DesignationID"].ToString() });
+                            desgnationCount = desgnationCount + 1;
+                        }
+                    }
+
+                    // ViewBag.ddlDesignation = ddlDesignation;
+
+                    model.ddlDesignation = ddlDesignation;
+                    model.Result = "yes";
+                }
+                else
+                {
+                    model.SponsorName = "";
+                    model.Result = "no";
+                }
+                #endregion
+
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return View(ex.Message);
+            }
+        }
+
+
+
+
+
+
+
+
+        /////////////////////////////////////////////////////////////////////////////////////
+
+
+
+        public ActionResult AssociateRegistration()
+        {
+            try
+            {
+                #region ddlBranch
+                AssociateBooking obj = new AssociateBooking();
+                int count = 0;
+                List<SelectListItem> ddlBranch = new List<SelectListItem>();
+                DataSet dsBranch = obj.GetBranchList();
+                if (dsBranch != null && dsBranch.Tables.Count > 0 && dsBranch.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in dsBranch.Tables[0].Rows)
+                    {
+                        if (count == 0)
+                        {
+                            ddlBranch.Add(new SelectListItem { Text = "Select Branch", Value = "0" });
+                        }
+                        ddlBranch.Add(new SelectListItem { Text = r["BranchName"].ToString(), Value = r["PK_BranchID"].ToString() });
+                        count = count + 1;
+                    }
+                }
+
+                ViewBag.ddlBranch = ddlBranch;
+
+                #endregion
+
+                #region ddlDesignation
+                
+                obj.Percentage = Session["Percentage"].ToString();
+                
+                int desgnationCount = 0;
+                List<SelectListItem> ddlDesignation = new List<SelectListItem>();
+                DataSet dsdesignation = obj.GetDesignationList();
+                if (dsdesignation != null && dsdesignation.Tables.Count > 0 && dsdesignation.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in dsdesignation.Tables[0].Rows)
+                    {
+                        if (desgnationCount == 0)
+                        {
+                            ddlDesignation.Add(new SelectListItem { Text = "Select Designation", Value = "0" });
+                        }
+                        ddlDesignation.Add(new SelectListItem { Text = r["DesignationName"].ToString(), Value = r["PK_DesignationID"].ToString() });
+                        desgnationCount = desgnationCount + 1;
+                    }
+                }
+
+                ViewBag.ddlDesignation = ddlDesignation;
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            return View();
+
+        }
+
+        
+        [HttpPost]
+        [ActionName("AssociateRegistration")]
+        [OnAction(ButtonName = "btnRegistration")]
+        public ActionResult AssociateRegistration(HttpPostedFileBase postedFile, HttpPostedFileBase postedFile1, AssociateBooking model)
+        {
+            string FormName = "";
+            string Controller = "";
+            try
+            {
+                Random rnd = new Random();
+                int ctrPasword = rnd.Next(111111, 999999);
+                model.Password = Crypto.Encrypt(ctrPasword.ToString());
+                model.AddedBy = Session["Pk_userId"].ToString();
+                if (postedFile != null)
+                {
+                    model.ProfilePic = "/images/ProfilePicture/" + Guid.NewGuid() + Path.GetExtension(postedFile.FileName);
+                    postedFile.SaveAs(Path.Combine(Server.MapPath(model.ProfilePic)));
+                    Session["ProfilePic"] = model.ProfilePic;
+                }
+                if (postedFile1 != null)
+                {
+                    model.Signature = "/images/ProfilePicture/" + Guid.NewGuid() + Path.GetExtension(postedFile1.FileName);
+                    postedFile1.SaveAs(Path.Combine(Server.MapPath(model.Signature)));
+
+                }
+                DataSet dsRegistration = model.AssociateRegistration();
+                if (dsRegistration != null && dsRegistration.Tables.Count > 0)
+                {
+                    if (dsRegistration.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        Session["DisplayNameConfirm"] = dsRegistration.Tables[0].Rows[0]["Name"].ToString();
+                        Session["LoginIDConfirm"] = dsRegistration.Tables[0].Rows[0]["LoginId"].ToString();
+                        Session["PasswordConfirm"] = Crypto.Decrypt(dsRegistration.Tables[0].Rows[0]["Password"].ToString());
+                        Session["PKUserID"] = Crypto.Encrypt(dsRegistration.Tables[0].Rows[0]["PKUserID"].ToString());
+                        string assocname = dsRegistration.Tables[0].Rows[0]["Name"].ToString();
+                        string loginid = dsRegistration.Tables[0].Rows[0]["LoginId"].ToString();
+                        string password = Crypto.Decrypt(dsRegistration.Tables[0].Rows[0]["Password"].ToString());
+                        string mobile = model.Contact;
+                        string tempid = "1707166296837269294";
+                        try
+                        {
+                            string msg = BLSMS.AssociateRegistration(assocname, loginid, password);
+                            BLSMS.SendSMS(mobile, msg, tempid);
+                        }
+                        catch
+                        {
+                        }
+                    }
+                    else
+                    {
+                        TempData["Registration"] = dsRegistration.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+                //if (dsRegistration.Tables[0].Rows[0][0].ToString() == "1")
+                //{
+                //    if (model.Email != null)
+                //    {
+                //        string mailbody = "";
+                //        try
+                //        {
+                //            mailbody = "Dear  " + dsRegistration.Tables[0].Rows[0]["Name"].ToString() + ",You have been successfully registered as Afluex Associate.Given below are your login details .!<br/>  <b>Login ID</b> :  " + dsRegistration.Tables[0].Rows[0]["LoginId"].ToString() + "<br/> <b>Passoword</b>  : " + Crypto.Decrypt(dsRegistration.Tables[0].Rows[0]["Password"].ToString());
+
+                //            //var fromAddress = new MailAddress("prakher.afluex@gmail.com");
+                //            //var toAddress = new MailAddress(model.Email);
+
+                //            System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient
+                //            {
+                //                Host = "smtp.gmail.com",
+                //                Port = 587,
+                //                EnableSsl = true,
+                //                DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network,
+                //                UseDefaultCredentials = false,
+                //                Credentials = new NetworkCredential("tejinfrazone@gmail.com", "awneesh1")
+
+                //            };
+
+                //            using (var message = new MailMessage("tejinfrazone@gmail.com", model.Email)
+                //            {
+                //                IsBodyHtml = true,
+                //                Subject = "Associate Registration",
+                //                Body = mailbody
+                //            })
+                //                smtp.Send(message);
+                //            TempData["Message"] = "Registration Successfull !";
+                //        }
+                //        catch (Exception ex)
+                //        {
+                //            //TempData["Registration"] = ex.Message;
+                //        }
+                //    }
+                //    FormName = "ConfirmRegistration";
+                //    Controller = "TraditionalAssociate";
+                //}
+                //else/* if(dsRegistration.Tables[0].Rows[0][0].ToString() == "0")*/
+                //{
+                //    TempData["Registration"] = dsRegistration.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                //    //FormName = "AssociateRegistration";
+                //    //Controller = "TraditionalAssociate";
+                //}
+
+            }
+            catch (Exception ex)
+            {
+                TempData["Registration"] = ex.Message;
+            }
+            FormName = "ConfirmRegistrationForAssociate";
+            Controller = "AssociateDashboard";
+
+            return RedirectToAction(FormName, Controller);
+        }
+
+        public ActionResult ConfirmRegistrationForAssociate()
+        {
+            return View();
+        }
+
+
+        public ActionResult CustomerRegistration(string UserID)
+        {
+            try
+            {
+                #region ddlBranch
+                AssociateBooking obj = new AssociateBooking();
+                int count = 0;
+                List<SelectListItem> ddlBranch = new List<SelectListItem>();
+                DataSet dsBranch = obj.GetBranchList();
+                if (dsBranch != null && dsBranch.Tables.Count > 0 && dsBranch.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in dsBranch.Tables[0].Rows)
+                    {
+                        //if (count == 0)
+                        //{
+                        //    ddlBranch.Add(new SelectListItem { Text = "Select Branch", Value = "0" });
+                        //}
+                        ddlBranch.Add(new SelectListItem { Text = r["BranchName"].ToString(), Value = r["PK_BranchID"].ToString() });
+                        count = count + 1;
+                    }
+                }
+
+                ViewBag.ddlBranch = ddlBranch;
+
+                #endregion
+                return View();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+        }
+
+
+
+        [HttpPost]
+        [ActionName("CustomerRegistration")]
+        [OnAction(ButtonName = "btnRegistration")]
+        public ActionResult CustomerRegistration(AssociateBooking model)
+        {
+            string FormName = "";
+            string Controller = "";
+            try
+            {
+                Random rnd = new Random();
+                string ctrpass = rnd.Next(111111, 999999).ToString();
+                model.Password = Crypto.Encrypt(ctrpass);
+                model.AddedBy = Session["Pk_userId"].ToString();
+                DataSet dsRegistration = model.CustomerRegistration();
+                if (dsRegistration.Tables[0].Rows[0][0].ToString() == "1")
+                {
+                    if (model.Email != null)
+                    {
+                        string mailbody = "";
+                        try
+                        {
+                            mailbody = "Dear  " + dsRegistration.Tables[0].Rows[0]["Name"].ToString() + ",You have been successfully registered as RealEstateDemo Customer.Given below are your login details .!<br/>  <b>Login ID</b> :  " + dsRegistration.Tables[0].Rows[0]["LoginId"].ToString() + "<br/> <b>Passoword</b>  : " + Crypto.Decrypt(dsRegistration.Tables[0].Rows[0]["Password"].ToString());
+
+                            //var fromAddress = new MailAddress("prakher.afluex@gmail.com");
+                            //var toAddress = new MailAddress(model.Email);
+
+                            System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient
+                            {
+                                Host = "smtp.gmail.com",
+                                Port = 587,
+                                EnableSsl = true,
+                                DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network,
+                                UseDefaultCredentials = false,
+                                Credentials = new NetworkCredential("tejinfrazone@gmail.com", "awneesh1")
+
+                            };
+
+                            using (var message = new MailMessage("tejinfrazone@gmail.com", model.Email)
+                            {
+                                IsBodyHtml = true,
+                                Subject = "Customer Registration",
+                                Body = mailbody
+                            })
+                                smtp.Send(message);
+                            TempData["Message"] = "Registration Successfull !";
+                        }
+                        catch (Exception ex)
+                        {
+
+                        }
+                    }
+                }
+                if (dsRegistration != null && dsRegistration.Tables.Count > 0)
+                {
+                    if (dsRegistration.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        Session["DisplayNameConfirm"] = dsRegistration.Tables[0].Rows[0]["Name"].ToString();
+                        Session["LoginIDConfirm"] = dsRegistration.Tables[0].Rows[0]["LoginId"].ToString();
+                        Session["PasswordConfirm"] = Crypto.Decrypt(dsRegistration.Tables[0].Rows[0]["Password"].ToString());
+                        Session["PKUserID"] = Crypto.Encrypt(dsRegistration.Tables[0].Rows[0]["PKUserID"].ToString());
+
+                        string name = dsRegistration.Tables[0].Rows[0]["Name"].ToString();
+                        string id = dsRegistration.Tables[0].Rows[0]["LoginId"].ToString();
+                        string pass = Crypto.Decrypt(dsRegistration.Tables[0].Rows[0]["Password"].ToString());
+                        string mob = model.Contact;
+                        string tempid = "1707166296829885562";
+                        string str = BLSMS.CustomerRegistration(name, id, pass);
+                        try
+                        {
+                            BLSMS.SendSMS(mob, str, tempid);
+                        }
+                        catch { }
+
+                    }
+                    else
+                    {
+                        TempData["Registration"] = dsRegistration.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Registration"] = ex.Message;
+            }
+            FormName = "ConfirmRegistrationForCustomer";
+            Controller = "AssociateDashboard";
+
+            return RedirectToAction(FormName, Controller);
+        }
+
+
+        public ActionResult ConfirmRegistrationForCustomer()
+        {
+            return View();
+        }
+
+
+
+
     }
 }

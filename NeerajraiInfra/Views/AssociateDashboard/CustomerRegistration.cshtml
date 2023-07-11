@@ -1,13 +1,12 @@
-﻿@model NeerajraiInfra.Models.Customer
+﻿@model NeerajraiInfra.Models.AssociateBooking
 
 @{
     ViewBag.Title = "CustomerRegistration";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/AssociateLayout.cshtml";
 }
 
-
-@using (Html.BeginForm("CustomerRegistration", "Customer", FormMethod.Post, new { @id = "form1" }))
-{ 
+@using (Html.BeginForm("CustomerRegistration", "AssociateDashboard", FormMethod.Post, new { @id = "form1" }))
+{
     <div id="divload" class="loader"></div>
     <section class="section">
         <ul class="breadcrumb breadcrumb-style ">
@@ -43,14 +42,14 @@
                     <div class="row">
                         <div class="input-field col m6 s12">
                             Associate Code<span style="color:red">*</span>
-                            @if (Model.UserID == null)
-                            {
+                            @*@if (Model.UserID == null)
+                            {*@
                                 @Html.TextBoxFor(m => m.SponsorID, new { @class = "form-control", @Placeholder = "Associate ID", @onchange = "return getSponsorName();" })
-                            }
+                            @*}
                             else
                             {
                                 @Html.TextBoxFor(m => m.SponsorID, new { @class = "form-control", @Placeholder = "Sponsor ID", @readonly = "readonly" })
-                            }
+                            }*@
                             @Html.HiddenFor(m => m.UserID)
                         </div>
                         <div class="input-field col m6 s12">
@@ -58,7 +57,7 @@
                             @Html.TextBoxFor(m => m.SponsorName, new { @class = "form-control", @Placeholder = "Sponsor Name", @readonly = "readonly" })
                         </div>
                         <div class="input-field col m6 s12">
-                                <img src="" style="margin-left: 37%;width: 86px;" id="AssociateImage" class="rounded-circle author-box-picture" />
+                            <img src="" style="margin-left: 37%;width: 86px;" id="AssociateImage" class="rounded-circle author-box-picture" />
                         </div>
                     </div>
                     <div class="row">
@@ -76,9 +75,9 @@
                             @Html.TextBoxFor(m => m.FatherName, new { @class = "form-control", @Placeholder = "Father Name", })
                         </div>
 
-                        
+
                     </div>
-                    
+
                     <div class="row">
                         <div class="input-field col m3 s12">
                             Email
@@ -92,33 +91,33 @@
                             Pan No.
                             @Html.TextBoxFor(m => m.PanNo, new { @class = "form-control", @Placeholder = "PAN Number", @maxlength = "10", @onchange = "return validatePan();" })
                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col m3 s12">
+                            Pin Code<span style="color:red">*</span>
+                            @Html.TextBoxFor(m => m.Pincode, new { @class = "form-control", @Placeholder = "Pincode", @onchange = "return getStateCity();", @onkeypress = "return isNumberOrDecimal(event);", @maxlength = "6" })
+
                         </div>
-                        <div class="row">
-                            <div class="input-field col m3 s12">
-                                Pin Code<span style="color:red">*</span>
-                                @Html.TextBoxFor(m => m.Pincode, new { @class = "form-control", @Placeholder = "Pincode", @onchange = "return getStateCity();", @onkeypress = "return isNumberOrDecimal(event);", @maxlength = "6" })
+                        <div class="input-field col m3 s12">
+                            State
+                            @Html.TextBoxFor(m => m.State, new { @class = "form-control", @Placeholder = "State", @readonly = "readonly" })
 
-                            </div>
-                            <div class="input-field col m3 s12">
-                                State
-                                @Html.TextBoxFor(m => m.State, new { @class = "form-control", @Placeholder = "State", @readonly = "readonly" })
-
-                            </div>
-                            <div class="input-field col m3 s12">
-                                City
-                                @Html.TextBoxFor(m => m.City, new { @class = "form-control", @Placeholder = "City", @readonly = "readonly" })
-
-                            </div>
+                        </div>
+                        <div class="input-field col m3 s12">
+                            City
+                            @Html.TextBoxFor(m => m.City, new { @class = "form-control", @Placeholder = "City", @readonly = "readonly" })
 
                         </div>
 
-                        <div class="row">
-                            <div class="input-field col-md-12">
-                                Address
-                                @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @Placeholder = "Address" })
+                    </div>
 
-                            </div>
+                    <div class="row">
+                        <div class="input-field col-md-12">
+                            Address
+                            @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @Placeholder = "Address" })
+
                         </div>
+                    </div>
                     <div class="row">
                         <div class="input-field col s2 s12">
                             Nominee Name
@@ -133,28 +132,28 @@
                             @Html.TextBoxFor(m => m.NomineeRelation, new { @class = "form-control", @Placeholder = "Nominee Relation", })
                         </div>
                     </div>
-                        <br />
+                    <br />
 
-                        <div class="form-group row">
-                            <div class="input-field col m6 s12">
-                                @if (Model.UserID == null)
-                                {
-                                    <input class="btn btn-success pull-left" type="submit" onclick="return validateform();" value="Save" id="btnSave" name="btnRegistration" />
-                                }
-                                else
-                                {
-                                    @Html.HiddenFor(m => m.UserID, new { @Value = @Model.UserID })
-                                    <input class="btn btn-success pull-left" type="submit" onclick="return validateform();" value="Update" id="btnUpdate" name="btnUpdate" />
-                                }
-                                <a class="btn btn-info" href="/Customer/CustomerList" style="margin-left:5px">Back To List</a>
-                            </div>
-
-
+                    <div class="form-group row">
+                        <div class="input-field col m6 s12">
+                            @*@if (Model.UserID == null)
+                            {*@
+                                <input class="btn btn-success pull-left" type="submit" onclick="return validateform();" value="Save" id="btnSave" name="btnRegistration" />
+                            @*}
+                            else
+                            {
+                                @Html.HiddenFor(m => m.UserID, new { @Value = @Model.UserID })
+                                <input class="btn btn-success pull-left" type="submit" onclick="return validateform();" value="Update" id="btnUpdate" name="btnUpdate" />
+                            }
+                            <a class="btn btn-info" href="/Customer/CustomerList" style="margin-left:5px">Back To List</a>*@
                         </div>
 
 
-
                     </div>
+
+
+
+                </div>
             </div>
         </div>
     </div>
@@ -163,7 +162,9 @@
 }
 <script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+
+
 
 <script>
     $(document).ready(function () {
@@ -171,7 +172,7 @@
         var cityuse = [];
         $("#loader").css({ 'display': '' });
         $.ajax({
-            url: '/Plot/GetUserList',
+            url: '/AssociateDashboard/GetUserList',
             type: 'Post',
             success: function (response) {
                 if (response != null) {
@@ -212,7 +213,7 @@
 
         var pincode = $('#Pincode').val();
         $.ajax({
-            url: '/Master/GetStateCity', type: 'post', dataType: 'json',
+            url: '/AssociateDashboard/GetStateCity', type: 'post', dataType: 'json',
             data: { 'Pincode': pincode },
             success: function (data) {
                 if (data.Result == "yes") {
@@ -239,11 +240,10 @@
     }
 
     function getSponsorName() {
-        debugger;
         $("#divload").css({ 'display': '' });
         var sponsorID = $('#UserID').val();
         $.ajax({
-            url: '/Customer/GetSponsorName', type: 'post', dataType: 'json',
+            url: '/AssociateDashboard/GetSponsorNameFOrCustomer', type: 'post', dataType: 'json',
             data: { 'SponsorID': sponsorID },
             success: function (data) {
 
@@ -252,7 +252,7 @@
                     $("#SponsorName").val(data.SponsorName);
                     //$("#AssociateImage").src(data.AssociateImage);
                     //document.querySelector('.rounded-circle author-box-picture').setAttribute('src', data.AssociateImage);
-                    document.getElementById('AssociateImage').src =data.AssociateImage;
+                    document.getElementById('AssociateImage').src = data.AssociateImage;
                     $("#UserID").val(data.UserID);
                     $("#SponsorName").removeClass('errortext');
                     $("#SponsorID").removeClass('errortext');
@@ -261,7 +261,7 @@
                     alert("Invalid Sponsor ID");
                     $("#SponsorName").val('');
                     document.getElementById('AssociateImage').src = '';
-                 
+
                     $("#SponsorName").addClass('errortext');
                     $("#SponsorID").addClass('errortext');
                     $('#SponsorID').focus();
@@ -336,6 +336,66 @@
         }
     }
 
+
+
+
+
+
+
+
+
+    //function getSponsorName() {
+    //    debugger;
+    //    $("#divload").css({ 'display': '' });
+    //    var sponsorID = $('#SponsorID').val();
+    //    $.ajax({
+    //        url: '/AssociateDashboard/GetSponsorName', type: 'post', dataType: 'json',
+    //        data: { 'SponsorID': sponsorID },
+    //        success: function (data) {
+    //            $("#divload").css({ 'display': 'none' });
+    //            if (data.Result == "yes") {
+    //                $("#SponsorName").val(data.SponsorName);
+    //                $("#UserID").val(data.UserID);
+    //                $("#SponsorName").removeClass('errortext');
+    //                $("#SponsorID").removeClass('errortext');
+
+    //                $("#DesignationID").html(""); // clear before appending new list
+    //                $("#DesignationID").empty();
+
+    //                $.each(data.ddlDesignation, function (index, Sectorcount) {
+    //                    $("#DesignationID").append(
+    //                          $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
+
+    //                });
+    //            }
+    //            else if (data.Result == "no") {
+    //                $("#SponsorName").val('');
+    //                $("#SponsorName").addClass('errortext');
+    //                $("#SponsorID").addClass('errortext');
+
+    //                $('#SponsorID').focus();
+    //                $('#SponsorID').val('');
+    //                alert("Invalid Associate Id");
+    //            }
+    //        }
+
+    //    });
+    //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </script>
 
 <style>
@@ -344,3 +404,4 @@
         background-color: #fff0f0 !important;
     }
 </style>
+
