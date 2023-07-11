@@ -767,8 +767,8 @@ Navbar Area CSS
   cursor: pointer;
   z-index: 9991;
   position: absolute;
-  right: 52px;
-  top: -42px;
+  right: 56px;
+  top: -96px;
 }
 
 .others-option-for-responsive .dot-menu .inner {
