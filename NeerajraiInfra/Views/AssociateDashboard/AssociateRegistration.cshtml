@@ -36,13 +36,13 @@
                     <div class="row">
                         <div class="input-field col m6 s12" style="display:none;">
                             Branch<span style="color:red">*</span>
-                            @Html.DropDownListFor(m => m.BranchID, new SelectList(ViewBag.ddlBranch, "Value", "Text"), new { @class = "form-control", @onchange = "return onSiteChange();" })
+                            @Html.DropDownListFor(m => m.BranchID, new SelectList(ViewBag.ddlBranch, "Value", "Text"), new { @class = "form-control", @onchange = "return onSiteChange()" })
                         </div>
                         <div class="input-field col m6 s12">
                             Sponsor Code<span style="color:red">*</span>
                             @*@if (Model.UserID == null)
                                 {*@
-                            @Html.TextBoxFor(m => m.SponsorID, new { @class = "form-control", @Placeholder = "Sponsor ID", @onchange = "return getSponsorName();" })
+                            @Html.TextBoxFor(m => m.SponsorID, new { @class = "form-control", @Placeholder = "Sponsor ID"@*, @onchange = "return getSponsorName();"*@ })
                             @*}
                                 else
                                 {
@@ -232,6 +232,7 @@
                                 var str = ui.item.label;
                                 var strsplit = str.split("(");
                                 $('#UserID').val(strsplit[1].substr(0, strsplit[1].length - 1));
+                                getSponsorName();
                             }
                         })
                     }

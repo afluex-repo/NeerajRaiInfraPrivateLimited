@@ -1781,7 +1781,7 @@ namespace NeerajraiInfra.Controllers
         [HttpPost]
         [ActionName("PlotList")]
         [OnAction(ButtonName = "SearchPlot")]
-        public ActionResult PlotListDetails(Master model)
+        public ActionResult PlotListDetails(Master model,string SiteID,string SectorID)
         {
             List<Master> lst = new List<Master>();
             model.SiteID = model.SiteID == "0" ? null : model.SiteID;
@@ -1836,6 +1836,7 @@ namespace NeerajraiInfra.Controllers
 
             #region GetSectors
             List<SelectListItem> ddlSector = new List<SelectListItem>();
+            objmaster.SiteID = SiteID;
             DataSet dsSector = objmaster.GetSectorList();
             int sectorcount = 0;
 
@@ -1862,6 +1863,7 @@ namespace NeerajraiInfra.Controllers
             int blockcount = 0;
             //objmodel.SiteID = ds.Tables[0].Rows[0]["PK_SiteID"].ToString();
             //objmodel.SectorID = ds.Tables[0].Rows[0]["PK_SectorID"].ToString();
+            objmaster.SectorID = SectorID;
             DataSet dsblock = objmaster.GetBlockList();
 
 
