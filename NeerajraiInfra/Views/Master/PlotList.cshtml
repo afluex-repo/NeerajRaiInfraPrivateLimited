@@ -62,7 +62,7 @@
                                     <span class="form-bar"></span>
                                 </div>
                                 <div class="input-field col m3 s12">
-                                    Sector
+                                    Phase
                                     @Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control", @onchange = "return onSectorChange();" })
                                     <span class="form-bar"></span>
                                 </div>
@@ -89,7 +89,7 @@
                                         <tr>
                                             <th>S No.</th>
                                             <th>SiteName</th>
-                                            <th>SectorName</th>
+                                            <th>PhaseName</th>
                                             <th>BlockName</th>
                                             <th>PlotNumber</th>
                                             <th>PlotArea</th>
