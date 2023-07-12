@@ -7621,6 +7621,8 @@
     <Content Include="Views\AssociateDashboard\ConfirmRegistrationForAssociate.cshtml" />
     <Content Include="Views\AssociateDashboard\CustomerRegistration.cshtml" />
     <Content Include="Views\AssociateDashboard\ConfirmRegistrationForCustomer.cshtml" />
+    <Content Include="Views\Master\PlanMaster.cshtml" />
+    <Content Include="Views\Master\PlanMasterList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

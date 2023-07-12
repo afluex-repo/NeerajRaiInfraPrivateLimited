@@ -2042,10 +2042,16 @@ namespace NeerajraiInfra.Controllers
 
         public ActionResult AssociateRegistration()
         {
+
+            AssociateBooking obj = new AssociateBooking();
+            obj.SponsorID = Session["LoginId"].ToString();
+            obj.SponsorName = Session["FullName"].ToString();
+            obj.UserID = Session["Pk_userId"].ToString();
+
             try
             {
                 #region ddlBranch
-                AssociateBooking obj = new AssociateBooking();
+           
                 int count = 0;
                 List<SelectListItem> ddlBranch = new List<SelectListItem>();
                 DataSet dsBranch = obj.GetBranchList();
@@ -2095,7 +2101,7 @@ namespace NeerajraiInfra.Controllers
 
                 throw ex;
             }
-            return View();
+            return View(obj);
 
         }
 
@@ -2219,10 +2225,15 @@ namespace NeerajraiInfra.Controllers
 
         public ActionResult CustomerRegistration(string UserID)
         {
+            AssociateBooking obj = new AssociateBooking();
+            obj.SponsorID = Session["LoginId"].ToString();
+            obj.SponsorName = Session["FullName"].ToString();
+            obj.UserID = Session["Pk_userId"].ToString();
+            
             try
             {
                 #region ddlBranch
-                AssociateBooking obj = new AssociateBooking();
+               
                 int count = 0;
                 List<SelectListItem> ddlBranch = new List<SelectListItem>();
                 DataSet dsBranch = obj.GetBranchList();
@@ -2242,7 +2253,7 @@ namespace NeerajraiInfra.Controllers
                 ViewBag.ddlBranch = ddlBranch;
 
                 #endregion
-                return View();
+                return View(obj);
             }
             catch (Exception ex)
             {

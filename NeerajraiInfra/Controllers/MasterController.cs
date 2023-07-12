@@ -66,6 +66,7 @@ namespace NeerajraiInfra.Controllers
             // NewsFor.Add();
             return View(model);
 
+
         }
 
         public ActionResult NewsList(Master model)
@@ -2125,13 +2126,13 @@ namespace NeerajraiInfra.Controllers
             }
         }
 
-     
+
         public ActionResult PincodeMaster(string Id)
 
         {
             Master model = new Master();
             model.PinCodeId = Id;
-            if (model.PinCodeId !=null)
+            if (model.PinCodeId != null)
             {
                 DataSet ds = model.GetPinCode();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -2159,15 +2160,15 @@ namespace NeerajraiInfra.Controllers
             int count1 = 0;
             List<SelectListItem> ddlstate = new List<SelectListItem>();
             DataSet ds1 = model.GetStateList();
-            if(ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
             {
-                foreach(DataRow dr in ds1.Tables[0].Rows)
+                foreach (DataRow dr in ds1.Tables[0].Rows)
                 {
-                    if(count1==0)
+                    if (count1 == 0)
                     {
-                        ddlstate.Add(new SelectListItem { Text="-select-",Value="0"});
+                        ddlstate.Add(new SelectListItem { Text = "-select-", Value = "0" });
                     }
-                    ddlstate.Add(new SelectListItem { Text=dr["StateName"].ToString(),Value=dr["fK_StateID"].ToString()});
+                    ddlstate.Add(new SelectListItem { Text = dr["StateName"].ToString(), Value = dr["fK_StateID"].ToString() });
                     count1 = count1 + 1;
                 }
             }
@@ -2313,9 +2314,153 @@ namespace NeerajraiInfra.Controllers
             }
         }
 
+        public ActionResult PlanMaster(string Id)
+        {
+            Master model = new Master();
+            if (Id != null)
+            {
+                model.PK_PlanId = Id;
+                DataSet ds = model.GetPlanNameList();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    model.PlanName = ds.Tables[0].Rows[0]["PlanName"].ToString();
+                    model.PlanMonth = ds.Tables[0].Rows[0]["Months"].ToString();
+                }
+            }
+            return View(model);
+        }
 
 
 
+        [HttpPost]
+        [ActionName("PlanMaster")]
+        [OnAction(ButtonName = "btnSave")]
+        public ActionResult PlanMaster(Master obj)
+        {
+            try
+            {
+
+                obj.AddedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = new DataSet();
+                ds = obj.SavePlanMaster();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["PlanMaster"] = "Plan master saved successfully";
+                    }
+                    else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        TempData["PlanMaster"] = ds.Tables[0].Rows[0][0].ToString();
+                    }
+                }
+                else
+                {
+                    TempData["PlanMaster"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                TempData["PlanMaster"] = ex.Message;
+            }
+            return RedirectToAction("PlanMaster", "Master");
+        }
+
+        public ActionResult PlanMasterList(Master model)
+        {
+            List<Master> lst = new List<Master>();
+            DataSet ds = model.GetPlanNameList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Master obj = new Master();
+                    obj.PK_PlanId = r["PK_PlanId"].ToString();
+                    obj.PlanName = r["PlanName"].ToString();
+                    obj.PlanMonth = r["Months"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstPlan = lst;
+            }
+            return View(model);
+        }
+
+
+
+        [HttpPost]
+        [ActionName("PlanMaster")]
+        [OnAction(ButtonName = "btnUpdate")]
+        public ActionResult UpdatePlanMaster(Master obj)
+        {
+            try
+            {
+
+                obj.AddedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = new DataSet();
+                ds = obj.UpdatePlanMaster();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["PlanMaster"] = "Plan master updated successfully";
+                    }
+                    else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        TempData["PlanMaster"] = ds.Tables[0].Rows[0][0].ToString();
+                    }
+                }
+                else
+                {
+                    TempData["PlanMaster"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                TempData["PlanMaster"] = ex.Message;
+            }
+            return RedirectToAction("PlanMaster", "Master");
+        }
+
+
+
+
+
+
+        public ActionResult DeletePlanMaster(Master obj, string Id)
+        {
+            try
+            {
+                if (Id != null)
+                {
+                    obj.PK_PlanId = Id;
+                    obj.AddedBy = Session["Pk_AdminId"].ToString();
+                    DataSet ds = new DataSet();
+                    ds = obj.DeletePlanMaster();
+                    if (ds != null && ds.Tables[0].Rows.Count > 0)
+                    {
+                        if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                        {
+                            TempData["PlanMaster"] = "Plan master deleted successfully";
+                        }
+                        else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                        {
+                            TempData["PlanMaster"] = ds.Tables[0].Rows[0][0].ToString();
+                        }
+                    }
+                    else
+                    {
+                        TempData["PlanMaster"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["PlanMaster"] = ex.Message;
+            }
+            return RedirectToAction("PlanMasterList", "Master");
+        }
 
 
 
