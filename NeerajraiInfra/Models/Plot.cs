@@ -240,7 +240,8 @@ namespace NeerajraiInfra.Models
                                         new SqlParameter("@BankBranch"   , BankBranch),
                                         new SqlParameter("@AddedBy",AddedBy),
                                         new SqlParameter("@NoofEMI",NoOfEMI),
-                                        new SqlParameter("@Fk_BankId",Fk_BankId)
+                                        new SqlParameter("@Fk_BankId",Fk_BankId),
+                                        new SqlParameter("@Remarks",Remark)
 
 
                             };

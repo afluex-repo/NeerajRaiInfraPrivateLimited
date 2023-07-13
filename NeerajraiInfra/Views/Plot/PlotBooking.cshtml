@@ -222,8 +222,7 @@
                                 @Html.DropDownListFor(m => m.Fk_BankId, new SelectList(ViewBag.ddlTransactionType, "Value", "Text"), new { @class = "TransactionID form-control" })
                             </div>
                         </div>*@
-                    </div>
-                    <div class="row">
+                         
                         <div class="col-md-3" id="divtransactiono" style="display: none">
                             <div class="form-group">
                                 <span id="txnNo"></span> <span id="spntrannumber" style="color: red">*</span>
@@ -248,6 +247,13 @@
                                 @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @maxlength = "100", @Placeholder = "Bank Branch" })
                             </div>
                         </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                Remark <span style="color: red">*</span>
+                                @Html.TextBoxFor(m => m.Remark, new { @class = "form-control", @Placeholder = "Remark" })
+                            </div>
+                        </div>
+
                     </div>
                     <div class="row">
                         <div class="col-md-12">
@@ -573,7 +579,7 @@
     }
 
     function validateform() {
-        debugger
+        debugger;
         $("#divload").css({ 'display': '' });
         $(".errortext").removeClass("errortext");
 
@@ -688,6 +694,7 @@
         //    $("#divload").css({ 'display': 'none' });
         //    return false;
         //}
+       
         if ($('#PaymentMode').val() == '2') {
             if ($('#TransactionNumber').val() == '') {
                 $("#TransactionNumber").addClass('errortext');
@@ -713,7 +720,9 @@
                 $("#divload").css({ 'display': 'none' });
                 return false;
             }
+            
         }
+       
         //else if ($('#PaymentMode').val() == '3') {
         //    if ($('#TransactionNumber').val() == '') {
         //        $("#TransactionNumber").addClass('errortext');
@@ -900,6 +909,14 @@
             //    return false;
             //}
         }
+        
+        if ($('#Remark').val() == '') {
+            $("#Remark").addClass('errortext');
+            $('#Remark').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        
 
 
         $("#divload").css({ 'display': '' });
