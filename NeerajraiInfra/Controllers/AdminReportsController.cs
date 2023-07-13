@@ -1282,10 +1282,7 @@ namespace NeerajraiInfra.Controllers
 
             return View(newdata);
         }
-
-
-
-
+        
         #endregion
 
         #region WelcomeLetter Associate
