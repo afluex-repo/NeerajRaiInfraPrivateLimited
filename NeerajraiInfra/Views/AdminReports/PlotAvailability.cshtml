@@ -29,8 +29,8 @@
                     <i data-feather="home"></i>
                 </a>
             </li>
-            <li class="breadcrumb-item">Reports</li>
-            <li class="breadcrumb-item">Plot Availability</li>
+            <li class="breadcrumb-item">Plot</li>
+            <li class="breadcrumb-item">Project Plot Management</li>
         </ul>
     </section>
 
@@ -192,16 +192,17 @@
                 DataType: "JSON",
                 data: { SiteTypeID: value },
                 success: function (data) {
+                    debugger;
                     var j = 1;
                        $("#divload").css({ 'display': 'none' });
-                    $("#SiteID").html("");
-                    $("#SiteID").empty();
-                    $("#SiteID").append(
-                          $('<option></option>').val(0).html('Select Site'));
-                    $.each(data.ddlSite, function (index, Sectorcount) {
-                        $("#SiteID").append(
-                              $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
-                    });
+                    //$("#SiteID").html("");
+                    //$("#SiteID").empty();
+                    //$("#SiteID").append(
+                    //      $('<option></option>').val(0).html('Select Site'));
+                    //$.each(data.ddlSite, function (index, Sectorcount) {
+                    //    $("#SiteID").append(
+                    //          $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
+                    //});
                     //$("#SiteID").formSelect();
                 }
             });

@@ -1,13 +1,13 @@
 ﻿@model NeerajraiInfra.Models.Master
 
 @{
-    ViewBag.Title = "SectorMaster";
+    ViewBag.Title = "PlanMaster";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using (Html.BeginForm("SectorMaster", "Master", FormMethod.Post, new { @id = "form1" }))
-{
 
+@using (Html.BeginForm("PlanMaster", "Master", FormMethod.Post, new { @id = "form1" }))
+{
     <section class="section">
         <ul class="breadcrumb breadcrumb-style ">
             <li class="breadcrumb-item">
@@ -16,56 +16,56 @@
                 </a>
             </li>
             <li class="breadcrumb-item">Master</li>
-            <li class="breadcrumb-item">Phase Master</li>
+            <li class="breadcrumb-item">Plan Master</li>
         </ul>
     </section>
 
+    @*<div class="card-header">
+            <h4>News Master</h4>
+        </div>*@
 
     <div class="section-body">
         <div class="col-12 col-md-12 col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h4>Phase Master</h4>
+                    <h4>Plan Master</h4>
 
                     <p style="color: red">
-                        @TempData["SectorMaster"]
+                        @TempData["PlanMaster"]
                     </p>
                 </div>
+
                 <div class="card-body">
-                    <div class="row ">
+                    <div class="row " id="divsave">
                         <div class="input-field col m6 s12">
-                            Project Name<span style="color:red">*</span>
-                            @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control" })
-                        </div>
 
-                        <div class="input-field col m6 s12">
-                            Phase Name<span style="color:red">*</span>
-                            @Html.TextBoxFor(m => m.SectorName, new { @class = "form-control", @Placeholder = "Phase Name" })
-                        </div>
+                            Plan Name<span style="color:red">*</span>
+                            @Html.TextBoxFor(m => m.PlanName, new { @class = "form-control", @Placeholder = "Plan Name" })
 
+                        </div>
+                        <div class="input-field col m12 s12">
+                            Plan Month<span style="color:red">*</span>
+                            @Html.TextBoxFor(m => m.PlanMonth, new { @class = "form-control", @Placeholder = "Plan Month" })
+
+                        </div>
                     </div>
-
                     <br />
                     <div class="form-group row">
-
-                        <div class="input-field col m6 s12">
-                            @if (Model.SectorID == null)
+                        <div class="input-field col s12">
+                            @if (Model.PK_PlanId == null)
                 {
-                                <input class="btn btn-success pull-left" type="submit" onclick="return validateform();" value="Save" id="btnSave" name="btnSave" />
+                                <input class="btn cyan waves-effect waves-light left btn-primary" type="submit" onclick="return validateform();" value="Save" id="btnSave" name="btnSave" />
                             }
                             else
                             {
-                                @Html.HiddenFor(m => m.SectorID, new { @Value = @Model.SectorID })
-                                <input class="btn btn-success pull-left" type="submit" onclick="return validateform();" value="Update" id="btnUpdate" name="btnUpdate" />
+                                <input type="hidden" id="PK_PlanId" name="PK_PlanId" value="@Model.PK_PlanId" />
+                                <input class="btn cyan waves-effect waves-light left btn-primary" type="submit" onclick="return validateform();" value="Update" id="btnUpdate" name="btnUpdate" />
                             }
-                            <input type="hidden" id="UserType" value="@Session["UserType"]" />
-                            <input type="hidden" id="UserTypeName" value="@Session["UserTypeName"]" />
-                            <a class="btn btn-info" href="/Master/SectorList" style="margin-left:5px">Back To List</a>
+                            <a class="btn btn-info" href="/Master/PlanMasterList">Back To List</a>
                         </div>
 
 
                     </div>
-
 
 
                 </div>
@@ -90,7 +90,7 @@
     });
     function GetMenuDetails() {
         debugger
-        var URL = "/Master/SectorMaster";
+        var URL = "/Master/NewsMaster";
         $.ajax({
             type: "POST",
             url: "/Master/GetMenuDetails",
@@ -99,7 +99,7 @@
             //contentType: 'application/json; charset=utf-8',
             success: function (data) {
                 var obj = jQuery.parseJSON(data);
-                console.log(obj)
+                //console.log(obj)
                 for (var i = 0; i < obj.length; i++) {
                     if (obj[i].FormSave == true) {
                         $('#btnSave').show();
@@ -111,14 +111,14 @@
 
                         $("#btnSave").attr('disabled', 'disabled');
                     }
-                    debugger
-                    if (obj[i].FormUpdate == true && $('#SectorID').val() != "") {
+                    if (obj[i].FormUpdate == true && $('#NewsID').val() != "") {
                         $('#btnUpdate').show();
 
                         $("#btnUpdate").removeAttr('disabled');
                     }
                     else {
                         $('#btnUpdate').hide();
+
                         $("#btnUpdate").attr('disabled', 'disabled');
                     }
                 }
@@ -129,54 +129,22 @@
         });
     }
     function validateform() {
-        $("#divload").css({ 'display': '' });
+        $("#divload").css({ 'display': 'none' });
         $(".errortext").removeClass("errortext");
-        if ($('#SiteID').val() == '0') {
-            $("#SiteID").addClass('errortext');
-            $('#SiteID').focus();
+
+        if ($('#PlanName').val() == '') {
+            $("#PlanName").addClass('errortext');
+            $('#PlanName').focus();
             return false;
         }
-        if ($('#SectorName').val() == '') {
-            $("#SectorName").addClass('errortext');
-            $('#SectorName').focus();
+        if ($('#PlanMonth').val() == '') {
+            $("#PlanMonth").addClass('errortext');
+            $('#PlanMonth').focus();
             return false;
         }
-
-
         return true;
     }
-
-    function isNumberOrDecimal(evt) {
-        var charCode = (evt.which) ? evt.which : evt.keyCode;
-        if (charCode != 46 && charCode > 31
-          && (charCode < 48 || charCode > 57))
-            return false;
-
-        return true;
-    }
-
-    function onlyAlphabets(e, t) {
-        try {
-            if (window.event) {
-                var charCode = window.event.keyCode;
-            }
-            else if (e) {
-                var charCode = e.which;
-            }
-            else { return true; }
-            if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
-                return true;
-            else
-                return false;
-        }
-        catch (err) {
-            alert(err.Description);
-        }
-    }
-
 </script>
-
-
 <style>
     .errortext {
         border: 1px solid red !important;

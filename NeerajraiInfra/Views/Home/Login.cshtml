@@ -11,17 +11,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords" content="">
     <meta name="description" content="">
-    <meta name="" content="ATFN">
+    <meta name="" content="">
     <!-- css file -->
     <link rel="stylesheet" href="/Website/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/Website/css/menu.css">
     <link rel="stylesheet" href="/Website/css/fontawesome.css">
-    <link rel="stylesheet" href="/Website/css/flaticon.css">
     <link rel="stylesheet" href="/Website/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="/Website/css/ud-custom-spacing.css">
     <link rel="stylesheet" href="/Website/css/style.css">
-    <link rel="stylesheet" href="/Website/css/animate.css">
-    <link rel="stylesheet" href="/Website/css/jquery-ui.min.css">
     <!-- Responsive stylesheet -->
     <link rel="stylesheet" href="/Website/css/responsive.css">
     <!-- Title -->
@@ -43,28 +39,26 @@
                                 <div class="log-reg-form signup-modal form-style1 bgc-white p50 p30-sm default-box-shadow2 bdrs12">
                                     <div class="text-center mb40">
                                         <img class="mb25" src="/Website/images/logo.jpeg" style="height: 100px;" alt="">
-                                        @*<h2>Admin Login</h2>*@
+                                       
                                         <h5>Please login to your account</h5>
                                         <p style="color:red"> @TempData["Login"] </p>
                                     </div>
                                     <div class="mb25">
-                                        @*<label class="form-label fw600 dark-color">Email</label>
-                                        <input type="email" class="form-control" placeholder="Enter Email">*@
                                         <label>Login Id </label>
                                         @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Login Id", @required = "required" })
                                     </div>
                                     <div class="mb15">
-                                        @*<label class="form-label fw600 dark-color">Password</label>
-                                        <input type="text" class="form-control" placeholder="Enter Password">*@
                                         <label>Password</label>
                                         @Html.PasswordFor(m => m.Password, new { @class = "form-control", @Placeholder = "Password", @required = "required" })
                                     </div>
                                     <div class="d-grid mb20">
-                                        @*<button class="ud-btn btn-thm" type="button">Sign in <i class="fal fa-arrow-right-long"></i></button>*@
                                         <input type="submit" id="Login" class="ud-btn btn-thm" name="Login" value="Sign In">
                                     </div>
                                     <div class="hr_content mb20">
-                                        <a style="color: #413b34;font-size: 16px;font-weight: 500;" href="~/Home/ForgetPassword">Forgot Password</a> 
+                                        <a href="~/Home/ForgetPassword">Forgot Password?</a> 
+                                    </div>
+                                    <div class="text-center">
+                                        <a href="/Website/Index" class="text-uppercase"><i class="fa fa-home"></i> Back to home</a>
                                     </div>
                                 </div>
                             </div>
@@ -72,16 +66,10 @@
                     }
                 </div>
             </section>
-            <a class="scrollToHome" href="#"><i class="fas fa-angle-up"></i></a>
         </div>
     </div>
     <!-- Wrapper End -->
     <script src="/Website/js/jquery-3.6.4.min.js"></script>
-    <script src="/Website/js/jquery-migrate-3.0.0.min.js"></script>
-    <script src="/Website/js/popper.min.js"></script>
-    <script src="/Website/js/bootstrap.min.js"></script>
-    <script src="/Website/js/jquery-scrolltofixed-min.js"></script>
-    <script src="/Website/js/wow.min.js"></script>
     <!-- Custom script for all pages -->
     <script src="/Website/js/script.js"></script>
 </body>

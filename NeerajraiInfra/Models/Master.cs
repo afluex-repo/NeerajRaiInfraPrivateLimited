@@ -74,6 +74,12 @@ namespace NeerajraiInfra.Models
         public string Pk_ContactId { get; set; }
         public string Address { get; set; }
         public List<Master> lstContact { get; set; }
+     
+
+        public string PK_PlanId { get; set; }
+        public string PlanName { get; set; }
+        public string PlanMonth { get; set; }
+        public List<Master> lstPlan { get; set; }
 
 
         #endregion
@@ -909,7 +915,52 @@ namespace NeerajraiInfra.Models
             return ds;
         }
 
-        
+
+        public DataSet SavePlanMaster()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@PlanName ", PlanName ),
+                                      new SqlParameter("@Months", PlanMonth),
+                                      new SqlParameter("@AddedBy", AddedBy)
+                                  };
+            DataSet ds = Connection.ExecuteQuery("SavePlanMaster", para);
+            return ds;
+        }
+
+        public DataSet GetPlanNameList()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@PK_PlanId ", PK_PlanId ),
+                              
+                                  };
+            DataSet ds = Connection.ExecuteQuery("GetPlanNameList", para);
+            return ds;
+        }
+
+
+
+        public DataSet UpdatePlanMaster()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@PK_PlanId ", PK_PlanId ),
+                                      new SqlParameter("@PlanName ", PlanName ),
+                                      new SqlParameter("@Months", PlanMonth),
+                                      new SqlParameter("@AddedBy", AddedBy)
+                                  };
+            DataSet ds = Connection.ExecuteQuery("UpdatePlanMaster", para);
+            return ds;
+        }
+
+
+        public DataSet DeletePlanMaster()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@PK_PlanId ", PK_PlanId ),
+                                      new SqlParameter("@AddedBy", AddedBy)
+                                  };
+            DataSet ds = Connection.ExecuteQuery("DeletePlanMaster", para);
+            return ds;
+        }
 
     }
 }

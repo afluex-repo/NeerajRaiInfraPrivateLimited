@@ -393,14 +393,18 @@ namespace NeerajraiInfra.Models
     }
     public class SoftwareDetails 
     {
-        public static  string CompanyName = "Neeraj rai Infra opc pvt. ltd.";
-        public static string CompanyAddress = " L-12-303, Budh Vihar Colony Dev Ghat Jhalwa Allahabad";
-        public static string Pin1 = "211016";
+        public static  string CompanyName = "Neeraj Rai Infra opc Pvt. Ltd.";
+        public static string CompanyAddress = "T1-CU-04, Parsvnath Planet, Tower No. 1, Vibhuti Khand, Gomti Nagar, Lucknow, Uttar Pradesh 226010 ";
+        public static string Pin1 = "226010";
         public static string State1="UP";
-        public static string City1= "Allahabad";
-        public static string ContactNo= " (+91) 8318941233";
+        public static string City1= "Lucknow";
+        public static string ContactNo= "9161582888,9115051888";
         public static string LandLine = "XXXXXX1213";
         public static string Website= "http://neerajraiinfra.com/";
         public static string EmailID= "admin@neerajraiinfra.com";
     }
 }
+
+
+
+

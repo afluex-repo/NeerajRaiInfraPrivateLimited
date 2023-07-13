@@ -802,14 +802,19 @@ namespace NeerajraiInfra.Controllers
             //ddlSite.Add(new SelectListItem { Text = "Select Site", Value = "0" });
             //ViewBag.ddlSite = ddlSite;
             #region GetSite
+            int count2 = 0;
             List<SelectListItem> ddlSite = new List<SelectListItem>();
-            DataSet dsSector = model.GetSiteList();
-
-            if (dsSector != null && dsSector.Tables.Count > 0)
+            DataSet dsSite = model.GetSiteList();
+            if (dsSite != null && dsSite.Tables.Count > 0 && dsSite.Tables[0].Rows.Count > 0)
             {
-                foreach (DataRow r in dsSector.Tables[0].Rows)
+                foreach (DataRow r in dsSite.Tables[0].Rows)
                 {
+                    if (count2 == 0)
+                    {
+                        ddlSite.Add(new SelectListItem { Text = "Select Site", Value = "0" });
+                    }
                     ddlSite.Add(new SelectListItem { Text = r["SiteName"].ToString(), Value = r["PK_SiteID"].ToString() });
+                    count2 = count2 + 1;
 
                 }
             }
@@ -823,7 +828,7 @@ namespace NeerajraiInfra.Controllers
             ddlBlock.Add(new SelectListItem { Text = "Select Block", Value = "0" });
             ViewBag.ddlBlock = ddlBlock;
 
-            return View();
+            return View(model);
         }
 
         public ActionResult GetSiteBySiteType(string SiteTypeID)
@@ -914,7 +919,7 @@ namespace NeerajraiInfra.Controllers
         [HttpPost]
         [ActionName("PlotAvailability")]
         [OnAction(ButtonName = "Search")]
-        public ActionResult Details(Master model)
+        public ActionResult Details(Master model,string SiteID,string SectorID)
         {
             //Master model = new Master();
             List<Master> lst = new List<Master>();
@@ -984,6 +989,7 @@ namespace NeerajraiInfra.Controllers
 
             #region GetSectors
             List<SelectListItem> ddlSector = new List<SelectListItem>();
+            objmaster.SiteID = SiteID;
             DataSet dsSector = objmaster.GetSectorList();
             int sectorcount = 0;
 
@@ -1010,6 +1016,7 @@ namespace NeerajraiInfra.Controllers
             int blockcount = 0;
             //objmodel.SiteID = ds.Tables[0].Rows[0]["PK_SiteID"].ToString();
             //objmodel.SectorID = ds.Tables[0].Rows[0]["PK_SectorID"].ToString();
+            objmaster.SectorID = SectorID;
             DataSet dsblock = objmaster.GetBlockList();
 
 
