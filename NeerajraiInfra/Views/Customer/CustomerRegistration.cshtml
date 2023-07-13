@@ -45,7 +45,7 @@
                             Associate Code<span style="color:red">*</span>
                             @if (Model.UserID == null)
                             {
-                                @Html.TextBoxFor(m => m.SponsorID, new { @class = "form-control", @Placeholder = "Associate ID", @onchange = "return getSponsorName();" })
+                                @Html.TextBoxFor(m => m.SponsorID, new { @class = "form-control", @Placeholder = "Associate ID"@*, @onchange = "return getSponsorName();"*@ })
                             }
                             else
                             {
@@ -185,6 +185,7 @@
                             var str = ui.item.label;
                             var strsplit = str.split("(");
                             $('#UserID').val(strsplit[1].substr(0, strsplit[1].length - 1));
+                            getSponsorName();
                         }
                     })
                 }
