@@ -22,7 +22,7 @@ namespace NeerajraiInfra.Models
                 //connectionString = "Data Source=DESKTOP-ICNPI6I\\SQLEXPRESS;Initial Catalog=NeerajraiInfraDB;Integrated Security=True";
 
             }
-            catch (Exception)
+            catch (Exception) 
             {
                 throw;
             }
