@@ -1836,6 +1836,7 @@ namespace NeerajraiInfra.Controllers
 
             #region GetSectors
             List<SelectListItem> ddlSector = new List<SelectListItem>();
+            
             DataSet dsSector = objmaster.GetSectorList();
             int sectorcount = 0;
 
@@ -1862,6 +1863,7 @@ namespace NeerajraiInfra.Controllers
             int blockcount = 0;
             //objmodel.SiteID = ds.Tables[0].Rows[0]["PK_SiteID"].ToString();
             //objmodel.SectorID = ds.Tables[0].Rows[0]["PK_SectorID"].ToString();
+            
             DataSet dsblock = objmaster.GetBlockList();
 
 
