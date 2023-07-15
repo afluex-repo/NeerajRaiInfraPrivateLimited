@@ -17,8 +17,8 @@ namespace NeerajraiInfra.Models
         {
             try
             {
-                connectionString = "Data Source=103.48.51.111,1232;Initial Catalog= NeerajRaiInfraDB; User Id= neerajraiinfrauser; Password=Neeraj123!@#;Integrated Security=false;";
-                //connectionString = "Data Source=DESKTOP-02J59E3\\SQLEXPRESS;Initial Catalog=NeerajraiInfraDB;Integrated Security=True";
+                //connectionString = "Data Source=103.48.51.111,1232;Initial Catalog= NeerajRaiInfraDB; User Id= neerajraiinfrauser; Password=Neeraj123!@#;Integrated Security=false;";
+                connectionString = "Data Source=DESKTOP-02J59E3\\SQLEXPRESS;Initial Catalog=NeerajraiInfraDB;Integrated Security=True";
             }
             catch (Exception) 
             {
