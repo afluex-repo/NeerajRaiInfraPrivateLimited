@@ -1337,7 +1337,11 @@ namespace NeerajraiInfra.Controllers
         }
         public ActionResult AssociateTree(AssociateBooking model, string AssociateID)
         {
-            if (AssociateID != null)
+            if (AssociateID == "1")
+            {
+                model.Fk_UserId = Session["Pk_UserId"].ToString();
+            }
+            else if (AssociateID != null)
             {
                 model.Fk_UserId = AssociateID;
             }
@@ -1345,6 +1349,18 @@ namespace NeerajraiInfra.Controllers
             {
                 model.Fk_UserId = Session["Pk_UserId"].ToString();
             }
+
+            
+            //if (AssociateID != null)
+            //{
+            //    model.Fk_UserId = AssociateID;
+            //}
+            //else
+            //{
+            //    model.Fk_UserId = Session["Pk_UserId"].ToString();
+            //}
+
+
             List<AssociateBooking> lst = new List<AssociateBooking>();
 
             DataSet ds = model.GetDownlineTree();

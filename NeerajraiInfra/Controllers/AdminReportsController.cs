@@ -1266,8 +1266,8 @@ namespace NeerajraiInfra.Controllers
                     ViewBag.BankName = ds.Tables[0].Rows[0]["BankName"].ToString();
                     ViewBag.BankBranch = ds.Tables[0].Rows[0]["BankBranch"].ToString();
                     ViewBag.RemainingAmount = ds.Tables[0].Rows[0]["RemainingAmount"].ToString();
-
-
+                    ViewBag.PlotRate = ds.Tables[0].Rows[0]["PlotRate"].ToString();
+                    
                     ViewBag.CompanyName = SoftwareDetails.CompanyName;
                     ViewBag.CompanyAddress = SoftwareDetails.CompanyAddress;
                     ViewBag.Pin1 = SoftwareDetails.Pin1;

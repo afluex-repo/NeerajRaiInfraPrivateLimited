@@ -7623,6 +7623,7 @@
     <Content Include="Views\AssociateDashboard\ConfirmRegistrationForCustomer.cshtml" />
     <Content Include="Views\Master\PlanMaster.cshtml" />
     <Content Include="Views\Master\PlanMasterList.cshtml" />
+    <Content Include="Views\AdminReports\ClosingWisePayoutDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -7671,7 +7672,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>24415</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:24416/</IISUrl>
+          <IISUrl>http://localhost:24417/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
