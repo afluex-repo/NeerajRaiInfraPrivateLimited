@@ -23,9 +23,34 @@
             <div class="card-header">
                 <h4>Down Team Tree</h4>
             </div>
-            <div class="input-field col s12">
+            @*<div class="input-field col s12">
                 <a href="/AssociateDashboard/AssociateTree?AssociateID=@ViewBag.Fk_SponsorId" id="btnDown" class="btn btn-info btn-sm">Back</a>
-            </div>
+            </div>*@
+
+
+            @*//////////////////////////////////////////////////*@
+
+            @if (Model.Fk_UserId == Session["Pk_UserId"].ToString())
+            {
+
+                <div class="input-field col s12" style="display:none;">
+                    <a href="/AssociateDashboard/AssociateTree?AssociateID=@ViewBag.Fk_SponsorId" id="btnDown" class="btn btn-info btn-sm">Back</a>
+                </div>
+            }
+            else
+            {
+
+                <div class="input-field col s12">
+                    <a href="/AssociateDashboard/AssociateTree?AssociateID=@ViewBag.Fk_SponsorId" id="btnDown" class="btn btn-info btn-sm">Back</a>
+                </div>
+            }
+
+
+            @*//////////////////////////////////////////////////*@
+
+
+
+
             <div class="card-body">
                
                 <table id="basic-btn" class="table table-striped">
