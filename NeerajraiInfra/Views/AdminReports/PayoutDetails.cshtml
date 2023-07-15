@@ -20,7 +20,6 @@
             <li class="breadcrumb-item">Payout Details</li>
         </ul>
     </section>
-
     <div class="section-body">
         <div class="row">
             <div class="col-12">
@@ -30,21 +29,18 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-
                             <div class="input-field col m2 s12">
                                 <div class="form-group">
                                     Login ID
                                     @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Search by Login ID" })
                                 </div>
                             </div>
-
                             <div class="input-field col m2 s12">
                                 <div class="form-group">
                                     PayOut No.
                                     @Html.TextBoxFor(m => m.PayOutNo, new { @class = "form-control", @Placeholder = "Search by PayOutNo" })
                                 </div>
                             </div>
-
                             <div class="input-field col m2 s12">
                                 <div class="form-group">
                                     From Date
@@ -58,8 +54,6 @@
                                     @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @readonly = "ds" })
                                 </div>
                             </div>
-
-
                             <div class="input-field col m2 s12">
                                 <div class="form-group">
                                     <br />
@@ -110,9 +104,7 @@
                                             }
                                         }
                                     }
-
                                 </tbody>
-
                             </table>
                         </div>
                     </div>
@@ -122,9 +114,6 @@
     </div>
 
 }
-
-
-
 <script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
