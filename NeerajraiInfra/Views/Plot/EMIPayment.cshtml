@@ -279,12 +279,12 @@
                                             @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlPaymentMode, "Value", "Text"), new { @class = "form-control", @onchange = "return CheckPayMode()" })
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    @*<div class="col-md-3">
                                         <div class="form-group">
                                             Bank <span style="color: red">*</span>
                                             @Html.DropDownListFor(m => m.Fk_BankId, new SelectList(ViewBag.ddlTransactionType, "Value", "Text"), new { @class = "TransactionID form-control" })
                                         </div>
-                                    </div>
+                                    </div>*@
                                     @*<div class="col-md-3">
                                             <div class="form-group">
                                                 Receipt No.<span style="color: red">*</span>
@@ -1006,12 +1006,12 @@
             $("#divload").css({ 'display': 'none' });
             return false;
         }
-        if ($('#Fk_BankId').val() == '0') {
-            $("#Fk_BankId").addClass('errortext');
-            $('#Fk_BankId').focus();
-            $("#divload").css({ 'display': 'none' });
-            return false;
-        }
+        //if ($('#Fk_BankId').val() == '0') {
+        //    $("#Fk_BankId").addClass('errortext');
+        //    $('#Fk_BankId').focus();
+        //    $("#divload").css({ 'display': 'none' });
+        //    return false;
+        //}
         if ($('#PaymentMode').val() == '2') {
             if ($('#TransactionNumber').val() == '') {
                 $("#TransactionNumber").addClass('errortext');
