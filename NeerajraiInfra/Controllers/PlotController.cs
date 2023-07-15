@@ -1554,6 +1554,7 @@ namespace NeerajraiInfra.Controllers
                     model.BlockName = dsblock.Tables[0].Rows[0]["BlockName"].ToString();
                     model.PlotNumber = dsblock.Tables[0].Rows[0]["PlotNumber"].ToString();
 
+
                 }
                 else
                 {
