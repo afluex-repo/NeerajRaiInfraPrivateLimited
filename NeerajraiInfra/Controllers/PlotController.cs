@@ -3554,7 +3554,6 @@ namespace NeerajraiInfra.Controllers
                     {
 
                         TempData["Update"] = " Booking Update successfully ";
-
                     }
                     else
                     {
@@ -3569,9 +3568,7 @@ namespace NeerajraiInfra.Controllers
             }
             FormName = "PlotBookingList";
             Controller = "Plot";
-
             return RedirectToAction(FormName, Controller);
-
         }
         public ActionResult CancelledPlotLedger(Plot model)
         {
@@ -3594,7 +3591,6 @@ namespace NeerajraiInfra.Controllers
                     }
                     else if (dsblock.Tables[0].Rows[0]["MSG"].ToString() == "1")
                     {
-
                         model.Result = "yes";
                         model.hdBookingNo = Crypto.Encrypt(dsblock.Tables[0].Rows[0]["BookingNo"].ToString());
                         // model.PlotID = dsblock.Tables[0].Rows[0]["PK_PlotID"].ToString();
@@ -3659,14 +3655,12 @@ namespace NeerajraiInfra.Controllers
                 {
                     model.Result = "No record found !";
                 }
-
             }
             catch (Exception ex)
             {
                 model.Result = ex.Message;
             }
             return Json(model, JsonRequestBehavior.AllowGet);
-
         }
     }
 }

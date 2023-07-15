@@ -10,7 +10,6 @@ namespace NeerajraiInfra.Models
 {
     public class Connection
     {
-
         public static string connectionString = string.Empty;
 
         static Connection()
@@ -18,10 +17,8 @@ namespace NeerajraiInfra.Models
             try
             {
                 connectionString = "Data Source=103.48.51.111,1232;Initial Catalog= NeerajRaiInfraDB; User Id= neerajraiinfrauser; Password=Neeraj123!@#;Integrated Security=false;";
-
                 ////Sudhakardb
                 //connectionString = "Data Source=DESKTOP-02J59E3\\SQLEXPRESS;Initial Catalog=NeerajraiInfraDB;Integrated Security=True";
-
                 //Sarfrazdb
                 //connectionString = "Data Source=DESKTOP-ICNPI6I\\SQLEXPRESS;Initial Catalog=NeerajraiInfraDB;Integrated Security=True";
             }
