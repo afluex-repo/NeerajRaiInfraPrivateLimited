@@ -1415,6 +1415,8 @@ namespace NeerajraiInfra.Controllers
                 obj.Address = ds.Tables[0].Rows[0]["Address"].ToString();
                 obj.PanNumber = ds.Tables[0].Rows[0]["PanNumber"].ToString();
                 obj.AccountHolderName = ds.Tables[0].Rows[0]["BankHolderName"].ToString();
+                obj.PanStatus = ds.Tables[0].Rows[0]["PanStatus"].ToString();
+                obj.AdharStatus = ds.Tables[0].Rows[0]["AdharStatus"].ToString();
             }
             return View(obj);
         }

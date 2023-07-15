@@ -287,7 +287,7 @@ namespace NeerajraiInfra.Controllers
             {
                 if (UserID != null)
                 {
-
+                  
                     model.UserID = Crypto.Decrypt(UserID);
                     //model.UserID = UserID;
                     DataSet dsPlotDetails = model.GetList();
@@ -318,6 +318,29 @@ namespace NeerajraiInfra.Controllers
                         model.IFSCCode = dsPlotDetails.Tables[0].Rows[0]["IFSCCode"].ToString();
                         model.ProfilePic = dsPlotDetails.Tables[0].Rows[0]["ProfilePic"].ToString();
                         model.Signature = dsPlotDetails.Tables[0].Rows[0]["Signature"].ToString();
+                        model.Percentage = dsPlotDetails.Tables[0].Rows[0]["Percentage"].ToString();
+
+                        #region ddlDesignation
+
+                        int desgnationCount = 0;
+                        List<SelectListItem> ddlDesignation = new List<SelectListItem>();
+                        DataSet dsdesignation = model.GetDesignationList();
+                        if (dsdesignation != null && dsdesignation.Tables.Count > 0 && dsdesignation.Tables[0].Rows.Count > 0)
+                        {
+                            foreach (DataRow r in dsdesignation.Tables[0].Rows)
+                            {
+                                if (desgnationCount == 0)
+                                {
+                                    ddlDesignation.Add(new SelectListItem { Text = "Select Designation", Value = "0" });
+                                }
+                                ddlDesignation.Add(new SelectListItem { Text = r["DesignationName"].ToString(), Value = r["PK_DesignationID"].ToString() });
+                                desgnationCount = desgnationCount + 1;
+                            }
+                        }
+                        ViewBag.ddlDesignation = ddlDesignation;
+
+                        #endregion
+
                     }
                 }
                 else
@@ -347,27 +370,26 @@ namespace NeerajraiInfra.Controllers
 
                 #endregion
 
-                #region ddlDesignation
+                //#region ddlDesignation
 
-                int desgnationCount = 0;
-                List<SelectListItem> ddlDesignation = new List<SelectListItem>();
-                DataSet dsdesignation = obj.GetDesignationList();
-                if (dsdesignation != null && dsdesignation.Tables.Count > 0 && dsdesignation.Tables[0].Rows.Count > 0)
-                {
-                    foreach (DataRow r in dsdesignation.Tables[0].Rows)
-                    {
-                        if (desgnationCount == 0)
-                        {
-                            ddlDesignation.Add(new SelectListItem { Text = "Select Designation", Value = "0" });
-                        }
-                        ddlDesignation.Add(new SelectListItem { Text = r["DesignationName"].ToString(), Value = r["PK_DesignationID"].ToString() });
-                        desgnationCount = desgnationCount + 1;
-                    }
-                }
+                //int desgnationCount = 0;
+                //List<SelectListItem> ddlDesignation = new List<SelectListItem>();
+                //DataSet dsdesignation = obj.GetDesignationList();
+                //if (dsdesignation != null && dsdesignation.Tables.Count > 0 && dsdesignation.Tables[0].Rows.Count > 0)
+                //{
+                //    foreach (DataRow r in dsdesignation.Tables[0].Rows)
+                //    {
+                //        if (desgnationCount == 0)
+                //        {
+                //            ddlDesignation.Add(new SelectListItem { Text = "Select Designation", Value = "0" });
+                //        }
+                //        ddlDesignation.Add(new SelectListItem { Text = r["DesignationName"].ToString(), Value = r["PK_DesignationID"].ToString() });
+                //        desgnationCount = desgnationCount + 1;
+                //    }
+                //}
+                //ViewBag.ddlDesignation = ddlDesignation;
 
-                ViewBag.ddlDesignation = ddlDesignation;
-
-                #endregion
+                //#endregion
             }
             catch (Exception ex)
             {

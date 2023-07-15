@@ -151,6 +151,7 @@ namespace NeerajraiInfra.Models
                                   new SqlParameter("@IFSCCode", IFSCCode) ,
                                    new SqlParameter("@ProfilePic", ProfilePic) ,
                                       new SqlParameter("@Signature", Signature) ,
+                                       new SqlParameter("@DesignationID", DesignationID) ,
 
                                   };
             DataSet ds = Connection.ExecuteQuery("UpdateAssociateTraditional", para);
