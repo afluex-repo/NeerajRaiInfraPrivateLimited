@@ -242,8 +242,6 @@ namespace NeerajraiInfra.Models
                                         new SqlParameter("@NoofEMI",NoOfEMI),
                                         new SqlParameter("@Fk_BankId",Fk_BankId),
                                         new SqlParameter("@Remarks",Remark)
-
-
                             };
             DataSet ds = Connection.ExecuteQuery("PlotBooking", para);
             return ds;
