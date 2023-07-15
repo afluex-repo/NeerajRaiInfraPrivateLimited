@@ -37,6 +37,8 @@ namespace NeerajraiInfra.Models
         public string AccountHolder { get; set; }
         public string PanNumber { get; set; }
         public string Address { get; set; }
+        public string AdharStatus { get; set; }
+        public string PanStatus { get; set; }
 
         public DataSet GetUserProfile()
         {

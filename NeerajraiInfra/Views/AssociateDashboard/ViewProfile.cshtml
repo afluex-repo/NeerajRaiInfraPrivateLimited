@@ -38,7 +38,7 @@
                                     @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
                                     @Html.ValidationMessageFor(m => m.LastName)
                                     <br />
-
+                                    
                                 </div>
                             </div>
                             @*<div class="col-lg-3">
@@ -46,6 +46,7 @@
 
                         </div>
                     </div>*@
+                           
                             <div class="col-md-6 form-group">
                                 <div class="form-group">
                                     <img src="@Model.ProfilePicture" height="190" width="250" />
@@ -53,10 +54,12 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="row ">
                             <div class="col-md-6 form-group">
                                 <div class="form-group">
-
+                                    @Html.HiddenFor(m => m.PanStatus)
+                                    @Html.HiddenFor(m => m.AdharStatus)
                                     <label>Mobile <span style="color:red">*</span></label>
                                     @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @readonly = "dgdf" })
                                     @Html.ValidationMessageFor(m => m.Mobile)
@@ -170,12 +173,11 @@
 
                         <div class="row">
                             <div class="col-lg-12">
-                                <div class="form-group">
-                                    <input type="submit" id="btnUpdate" class="btn btn-success pull-right" name="btnUpdate" value="Update" onclick="return editProfile()" />
-                                    <input type="button" id="btnEdit" class="btn btn-primary pull-right" value="Edit" onclick="editProfile()" style="display:none" />
+                                        <div class="form-group">
 
-                                </div>
-
+                                            <input type="submit" id="btnUpdate" class="btn btn-success pull-right" name="btnUpdate" value="Update" onclick="return editProfile()" />
+                                            <input type="button" id="btnEdit" class="btn btn-primary pull-right" value="Edit" onclick="editProfile()" style="display:none" />
+                                        </div>
                             </div>
                         </div>
 
@@ -201,8 +203,10 @@
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
 
 <script>
+   
 
     $(document).ready(function () {
+        debugger;
         if ($('#AccountNumber').val() != '') {
             $("#AccountNumber").attr("disabled", "disabled");
         }
@@ -215,6 +219,23 @@
 
         if ($('#BankBranch').val() != '') {
             $("#BankBranch").attr("disabled", "disabled");
+        }
+        debugger;
+        var PanStatus1 = $('#PanStatus').val();
+        var AdharStatus1 = $('#AdharStatus').val();
+        if ((PanStatus1 == 'Approved') && (AdharStatus1 == 'Approved') ){
+            debugger;
+            $("#Mobile").attr("disabled", "disabled");
+            $("#DOB").attr("disabled", "disabled");
+            $("#EmailId").attr("disabled", "disabled");
+            $("#PanNumber").attr("disabled", "disabled");
+            $("#AccountHolderName").attr("disabled", "disabled");
+            $("#AccountNumber").attr("disabled", "disabled");
+            $("#IFSC").attr("disabled", "disabled");
+            $("#BankName").attr("disabled", "disabled");
+            $("#BankBranch").attr("disabled", "disabled");
+            $("#Address").attr("disabled", "disabled");
+            $("#btnUpdate").attr("disabled", "disabled").val('Updated');
         }
     });
 
