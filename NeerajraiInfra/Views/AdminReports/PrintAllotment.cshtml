@@ -129,32 +129,32 @@
                         <td style="border: 1px solid black;"><b> Via:    </b>@ViewBag.PaymentMode</td>
                         <td style="border: 1px solid black;"><b> ChequeNo:    </b>@ViewBag.TransactionNo</td>
                         <td style="border: 1px solid black;"><b> ChequeDate:    </b>@ViewBag.TransactionDate</td>
-                        <td style="border: 1px solid black;"><b> BankName:    </b>@ViewBag.BankName</td>
-                        <td style="border: 1px solid black;"><b> BankBranch:    </b>@ViewBag.BankBranch</td>
+                        @*<td style="border: 1px solid black;"><b> BankName:    </b>@ViewBag.BankName</td>
+                        <td style="border: 1px solid black;"><b> BankBranch:    </b>@ViewBag.BankBranch</td>*@
                     }
                     else if (ViewBag.PaymentMode == "NEFT")
                     {
                         <td style="border: 1px solid black;"><b> Via:    </b>@ViewBag.PaymentMode</td>
                         <td style="border: 1px solid black;"><b> NEFTNo:    </b>@ViewBag.TransactionNo</td>
                         <td style="border: 1px solid black;"><b> NEFTDate:    </b>@ViewBag.TransactionDate</td>
-                        <td style="border: 1px solid black;"><b> BankName:    </b>@ViewBag.BankName</td>
-                        <td style="border: 1px solid black;"><b> BankBranch:    </b>@ViewBag.BankBranch</td>
+                        @*<td style="border: 1px solid black;"><b> BankName:    </b>@ViewBag.BankName</td>
+                        <td style="border: 1px solid black;"><b> BankBranch:    </b>@ViewBag.BankBranch</td>*@
                     }
                     else if (ViewBag.PaymentMode == "DD")
                     {
                         <td style="border: 1px solid black;"><b> Via:    </b>@ViewBag.PaymentMode</td>
                         <td style="border: 1px solid black;"><b> DD No:    </b>@ViewBag.TransactionNo</td>
                         <td style="border: 1px solid black;"><b> DD Date:    </b>@ViewBag.TransactionDate</td>
-                        <td style="border: 1px solid black;"><b> BankName:    </b>@ViewBag.BankName</td>
-                        <td style="border: 1px solid black;"><b> BankBranch:    </b>@ViewBag.BankBranch</td>
+                        @*<td style="border: 1px solid black;"><b> BankName:    </b>@ViewBag.BankName</td>
+                        <td style="border: 1px solid black;"><b> BankBranch:    </b>@ViewBag.BankBranch</td>*@
                     }
                     else
                     {
                         <td style="border: 1px solid black;"><b> Via:    </b>@ViewBag.PaymentMode</td>
                         <td style="border: 1px solid black;"><b> Transdaction No:    </b>@ViewBag.TransactionNo</td>
                         <td style="border: 1px solid black;"><b> Transdaction Date:    </b>@ViewBag.TransactionDate</td>
-                        <td style="border: 1px solid black;"><b> BankName:    </b>@ViewBag.BankName</td>
-                        <td style="border: 1px solid black;"><b> BankBranch:    </b>@ViewBag.BankBranch</td>
+                        @*<td style="border: 1px solid black;"><b> BankName:    </b>@ViewBag.BankName</td>
+                        <td style="border: 1px solid black;"><b> BankBranch:    </b>@ViewBag.BankBranch</td>*@
                     }
                 }
             </tr>
@@ -194,13 +194,21 @@
                     <td style="text-align:left;" colspan="2"><b>  Remark :-   </b></td>
                 </tr>
                 <tr>
-                    <td style="text-align:left;" colspan="2">
+                    @*<td class="FontSize" style="text-align:left;" colspan="2">
                         1.The applicant shall be liable/responsible for any payment
                         made by him any third account and right created from there and company shall have no liability
                         in this regards.
+                    </td>*@
+
+                    <td style="text-align:left;" colspan="2">
+                        <span class="bigger">
+                            1.The applicant shall be liable/responsible for any payment
+                            made by him any third account and right created from there and company shall have no liability
+                            in this regards.
+                        </span>
                     </td>
                 </tr>
-                <tr>
+                @*<tr>
                     <td style="text-align:left;" colspan="2">2.This receipt is not transferable unless consented by the company.</td>
                 </tr>
                 <tr>
@@ -211,12 +219,14 @@
                 </tr>
                 <tr>
                     <td style="text-align:left;" colspan="2">4.This money receipt is subject to realization of payment mode.</td>
+                </tr>*@
+                <tr>
+                    @*<td class="FontSize" style="text-align:left;" colspan="2">2.In case of refund 35% of total plot amount is subject to deducation in favour of company.</td>*@
+                    <td style="text-align:left;" colspan="2"><span class="bigger">2.In case of refund 35% of total plot amount is subject to deducation in favour of company.</span></td>
                 </tr>
                 <tr>
-                    <td style="text-align:left;" colspan="2">5.In case of refund 35% of total plot amount is subject to deducation in favour of company.</td>
-                </tr>
-                <tr>
-                    <td style="text-align:left;" colspan="2">6.Booking amount is not refundable.</td>
+                    @*<td style="text-align:left;" colspan="2"><span class="bigger">3.Booking amount is not refundable.</span></td>*@
+                    <td style="text-align:left;" colspan="2"><span class="bigger">3.Booking amount is not refundable.</span></td>
                 </tr>
                 <tr>
                     <td style="text-align:right;margin-right:100px;"><b style="margin-right: 40px;">Generated By</b></td>                
@@ -233,13 +243,21 @@
                 <td style="text-align:left;" colspan="2"><b>  Remark :-   </b></td>
             </tr>
             <tr>
-                <td style="text-align:left;" colspan="2">
+                @*<td class="FontSize"  style="text-align:left;" colspan="2">
                     1.The applicant shall be liable/responsible for any payment
                     made by him any third account and right created from there and company shall have no liability
                     in this regards.
-                </td>
+                </td>*@
+
+
+                <td style="text-align:left;" colspan="2"><span class="bigger">1.The applicant shall be liable/responsible for any payment
+                    made by him any third account and right created from there and company shall have no liability
+                    in this regards.</span></td>
+
+
+
             </tr>
-            <tr>
+            @*<tr>
                 <td style="text-align:left;" colspan="2">2.This receipt is not transferable unless consented by the company.</td>
             </tr>
             <tr>
@@ -250,12 +268,19 @@
             </tr>
             <tr>
                 <td style="text-align:left;" colspan="2">4.This money receipt is subject to realization of payment mode.</td>
+            </tr>*@
+            <tr>
+                @*<td  class="FontSize" style="text-align:left;" colspan="2">2.In case of refund 35% of total plot amount is subject to deducation in favour of company.</td>*@
+
+             
+                <td style="text-align:left;" colspan="2"><span class="bigger">2.In case of refund 35% of total plot amount is subject to deducation in favour of company.</span></td>
+
+
+
             </tr>
             <tr>
-                <td style="text-align:left;" colspan="2">5.In case of refund 35% of total plot amount is subject to deducation in favour of company.</td>
-            </tr>
-            <tr>
-                <td style="text-align:left;" colspan="2">6.Booking amount is not refundable.</td>
+                @*<td class="FontSize"  style="text-align:left;" colspan="2">3.Booking amount is not refundable.</td>*@
+                <td style="text-align:left;" colspan="2"><span class="bigger">3.Booking amount is not refundable.</span></td>
             </tr>
             <tr>
 
@@ -284,6 +309,8 @@
         </table>
     </div>
     @*<p style="page-break-after: always;">&nbsp;</p>*@
+    <br />
+    <br />
     <br />
     <br />
     <br />
@@ -365,32 +392,32 @@
                         <td style="border: 1px solid black;"><b> Via:    </b>@ViewBag.PaymentMode</td>
                         <td style="border: 1px solid black;"><b> ChequeNo:    </b>@ViewBag.TransactionNo</td>
                         <td style="border: 1px solid black;"><b> ChequeDate:    </b>@ViewBag.TransactionDate</td>
-                        <td style="border: 1px solid black;"><b> BankName:    </b>@ViewBag.BankName</td>
-                        <td style="border: 1px solid black;"><b> BankBranch:    </b>@ViewBag.BankBranch</td>
+                        @*<td style="border: 1px solid black;"><b> BankName:    </b>@ViewBag.BankName</td>
+                        <td style="border: 1px solid black;"><b> BankBranch:    </b>@ViewBag.BankBranch</td>*@
                     }
                     else if (ViewBag.PaymentMode == "NEFT")
                     {
                         <td style="border: 1px solid black;"><b> Via:    </b>@ViewBag.PaymentMode</td>
                         <td style="border: 1px solid black;"><b> NEFTNo:    </b>@ViewBag.TransactionNo</td>
                         <td style="border: 1px solid black;"><b> NEFTDate:    </b>@ViewBag.TransactionDate</td>
-                        <td style="border: 1px solid black;"><b> BankName:    </b>@ViewBag.BankName</td>
-                        <td style="border: 1px solid black;"><b> BankBranch:    </b>@ViewBag.BankBranch</td>
+                        @*<td style="border: 1px solid black;"><b> BankName:    </b>@ViewBag.BankName</td>
+                        <td style="border: 1px solid black;"><b> BankBranch:    </b>@ViewBag.BankBranch</td>*@
                     }
                     else if (ViewBag.PaymentMode == "DD")
                     {
                         <td style="border: 1px solid black;"><b> Via:    </b>@ViewBag.PaymentMode</td>
                         <td style="border: 1px solid black;"><b> DD No:    </b>@ViewBag.TransactionNo</td>
                         <td style="border: 1px solid black;"><b> DD Date:    </b>@ViewBag.TransactionDate</td>
-                        <td style="border: 1px solid black;"><b> BankName:    </b>@ViewBag.BankName</td>
-                        <td style="border: 1px solid black;"><b> BankBranch:    </b>@ViewBag.BankBranch</td>
+                        @*<td style="border: 1px solid black;"><b> BankName:    </b>@ViewBag.BankName</td>
+                        <td style="border: 1px solid black;"><b> BankBranch:    </b>@ViewBag.BankBranch</td>*@
                     }
                     else
                     {
                         <td style="border: 1px solid black;"><b> Via:    </b>@ViewBag.PaymentMode</td>
                         <td style="border: 1px solid black;"><b> Transdaction No:    </b>@ViewBag.TransactionNo</td>
                         <td style="border: 1px solid black;"><b> Transdaction Date:    </b>@ViewBag.TransactionDate</td>
-                        <td style="border: 1px solid black;"><b> BankName:    </b>@ViewBag.BankName</td>
-                        <td style="border: 1px solid black;"><b> BankBranch:    </b>@ViewBag.BankBranch</td>
+                        @*<td style="border: 1px solid black;"><b> BankName:    </b>@ViewBag.BankName</td>
+                        <td style="border: 1px solid black;"><b> BankBranch:    </b>@ViewBag.BankBranch</td>*@
                     }
                 }
             </tr>
@@ -431,32 +458,48 @@
                     <td style="text-align:left;" colspan="2"><b>  Remark :-   </b></td>
                 </tr>
                 <tr>
-                    <td style="text-align:left;" colspan="2">
+                    @*<td class="FontSize" style="text-align:left;" colspan="2">
                         1.The applicant shall be liable/responsible for any payment
                         made by him any third account and right created from there and company shall have no liability
                         in this regards.
+                    </td>*@
+                    <td style="text-align:left;" colspan="2">
+                        <span class="bigger">
+                            1.The applicant shall be liable/responsible for any payment
+                            made by him any third account and right created from there and company shall have no liability
+                            in this regards.
+                        </span>
                     </td>
                 </tr>
-                <tr>
+                @*<tr>
                     <td style="text-align:left;" colspan="2">2.This receipt is not transferable unless consented by the company.</td>
-                </tr>
-                <tr>
+                </tr>*@
+                @*<tr>
                     <td style="text-align:left;" colspan="2">
                         3.Please keep this document in safe custody and in case same is lost/misplaced
                         please inform to company immediately with request letter copy of fir news cutting and affidavit.
                     </td>
-                </tr>
-                <tr>
+                </tr>*@
+                @*<tr>
                     <td style="text-align:left;" colspan="2">4.This money receipt is subject to realization of payment mode.</td>
+                </tr>*@
+                <tr>
+                    @*<td class="FontSize" style="text-align:left;" colspan="2">2.In case of refund 35% of total plot amount is subject to deducation in favour of company.</td>*@
+                    <td style="text-align:left;" colspan="2">
+                        <span class="bigger">
+                            2.In case of refund 35% of total plot amount is subject to deducation in favour of company.
+                        </span>
+                    </td>
                 </tr>
                 <tr>
-                    <td style="text-align:left;" colspan="2">5.In case of refund 35% of total plot amount is subject to deducation in favour of company.</td>
+                    @*<td class="FontSize"  style="text-align:left;" colspan="2">3.Booking amount is not refundable.</td>*@
+                    <td style="text-align:left;" colspan="2">
+                        <span class="bigger">
+                            3.Booking amount is not refundable.
+                        </span>
+                    </td>
                 </tr>
                 <tr>
-                    <td style="text-align:left;" colspan="2">6.Booking amount is not refundable.</td>
-                </tr>
-                <tr>
-
                     <td style="text-align:right;margin-right:100px;"><b style="margin-right: 40px;"> Generated By</b></td>
                 </tr>
                 <tr>
@@ -471,32 +514,49 @@
                     <td style="text-align:left;" colspan="2"><b>  Remark :-   </b></td>
                 </tr>
                 <tr>
-                    <td style="text-align:left;" colspan="2">
+                    @*<td  class="FontSize" style="text-align:left;" colspan="2">
                         1.The applicant shall be liable/responsible for any payment
                         made by him any third account and right created from there and company shall have no liability
                         in this regards.
+                    </td>*@
+                    <td style="text-align:left;" colspan="2">
+                        <span class="bigger">
+                            1.The applicant shall be liable/responsible for any payment
+                            made by him any third account and right created from there and company shall have no liability
+                            in this regards.
+                        </span>
                     </td>
                 </tr>
-                <tr>
+                @*<tr>
                     <td style="text-align:left;" colspan="2">2.This receipt is not transferable unless consented by the company.</td>
-                </tr>
-                <tr>
+                </tr>*@
+                @*<tr>
                     <td style="text-align:left;" colspan="2">
                         3.Please keep this document in safe custody and in case same is lost/misplaced
                         please inform to company immediately with request letter copy of fir news cutting and affidavit.
                     </td>
-                </tr>
-                <tr>
+                </tr>*@
+                @*<tr>
                     <td style="text-align:left;" colspan="2">4.This money receipt is subject to realization of payment mode.</td>
+                </tr>*@
+                <tr>
+                    @*<td class="FontSize"  style="text-align:left;" colspan="2">2.In case of refund 35% of total plot amount is subject to deducation in favour of company.</td>*@
+                    <td style="text-align:left;" colspan="2">
+                        <span class="bigger">
+                            2.In case of refund 35% of total plot amount is subject to deducation in favour of company.
+                        </span>
+                    </td>
                 </tr>
                 <tr>
-                    <td style="text-align:left;" colspan="2">5.In case of refund 35% of total plot amount is subject to deducation in favour of company.</td>
-                </tr>
-                <tr>
-                    <td style="text-align:left;" colspan="2">6.Booking amount is not refundable.</td>
-                </tr>
-                <tr>
+                    @*<td class="FontSize" style="text-align:left;" colspan="2">3.Booking amount is not refundable.</td>*@
 
+                    <td style="text-align:left;" colspan="2">
+                        <span class="bigger">
+                            3.Booking amount is not refundable.
+                        </span>
+                    </td>
+                </tr>
+                <tr>
                     <td style="text-align:right;margin-right:100px;"><b style="margin-right: 40px;">Generated By</b></td>
                 </tr>
                 <tr>
@@ -523,3 +583,18 @@
 </div>
 </body>
 </html>
+<style>
+    /*.FontSize{
+        font-size:30px;
+    }*/
+
+    @@media print {
+    .bigger {
+        font-size: 14pt;
+    }
+}
+
+</style>
+
+
+
