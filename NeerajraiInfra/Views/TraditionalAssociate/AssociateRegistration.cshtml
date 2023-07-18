@@ -326,25 +326,25 @@
     function validateform() {
        // $("#divload").css({ 'display': '' });
         $(".errortext").removeClass("errortext");
-        //if ($('#BranchID').val() == '0') {
-        //    $("#BranchID").addClass('errortext');
-        //    $('#BranchID').focus();
-        //    //   alert("Please Select Branch .")
-        //    return false;
-        //}
-        //if ($('#SponsorID').val() == '') {
-        //    $("#SponsorID").addClass('errortext');
-        //    $('#SponsorID').focus();
-        //    $('#SponsorID').val('');
-        //    //   alert("Please Fill Sponsor ID .")
-        //    return false;
-        //}
-        //if ($('#DesignationID').val() == '0') {
-        //    $("#DesignationID").addClass('errortext');
-        //    $('#DesignationID').focus();
-        //    //   alert("Please Select Designation .")
-        //    return false;
-        //}
+        if ($('#BranchID').val() == '0') {
+            $("#BranchID").addClass('errortext');
+            $('#BranchID').focus();
+            //   alert("Please Select Branch .")
+            return false;
+        }
+        if ($('#SponsorID').val() == '') {
+            $("#SponsorID").addClass('errortext');
+            $('#SponsorID').focus();
+            $('#SponsorID').val('');
+            //   alert("Please Fill Sponsor ID .")
+            return false;
+        }
+        if ($('#DesignationID').val() == '0') {
+            $("#DesignationID").addClass('errortext');
+            $('#DesignationID').focus();
+            //   alert("Please Select Designation .")
+            return false;
+        }
         if ($('#FirstName').val() == '') {
             $("#FirstName").addClass('errortext');
             $('#FirstName').focus();
