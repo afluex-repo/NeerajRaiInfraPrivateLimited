@@ -296,6 +296,7 @@ namespace NeerajraiInfra.Models
 
         public string PanNo { get; set; }
 
+        
         public string Address { get; set; }
         public string ActionStatus { get; set; }
         public string NewsFor { get; set; }

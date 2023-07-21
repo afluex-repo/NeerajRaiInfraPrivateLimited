@@ -102,7 +102,6 @@
                                                 <th>Associate Name</th>*@
                                             <th>JoiningDate</th>
                                             <th>Mobile Number</th>
-                                        
                                             @*<th>Action</th>*@
                                         </tr>
                                     </thead>
@@ -127,8 +126,7 @@
                                                             <td>@Item.SponsorName </td>*@
                                                         <td>@Item.JoiningFromDate</td>
                                                         <td>@Item.Contact</td>
-                                                   
-                                                                                                                @*<td>
+                                                                                           @*<td>
                                                             <a href="/Customer/CustomerRegistration?UserID=@Item.EncryptKey" style="margin-top:5px;" class="btn btn-info btn-sm">Edit</a>
                                                             <a href="/Customer/Delete?UserID=@Item.UserID" style="margin-top:5px;margin-bottom:5px" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this Customer?');">Delete</a>*@
                                                     </tr>
