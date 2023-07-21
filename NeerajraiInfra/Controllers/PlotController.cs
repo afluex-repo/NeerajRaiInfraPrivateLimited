@@ -1625,8 +1625,7 @@ namespace NeerajraiInfra.Controllers
             return RedirectToAction(FormName, Controller);
         }
         #endregion
-
-
+        
         #region EMIPayment
 
         public ActionResult EMIPayment(string PK_BookingId)
@@ -1644,8 +1643,7 @@ namespace NeerajraiInfra.Controllers
 
                     model.PlotID = dsBookingDetails.Tables[0].Rows[0]["Fk_PlotId"].ToString();
                     model.SiteID = dsBookingDetails.Tables[0].Rows[0]["FK_SiteID"].ToString();
-
-
+                    
                     #region GetSectors
                     List<SelectListItem> ddlSector = new List<SelectListItem>();
                     DataSet dsSector = model.GetSectorList();
@@ -1685,7 +1683,6 @@ namespace NeerajraiInfra.Controllers
             }
             else
             {
-
                 List<SelectListItem> ddlSector = new List<SelectListItem>();
                 ddlSector.Add(new SelectListItem { Text = "Select Phase", Value = "0" });
                 ViewBag.ddlSector = ddlSector;
@@ -1776,7 +1773,6 @@ namespace NeerajraiInfra.Controllers
             #endregion
             return View(model);
         }
-
         public ActionResult Details(string SiteID, string SectorID, string BlockID, string PlotNumber, string BookingNumber)
         {
             Plot model = new Plot();
@@ -1837,12 +1833,10 @@ namespace NeerajraiInfra.Controllers
                             obj.PaymentMode = r["PaymentModeName"].ToString();
                             obj.DueAmount = r["DueAmount"].ToString();
                             obj.CssClass = r["CssClass"].ToString();
-
                             lst.Add(obj);
                         }
                         model.lstPlot = lst;
                     }
-
                 }
                 else if (dsblock.Tables[0].Rows[0]["MSG"].ToString() == "0")
                 {
@@ -1855,7 +1849,6 @@ namespace NeerajraiInfra.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
-
         [HttpPost]
         [ActionName("EMIPayment")]
         [OnAction(ButtonName = "Save")]
@@ -1897,9 +1890,6 @@ namespace NeerajraiInfra.Controllers
                         catch
                         {
                         }
-                       
-                      
-
                     }
                     else
                     {
@@ -3272,10 +3262,8 @@ namespace NeerajraiInfra.Controllers
             DataSet dsblock = model.FillDetails();
             if (dsblock != null && dsblock.Tables[0].Rows.Count > 0)
             {
-
                 if (dsblock.Tables[0].Rows[0]["MSG"].ToString() == "1")
                 {
-
                     model.Result = "yes";
                     // model.PlotID = dsblock.Tables[0].Rows[0]["PK_PlotID"].ToString();
                     model.PlotAmount = dsblock.Tables[0].Rows[0]["PlotAmount"].ToString();
@@ -3297,8 +3285,6 @@ namespace NeerajraiInfra.Controllers
                     model.InstallmentAmount = dsblock.Tables[0].Rows[0]["InstallmentAmount"].ToString();
                     model.PlotArea = dsblock.Tables[0].Rows[0]["PlotArea"].ToString();
                     model.Balance = dsblock.Tables[0].Rows[0]["BalanceAmount"].ToString();
-
-
                 }
                 FormName = "CustomerLedgerReport";
                 Controller = "AssociateDashboard";
@@ -3554,7 +3540,6 @@ namespace NeerajraiInfra.Controllers
                     {
 
                         TempData["Update"] = " Booking Update successfully ";
-
                     }
                     else
                     {
@@ -3569,9 +3554,7 @@ namespace NeerajraiInfra.Controllers
             }
             FormName = "PlotBookingList";
             Controller = "Plot";
-
             return RedirectToAction(FormName, Controller);
-
         }
         public ActionResult CancelledPlotLedger(Plot model)
         {
@@ -3594,7 +3577,6 @@ namespace NeerajraiInfra.Controllers
                     }
                     else if (dsblock.Tables[0].Rows[0]["MSG"].ToString() == "1")
                     {
-
                         model.Result = "yes";
                         model.hdBookingNo = Crypto.Encrypt(dsblock.Tables[0].Rows[0]["BookingNo"].ToString());
                         // model.PlotID = dsblock.Tables[0].Rows[0]["PK_PlotID"].ToString();
@@ -3659,14 +3641,12 @@ namespace NeerajraiInfra.Controllers
                 {
                     model.Result = "No record found !";
                 }
-
             }
             catch (Exception ex)
             {
                 model.Result = ex.Message;
             }
             return Json(model, JsonRequestBehavior.AllowGet);
-
         }
     }
 }

@@ -395,12 +395,12 @@
         //    //   alert("Please Fill Sponsor ID .")
         //    return false;
         //}
-        //if ($('#DesignationID').val() == '0') {
-        //    $("#DesignationID").addClass('errortext');
-        //    $('#DesignationID').focus();
-        //    //   alert("Please Select Designation .")
-        //    return false;
-        //}
+        if ($('#DesignationID').val() == '0') {
+            $("#DesignationID").addClass('errortext');
+            $('#DesignationID').focus();
+            //   alert("Please Select Designation .")
+            return false;
+        }
         if ($('#FirstName').val() == '') {
             $("#FirstName").addClass('errortext');
             $('#FirstName').focus();

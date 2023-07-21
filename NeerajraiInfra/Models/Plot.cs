@@ -19,10 +19,7 @@ namespace NeerajraiInfra.Models
         public List<SelectListItem> ddlPlan { get; set; }
         public string MLMLoginId { get; set; }
         public string PLCAmount { get; set; }
-
-       
-
-
+        
         #region Properties
         public string Type { get; set; }
         public string PreviousBookingAmount { get; set; }
@@ -123,7 +120,6 @@ namespace NeerajraiInfra.Models
             DataSet ds = Connection.ExecuteQuery("GetBranchList");
             return ds;
         }
-
         public DataSet GetSiteList()
         {
             DataSet ds = Connection.ExecuteQuery("SiteList");
@@ -134,7 +130,6 @@ namespace NeerajraiInfra.Models
             DataSet ds = Connection.ExecuteQuery("GetPlan");
             return ds;
         }
-
         public DataSet GetCustomerName()
         {
             SqlParameter[] para = { new SqlParameter("@LoginID", LoginId) };
@@ -155,21 +150,18 @@ namespace NeerajraiInfra.Models
             DataSet ds = Connection.ExecuteQuery("CheckPlotNumber", para);
             return ds;
         }
-
         public DataSet GetAssociateList()
         {
             SqlParameter[] para = { new SqlParameter("@LoginID", LoginId) };
             DataSet ds = Connection.ExecuteQuery("AssociateListTraditional", para);
             return ds;
         }
-
         public DataSet GetSectorList()
         {
             SqlParameter[] para = { new SqlParameter("@SiteID", SiteID) };
             DataSet ds = Connection.ExecuteQuery("GetSectorList", para);
             return ds;
         }
-
         public DataSet GetBlockList()
         {
             SqlParameter[] para ={ new SqlParameter("@SiteID",SiteID),
@@ -179,14 +171,12 @@ namespace NeerajraiInfra.Models
             DataSet ds = Connection.ExecuteQuery("GetBlockList", para);
             return ds;
         }
-
         public DataSet GetPaymentPlanList()
         {
             SqlParameter[] para = { new SqlParameter("@PK_PLanID", PaymentPlanID) };
             DataSet ds = Connection.ExecuteQuery("GetPaymentPlan",para);
             return ds;
         }
-
         public DataSet CheckPlotAvailibility()
         {
             SqlParameter[] para =
@@ -199,7 +189,6 @@ namespace NeerajraiInfra.Models
             DataSet ds = Connection.ExecuteQuery("GetPlotStatus", para);
             return ds;
         }
-
         public DataSet GetPaymentModeList()
         {
             SqlParameter[] para =
@@ -246,7 +235,6 @@ namespace NeerajraiInfra.Models
             DataSet ds = Connection.ExecuteQuery("PlotBooking", para);
             return ds;
         }
-
         //public DataSet SavePlotBooking()
         //{
         //    SqlParameter[] para =
@@ -344,7 +332,6 @@ namespace NeerajraiInfra.Models
             DataSet ds = Connection.ExecuteQuery("GetPlotBookingForCancelList", para);
             return ds;
         }
-
         public DataSet UpdatePlotBooking()
         {
             SqlParameter[] para =
@@ -374,7 +361,6 @@ namespace NeerajraiInfra.Models
             DataSet ds = Connection.ExecuteQuery("UpdatePlotBooking", para);
             return ds;
         }
-
         public DataSet CancelPlotBooking()
         {
             SqlParameter[] para =
@@ -387,7 +373,6 @@ namespace NeerajraiInfra.Models
             DataSet ds = Connection.ExecuteQuery("CancelPlotBooking", para);
             return ds;
         }
-
         public DataSet GetCancelledBookingDetailsList()
         {
             SqlParameter[] para = {
@@ -518,7 +503,6 @@ namespace NeerajraiInfra.Models
         public string PlotArea { get; set; }
         public string Balance { get; set; }
         public string DueAmount { get; set; }
-
         public DataSet FillBookedPlotDetailsForEmi()
         {
             SqlParameter[] para =
@@ -532,7 +516,6 @@ namespace NeerajraiInfra.Models
             DataSet ds = Connection.ExecuteQuery("GetPlotDetailsForEMIPayment", para);
             return ds;
         }
-
         public DataSet SaveEMIPayment()
         {
             SqlParameter[] para =
@@ -554,7 +537,6 @@ namespace NeerajraiInfra.Models
             DataSet ds = Connection.ExecuteQuery("EMIPayment", para);
             return ds;
         }
-
         #endregion
 
         #region Customer Ledger Report
@@ -754,7 +736,6 @@ namespace NeerajraiInfra.Models
             DataSet ds = Connection.ExecuteQuery("GetPlotAllotmentReport", para);
             return ds;
         }
-
         #endregion
 
         #region paymentpaidlist
@@ -842,14 +823,12 @@ namespace NeerajraiInfra.Models
             DataSet ds = Connection.ExecuteQuery("GetPlotForAgreementLatter", para);
             return ds;
         }
-
         public DataSet PrintAgreementLatter()
         {
             SqlParameter[] para = { new SqlParameter("@PK_BookingId", PK_BookingId) };
             DataSet ds = Connection.ExecuteQuery("PrintAgreementLetter", para);
             return ds;
         }
-
         #region RowHouseBooking
         public string RowHouseBookingID { get; set; }
         public string PK_PLCCharge { get; set; }
@@ -958,9 +937,7 @@ namespace NeerajraiInfra.Models
         public string Rate { get; set; }
         public string Months { get; internal set; }
         #endregion
-
-
-       
+        
     }
 }
 
