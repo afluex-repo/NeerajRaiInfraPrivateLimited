@@ -1808,6 +1808,8 @@ namespace NeerajraiInfra.Controllers
                     obj.JoiningFromDate = r["JoiningDate"].ToString();
                     obj.EncryptKey = Crypto.Encrypt(r["PK_UserId"].ToString());
                     obj.Password = Crypto.Decrypt(r["Password"].ToString());
+            
+                    
                     lstCustomer.Add(obj);
                 }
                 model.lstCustomer = lstCustomer;
@@ -2270,7 +2272,7 @@ namespace NeerajraiInfra.Controllers
 
                 ViewBag.ddlBranch = ddlBranch;
 
-                #endregion
+                #endregion  
                 return View(obj);
             }
             catch (Exception ex)
