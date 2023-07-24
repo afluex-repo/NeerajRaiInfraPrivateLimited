@@ -1268,7 +1268,9 @@ namespace NeerajraiInfra.Controllers
                     ViewBag.RemainingAmount = ds.Tables[0].Rows[0]["RemainingAmount"].ToString();
                     ViewBag.PlotRate = ds.Tables[0].Rows[0]["PlotRate"].ToString();
                     ViewBag.SiteName = ds.Tables[0].Rows[0]["SiteName"].ToString();
-                    
+                    //ViewBag.InstallmentNo = ds.Tables[0].Rows[0]["InstallmentNo"].ToString();
+                    //ViewBag.AdjustmentloginId = ds.Tables[0].Rows[0]["AdjustmentloginId"].ToString();
+
                     ViewBag.CompanyName = SoftwareDetails.CompanyName;
                     ViewBag.CompanyAddress = SoftwareDetails.CompanyAddress;
                     ViewBag.Pin1 = SoftwareDetails.Pin1;
