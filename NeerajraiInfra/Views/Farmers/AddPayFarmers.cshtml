@@ -63,7 +63,7 @@
                     <div class="row form-group">
                         <div class="col-md-3 col-lg-3">
                             Area <span style="color:red">*</span>
-                            @Html.TextBoxFor(m => m.Hectare, new { @class = "form-control", @placeholder = "Hectare", @onkeypress = "return isNumberKey(event);", @readonly = true })
+                            @Html.TextBoxFor(m => m.SqMtr, new { @class = "form-control", @placeholder = "SQMtr.", @onkeypress = "return isNumberKey(event);", @readonly = true })
                         </div>
                         <div class="col-md-3 col-lg-3" style="display:none">
                             Acre<span>&nbsp;</span>
@@ -153,22 +153,22 @@
         $("#divload").css({ 'display': 'none' });
 
     });
-    $('#Hectare').keyup(function () {
-        var getacre = parseFloat(2.47107 * $(this).val()).toFixed(2);
+    $('#SqMtr').keyup(function () {
+        var getacre = parseFloat(0.0002471053815 * $(this).val()).toFixed(2);
         $('#Acre').val(getacre);
-        var getsqft = parseFloat(107639 * $(this).val()).toFixed(2);
+        var getsqft = parseFloat(10.76391042 * $(this).val()).toFixed(2);
         $('#SQFT').val(getsqft);
     });
     $('#Acre').keyup(function () {
-        var gethectare = parseFloat(0.404686 * $(this).val()).toFixed(2);
-        $('#Hectare').val(gethectare);
+        var getsgmtr = parseFloat(0.404686 * $(this).val()).toFixed(2);
+        $('#SqMtr').val(getsgmtr);
         var getsqft = parseFloat(43560 * $(this).val()).toFixed(2);
         $('#SQFT').val(getsqft);
     });
     $('#SQFT').keyup(function () {
-        var gethectare = parseFloat($(this).val() / 107639).toFixed(2);
-        $('#Hectare').val(gethectare);
-        var getacre = parseFloat($(this).val() / 43560).toFixed(2);
+        var getsgmtr = parseFloat($(this).val() / 10.76391042).toFixed(2);
+        $('#SqMtr').val(getsgmtr);
+        var getacre = parseFloat($(this).val() / 0.0002471053815).toFixed(2);
         $('#Acre').val(getacre);
     });
         function validatePayAmount() {
