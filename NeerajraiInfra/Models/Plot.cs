@@ -109,6 +109,9 @@ namespace NeerajraiInfra.Models
         public string PaymentDetail { get; set; }
         public string PaidAmtinrs { get; set; }
         public string PayDate { get; set; }
+        public string KharijDakhilDate { get; set; }
+        public string IsKharijDakhil { get; set; }
+        public string IsKharijDakhila { get; set; }
 
 
         #endregion
@@ -827,6 +830,19 @@ namespace NeerajraiInfra.Models
         {
             SqlParameter[] para = { new SqlParameter("@PK_BookingId", PK_BookingId) };
             DataSet ds = Connection.ExecuteQuery("PrintAgreementLetter", para);
+            return ds;
+        }
+        public DataSet SaveIsKharijDakhil()
+        {
+            SqlParameter[] para =
+                            {
+                                        new SqlParameter("@Fk_BookingId ",PK_BookingId),
+                                         new SqlParameter("@IsKharijDakhila ",IsKharijDakhila),
+                                        new SqlParameter("@KharijDakhilDate" , KharijDakhilDate),
+                                        new SqlParameter("@AddedBy",AddedBy),
+                                        new SqlParameter("@Remarks",Remark)
+                            };
+            DataSet ds = Connection.ExecuteQuery("SaveIsKharijDakhil", para);
             return ds;
         }
         #region RowHouseBooking

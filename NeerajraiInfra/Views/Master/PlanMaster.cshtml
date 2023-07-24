@@ -48,6 +48,11 @@
                             @Html.TextBoxFor(m => m.PlanMonth, new { @class = "form-control", @Placeholder = "Plan Month" })
 
                         </div>
+                        <div class="input-field col m12 s12">
+                            Alotment Amount<span style="color:red">*</span>
+                            @Html.TextBoxFor(m => m.AlotmentAmount, new { @class = "form-control", @Placeholder = "Alotment Amount" })
+
+                        </div>
                     </div>
                     <br />
                     <div class="form-group row">
@@ -142,6 +147,14 @@
             $('#PlanMonth').focus();
             return false;
         }
+        if ($('#AlotmentAmount').val() == '') {
+            $("#AlotmentAmount").addClass('errortext');
+            $('#AlotmentAmount').focus();
+            return false;
+        }
+
+
+        
         return true;
     }
 </script>
