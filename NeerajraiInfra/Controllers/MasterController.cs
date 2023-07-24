@@ -2327,6 +2327,7 @@ namespace NeerajraiInfra.Controllers
                 {
                     model.PlanName = ds.Tables[0].Rows[0]["PlanName"].ToString();
                     model.PlanMonth = ds.Tables[0].Rows[0]["Months"].ToString();
+                    model.AlotmentAmount = ds.Tables[0].Rows[0]["AlotmentAmount"].ToString();
                 }
             }
             return View(model);
@@ -2381,6 +2382,7 @@ namespace NeerajraiInfra.Controllers
                     obj.PK_PlanId = r["PK_PlanId"].ToString();
                     obj.PlanName = r["PlanName"].ToString();
                     obj.PlanMonth = r["Months"].ToString();
+                    obj.AlotmentAmount = r["AlotmentAmount"].ToString();
                     lst.Add(obj);
                 }
                 model.lstPlan = lst;

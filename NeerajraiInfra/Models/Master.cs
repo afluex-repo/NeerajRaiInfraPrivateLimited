@@ -80,6 +80,9 @@ namespace NeerajraiInfra.Models
         public string PlanName { get; set; }
         public string PlanMonth { get; set; }
         public List<Master> lstPlan { get; set; }
+        public string AlotmentAmount { get; set; }
+
+        
 
 
         #endregion
@@ -921,6 +924,7 @@ namespace NeerajraiInfra.Models
             SqlParameter[] para = {
                                       new SqlParameter("@PlanName ", PlanName ),
                                       new SqlParameter("@Months", PlanMonth),
+                                             new SqlParameter("@AlotmentAmount", AlotmentAmount),
                                       new SqlParameter("@AddedBy", AddedBy)
                                   };
             DataSet ds = Connection.ExecuteQuery("SavePlanMaster", para);
@@ -945,6 +949,7 @@ namespace NeerajraiInfra.Models
                                       new SqlParameter("@PK_PlanId ", PK_PlanId ),
                                       new SqlParameter("@PlanName ", PlanName ),
                                       new SqlParameter("@Months", PlanMonth),
+                                      new SqlParameter("@AlotmentAmount", AlotmentAmount),
                                       new SqlParameter("@AddedBy", AddedBy)
                                   };
             DataSet ds = Connection.ExecuteQuery("UpdatePlanMaster", para);
