@@ -41,6 +41,7 @@ namespace NeerajraiInfra.Models
         public string Name { get; set; }
         public string IDProof { get; set; }
         public string Hectare { get; set; }
+        public string SqMtr { get; set; }
         public string IsActive { get; set; }
         public string PK_Farmerid { get; set; }
         public string EncryptKey { get; set; }
@@ -83,6 +84,7 @@ namespace NeerajraiInfra.Models
         public List<SelectListItem> lstBlock { get; set; }
         public string Fk_PaymentId { get; set; }
         public List<SelectListItem> ddlRegistry { get; set; }
+        public string IsRegistryByCompany { get; set; }
 
 
         #endregion
@@ -100,7 +102,7 @@ namespace NeerajraiInfra.Models
                                       new SqlParameter("@Mobile", Mobile),
                                       new SqlParameter("@Email", Email),
                                       new SqlParameter("@DOB", DOB),
-                                      new SqlParameter("@Hectare", Hectare),
+                                      new SqlParameter("@SqMtr", SqMtr),
                                       new SqlParameter("@SQFT", SQFT),
                                       new SqlParameter("@Acre", Acre),
                                       new SqlParameter("@Pincode", Pincode),
@@ -143,7 +145,7 @@ namespace NeerajraiInfra.Models
                                       new SqlParameter("@Mobile", Mobile),
                                       new SqlParameter("@Email", Email),
                                       new SqlParameter("@DOB", DOB),
-                                      new SqlParameter("@Hectare", Hectare),
+                                      new SqlParameter("@SqMtr", SqMtr),
                                       new SqlParameter("@SQFT", SQFT),
                                       new SqlParameter("@Acre", Acre),
                                       new SqlParameter("@Pincode", Pincode),
@@ -392,6 +394,7 @@ namespace NeerajraiInfra.Models
                                       new SqlParameter("@GataKhasraNo", GataKhasaraN),
                                       new SqlParameter("@RegistryDate", RegistryDate),
                                       new SqlParameter("@RemainingArea", RemainingArea),
+                                        new SqlParameter("@IsRegistryByCompany", IsRegistryByCompany),
                                       new SqlParameter("@AddedBy", AddedBy)
 
                                   };

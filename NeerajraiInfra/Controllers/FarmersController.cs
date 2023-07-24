@@ -57,6 +57,7 @@ namespace NeerajraiInfra.Controllers
                         model.Registry = ds.Tables[0].Rows[0]["IsRegistry"].ToString();
                         model.Agreement = ds.Tables[0].Rows[0]["IsAgreement"].ToString();
                         model.Notary = ds.Tables[0].Rows[0]["IsNotary"].ToString();
+                        model.SqMtr = ds.Tables[0].Rows[0]["SqMtr"].ToString();
 
 
                         //ddltitle.Add(new SelectListItem { Text = ds.Tables[0].Rows[0]["Title"].ToString(), Value = ds.Tables[0].Rows[0]["Title"].ToString(), Selected = true });
@@ -241,6 +242,7 @@ namespace NeerajraiInfra.Controllers
                     obj.JoiningDate = r["AddedDate"].ToString();
                     obj.GataKhasaraN = r["GataKhasaraN"].ToString();
                     obj.Hectare = r["Hectare"].ToString();
+                    obj.SqMtr = r["SqMtr"].ToString();
                     obj.Village = r["Village"].ToString();
                     obj.EncryptKey = Crypto.Encrypt(r["Pk_FarmerID"].ToString());
                     lst.Add(obj);
@@ -635,6 +637,7 @@ namespace NeerajraiInfra.Controllers
                         model.Acre = ds.Tables[0].Rows[0]["Acre"].ToString();
                         model.SQFT = ds.Tables[0].Rows[0]["SQFT"].ToString();
                         model.GataKhasaraN = ds.Tables[0].Rows[0]["GataKhasaraN"].ToString();
+                        model.SqMtr = ds.Tables[0].Rows[0]["SqMtr"].ToString();
                     }
                 }
                 else
@@ -1111,6 +1114,14 @@ namespace NeerajraiInfra.Controllers
             {
                 model.AddedBy = Session["Pk_AdminId"].ToString();
                 model.RegistryDate = string.IsNullOrEmpty(model.RegistryDate) ? null : Common.ConvertToSystemDate(model.RegistryDate, "dd/MM/yyyy");
+                if(model.IsRegistryByCompany == null)
+                {
+                    model.IsRegistryByCompany = "0";
+                }
+                else
+                {
+                    model.IsRegistryByCompany = "1";
+                }
                 DataSet ds = model.SaveFarmerPlotRegistry();
                 if (ds != null && ds.Tables.Count > 0)
                 {

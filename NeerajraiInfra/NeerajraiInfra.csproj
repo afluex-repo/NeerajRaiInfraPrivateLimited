@@ -7624,6 +7624,7 @@
     <Content Include="Views\Master\PlanMaster.cshtml" />
     <Content Include="Views\Master\PlanMasterList.cshtml" />
     <Content Include="Views\AdminReports\ClosingWisePayoutDetails.cshtml" />
+    <Content Include="Views\AdminReports\PrintAllotments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
