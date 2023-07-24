@@ -110,11 +110,17 @@
                                 @Html.TextBoxFor(m => m.RemainingArea, new { @class = "form-control", @Placeholder = "Remaining Area", @readonly = true  })
                             </div>
                         </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                Is Registry By Company
+                                <input type="checkbox" id="IsRegistryByCompany" name="IsRegistryByCompany"  value="@Model.IsRegistryByCompany" />
+                                <input name="IsRegistryByCompany" type="hidden" value="@Model.IsRegistryByCompany" />
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                           
                                     <input class="btn btn-success pull-left" type="submit" onclick="return validateform();" value="Save" id="btnSave" name="btnSave" />
                                 <a class="btn btn-info" href="/Farmers/FarmerPlotRegistrylist" style="margin-left:5px;">Back To List</a>
                             </div>
@@ -133,6 +139,18 @@
 <script>
     $(document).ready(function () {
         $("#divload").css({ 'display': 'none' });
+
+      
+        var IsRegistryBy = 0;
+        debugger;
+        if ($("#IsRegistryByCompany").is(":checked") == true) {
+
+            IsRegistryBy = "1";
+        }
+        else {
+            IsRegistryBy = "0";
+        }
+
         $("input").attr("autocomplete", "off");
 
         var cityuse = [];
@@ -255,6 +273,7 @@
             $("#divload").css({ 'display': 'none' });
             return false;
         }
+        
         $("#divload").css({ 'display': '' });
 
         return true;

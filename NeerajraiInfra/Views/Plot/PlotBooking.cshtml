@@ -119,7 +119,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 Plot Area
-                                @Html.TextBoxFor(m => m.PlotArea, new { @class = "form-control", @Placeholder = "Plot Number",@readonly=true})
+                                @Html.TextBoxFor(m => m.PlotArea, new { @class = "form-control", @Placeholder = "Plot Number"})
                                 @*@Html.HiddenFor(m => m.PlotID)
                                 @Html.HiddenFor(m => m.PlotSize)
                                 @Html.HiddenFor(m => m.BookingPercent)*@
@@ -163,7 +163,6 @@
                                 @Html.DropDownListFor(m => m.PaymentPlanID, new SelectList(ViewBag.ddlPlan, "Value", "Text"), new { @class = "form-control", @onchange = "return Flexi();" })
                             </div>
                         </div>
-                        
                     </div>
                     <div class="row">
                         <div class="col-md-3" id="emi">
