@@ -919,7 +919,7 @@ namespace NeerajraiInfra.Controllers
         [HttpPost]
         [ActionName("PlotAvailability")]
         [OnAction(ButtonName = "Search")]
-        public ActionResult Details(Master model,string SiteID,string SectorID)
+        public ActionResult Details(Master model, string SiteID, string SectorID)
         {
             //Master model = new Master();
             List<Master> lst = new List<Master>();
@@ -1268,7 +1268,7 @@ namespace NeerajraiInfra.Controllers
                     ViewBag.RemainingAmount = ds.Tables[0].Rows[0]["RemainingAmount"].ToString();
                     ViewBag.PlotRate = ds.Tables[0].Rows[0]["PlotRate"].ToString();
                     ViewBag.SiteName = ds.Tables[0].Rows[0]["SiteName"].ToString();
-                    //ViewBag.InstallmentNo = ds.Tables[0].Rows[0]["InstallmentNo"].ToString();
+                    ViewBag.InstallmentNo = ds.Tables[0].Rows[0]["InstallmentNo"].ToString();
                     //ViewBag.AdjustmentloginId = ds.Tables[0].Rows[0]["AdjustmentloginId"].ToString();
 
                     ViewBag.CompanyName = SoftwareDetails.CompanyName;
@@ -1285,7 +1285,7 @@ namespace NeerajraiInfra.Controllers
 
             return View(newdata);
         }
-        
+
         #endregion
 
         #region WelcomeLetter Associate
@@ -1617,7 +1617,7 @@ namespace NeerajraiInfra.Controllers
                         string name = ds.Tables[0].Rows[0]["Name"].ToString();
                         string Amount = ds.Tables[0].Rows[0]["Amount"].ToString();
                         string TempId = "1707166296882557362";
-                        BLSMS.SendSMS(mob, "Dear "+name+", Your Payout Request of Rs"+ Amount + " has been approved and processed successfully. Please check your account. SHRIRADHEYKUNJ", TempId);
+                        BLSMS.SendSMS(mob, "Dear " + name + ", Your Payout Request of Rs" + Amount + " has been approved and processed successfully. Please check your account. SHRIRADHEYKUNJ", TempId);
                     }
                     else
                     {
@@ -1669,7 +1669,7 @@ namespace NeerajraiInfra.Controllers
             List<TraditionalAssociate> lst = new List<TraditionalAssociate>();
             if (LoginId != null)
             {
-               
+
                 model.ToID = LoginId;
             }
             DataSet ds = model.GetUnPaidForDistribute();
@@ -1702,7 +1702,7 @@ namespace NeerajraiInfra.Controllers
         public ActionResult UnpaidIncome(TraditionalAssociate model, string LoginId)
         {
             List<TraditionalAssociate> lst = new List<TraditionalAssociate>();
-            if(LoginId !=null)
+            if (LoginId != null)
             {
                 TempData["Plot"] = "UNPAID";
                 model.ToID = LoginId;
@@ -1710,7 +1710,7 @@ namespace NeerajraiInfra.Controllers
             DataSet ds = model.UnpaidIncomes();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
-                model.AssociateName = ds.Tables[0].Rows[0]["ToName"].ToString()+"("+ ds.Tables[0].Rows[0]["ToLoginId"].ToString() + ")";
+                model.AssociateName = ds.Tables[0].Rows[0]["ToName"].ToString() + "(" + ds.Tables[0].Rows[0]["ToLoginId"].ToString() + ")";
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
                     TraditionalAssociate obj = new TraditionalAssociate();
@@ -1840,7 +1840,7 @@ namespace NeerajraiInfra.Controllers
 
         public ActionResult TransactionLogReport(AssociateBooking model)
         {
-          
+
             #region GetExpenseName
             List<SelectListItem> ddlexpensename = new List<SelectListItem>();
             //model.ExpenseID = "4";
@@ -1918,7 +1918,7 @@ namespace NeerajraiInfra.Controllers
             ViewBag.AssociateloginId = ddlassociatename;
             #endregion
             #region GetcustomerList
-            List<SelectListItem> ddlemployeeename = new List<SelectListItem>(); 
+            List<SelectListItem> ddlemployeeename = new List<SelectListItem>();
             DataSet dsemp = model.GetEmployeeList();
 
             if (dsemp != null && dsemp.Tables.Count > 0)
@@ -2718,7 +2718,7 @@ namespace NeerajraiInfra.Controllers
             {
                 foreach (DataRow r in dsPayMode.Tables[0].Rows)
                 {
-                    if(count3==0)
+                    if (count3 == 0)
                     {
                         ddlPaymentMode.Add(new SelectListItem { Text = "Select Payment Mode", Value = "0" });
                     }
@@ -2856,6 +2856,104 @@ namespace NeerajraiInfra.Controllers
             }
             return View(model);
         }
+
+
+        public ActionResult IsKharijDakhilList(Reports model)
+        {
+            List<Reports> lst = new List<Reports>();
+            DataSet ds = model.GetKharijDakhilList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.Pk_KharijId = r["Pk_KharijId"].ToString();
+                    obj.IsKharijDakhilDone = r["IsKharijDakhilDone"].ToString();
+                    obj.KharijDakhilDate = r["KharijDakhilDate"].ToString();
+                    obj.KharijDakhilRemarks = r["KharijDakhilRemarks"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstkharijdakhil = lst;
+            }
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [ActionName("IsKharijDakhilList")]
+        [OnAction(ButtonName = "GetList")]
+        public ActionResult IsKharijDakhilListAction(Reports model)
+        {
+            model.Pk_KharijId = model.Pk_KharijId == "0" ? null : model.Pk_KharijId;
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            List<Reports> lst = new List<Reports>();
+            DataSet ds = model.GetKharijDakhilList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.Pk_KharijId = r["Pk_KharijId"].ToString();
+                    obj.IsKharijDakhilDone = r["IsKharijDakhilDone"].ToString();
+                    obj.KharijDakhilDate = r["KharijDakhilDate"].ToString();
+                    obj.KharijDakhilRemarks = r["KharijDakhilRemarks"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstkharijdakhil = lst;
+            }
+            return View(model);
+        }
         
+        public ActionResult DeleteIsKharijDakhil(Reports model, string Id)
+        {
+            string FormName = "";
+            string Controller = "";
+            try
+            {
+                if (Id != null)
+                {
+                    model.Pk_KharijId = Id;
+                    model.AddedBy = Session["Pk_AdminId"].ToString();
+                    DataSet ds = model.DeleteIsKharijDakhil();
+                    if (ds != null && ds.Tables.Count > 0)
+                    {
+                        if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                        {
+
+                            TempData["Kharij"] = " Kharij Dakhil Deleted Successfully ";
+                        }
+                        else if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                        {
+
+                            TempData["Kharij"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        }
+                        else
+                        {
+                            TempData["Kharij"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            FormName = "IsKharijDakhilList";
+            Controller = "AdminReports";
+
+            return RedirectToAction(FormName, Controller);
+
+        }
+
+
+
+
+
+
+
+
     }
 }

@@ -288,7 +288,7 @@
                                 <div class="row">
                                     <div class="col-md-3 mt-3">
                                         <div class="form-group">
-                                            <label>IsKharij Dakhil &nbsp; &nbsp;</label>
+                                            <label>IsKharij Dakhil Done &nbsp; &nbsp;</label>
                                            <input type="checkbox" name="IsKharijDakhil" id="IsKharijDakhil"  />
                                            <input type="hidden" name="IsKharijDakhila" id="IsKharijDakhila" />
                                             @*<label  name="IsKharijDakhila" id="IsKharijDakhila"></label>*@
@@ -297,10 +297,10 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             Kharij Dakhil Date<span style="color: red">*</span>
-                                            @Html.TextBoxFor(m => m.KharijDakhilDate, new { @class = "form-control", @Placeholder = "KharijDakhilDate", @readonly = "readonly" })
+                                            @Html.TextBoxFor(m => m.KharijDakhilDate, new { @class = "form-control", @Placeholder = "dd/mm/yyyy", @readonly = "readonly" })
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             Kharij Dakhil Remarks
                                             @Html.TextAreaFor(m => m.Remark,new { @class = "form-control" })
@@ -922,6 +922,9 @@
             $("#PaidAmount").removeClass('errortext');
         }
     }
+
+
+
     function checkbox() {
         if ($("#IsKharijDakhil").is("checked") == true) {
             $("#IsKharijDakhila").val("1");
