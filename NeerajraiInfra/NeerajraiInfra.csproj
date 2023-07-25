@@ -7626,6 +7626,7 @@
     <Content Include="Views\AdminReports\ClosingWisePayoutDetails.cshtml" />
     <Content Include="Views\AdminReports\PrintAllotments.cshtml" />
     <Content Include="Views\Plot\IsKharijDakhil.cshtml" />
+    <Content Include="Views\AdminReports\IsKharijDakhilList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
