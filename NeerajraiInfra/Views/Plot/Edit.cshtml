@@ -212,7 +212,7 @@
                         <div class="col-md-3" id="divtransactiono" style="display: none">
                             <div class="form-group">
                                 <span id="txnNo"></span> <span id="spntrannumber" style="color: red">*</span>
-                                @Html.TextBoxFor(m => m.TransactionNumber, new { @class = "form-control", @Placeholder = "Mobile Number", @maxlength = "50", @readonly = "readonly" })
+                                @Html.TextBoxFor(m => m.TransactionNumber, new { @class = "form-control", @Placeholder = "Mobile Number", @maxlength = "50", @readonly = "readonly" ,@onchange= "return ChangeUTR() " })
                             </div>
                         </div>
                         <div class="col-md-3" id="divPaymentMode" style="display: none">
@@ -246,6 +246,18 @@
                                 @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @maxlength = "100", @Placeholder = "Bank Branch", @readonly = "readonly" })
                             </div>
                         </div>
+                        <div class="col-md-3" id="divutrname" style="display: none">
+                            <div class="form-group">
+                                UTR No. <span style="color: red">*</span>
+                                @Html.TextBoxFor(m => m.UtrNumber, new { @class = "form-control blockTyping", @Placeholder = "Utr Number", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="col-md-3" id="divutramount" style="display: none">
+                            <div class="form-group">
+                                UTR Amount<span style="color: red">*</span>
+                                @Html.TextBoxFor(m => m.UtrAmount, new { @class = "form-control", @Placeholder = "Utr Amount", onkeypress = "return isNumberOrDecimal(event);", @readonly = "readonly" })
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
@@ -268,7 +280,7 @@
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
 
 <script>
-
+  
     $(document).ready(function () {
         $("#divload").css({ 'display': 'none' });
         $("#NoOfEMI").prop('disabled', true);
@@ -295,6 +307,8 @@
                 $("#spnbankbranch").show();
                 $("#divAssociateId").hide();
                 $("#divAssociateName").hide();
+                $("#divutrname").show();
+                $("#divutramount").show();
                 $("#TransactionNumber").attr("placeholder", "Cheque No.");
                 $("#TransactionDate").attr("placeholder", "Cheque Date");
             }
@@ -311,6 +325,8 @@
                 $("#spnbankbranch").hide();
                 $("#divAssociateId").hide();
                 $("#divAssociateName").hide();
+                $("#divutrname").show();
+                $("#divutramount").show();
                 $("#TransactionNumber").attr("placeholder", "NEFT No.");
                 $("#TransactionDate").attr("placeholder", "NEFT Date");
             }
@@ -327,6 +343,8 @@
                 $("#divbankbranch").show();
                 $("#divAssociateId").hide();
                 $("#divAssociateName").hide();
+                $("#divutrname").show();
+                $("#divutramount").show();
                 $("#TransactionNumber").attr("placeholder", "DD No.");
                 $("#TransactionDate").attr("placeholder", "DD Date");
             }
@@ -343,6 +361,8 @@
                 $("#spnbankbranch").hide();
                 $("#divAssociateId").hide();
                 $("#divAssociateName").hide();
+                $("#divutrname").show();
+                $("#divutramount").show();
                 $("#TransactionNumber").attr("placeholder", "RTGS No.");
                 $("#TransactionDate").attr("placeholder", "RTGS Date");
             }
@@ -359,6 +379,8 @@
                 $("#divbankbranch").show();
                 $("#divAssociateId").hide();
                 $("#divAssociateName").hide();
+                $("#divutrname").show();
+                $("#divutramount").show();
                 $("#TransactionNumber").attr("placeholder", "IMPS No.");
                 $("#TransactionDate").attr("placeholder", "IMPS Date");
             }
@@ -373,6 +395,8 @@
                 $("#divPaymentMode").hide();
                 $("#divAssociateId").hide();
                 $("#divAssociateName").hide();
+                $("#divutrname").show();
+                $("#divutramount").show();
                 $("#TransactionNumber").attr("placeholder", "Mobile No. / UPI ID");
             }
             else if ($('#PaymentMode').val() == '8') {
@@ -386,6 +410,8 @@
                 $("#divPaymentMode").hide();
                 $("#divAssociateId").hide();
                 $("#divAssociateName").hide();
+                $("#divutrname").show();
+                $("#divutramount").show();
                 $("#TransactionNumber").attr("placeholder", "Mobile No. / UPI ID");
             }
             else if ($('#PaymentMode').val() == '9') {
@@ -399,6 +425,8 @@
                 $("#divPaymentMode").hide();
                 $("#divAssociateId").hide();
                 $("#divAssociateName").hide();
+                $("#divutrname").show();
+                $("#divutramount").show();
                 $("#TransactionNumber").attr("placeholder", "Mobile No. / UPI ID");
             }
             else if ($('#PaymentMode').val() == '10') {
@@ -411,6 +439,8 @@
                 $("#divPaymentMode").hide();
                 $("#divAssociateId").hide();
                 $("#divAssociateName").hide();
+                $("#divutrname").show();
+                $("#divutramount").show();
                 $("#TransactionNumber").attr("placeholder", "Mobile No. / UPI ID");
             }
             else if ($('#PaymentMode').val() == '11') {
@@ -425,6 +455,8 @@
                 $("#divbankbranch").hide();
                 $("#divAssociateId").hide();
                 $("#divAssociateName").hide();
+                $("#divutrname").show();
+                $("#divutramount").show();
                 $("#TransactionNumber").attr("placeholder", "Reciept No.");
                 $("#TransactionDate").attr("placeholder", "Transaction Date");
             }
@@ -438,6 +470,8 @@
                 $("#divbankbranch").hide();
                 $("#divAssociateId").show();
                 $("#divAssociateName").show();
+                $("#divutrname").show();
+                $("#divutramount").show();
                 $("#AssociateLoginID").attr("placeholder", "Associate Id");
                 $("#AssociateName").attr("placeholder", "AssociateName");
             }

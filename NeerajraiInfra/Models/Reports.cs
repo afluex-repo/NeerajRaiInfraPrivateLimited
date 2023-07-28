@@ -71,8 +71,8 @@ namespace NeerajraiInfra.Models
         public string PayAmount { get; set; }
         public string BookingDate { get; set; }
         public string BookingAmount { get; set; }
-        
-       
+
+
         public string Discount { get; set; }
         public string PaymentPlanID { get; set; }
         public string PlanName { get; set; }
@@ -80,7 +80,7 @@ namespace NeerajraiInfra.Models
         public string PaidAllotmentAmount { get; set; }
         public string BalanceAllotmentAmount { get; set; }
         public string TotalInstallment { get; set; }
-     
+
         public string Balance { get; set; }
         public string PlotArea { get; set; }
         public string PK_BookingDetailsId { get; set; }
@@ -121,11 +121,16 @@ namespace NeerajraiInfra.Models
         public List<SelectListItem> lstBlock { get; set; }
         List<SelectListItem> ddlPaymentMode = new List<SelectListItem>();
         public List<Reports> EMIBookingReports { get; set; }
+        public List<Reports> lstkharijdakhil { get; set; }
 
+        public string Pk_KharijId { get; set; }
+        public string IsKharijDakhilDone { get; set; }
+        public string KharijDakhilDate { get; set; }
+        public string KharijDakhilRemarks { get; set; }
 
         public DataSet GetBookingDetailsList()
         {
-            SqlParameter[] para = { new SqlParameter("@PK_BookingId", PK_BookingId )};
+            SqlParameter[] para = { new SqlParameter("@PK_BookingId", PK_BookingId) };
             DataSet ds = Connection.ExecuteQuery("GetPlotBooking", para);
             return ds;
         }
@@ -335,12 +340,12 @@ namespace NeerajraiInfra.Models
             DataSet ds = Connection.ExecuteQuery("GetAssociateListForApprove", para);
             return ds;
         }
-        
+
         public DataSet ApprovedAssociate()
         {
 
             SqlParameter[] para = {
-                                   
+
                                       new SqlParameter("@AssociateID", AssociateID),
                                         new SqlParameter("@ApprovedBy", AddedBy),
                                         new SqlParameter("LoginId",LoginId),
@@ -419,6 +424,45 @@ namespace NeerajraiInfra.Models
             DataSet ds = Connection.ExecuteQuery("GetEMIBookingReportsDetails", para);
             return ds;
         }
+
+
+
+
+        public DataSet GetKharijDakhilList()
+        {
+            SqlParameter[] para =
+                         {
+                 new SqlParameter("@CustomerId",CustomerId),
+                     new SqlParameter("@Pk_KharijId",Pk_KharijId),
+                                 new SqlParameter("@FromDate",FromDate),
+                                  new SqlParameter("@ToDate",ToDate)
+                            };
+            DataSet ds = Connection.ExecuteQuery("GetKharijDakhilList", para);
+            return ds;
+        }
+
+
+
+
+        public DataSet DeleteIsKharijDakhil()
+        {
+            SqlParameter[] para =
+                         {
+                                 new SqlParameter("@Pk_KharijId",Pk_KharijId),
+                                  new SqlParameter("@AddedBy",AddedBy)
+                            };
+            DataSet ds = Connection.ExecuteQuery("DeleteIsKharijDakhil", para);
+            return ds;
+        }
+
+
+
+
+
+
+
+
+
     }
 }
 

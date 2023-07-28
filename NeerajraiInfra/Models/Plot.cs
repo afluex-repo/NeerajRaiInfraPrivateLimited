@@ -112,7 +112,12 @@ namespace NeerajraiInfra.Models
         public string KharijDakhilDate { get; set; }
         public string IsKharijDakhil { get; set; }
         public string IsKharijDakhila { get; set; }
-
+        public string UtrAmount { get; set; }
+        public string UtrNumber { get; set; }
+        public string UtrDate { get; set; }
+        public string RemainingUtrAmount { get; set; }
+        public string UtrPaidAmount { get; set; }
+        public List<Plot> lstUtr { get; set; }
 
         #endregion
 
@@ -233,7 +238,9 @@ namespace NeerajraiInfra.Models
                                         new SqlParameter("@AddedBy",AddedBy),
                                         new SqlParameter("@NoofEMI",NoOfEMI),
                                         new SqlParameter("@Fk_BankId",Fk_BankId),
-                                        new SqlParameter("@Remarks",Remark)
+                                        new SqlParameter("@Remarks",Remark),
+                                        new SqlParameter("@UTR_Number",UtrNumber),
+                                        new SqlParameter("@UTR_Amount",UtrAmount)
                             };
             DataSet ds = Connection.ExecuteQuery("PlotBooking", para);
             return ds;
@@ -477,7 +484,11 @@ namespace NeerajraiInfra.Models
                                         new SqlParameter("@BankName"  , BankName),
                                         new SqlParameter("@AddedBy",AddedBy),
                                         new SqlParameter("@AllotmentRemarks",Remark),
-                                        new SqlParameter("@Fk_BankId",Fk_BankId)
+                                        new SqlParameter("@Fk_BankId",Fk_BankId),
+                                          new SqlParameter("@UTR_Number",UtrNumber),
+                                        new SqlParameter("@UTR_Amount",UtrAmount)
+                                        
+
                             };
             DataSet ds = Connection.ExecuteQuery("PlotAllotment", para);
             return ds;
@@ -534,8 +545,10 @@ namespace NeerajraiInfra.Models
                                         new SqlParameter("@UpdatedBy",AddedBy)  ,
                                         new SqlParameter("@ReceiptNoManual",ReceiptNo),
                                         new SqlParameter("@PaymentRemarks",Remark),
-                                        new SqlParameter("@Fk_BankId",Fk_BankId)
-
+                                        new SqlParameter("@Fk_BankId",Fk_BankId),
+                                        new SqlParameter("@UTR_Number",UtrNumber),
+                                        new SqlParameter("@UTR_Amount",UtrAmount)
+                                        
                             };
             DataSet ds = Connection.ExecuteQuery("EMIPayment", para);
             return ds;
@@ -843,6 +856,15 @@ namespace NeerajraiInfra.Models
                                         new SqlParameter("@Remarks",Remark)
                             };
             DataSet ds = Connection.ExecuteQuery("SaveIsKharijDakhil", para);
+            return ds;
+        }
+        public DataSet CheckUtrNumber()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@UtrNumber", UtrNumber),
+
+                                     };
+            DataSet ds = Connection.ExecuteQuery("UtrList", para);
             return ds;
         }
         #region RowHouseBooking
