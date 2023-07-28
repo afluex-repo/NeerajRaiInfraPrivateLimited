@@ -18,6 +18,8 @@ namespace NeerajraiInfra.Controllers
         #region CustomerRegistration
         public ActionResult CustomerRegistration(string UserID)
         {
+            List<SelectListItem> ddlAbbreviation = Common.Abbreviation();
+            ViewBag.ddlAbbreviation = ddlAbbreviation;
             Customer model = new Customer();
             try
             {
@@ -48,6 +50,8 @@ namespace NeerajraiInfra.Controllers
                         model.Nomani = dsPlotDetails.Tables[0].Rows[0]["NomineeName"].ToString();
                         model.NomineeAge = dsPlotDetails.Tables[0].Rows[0]["NomineeAge"].ToString();
                         model.NomineeRelation = dsPlotDetails.Tables[0].Rows[0]["NomineeRelation"].ToString();
+                        model.FatherName = dsPlotDetails.Tables[1].Rows[0]["FathersName"].ToString();
+                        model.Abbreviation = dsPlotDetails.Tables[1].Rows[0]["Abbreviation"].ToString();
                     }
                 }
 

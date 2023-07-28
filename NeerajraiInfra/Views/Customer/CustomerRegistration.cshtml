@@ -62,21 +62,29 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="input-field col m6 s12">
+                        <div class="input-field col-md-4 s12">
                             First Name<span style="color:red">*</span>
                             @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @Placeholder = "First Name" })
                         </div>
-                        <div class="input-field col m3 s12">
+                        <div class="input-field col-md-4 s12">
                             Last Name
                             @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @Placeholder = "Last Name" })
                         </div>
+                        &nbsp;
+                        &nbsp;
+                        <div class="input-field s12 mtt">
+                            
+                            @Html.DropDownListFor(m => m.Abbreviation, new SelectList(ViewBag.ddlAbbreviation, "Value", "Text"), new { @class = "form-control", @style = "width: 93px;" })
 
-                        <div class="input-field col m3 s12">
-                            Father Name
-                            @Html.TextBoxFor(m => m.FatherName, new { @class = "form-control", @Placeholder = "Father Name", })
+                        </div>
+                        &nbsp;
+                        &nbsp;
+                        <div class="input-field s12">
+                            Father Name,Spouse Name
+                           
+                            @Html.TextBoxFor(m => m.FatherName, new { @class = "form-control", @Placeholder = "Father Name", @style = "width: 274px;" })
                         </div>
 
-                        
                     </div>
                     
                     <div class="row">
@@ -291,11 +299,16 @@
             $('#FirstName').focus();
             return false;
         }
+
+      
+
         if ($('#Contact').val() == '') {
             $("#Contact").addClass('errortext');
             $('#Contact').focus();
             return false;
         }
+
+
         //if ($('#PanNo').val() == '') {
         //    $("#PanNo").addClass('errortext');
         //    $('#PanNo').focus();
@@ -343,5 +356,8 @@
     .errortext {
         border: 1px solid red !important;
         background-color: #fff0f0 !important;
+    }
+    .mtt{
+        margin-top:21px;
     }
 </style>
