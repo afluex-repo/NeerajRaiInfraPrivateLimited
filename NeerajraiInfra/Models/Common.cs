@@ -384,6 +384,19 @@ namespace NeerajraiInfra.Models
 
 
 
+
+        public static List<SelectListItem> Abbreviation()
+        {
+            List<SelectListItem> ddlAbbreviation = new List<SelectListItem>();
+            ddlAbbreviation.Add(new SelectListItem { Text = "Select", Value = null });
+            ddlAbbreviation.Add(new SelectListItem { Text = "C/O", Value = "C/O" });
+            ddlAbbreviation.Add(new SelectListItem { Text = "S/O", Value = "S/O" });
+            ddlAbbreviation.Add(new SelectListItem { Text = "D/O", Value = "D/O" });
+            ddlAbbreviation.Add(new SelectListItem { Text = "W/O", Value = "W/O" });
+            return ddlAbbreviation;
+        }
+
+
     }
     public class SMSCredential
     {

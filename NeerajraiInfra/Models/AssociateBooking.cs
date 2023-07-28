@@ -11,6 +11,8 @@ namespace NeerajraiInfra.Models
     public class AssociateBooking : Common
     {
         #region Properties
+        
+        public string Abbreviation { get; set; }
         public string Fk_SponsorId { get; set; }
         public string ActiveStatus { get; set; }
         public string ProfilePic { get; set; }
@@ -722,7 +724,8 @@ namespace NeerajraiInfra.Models
                                   new SqlParameter("@Address", Address) ,
                                   new SqlParameter("@PanNo", PanNo) ,
                                   new SqlParameter("@AddedBy", AddedBy) ,
-                                  new SqlParameter("@Password", Password)
+                                  new SqlParameter("@Password", Password),
+                                  new SqlParameter("@Abbreviation",Abbreviation)
                                   };
             DataSet ds = Connection.ExecuteQuery("CustomerRegistration", para);
             return ds;

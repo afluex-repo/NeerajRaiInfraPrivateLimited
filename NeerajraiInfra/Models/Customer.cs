@@ -11,6 +11,7 @@ namespace NeerajraiInfra.Models
     public class Customer : Common
     {
         #region Properties
+        public string Abbreviation { get; set; }
         public string AssociateID { get; set; }
         public string JoiningFromDate { get; set; }
         public string JoiningToDate { get; set; }
@@ -72,7 +73,8 @@ namespace NeerajraiInfra.Models
                                   new SqlParameter("@Address", Address) ,
                                   new SqlParameter("@PanNo", PanNo) ,
                                   new SqlParameter("@AddedBy", AddedBy) ,
-                                  new SqlParameter("@Password", Password) 
+                                  new SqlParameter("@Password", Password),
+                                  new SqlParameter("@Abbreviation",Abbreviation) 
                                   };
             DataSet ds = Connection.ExecuteQuery("CustomerRegistration", para);
             return ds;
@@ -108,7 +110,9 @@ namespace NeerajraiInfra.Models
                                   new SqlParameter("@Nominee",Nomani) ,
                                   new SqlParameter("@NomineeAge", NomineeAge),
                                   new SqlParameter("@NomineeRelation", NomineeRelation),
-                                  new SqlParameter("@UpdatedBy", AddedBy)  
+                                  new SqlParameter("@UpdatedBy", AddedBy),
+                                  new SqlParameter("@FatherName",FatherName),  
+                                  new SqlParameter("@Abbreviation",Abbreviation)
                                   };
             DataSet ds = Connection.ExecuteQuery("UpdateCustomerRegistrationDetails", para);
             return ds;
