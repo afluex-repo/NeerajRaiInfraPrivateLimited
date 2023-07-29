@@ -32,35 +32,29 @@
                     </p>
                 </div>
                 <div class="card-body">
-                    <div class="row ">
-                        @*<div class="input-field col m3 s12">
+                    <div class="row">
+                       
+                        <div class="col-md-3">
                             <div class="form-group">
-                                Login Id
-                                @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Login Id" })
-                            </div>
-                        </div>*@
-                        <div class="input-field col m3 s12">
-                            <div class="form-group">
-                                FromDate
-                                @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "From Date", @autocomplete = "off" })
+                                From Date
+                                @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "From Date", @readonly = "readonly" })
                             </div>
                         </div>
-                        <div class="input-field col m3 s12">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 To Date
-                                @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @Placeholder = "To Date", @autocomplete = "off" })
+                                @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @Placeholder = "To Date", @readonly = "readonly" })
                             </div>
                         </div>
-
-                        <div class="input-field col m3 s12">
+                        
+                      
+                        
+                        <div class="col-md-3">
                             <div class="form-group">
-                                <input class="btn btn-success pull-left" type="submit" value="Search" id="btnSearch" name="GetList" />
+                                <br />
+                                <input class="btn btn-success" type="submit" value="Search" id="btnSearch" onclick="return GetMenuDetails();" name="Search" />
                             </div>
                         </div>
-
-
-
-
                     </div>
                     @*<div class="row">
 
