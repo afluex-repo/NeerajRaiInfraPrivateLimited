@@ -2861,6 +2861,7 @@ namespace NeerajraiInfra.Controllers
         public ActionResult IsKharijDakhilList(Reports model)
         {
             List<Reports> lst = new List<Reports>();
+         
             DataSet ds = model.GetKharijDakhilList();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {

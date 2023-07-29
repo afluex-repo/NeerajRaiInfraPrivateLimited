@@ -2245,6 +2245,8 @@ namespace NeerajraiInfra.Controllers
 
         public ActionResult CustomerRegistration(string UserID)
         {
+            List<SelectListItem> ddlAbbreviation = Common.Abbreviation();
+            ViewBag.ddlAbbreviation = ddlAbbreviation;
             AssociateBooking obj = new AssociateBooking();
             obj.SponsorID = Session["LoginId"].ToString();
             obj.SponsorName = Session["FullName"].ToString();

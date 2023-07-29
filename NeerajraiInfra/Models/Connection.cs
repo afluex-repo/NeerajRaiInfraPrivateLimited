@@ -21,6 +21,8 @@ namespace NeerajraiInfra.Models
                 //connectionString = "Data Source=DESKTOP-02J59E3\\SQLEXPRESS;Initial Catalog=NeerajraiInfraDB;Integrated Security=True";
                 //Sarfrazdb
                 connectionString = "Data Source=DESKTOP-ICNPI6I\\SQLEXPRESS;Initial Catalog=NeerajraiInfraDB;Integrated Security=True";
+                //tanishq
+                //connectionString = "Data Source=DESKTOP-OEAINLG\\SQLEXPRESS;Initial Catalog=NeerajraiInfraDB;Integrated Security=True";
             }
             catch (Exception) 
             {
