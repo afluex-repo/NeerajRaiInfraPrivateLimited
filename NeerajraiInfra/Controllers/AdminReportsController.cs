@@ -2872,6 +2872,8 @@ namespace NeerajraiInfra.Controllers
                     obj.IsKharijDakhilDone = r["IsKharijDakhilDone"].ToString();
                     obj.KharijDakhilDate = r["KharijDakhilDate"].ToString();
                     obj.KharijDakhilRemarks = r["KharijDakhilRemarks"].ToString();
+                    obj.CustomerId = r["CustomerID"].ToString();
+                    obj.Customername = r["CustomerName"].ToString();
                     lst.Add(obj);
                 }
                 model.lstkharijdakhil = lst;
@@ -2899,6 +2901,8 @@ namespace NeerajraiInfra.Controllers
                     obj.IsKharijDakhilDone = r["IsKharijDakhilDone"].ToString();
                     obj.KharijDakhilDate = r["KharijDakhilDate"].ToString();
                     obj.KharijDakhilRemarks = r["KharijDakhilRemarks"].ToString();
+                    obj.CustomerId = r["CustomerID"].ToString();
+                    obj.Customername = r["CustomerName"].ToString();
                     lst.Add(obj);
                 }
                 model.lstkharijdakhil = lst;
