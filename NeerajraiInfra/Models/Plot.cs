@@ -18,8 +18,11 @@ namespace NeerajraiInfra.Models
         public string NetAmount { get; set; }
         public List<SelectListItem> ddlPlan { get; set; }
         public string MLMLoginId { get; set; }
+        public string AssociateNames { get; set; }
+        public string AssociatesLoginID { get; set; }
         public string PLCAmount { get; set; }
-        
+        public string AllotmentRemark { get; set; }
+
         #region Properties
         public string Type { get; set; }
         public string PreviousBookingAmount { get; set; }
@@ -240,7 +243,8 @@ namespace NeerajraiInfra.Models
                                         new SqlParameter("@Fk_BankId",Fk_BankId),
                                         new SqlParameter("@Remarks",Remark),
                                         new SqlParameter("@UTR_Number",UtrNumber),
-                                        new SqlParameter("@UTR_Amount",UtrAmount)
+                                        new SqlParameter("@UTR_Amount",UtrAmount),
+                                       new SqlParameter("@AdjustmentId",AssociatesLoginID)
                             };
             DataSet ds = Connection.ExecuteQuery("PlotBooking", para);
             return ds;
@@ -486,8 +490,8 @@ namespace NeerajraiInfra.Models
                                         new SqlParameter("@AllotmentRemarks",Remark),
                                         new SqlParameter("@Fk_BankId",Fk_BankId),
                                           new SqlParameter("@UTR_Number",UtrNumber),
-                                        new SqlParameter("@UTR_Amount",UtrAmount)
-                                        
+                                        new SqlParameter("@UTR_Amount",UtrAmount),
+                                        new SqlParameter("@AdjustmentId",AssociatesLoginID)
 
                             };
             DataSet ds = Connection.ExecuteQuery("PlotAllotment", para);
@@ -547,8 +551,9 @@ namespace NeerajraiInfra.Models
                                         new SqlParameter("@PaymentRemarks",Remark),
                                         new SqlParameter("@Fk_BankId",Fk_BankId),
                                         new SqlParameter("@UTR_Number",UtrNumber),
-                                        new SqlParameter("@UTR_Amount",UtrAmount)
-                                        
+                                        new SqlParameter("@UTR_Amount",UtrAmount),
+                                        new SqlParameter("@AdjustmentId",AssociatesLoginID)
+
                             };
             DataSet ds = Connection.ExecuteQuery("EMIPayment", para);
             return ds;
