@@ -432,6 +432,7 @@ namespace NeerajraiInfra.Models
         {
             SqlParameter[] para =
                          {
+                 new SqlParameter("@CustomerId",CustomerId),
                      new SqlParameter("@Pk_KharijId",Pk_KharijId),
                                  new SqlParameter("@FromDate",FromDate),
                                   new SqlParameter("@ToDate",ToDate)

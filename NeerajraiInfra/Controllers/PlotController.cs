@@ -3402,6 +3402,8 @@ namespace NeerajraiInfra.Controllers
                     model.BankBranch = dsBookingDetails.Tables[0].Rows[0]["BankBranch"].ToString();
                     model.PlotSize = dsBookingDetails.Tables[0].Rows[0]["PlotSize"].ToString();
                     model.NetPlotAmount = dsBookingDetails.Tables[0].Rows[0]["NetPlotAmount"].ToString();
+                    model.UtrAmount = dsBookingDetails.Tables[0].Rows[0]["UTR_Amount"].ToString();
+                    model.UtrNumber = dsBookingDetails.Tables[0].Rows[0]["UTR_Number"].ToString();
                     // model.MLMLoginId = dsBookingDetails.Tables[0].Rows[0]["MLMLoginId"].ToString();
                 }
                 #region BlockList
@@ -3843,5 +3845,49 @@ namespace NeerajraiInfra.Controllers
             return RedirectToAction(FormName, Controller);
         }
         #endregion
+        public ActionResult CheckUTR(string UtrNumber)
+        {
+            Plot model = new Plot();
+            model.UtrNumber = UtrNumber;
+            List<Plot> lstUtr = new List<Plot>();
+            DataSet ds = model.CheckUtrNumber();
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                {
+                    if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (DataRow r in ds.Tables[0].Rows)
+                        {
+                            Plot obj = new Plot();
+                            obj.CustomerID = r["CustomerId"].ToString();
+                            obj.CustomerName = r["CustomerName"].ToString();
+                            obj.SiteName = r["SiteName"].ToString();
+                            obj.SectorName = r["SectorName"].ToString();
+                            obj.BlockName = r["BlockName"].ToString();
+                            obj.PlotNumber = r["PlotNumber"].ToString();
+                            obj.UtrPaidAmount = r["UtrPaidAmount"].ToString();
+                            obj.UtrDate = r["UTRDate"].ToString();
+                            lstUtr.Add(obj);
+                        }
+                        model.lstUtr = lstUtr;
+                    }
+                    model.UtrAmount = ds.Tables[1].Rows[0]["UTR_Amount"].ToString();
+                    model.RemainingUtrAmount = ds.Tables[1].Rows[0]["RemainingUtrAmount"].ToString();
+                    model.Result = "yes";
+                }
+                else
+                {
+                    model.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+            }
+            else
+            {
+                model.Result = "Invalid";
+
+            }
+
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
     }
 }
