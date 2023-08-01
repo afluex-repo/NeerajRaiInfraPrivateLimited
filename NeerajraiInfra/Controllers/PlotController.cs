@@ -574,9 +574,9 @@ namespace NeerajraiInfra.Controllers
 
             return RedirectToAction(FormName, Controller);
         }
-        public ActionResult PrintPlotBooking(string PrintId)
+        public ActionResult PrintPlotBooking(Plot newdata,string PrintId)
         {
-            Plot newdata = new Plot();
+            //Plot newdata = new Plot();
             newdata.PK_BookingId = Crypto.Decrypt(PrintId);
             ViewBag.Name = Session["Name"].ToString();
             DataSet ds = newdata.List();
@@ -605,26 +605,29 @@ namespace NeerajraiInfra.Controllers
 
                     ViewBag.PlotNumber = ds.Tables[0].Rows[0]["PlotInfo"].ToString();
                     ViewBag.PaidAmount = ds.Tables[0].Rows[0]["PaidAmount"].ToString();
+                    //ViewBag.PaidAmount = ds.Tables[0].Rows[0]["latestpayment"].ToString();
+                    ViewBag.RemainingAmounts = ds.Tables[0].Rows[0]["RemainingAmounts"].ToString();
                     ViewBag.PlotArea = ds.Tables[0].Rows[0]["PlotArea"].ToString();
                     ViewBag.PaymentMode = ds.Tables[0].Rows[0]["PaymentMode"].ToString();
                     ViewBag.ReasonOfPayment = ds.Tables[0].Rows[0]["ReasonOfPayment"].ToString();
                     ViewBag.PaymentDate = ds.Tables[0].Rows[0]["PaymentDate"].ToString();
-                    ViewBag.BookingDate = ds.Tables[0].Rows[0]["BookingDate"].ToString();
                     ViewBag.ReceiptNo = ds.Tables[0].Rows[0]["ReceiptNo"].ToString();
                     ViewBag.CorporateOffice = ds.Tables[0].Rows[0]["CorporateOffice"].ToString();
                     ViewBag.AssociateName = ds.Tables[0].Rows[0]["AssociateName"].ToString();
-
+                    ViewBag.BookingDate = ds.Tables[0].Rows[0]["BookingDate"].ToString();
                     ViewBag.customerMobile = ds.Tables[0].Rows[0]["customerMobile"].ToString();
                     ViewBag.PLC = string.IsNullOrEmpty(ds.Tables[0].Rows[0]["PLC"].ToString()) ? "N/A" : ds.Tables[0].Rows[0]["PLC"].ToString();
                     ViewBag.AmountInWords = ds.Tables[0].Rows[0]["PaidAmountInWords"].ToString();
-                    ViewBag.NetPlotAmount = ds.Tables[0].Rows[0]["NetPlotAmount"].ToString();
+                    //ViewBag.NetPlotAmount = ds.Tables[0].Rows[0]["NetPlotAmount"].ToString();
                     ViewBag.NetPlotAmountInWords = ds.Tables[0].Rows[0]["NetPlotAmountInWords"].ToString();
 
                     ViewBag.TransactionNo = ds.Tables[0].Rows[0]["TransactionNo"].ToString();
                     ViewBag.TransactionDate = ds.Tables[0].Rows[0]["TransactionDate"].ToString();
                     ViewBag.BankName = ds.Tables[0].Rows[0]["BankName"].ToString();
                     ViewBag.BankBranch = ds.Tables[0].Rows[0]["BankBranch"].ToString();
-
+                    ViewBag.RemainingAmount = ds.Tables[0].Rows[0]["Balance"].ToString();
+                    ViewBag.PlotRate = ds.Tables[0].Rows[0]["PlotRate"].ToString();
+                    ViewBag.SiteName = ds.Tables[0].Rows[0]["SiteName"].ToString();
                     ViewBag.InstallmentNo = ds.Tables[0].Rows[0]["InstallmentNo"].ToString();
                     //ViewBag.AdjustmentloginId = ds.Tables[0].Rows[0]["AdjustmentloginId"].ToString();
 
@@ -2793,6 +2796,7 @@ namespace NeerajraiInfra.Controllers
                     obj.PaidAmount = r["PaidAmount"].ToString();
                     obj.PaymentStatus = r["PaymentStatus"].ToString();
                     obj.PaymentDate = r["PaymentDate"].ToString();
+                    obj.AllotmentRemark = r["Remarks"].ToString();
                     lst.Add(obj);
                 }
                 model.lstPlot = lst;
