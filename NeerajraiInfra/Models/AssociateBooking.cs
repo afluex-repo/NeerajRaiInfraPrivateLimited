@@ -480,6 +480,11 @@ namespace NeerajraiInfra.Models
             DataSet ds = Connection.ExecuteQuery("PayoutLedgerAssociate", para);
             return ds;
         }
+
+        public string DirectIncome { get; set; }
+        public string DifferentialIncome { get; set; }
+        public string DirectLeadershipIncome { get; set; }
+
         public DataSet PayoutDetails()
         {
             SqlParameter[] para = {
@@ -773,9 +778,41 @@ namespace NeerajraiInfra.Models
             return ds;
         }
 
+        #region MyIncome
 
-        
+        public string PaidStatus { get; set; }
+        public string Date { get; set; }
+        public string IncomeType { get; set; }
+        public List<AssociateBooking> lstDirectIncome { get; set; }
 
+        public DataSet GetDirectIncomes()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginID", UserID) };
+            DataSet ds = Connection.ExecuteQuery("GetDirectIncome", para);
+            return ds;
+        }
+
+
+        public List<AssociateBooking> lstDifferentialIncome { get; set; }
+
+        public DataSet GetDifferentialIncome()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginID", UserID) };
+            DataSet ds = Connection.ExecuteQuery("GetDifferentialIncome", para);
+            return ds;
+        }
+
+
+        public List<AssociateBooking> lstDirectLeadershipIncome { get; set; }
+
+        public DataSet GetDirectLeadershipIncome()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginID", LoginId) };
+            DataSet ds = Connection.ExecuteQuery("GetDirectLeadershipIncome", para);
+            return ds;
+        }
+
+        #endregion
     }
 
 }

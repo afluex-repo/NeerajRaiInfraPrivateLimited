@@ -1500,6 +1500,9 @@ namespace NeerajraiInfra.Controllers
                     obj.AssociateLoginID = r["LoginId"].ToString();
                     obj.FirstName = r["FirstName"].ToString();
                     obj.GrossAmount = r["GrossAmount"].ToString();
+                    obj.DirectIncome = r["DirectIncome"].ToString();
+                    obj.DifferentialIncome = r["DifferentialIncome"].ToString();
+                    obj.DirectLeadershipIncome = r["DirectLeadershipIncome"].ToString();
                     obj.TDS = r["TDS"].ToString();
                     obj.Processing = r["Processing"].ToString();
                     obj.NetAmount = r["NetAmount"].ToString();
@@ -1511,6 +1514,9 @@ namespace NeerajraiInfra.Controllers
                 ViewBag.TDS = double.Parse(ds.Tables[0].Compute("sum(TDS)", "").ToString()).ToString("n2");
                 ViewBag.Processing = double.Parse(ds.Tables[0].Compute("sum(Processing)", "").ToString()).ToString("n2");
                 ViewBag.NetAmount = double.Parse(ds.Tables[0].Compute("sum(NetAmount)", "").ToString()).ToString("n2");
+                ViewBag.DirectIncome = double.Parse(ds.Tables[0].Compute("sum(DirectIncome)", "").ToString()).ToString("n2");
+                ViewBag.DifferentialIncome = double.Parse(ds.Tables[0].Compute("sum(DifferentialIncome)", "").ToString()).ToString("n2");
+                ViewBag.DirectLeadershipIncome = double.Parse(ds.Tables[0].Compute("sum(DirectLeadershipIncome)", "").ToString()).ToString("n2");
             }
             return View(model);
         }
@@ -1538,6 +1544,9 @@ namespace NeerajraiInfra.Controllers
                     obj.AssociateLoginID = r["LoginId"].ToString();
                     obj.FirstName = r["FirstName"].ToString();
                     obj.GrossAmount = r["GrossAmount"].ToString();
+                    obj.DirectIncome = r["DirectIncome"].ToString();
+                    obj.DifferentialIncome = r["DifferentialIncome"].ToString();
+                    obj.DirectLeadershipIncome = r["DirectLeadershipIncome"].ToString();
                     obj.TDS = r["TDS"].ToString();
                     obj.Processing = r["Processing"].ToString();
                     obj.NetAmount = r["NetAmount"].ToString();
@@ -1545,6 +1554,13 @@ namespace NeerajraiInfra.Controllers
                     lst.Add(obj);
                 }
                 model.lstPlot = lst;
+                ViewBag.GrossAmount = double.Parse(ds.Tables[0].Compute("sum(GrossAmount)", "").ToString()).ToString("n2");
+                ViewBag.TDS = double.Parse(ds.Tables[0].Compute("sum(TDS)", "").ToString()).ToString("n2");
+                ViewBag.Processing = double.Parse(ds.Tables[0].Compute("sum(Processing)", "").ToString()).ToString("n2");
+                ViewBag.NetAmount = double.Parse(ds.Tables[0].Compute("sum(NetAmount)", "").ToString()).ToString("n2");
+                ViewBag.DirectIncome = double.Parse(ds.Tables[0].Compute("sum(DirectIncome)", "").ToString()).ToString("n2");
+                ViewBag.DifferentialIncome = double.Parse(ds.Tables[0].Compute("sum(DifferentialIncome)", "").ToString()).ToString("n2");
+                ViewBag.DirectLeadershipIncome = double.Parse(ds.Tables[0].Compute("sum(DirectLeadershipIncome)", "").ToString()).ToString("n2");
             }
             return View(model);
         }
