@@ -7627,6 +7627,9 @@
     <Content Include="Views\AdminReports\PrintAllotments.cshtml" />
     <Content Include="Views\Plot\IsKharijDakhil.cshtml" />
     <Content Include="Views\AdminReports\IsKharijDakhilList.cshtml" />
+    <Content Include="Views\AdminReports\DirectIncome.cshtml" />
+    <Content Include="Views\AdminReports\DifferentialIncome.cshtml" />
+    <Content Include="Views\AdminReports\DirectLeadershipIncome.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -2985,6 +2985,7 @@ namespace NeerajraiInfra.Controllers
                     obj.PaymentDate = r["PaymentDate"].ToString();
                     obj.AssociateID = r["AssociateLoginID"].ToString();
                     obj.AssociateName = r["AssociateName"].ToString();
+                    obj.AllotmentRemark = r["AllotmentRemarks"].ToString();
                     lst.Add(obj);
                 }
                 model.lstPlot = lst;

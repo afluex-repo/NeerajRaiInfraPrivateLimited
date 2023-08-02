@@ -2958,12 +2958,164 @@ namespace NeerajraiInfra.Controllers
 
         }
 
+        #region Income
+        public ActionResult DirectIncome(Reports objreports)
+        {
+            List<Reports> lst = new List<Reports>();
+            DataSet ds = objreports.GetDirectIncome();
 
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.FromLoginId = r["FromLoginId"].ToString();
+                    obj.FromUserName = r["FromUserName"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.IncomeType = (r["IncomeType"].ToString());
+                    obj.Income = (r["Income"].ToString());
+                    obj.Date = (r["CurrentDate"].ToString());
+                    obj.Status = (r["PaidStatus"].ToString());
+                    lst.Add(obj);
+                }
+                objreports.lstDirectIncome = lst;
+            }
+            return View(objreports);
+        }
 
+        [HttpPost]
+        [ActionName("DirectIncome")]
+        [OnAction(ButtonName = "btnSearch")]
+        public ActionResult DirectIncomeAction(Reports objreports)
+        {
+            List<Reports> lst = new List<Reports>();
+            objreports.FromDate = string.IsNullOrEmpty(objreports.FromDate) ? null : Common.ConvertToSystemDate(objreports.FromDate, "dd/MM/yyyy");
+            objreports.ToDate = string.IsNullOrEmpty(objreports.ToDate) ? null : Common.ConvertToSystemDate(objreports.ToDate, "dd/MM/yyyy");
+            DataSet ds = objreports.GetDirectIncome();
 
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.FromLoginId = r["FromLoginId"].ToString();
+                    obj.FromUserName = r["FromUserName"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.IncomeType = (r["IncomeType"].ToString());
+                    obj.Income = (r["Income"].ToString());
+                    obj.Date = (r["CurrentDate"].ToString());
+                    obj.Status = (r["PaidStatus"].ToString());
+                    lst.Add(obj);
+                }
+                objreports.lstDirectIncome = lst;
+            }
+            return View(objreports);
+        }
 
+      
+        public ActionResult DifferentialIncome(Reports objreports)
+        {
+            List<Reports> lst = new List<Reports>();
+            DataSet ds = objreports.GetDifferentialIncome();
 
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.FromLoginId = r["FromLoginId"].ToString();
+                    obj.FromUserName = r["FromUserName"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.IncomeType = (r["IncomeType"].ToString());
+                    obj.Income = (r["Income"].ToString());
+                    obj.Date = (r["CurrentDate"].ToString());
+                    obj.Status = (r["PaidStatus"].ToString());
+                    lst.Add(obj);
+                }
+                objreports.lstDifferentialIncome = lst;
+            }
+            return View(objreports);
+        }
 
+        [HttpPost]
+        [ActionName("DifferentialIncome")]
+        [OnAction(ButtonName = "btnSearch")]
+        public ActionResult DifferentialIncomeAction(Reports objreports)
+        {
+            List<Reports> lst = new List<Reports>();
+            objreports.FromDate = string.IsNullOrEmpty(objreports.FromDate) ? null : Common.ConvertToSystemDate(objreports.FromDate, "dd/MM/yyyy");
+            objreports.ToDate = string.IsNullOrEmpty(objreports.ToDate) ? null : Common.ConvertToSystemDate(objreports.ToDate, "dd/MM/yyyy");
+            DataSet ds = objreports.GetDifferentialIncome();
 
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.FromLoginId = r["FromLoginId"].ToString();
+                    obj.FromUserName = r["FromUserName"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.IncomeType = (r["IncomeType"].ToString());
+                    obj.Income = (r["Income"].ToString());
+                    obj.Date = (r["CurrentDate"].ToString());
+                    obj.Status = (r["PaidStatus"].ToString());
+                    lst.Add(obj);
+                }
+                objreports.lstDifferentialIncome = lst;
+            }
+            return View(objreports);
+        }
+
+        public ActionResult DirectLeadershipIncome(Reports objreports)
+        {
+            List<Reports> lst = new List<Reports>();
+            DataSet ds = objreports.GetDirectLeadershipIncome();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.FromLoginId = r["FromLoginId"].ToString();
+                    obj.FromUserName = r["FromUserName"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.IncomeType = (r["IncomeType"].ToString());
+                    obj.Income = (r["Income"].ToString());
+                    obj.Date = (r["CurrentDate"].ToString());
+                    obj.Status = (r["PaidStatus"].ToString());
+                    lst.Add(obj);
+                }
+                objreports.lstDirectLeadershipIncome = lst;
+            }
+            return View(objreports);
+        }
+
+        [HttpPost]
+        [ActionName("DirectLeadershipIncome")]
+        [OnAction(ButtonName = "btnSearch")]
+        public ActionResult DirectLeadershipIncomeAction(Reports objreports)
+        {
+            List<Reports> lst = new List<Reports>();
+            objreports.FromDate = string.IsNullOrEmpty(objreports.FromDate) ? null : Common.ConvertToSystemDate(objreports.FromDate, "dd/MM/yyyy");
+            objreports.ToDate = string.IsNullOrEmpty(objreports.ToDate) ? null : Common.ConvertToSystemDate(objreports.ToDate, "dd/MM/yyyy");
+            DataSet ds = objreports.GetDirectLeadershipIncome();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.FromLoginId = r["FromLoginId"].ToString();
+                    obj.FromUserName = r["FromUserName"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.IncomeType = (r["IncomeType"].ToString());
+                    obj.Income = (r["Income"].ToString());
+                    obj.Date = (r["CurrentDate"].ToString());
+                    obj.Status = (r["PaidStatus"].ToString());
+                    lst.Add(obj);
+                }
+                objreports.lstDirectLeadershipIncome = lst;
+            }
+            return View(objreports);
+        }
+        #endregion
     }
 }
