@@ -10,6 +10,7 @@ namespace NeerajraiInfra.Models
 {
     public class Reports : Common
     {
+        
         public string ErrorMessage { get; set; }
         public string ReturnBenefitStartDate { get; set; }
         public string SponsorName { get; set; }
@@ -456,7 +457,51 @@ namespace NeerajraiInfra.Models
         }
 
 
+        #region Income
 
+        public string FromUserName { get; set; }
+        public string Income { get; set; }
+        public string IncomeType { get; set; }
+        public string FromLoginId { get; set; }
+        public string Date { get; set; }
+        public List<Reports> lstDirectIncome { get; set; }
+        public List<Reports> lstDifferentialIncome { get; set; }
+        public List<Reports> lstDirectLeadershipIncome { get; set; }
+
+
+        public DataSet GetDirectIncome()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@LoginId", LoginId),
+                 new SqlParameter("@FromDate", FromDate),
+                  new SqlParameter("@ToDate", ToDate)
+            };
+            DataSet ds = Connection.ExecuteQuery("GetDirectIncome", para);
+            return ds;
+        }
+        public DataSet GetDifferentialIncome()
+        {
+            SqlParameter[] para = {
+               new SqlParameter("@LoginId", LoginId),
+                 new SqlParameter("@FromDate", FromDate),
+                  new SqlParameter("@ToDate", ToDate)
+            };
+            DataSet ds = Connection.ExecuteQuery("GetDifferentialIncome", para);
+            return ds;
+        }
+        public DataSet GetDirectLeadershipIncome()
+        {
+            SqlParameter[] para = {
+              new SqlParameter("@LoginId", LoginId),
+                 new SqlParameter("@FromDate", FromDate),
+                  new SqlParameter("@ToDate", ToDate)
+            };
+            DataSet ds = Connection.ExecuteQuery("GetDirectLeadershipIncome", para);
+            return ds;
+        }
+
+
+        #endregion
 
 
 
