@@ -37,7 +37,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <IntermediateOutputPath>C:\Users\MUTILE~1\AppData\Local\Temp\vs3B1B.tmp\Debug\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\DELL\AppData\Local\Temp\vsF198.tmp\Debug\</IntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -46,7 +46,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <IntermediateOutputPath>C:\Users\MUTILE~1\AppData\Local\Temp\vs3B1B.tmp\Release\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\DELL\AppData\Local\Temp\vsF198.tmp\Release\</IntermediateOutputPath>
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
@@ -7627,6 +7627,9 @@
     <Content Include="Views\AdminReports\PrintAllotments.cshtml" />
     <Content Include="Views\Plot\IsKharijDakhil.cshtml" />
     <Content Include="Views\AdminReports\IsKharijDakhilList.cshtml" />
+    <Content Include="Views\AssociateDashboard\DirectIncome.cshtml" />
+    <Content Include="Views\AssociateDashboard\DifferentialIncome.cshtml" />
+    <Content Include="Views\AssociateDashboard\DirectLeadershipIncome.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
