@@ -2133,6 +2133,9 @@ namespace NeerajraiInfra.Controllers
                     obj.ToName = r["ToName"].ToString();
                     obj.Income = r["Income"].ToString();
                     obj.GrossAmount = r["GrossIncome"].ToString();
+                    //obj.DirectIncome = r["DirectIncome"].ToString();
+                    //obj.DifferentialIncome = r["DifferentialIncome"].ToString();
+                    //obj.DirectLeadershipIncome = r["DirectLeadershipIncome"].ToString();
                     obj.Processing = r["Processing"].ToString();
                     obj.TDS = r["TDS"].ToString();
                     lst.Add(obj);
