@@ -20,6 +20,7 @@
 </style>
 <div class="loader" id="divload"></div>
 @using (Html.BeginForm("DirectLeadershipIncome", "AdminReports", FormMethod.Post, new { @id = "formI" }))
+
 {    <section class="section">
         <ul class="breadcrumb breadcrumb-style ">
             <li class="breadcrumb-item">
@@ -75,6 +76,8 @@
                                     <tr >
                                         <th>S No.</th>
                                         <th>Date</th>
+                                        <th>To LoginID</th>
+                                        <th>To Name</th>
                                         <th>From LoginID</th>
                                         <th>From Name</th>
                                         <th>Amount</th>
@@ -93,6 +96,8 @@
                                                 <tr class="text-left">
                                                     <td>@i</td>
                                                     <td>@Item.Date</td>
+                                                    <td>@Item.ToLoginId</td>
+                                                    <td>@Item.ToUserName</td>
                                                     <td>@Item.FromLoginId</td>
                                                     <td>@Item.FromUserName</td>
                                                     <td>@Item.Amount</td>
@@ -113,6 +118,7 @@
         </div>
     </div>
 }
+
 <script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
@@ -132,3 +138,6 @@
     });
 
 </script>
+
+
+           
