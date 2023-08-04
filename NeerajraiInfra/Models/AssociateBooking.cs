@@ -807,7 +807,7 @@ namespace NeerajraiInfra.Models
 
         public DataSet GetDirectLeadershipIncome()
         {
-            SqlParameter[] para = { new SqlParameter("@LoginID", LoginId) };
+            SqlParameter[] para = { new SqlParameter("@LoginID", UserID) };
             DataSet ds = Connection.ExecuteQuery("GetDirectLeadershipIncome", para);
             return ds;
         }
