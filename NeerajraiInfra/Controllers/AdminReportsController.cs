@@ -2993,6 +2993,8 @@ namespace NeerajraiInfra.Controllers
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
                     Reports obj = new Reports();
+                    obj.ToLoginId = r["ToLoginId"].ToString();
+                    obj.ToUserName = r["ToUserName"].ToString();
                     obj.FromLoginId = r["FromLoginId"].ToString();
                     obj.FromUserName = r["FromUserName"].ToString();
                     obj.Amount = r["Amount"].ToString();
@@ -3022,6 +3024,8 @@ namespace NeerajraiInfra.Controllers
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
                     Reports obj = new Reports();
+                    obj.ToLoginId = r["ToLoginId"].ToString();
+                    obj.ToUserName = r["ToUserName"].ToString();
                     obj.FromLoginId = r["FromLoginId"].ToString();
                     obj.FromUserName = r["FromUserName"].ToString();
                     obj.Amount = r["Amount"].ToString();
@@ -3047,6 +3051,8 @@ namespace NeerajraiInfra.Controllers
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
                     Reports obj = new Reports();
+                    obj.ToLoginId = r["ToLoginId"].ToString();
+                    obj.ToUserName = r["ToUserName"].ToString();
                     obj.FromLoginId = r["FromLoginId"].ToString();
                     obj.FromUserName = r["FromUserName"].ToString();
                     obj.Amount = r["Amount"].ToString();
@@ -3076,6 +3082,8 @@ namespace NeerajraiInfra.Controllers
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
                     Reports obj = new Reports();
+                    obj.ToLoginId = r["ToLoginId"].ToString();
+                    obj.ToUserName = r["ToUserName"].ToString();
                     obj.FromLoginId = r["FromLoginId"].ToString();
                     obj.FromUserName = r["FromUserName"].ToString();
                     obj.Amount = r["Amount"].ToString();
@@ -3099,6 +3107,8 @@ namespace NeerajraiInfra.Controllers
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
                     Reports obj = new Reports();
+                    obj.ToLoginId = r["ToLoginId"].ToString();
+                    obj.ToUserName = r["ToUserName"].ToString();
                     obj.FromLoginId = r["FromLoginId"].ToString();
                     obj.FromUserName = r["FromUserName"].ToString();
                     obj.Amount = r["Amount"].ToString();
@@ -3127,6 +3137,8 @@ namespace NeerajraiInfra.Controllers
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
                     Reports obj = new Reports();
+                    obj.ToLoginId = r["ToLoginId"].ToString();
+                    obj.ToUserName = r["ToUserName"].ToString();
                     obj.FromLoginId = r["FromLoginId"].ToString();
                     obj.FromUserName = r["FromUserName"].ToString();
                     obj.Amount = r["Amount"].ToString();
@@ -3141,5 +3153,10 @@ namespace NeerajraiInfra.Controllers
             return View(objreports);
         }
         #endregion
+
+        //public ActionResult PayPayout()
+        //{
+        //    return View();
+        //}
     }
 }

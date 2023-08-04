@@ -459,6 +459,8 @@ namespace NeerajraiInfra.Models
 
         #region Income
 
+        public string ToUserName { get; set; }
+        public string ToLoginId { get; set; }
         public string FromUserName { get; set; }
         public string Income { get; set; }
         public string IncomeType { get; set; }
