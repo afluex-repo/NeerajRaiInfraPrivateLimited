@@ -725,7 +725,7 @@ namespace NeerajraiInfra.Controllers
                             obj.AssociateLoginID = r["AssociateLoginID"].ToString();
                             obj.Discount = r["Discount"].ToString();
                             obj.AssociateName = r["AssociateName"].ToString();
-                            obj.PlotNumber = r["PlotInfo"].ToString();
+                            //obj.PlotNumber = r["PlotInfo"].ToString();
                             obj.BookingDate = r["BookingDate"].ToString();
                             obj.BookingAmount = r["BookingAmt"].ToString();
                             obj.PaymentPlanID = r["PlanName"].ToString();
@@ -740,6 +740,10 @@ namespace NeerajraiInfra.Controllers
                             obj.RemainingAmount = r["RemainingAmount"].ToString();
                             obj.TotalPaidAmount = r["TotalPaid"].ToString();
                             obj.EncryptKey = Crypto.Encrypt(r["PK_BookingId"].ToString());
+                            obj.SiteName = r["SiteName"].ToString();
+                            obj.SectorName = r["SectorName"].ToString();
+                            obj.BlockName = r["BlockName"].ToString();
+                            obj.PlotNumber = r["PlotNumber"].ToString();
                             lst.Add(obj);
                         }
                        
@@ -788,7 +792,7 @@ namespace NeerajraiInfra.Controllers
                         obj.AssociateLoginID = r["AssociateLoginID"].ToString();
                         obj.Discount = r["Discount"].ToString();
                         obj.AssociateName = r["AssociateName"].ToString();
-                        obj.PlotNumber = r["PlotInfo"].ToString();
+                        //obj.PlotNumber = r["PlotInfo"].ToString();
                         obj.BookingDate = r["BookingDate"].ToString();
                         obj.BookingAmount = r["BookingAmt"].ToString();
                         obj.PaymentPlanID = r["PlanName"].ToString();
@@ -803,6 +807,10 @@ namespace NeerajraiInfra.Controllers
                         obj.RemainingAmount = r["RemainingAmount"].ToString();
                         obj.TotalPaidAmount = r["TotalPaid"].ToString();
                         obj.EncryptKey = Crypto.Encrypt(r["PK_BookingId"].ToString());
+                        obj.SiteName = r["SiteName"].ToString();
+                        obj.SectorName = r["SectorName"].ToString();
+                        obj.BlockName = r["BlockName"].ToString();
+                        obj.PlotNumber = r["PlotNumber"].ToString();
                         lst.Add(obj);
                     }
                     model.lstPlot = lst;
@@ -2131,7 +2139,7 @@ namespace NeerajraiInfra.Controllers
                     obj.BranchID = r["BranchName"].ToString();
                     obj.CustomerName = r["CustomerInfo"].ToString();
                     obj.AssociateName = r["AssociateInfo"].ToString();
-                    obj.PlotNumber = r["Plot"].ToString();
+                    //obj.PlotNumber = r["Plot"].ToString();
                     obj.BookingDate = r["BookingDate"].ToString();
                     obj.TotalPaidAmount = r["PaidAmount"].ToString();
                     obj.BookingAmount = r["BookingAmt"].ToString();
@@ -2140,6 +2148,10 @@ namespace NeerajraiInfra.Controllers
                     obj.CancelRemark = r["CancelRemark"].ToString();
                     obj.CancelDate = r["CancelledDate"].ToString();
                     obj.BookingNumber = r["BookingNo"].ToString();
+                    obj.SiteName = r["SiteName"].ToString();
+                    obj.SectorName = r["SectorName"].ToString();
+                    obj.BlockName = r["BlockName"].ToString();
+                    obj.PlotNumber = r["PlotNumber"].ToString();
                     lst.Add(obj);
                 }
                 model.lstPlot = lst;
@@ -2348,11 +2360,15 @@ namespace NeerajraiInfra.Controllers
                     Plot obj = new Plot();
                     obj.PK_PlotHoldID = r["PK_PlotHoldID"].ToString();
                     obj.EncryptKey = Crypto.Encrypt(r["PK_PlotHoldID"].ToString());
-                    obj.PlotNumber = r["Plot"].ToString();
+                    //obj.PlotNumber = r["Plot"].ToString();
                     obj.HoldFrom = r["HoldFrom"].ToString();
                     obj.HoldTo = r["HoldTo"].ToString();
                     obj.Name = r["Name"].ToString();
                     obj.Mobile = r["Mobile"].ToString();
+                    obj.SiteName = r["SiteName"].ToString();
+                    obj.SectorName = r["SectorName"].ToString();
+                    obj.BlockName = r["BlockName"].ToString();
+                    obj.PlotNumber = r["PlotNumber"].ToString();
 
                     lst.Add(obj);
                 }
@@ -2789,7 +2805,7 @@ namespace NeerajraiInfra.Controllers
                     obj.AssociateID = r["AssociateLoginID"].ToString();
                     obj.AssociateName = r["AssociateName"].ToString();
                     obj.PaymentMode = r["PaymentMode"].ToString();
-                    obj.PlotInfo = r["Plotdetails"].ToString();
+                    //obj.PlotInfo = r["Plotdetails"].ToString();
                     obj.TransactionDate = r["TransactionDate"].ToString();
                     obj.TransactionNumber = r["TransactionNo"].ToString();
                     obj.Remark = r["Details"].ToString();
@@ -2797,6 +2813,10 @@ namespace NeerajraiInfra.Controllers
                     obj.PaymentStatus = r["PaymentStatus"].ToString();
                     obj.PaymentDate = r["PaymentDate"].ToString();
                     obj.AllotmentRemark = r["Remarks"].ToString();
+                    obj.SiteName = r["SiteName"].ToString();
+                    obj.SectorName = r["SectorName"].ToString();
+                    obj.BlockName = r["BlockName"].ToString();
+                    obj.PlotNumber = r["PlotNumber"].ToString();
                     lst.Add(obj);
                 }
                 model.lstPlot = lst;

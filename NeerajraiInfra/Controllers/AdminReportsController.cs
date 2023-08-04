@@ -376,12 +376,16 @@ namespace NeerajraiInfra.Controllers
                     obj.AssociateID = r["AssociateInfo"].ToString();
                     obj.PaidAmount = r["PaidAmount"].ToString();
                     obj.PaymentDate = r["LastPaymentDate"].ToString();
-                    obj.PlotNumber = r["PlotInfo"].ToString();
+                    //obj.PlotNumber = r["PlotInfo"].ToString();
                     obj.PlotAmount = r["NetPlotAmount"].ToString();
                     obj.Balance = r["Balance"].ToString();
                     obj.Amount = r["PlotAmount"].ToString();
                     obj.BookingNumber = r["BookingNo"].ToString();
                     obj.Discount = r["Discount"].ToString();
+                    obj.SiteName = r["SiteName"].ToString();
+                    obj.SectorName = r["SectorName"].ToString();
+                    obj.BlockName = r["BlockName"].ToString();
+                    obj.PlotNumber = r["PlotNumber"].ToString();
                     obj.BookingDate = r["BookingDate"].ToString();
                     lst.Add(obj);
                 }
@@ -1135,9 +1139,13 @@ namespace NeerajraiInfra.Controllers
                     //obj.TransactionNumber = r["TransactionNo"].ToString();
                     obj.PaidAmount = r["PaidAmount"].ToString();
                     obj.PaymentDate = r["PaymentDate"].ToString();
-                    obj.PlotNumber = r["PlotInfo"].ToString();
+                    //obj.PlotNumber = r["PlotInfo"].ToString();
                     obj.BookingNumber = r["BookingNo"].ToString();
                     obj.EncryptKey = Crypto.Encrypt(r["PK_BookingDetailsId"].ToString());
+                    obj.SiteName = r["SiteName"].ToString();
+                    obj.SectorName = r["SectorName"].ToString();
+                    obj.BlockName = r["BlockName"].ToString();
+                    obj.PlotNumber = r["PlotNumber"].ToString();
                     lst.Add(obj);
                 }
                 model.lstPlot = lst;

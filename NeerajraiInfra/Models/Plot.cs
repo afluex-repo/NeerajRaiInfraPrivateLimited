@@ -802,7 +802,7 @@ namespace NeerajraiInfra.Models
                             {
                                  new SqlParameter("@PK_BookingId",PK_BookingId),
                                  new SqlParameter("@CustomerID",CustomerID ),
-                                 new SqlParameter("@AssociateID",AssociateID ),
+                                 new SqlParameter("@AssociateID",AssociateLoginID ),
                                  new SqlParameter("@FromDate",FromDate),
                                  new SqlParameter("@ToDate",ToDate),
                                  new SqlParameter("@CustomerName",CustomerName),
