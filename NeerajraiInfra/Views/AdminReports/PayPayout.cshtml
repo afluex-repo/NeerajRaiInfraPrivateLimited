@@ -74,11 +74,15 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td></td>
+                                    <td>
+                                        <input type="text" name="Amount" id="Amount" class="form-control" />
+                                    </td>
                                     <td>
                                     <input type="text" name="TransactionNo" id="TransactionNo" class="form-control"/>
                                     </td>
-                                    <td></td>
+                                    <td>
+                                        <input type="date" name="TransactionDate" id="TransactionDate" class="form-control" />
+                                    </td>
                                 </tr>
                             </tbody>
                             <tfoot>
@@ -97,6 +101,7 @@
                             </tfoot>
 
                         </table>
+                        <input type="submit" name="btnsave" id="btnsave" value="Save" class="btn btn-success" />
                     </div>
                 </div>
             </div>
@@ -113,6 +118,11 @@
         $('#PayPayout').DataTable({
             responsive: true
         });
+    });
+    $('#TransactionDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
     });
 </script>
 
