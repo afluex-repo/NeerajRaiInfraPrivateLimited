@@ -1076,206 +1076,203 @@ namespace NeerajraiInfra.Controllers
         //        return PartialView("_Tree");
         //    }
 
-        //    #region PayPayout
-        //    public ActionResult PayPayout()
-        //    {
-        //        #region ddlLeg
-        //        List<SelectListItem> ddlLeg = Common.Leg();
-        //        ViewBag.ddlLeg = ddlLeg;
-        //        #endregion ddlLeg
-        //        Reports model = new Reports();
+        #region PayPayout
+        public ActionResult PayPayout()
+        {
+            #region ddlLeg
+            List<SelectListItem> ddlLeg = Common.Leg();
+            ViewBag.ddlLeg = ddlLeg;
+            #endregion ddlLeg
+            Reports model = new Reports();
 
-        //        List<Reports> lst = new List<Reports>();
-        //        DataSet ds = model.GetPayPayout();
-        //        ViewBag.Total = "0";
-        //        if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            List<Reports> lst = new List<Reports>();
+            DataSet ds = model.GetPayPayout();
+            ViewBag.Total = "0";
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.Name = r["Name"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.MemberAccNo = r["MemberAccNo"].ToString();
+                    obj.IFSCCode = (r["IFSCCode"].ToString());
+                    obj.BankName = (r["MemberBankName"].ToString());
+                    obj.Fk_UserId = (r["Pk_UserId"].ToString());
+                    obj.Amount = (r["Amount"].ToString());
+                    ViewBag.Total = Convert.ToDecimal(ViewBag.Total) + Convert.ToDecimal(r["Amount"].ToString());
+                    lst.Add(obj);
+                }
+                model.lstassociate = lst;
+            }
+            return View(model);
+        }
+        [HttpPost]
+        [ActionName("PayPayout")]
+        [OnAction(ButtonName = "GetDetails")]
+        public ActionResult GetPayPayout(Reports model)
+        {
+            #region ddlLeg
+            List<SelectListItem> ddlLeg = Common.Leg();
+            ViewBag.ddlLeg = ddlLeg;
+            #endregion ddlLeg
+            model.LoginId = string.IsNullOrEmpty(model.LoginId) ? null : model.LoginId;
+           
+            List<Reports> lst = new List<Reports>();
+            DataSet ds = model.GetPayPayout();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.Name = r["Name"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.MemberAccNo = r["MemberAccNo"].ToString();
+                    obj.IFSCCode = (r["IFSCCode"].ToString());
+                    obj.BankName = (r["MemberBankName"].ToString());
+                    obj.Fk_UserId = (r["Pk_UserId"].ToString());
+                    obj.Amount = (r["Amount"].ToString());
+                    ViewBag.Total = Convert.ToDecimal(ViewBag.Total) + Convert.ToDecimal(r["Amount"].ToString());
+                    lst.Add(obj);
+                }
+                model.lstassociate = lst;
+            }
+
+
+            return View(model);
+        }
+
+        //Export to Excel for Pay Payout
+        [HttpPost]
+        [ActionName("PayPayout")]
+        [OnAction(ButtonName = "Export")]
+        public ActionResult ExportToExcelPayout(Reports model)
+        {
+            #region ddlLeg
+            List<SelectListItem> ddlLeg = Common.Leg();
+            ViewBag.ddlLeg = ddlLeg;
+            #endregion ddlLeg
+            model.LoginId = string.IsNullOrEmpty(model.LoginId) ? null : model.LoginId;
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            List<Reports> lst = new List<Reports>();
+            DataSet ds = model.GetPayPayout();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                string filename = "PayPayout" + ".xls";
+                GridView GridView1 = new GridView();
+                ds.Tables[0].Columns.Remove("Pk_UserID");
+                ds.Tables[0].Columns.Remove("MemberBranch");
+                ds.Tables[0].Columns.Remove("BankHolderName");
+                ds.Tables[0].Columns.Remove("TransactionDate");
+                GridView1.DataSource = ds.Tables[0];
+                GridView1.DataBind();
+                string style = @" .text { mso-number-format:\@; }  ";
+                //string style = @"<style> td { mso-number-format:\@; } </style> ";
+
+                Response.Clear();
+                Response.AddHeader("content-disposition", "attachment;filename=MemberDetailsReport.xls");
+                Response.AddHeader("Content-Disposition", "attachment; filename=" + filename + "");
+                Response.Charset = "";
+                Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                Response.ContentType = "application/vnd.ms-excel";
+                System.IO.StringWriter s_Write = new System.IO.StringWriter();
+                System.Web.UI.HtmlTextWriter h_write = new HtmlTextWriter(s_Write);
+                GridView1.ShowHeader = true;
+                GridView1.RenderControl(h_write);
+                Response.Write(style);
+                Response.Write(s_Write.ToString());
+                Response.End();
+
+            }
+
+            return null;
+        }
+
+        [HttpPost]
+        [ActionName("PayPayout")]
+        [OnAction(ButtonName = "Save")]
+        public ActionResult PayPayoutAction(Reports model)
+        {
+            string hdrows2 = Request["hdRows2"].ToString();
+            string amount = "";
+            string description = "";
+            string transactiono = "";
+            string transactiondate = "";
+            string Pk_PaidBoosterId_ = "";
+            for (int i = 1; i < int.Parse(hdrows2); i++)
+            {
+                Pk_PaidBoosterId_ = Request["Fk_UserId_ " + i].ToString();
+                amount = "";
+
+                transactiono = Request["txttranno_ " + i].ToString();
+                transactiondate = Request["txttransdate_ " + i].ToString();
+                model.Amount = Request["txtamount_ " + i].ToString();
+                model.Fk_UserId = Pk_PaidBoosterId_;
+
+                model.TransactionNo = transactiono;
+                DataSet ds = null;
+                if (!string.IsNullOrEmpty(transactiondate))
+                {
+                    model.TransactionDate = transactiondate;
+                    model.AddedBy = Session["Pk_AdminId"].ToString();
+                    ds = model.SavePayPayout();
+                }
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        TempData["PayPayout"] = "Payment Done";
+                    }
+                    else
+                    {
+                        TempData["BoosterPay"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+
+            }
+            return RedirectToAction("PayPayout");
+        }
+        #endregion
+
+        //#region PaidPayout
+        //public ActionResult PaidPayout()
+        //{
+        //    return View();
+        //}
+        //[HttpPost]
+        //[ActionName("PaidPayout")]
+        //[OnAction(ButtonName = "GetDetails")]
+        //public ActionResult GetPaidPayout(Wallet objewallet)
+        //{
+        //    List<Wallet> lst = new List<Wallet>();
+        //    objewallet.FromDate = string.IsNullOrEmpty(objewallet.FromDate) ? null : Common.ConvertToSystemDate(objewallet.FromDate, "dd/MM/yyyy");
+        //    objewallet.ToDate = string.IsNullOrEmpty(objewallet.ToDate) ? null : Common.ConvertToSystemDate(objewallet.ToDate, "dd/MM/yyyy");
+        //    DataSet ds = objewallet.GetPaidPayout();
+        //    ViewBag.Total = "0";
+        //    if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
+        //    {
+        //        foreach (DataRow dr in ds.Tables[0].Rows)
         //        {
-        //            foreach (DataRow r in ds.Tables[0].Rows)
-        //            {
-        //                Reports obj = new Reports();
-        //                obj.Name = r["Name"].ToString();
-        //                obj.LoginId = r["LoginId"].ToString();
-        //                obj.MemberAccNo = r["MemberAccNo"].ToString();
-        //                obj.IFSCCode = (r["IFSCCode"].ToString());
-        //                obj.BankName = (r["MemberBankName"].ToString());
-        //                obj.Fk_UserId = (r["Pk_UserId"].ToString());
-        //                obj.Amount = (r["Amount"].ToString());
-        //                ViewBag.Total = Convert.ToDecimal(ViewBag.Total) + Convert.ToDecimal(r["Amount"].ToString());
-        //                lst.Add(obj);
-        //            }
-        //            model.lstassociate = lst;
+        //            Wallet Objload = new Wallet();
+        //            Objload.LoginId = dr["Loginid"].ToString();
+        //            Objload.DisplayName = dr["Name"].ToString();
+        //            Objload.PaymentDate = dr["Paymentdate"].ToString();
+
+        //            Objload.Amount = dr["Amount"].ToString();
+        //            Objload.TransactionDate = dr["TransactionDate"].ToString();
+        //            Objload.TransactionNo = dr["TransactionNo"].ToString();
+        //            ViewBag.Total = Convert.ToDecimal(ViewBag.Total) + Convert.ToDecimal(dr["Amount"].ToString());
+        //            lst.Add(Objload);
         //        }
-        //        return View(model);
+        //        objewallet.lstpayoutledger = lst;
         //    }
-        //    [HttpPost]
-        //    [ActionName("PayPayout")]
-        //    [OnAction(ButtonName = "GetDetails")]
-        //    public ActionResult GetPayPayout(Reports model)
-        //    {
-        //        #region ddlLeg
-        //        List<SelectListItem> ddlLeg = Common.Leg();
-        //        ViewBag.ddlLeg = ddlLeg;
-        //        #endregion ddlLeg
-        //        //model.LoginId = string.IsNullOrEmpty(model.LoginId) ? null : model.LoginId;
-        //        //model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
-        //        //model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
-        //        List<Reports> lst = new List<Reports>();
-        //        // model.LoginId = Session["LoginId"].ToString();
-        //        DataSet ds = model.GetPayPayout();
-
-        //        if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
-        //        {
-        //            foreach (DataRow r in ds.Tables[0].Rows)
-        //            {
-        //                Reports obj = new Reports();
-        //                obj.Name = r["Name"].ToString();
-        //                obj.LoginId = r["LoginId"].ToString();
-        //                obj.MemberAccNo = r["MemberAccNo"].ToString();
-        //                obj.IFSCCode = (r["IFSCCode"].ToString());
-        //                obj.BankName = (r["MemberBankName"].ToString());
-        //                obj.Fk_UserId = (r["Pk_UserId"].ToString());
-        //                obj.Amount = (r["Amount"].ToString());
-        //                lst.Add(obj);
-        //            }
-        //            model.lstassociate = lst;
-        //        }
-
-
-        //        return View(model);
-        //    }
-
-        //    //Export to Excel for Pay Payout
-        //    [HttpPost]
-        //    [ActionName("PayPayout")]
-        //    [OnAction(ButtonName = "Export")]
-        //    public ActionResult ExportToExcelPayout(Reports model)
-        //    {
-        //        #region ddlLeg
-        //        List<SelectListItem> ddlLeg = Common.Leg();
-        //        ViewBag.ddlLeg = ddlLeg;
-        //        #endregion ddlLeg
-        //        //model.LoginId = string.IsNullOrEmpty(model.LoginId) ? null : model.LoginId;
-        //        //model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
-        //        //model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
-        //        List<Reports> lst = new List<Reports>();
-        //        // model.LoginId = Session["LoginId"].ToString();
-        //        DataSet ds = model.GetPayPayout();
-
-        //        if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
-        //        {
-        //            string filename = "PayPayout" + ".xls";
-        //            GridView GridView1 = new GridView();
-        //            ds.Tables[0].Columns.Remove("Pk_UserID");
-        //            ds.Tables[0].Columns.Remove("MemberBranch");
-        //            ds.Tables[0].Columns.Remove("BankHolderName");
-        //            //ds.Tables[0].Columns.Remove("TransactionDate");
-        //            GridView1.DataSource = ds.Tables[0];
-        //            GridView1.DataBind();
-        //            //string style = @" .text { mso-number-format:\@; }  ";
-        //            string style = @"<style> td { mso-number-format:\@; } </style> ";
-
-        //            Response.Clear();
-        //            // Response.AddHeader("content-disposition", "attachment;filename=MemberDetailsReport.xls");
-        //            Response.AddHeader("Content-Disposition", "attachment; filename=" + filename + "");
-        //            Response.Charset = "";
-        //            Response.Cache.SetCacheability(HttpCacheability.NoCache);
-        //            Response.ContentType = "application/vnd.ms-excel";
-        //            System.IO.StringWriter s_Write = new System.IO.StringWriter();
-        //            System.Web.UI.HtmlTextWriter h_write = new HtmlTextWriter(s_Write);
-        //            GridView1.ShowHeader = true;
-        //            GridView1.RenderControl(h_write);
-        //            Response.Write(style);
-        //            Response.Write(s_Write.ToString());
-        //            Response.End();
-
-        //        }
-
-        //        return null;
-        //    }
-
-        //    [HttpPost]
-        //    [ActionName("PayPayout")]
-        //    [OnAction(ButtonName = "Save")]
-        //    public ActionResult PayPayoutAction(Reports model)
-        //    {
-        //        string hdrows2 = Request["hdRows2"].ToString();
-        //        string amount = "";
-        //        string description = "";
-        //        string transactiono = "";
-        //        string transactiondate = "";
-        //        string Pk_PaidBoosterId_ = "";
-        //        for (int i = 1; i < int.Parse(hdrows2); i++)
-        //        {
-        //            Pk_PaidBoosterId_ = Request["Fk_UserId_ " + i].ToString();
-        //            amount = "";
-
-        //            transactiono = Request["txttranno_ " + i].ToString();
-        //            transactiondate = Request["txttransdate_ " + i].ToString();
-        //            model.Amount = Request["txtamount_ " + i].ToString();
-        //            model.Fk_UserId = Pk_PaidBoosterId_;
-
-        //            model.TransactionNo = transactiono;
-        //            DataSet ds = null;
-        //            if (!string.IsNullOrEmpty(transactiondate))
-        //            {
-        //                model.TransactionDate = transactiondate;
-        //                model.AddedBy = Session["Pk_AdminId"].ToString();
-        //                ds = model.SavePayPayout();
-        //            }
-        //            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
-        //            {
-
-        //                if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
-        //                {
-
-        //                }
-        //                else
-        //                {
-        //                    // TempData["BoosterPay"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-        //                }
-        //            }
-
-        //        }
-        //        TempData["PayPayout"] = "Paymnent Done";
-        //        return RedirectToAction("PayPayout");
-        //    }
-        //    #endregion
-
-        //    #region PaidPayout
-        //    public ActionResult PaidPayout()
-        //    {
-        //        return View();
-        //    }
-        //    [HttpPost]
-        //    [ActionName("PaidPayout")]
-        //    [OnAction(ButtonName = "GetDetails")]
-        //    public ActionResult GetPaidPayout(Wallet objewallet)
-        //    {
-        //        List<Wallet> lst = new List<Wallet>();
-        //        objewallet.FromDate = string.IsNullOrEmpty(objewallet.FromDate) ? null : Common.ConvertToSystemDate(objewallet.FromDate, "dd/MM/yyyy");
-        //        objewallet.ToDate = string.IsNullOrEmpty(objewallet.ToDate) ? null : Common.ConvertToSystemDate(objewallet.ToDate, "dd/MM/yyyy");
-        //        DataSet ds = objewallet.GetPaidPayout();
-        //        ViewBag.Total = "0";
-        //        if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
-        //        {
-        //            foreach (DataRow dr in ds.Tables[0].Rows)
-        //            {
-        //                Wallet Objload = new Wallet();
-        //                Objload.LoginId = dr["Loginid"].ToString();
-        //                Objload.DisplayName = dr["Name"].ToString();
-        //                Objload.PaymentDate = dr["Paymentdate"].ToString();
-
-        //                Objload.Amount = dr["Amount"].ToString();
-        //                Objload.TransactionDate = dr["TransactionDate"].ToString();
-        //                Objload.TransactionNo = dr["TransactionNo"].ToString();
-        //                ViewBag.Total = Convert.ToDecimal(ViewBag.Total) + Convert.ToDecimal(dr["Amount"].ToString());
-        //                lst.Add(Objload);
-        //            }
-        //            objewallet.lstpayoutledger = lst;
-        //        }
-        //        return View(objewallet);
-        //    }
-        //    #endregion
+        //    return View(objewallet);
+        //}
+        //#endregion
 
 
 
