@@ -7633,7 +7633,7 @@
     <Content Include="Views\AdminReports\DirectIncome.cshtml" />
     <Content Include="Views\AdminReports\DifferentialIncome.cshtml" />
     <Content Include="Views\AdminReports\DirectLeadershipIncome.cshtml" />
-    <Content Include="Views\AdminReports\PayPayout.cshtml" />
+    <Content Include="Views\Admin\PayPayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

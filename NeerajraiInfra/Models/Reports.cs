@@ -128,6 +128,8 @@ namespace NeerajraiInfra.Models
         public string IsKharijDakhilDone { get; set; }
         public string KharijDakhilDate { get; set; }
         public string KharijDakhilRemarks { get; set; }
+        public string IFSCCode { get; set; }
+        public string MemberAccNo { get; set; }
 
         public DataSet GetBookingDetailsList()
         {
@@ -505,8 +507,26 @@ namespace NeerajraiInfra.Models
 
         #endregion
 
-
-
+        #region PayPayout
+        public DataSet GetPayPayout()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
+                                    new SqlParameter("@IsDownline", IsDownline),
+                                    new SqlParameter("@Leg", Leg), };
+            DataSet ds = Connection.ExecuteQuery("GetBalancePayoutforPayment", para);
+            return ds;
+        }
+        public DataSet SavePayPayout()
+        {
+            SqlParameter[] para = { new SqlParameter("@Fk_UserId", Fk_UserId),
+                                    new SqlParameter("@TransactionNo", TransactionNo),
+                                    new SqlParameter("@TransactionDate", TransactionDate),
+                                    new SqlParameter("@Amount", Amount),
+                                    new SqlParameter("@AddedBy", AddedBy) };
+            DataSet ds = Connection.ExecuteQuery("PayPayout", para);
+            return ds;
+        }
+        #endregion
 
 
 
