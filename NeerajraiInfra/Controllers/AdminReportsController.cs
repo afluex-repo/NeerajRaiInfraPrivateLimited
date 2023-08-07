@@ -376,12 +376,16 @@ namespace NeerajraiInfra.Controllers
                     obj.AssociateID = r["AssociateInfo"].ToString();
                     obj.PaidAmount = r["PaidAmount"].ToString();
                     obj.PaymentDate = r["LastPaymentDate"].ToString();
-                    obj.PlotNumber = r["PlotInfo"].ToString();
+                    //obj.PlotNumber = r["PlotInfo"].ToString();
                     obj.PlotAmount = r["NetPlotAmount"].ToString();
                     obj.Balance = r["Balance"].ToString();
                     obj.Amount = r["PlotAmount"].ToString();
                     obj.BookingNumber = r["BookingNo"].ToString();
                     obj.Discount = r["Discount"].ToString();
+                    obj.SiteName = r["SiteName"].ToString();
+                    obj.SectorName = r["SectorName"].ToString();
+                    obj.BlockName = r["BlockName"].ToString();
+                    obj.PlotNumber = r["PlotNumber"].ToString();
                     obj.BookingDate = r["BookingDate"].ToString();
                     lst.Add(obj);
                 }
@@ -1135,9 +1139,13 @@ namespace NeerajraiInfra.Controllers
                     //obj.TransactionNumber = r["TransactionNo"].ToString();
                     obj.PaidAmount = r["PaidAmount"].ToString();
                     obj.PaymentDate = r["PaymentDate"].ToString();
-                    obj.PlotNumber = r["PlotInfo"].ToString();
+                    //obj.PlotNumber = r["PlotInfo"].ToString();
                     obj.BookingNumber = r["BookingNo"].ToString();
                     obj.EncryptKey = Crypto.Encrypt(r["PK_BookingDetailsId"].ToString());
+                    obj.SiteName = r["SiteName"].ToString();
+                    obj.SectorName = r["SectorName"].ToString();
+                    obj.BlockName = r["BlockName"].ToString();
+                    obj.PlotNumber = r["PlotNumber"].ToString();
                     lst.Add(obj);
                 }
                 model.lstPlot = lst;
@@ -1246,7 +1254,8 @@ namespace NeerajraiInfra.Controllers
                     ViewBag.PlotNo = ds.Tables[0].Rows[0]["PlotNumber"].ToString();
 
                     ViewBag.PlotNumber = ds.Tables[0].Rows[0]["PlotInfo"].ToString();
-                    ViewBag.PaidAmount = ds.Tables[0].Rows[0]["PaidAmount"].ToString();
+                    ViewBag.PaidAmount = ds.Tables[0].Rows[0]["latestpayment"].ToString();
+                    ViewBag.TotalDeposit = ds.Tables[0].Rows[0]["TotalDeposit"].ToString();
                     ViewBag.PlotArea = ds.Tables[0].Rows[0]["PlotArea"].ToString();
                     ViewBag.PaymentMode = ds.Tables[0].Rows[0]["PaymentMode"].ToString();
                     ViewBag.ReasonOfPayment = ds.Tables[0].Rows[0]["ReasonOfPayment"].ToString();
@@ -1258,14 +1267,14 @@ namespace NeerajraiInfra.Controllers
                     ViewBag.customerMobile = ds.Tables[0].Rows[0]["customerMobile"].ToString();
                     ViewBag.PLC = string.IsNullOrEmpty(ds.Tables[0].Rows[0]["PLC"].ToString()) ? "N/A" : ds.Tables[0].Rows[0]["PLC"].ToString();
                     ViewBag.AmountInWords = ds.Tables[0].Rows[0]["PaidAmountInWords"].ToString();
-                    ViewBag.NetPlotAmount = ds.Tables[0].Rows[0]["NetPlotAmount"].ToString();
+                    //ViewBag.NetPlotAmount = ds.Tables[0].Rows[0]["NetPlotAmount"].ToString();
                     ViewBag.NetPlotAmountInWords = ds.Tables[0].Rows[0]["NetPlotAmountInWords"].ToString();
 
                     ViewBag.TransactionNo = ds.Tables[0].Rows[0]["TransactionNo"].ToString();
                     ViewBag.TransactionDate = ds.Tables[0].Rows[0]["TransactionDate"].ToString();
                     ViewBag.BankName = ds.Tables[0].Rows[0]["BankName"].ToString();
                     ViewBag.BankBranch = ds.Tables[0].Rows[0]["BankBranch"].ToString();
-                    ViewBag.RemainingAmount = ds.Tables[0].Rows[0]["RemainingAmount"].ToString();
+                    ViewBag.RemainingAmount = ds.Tables[0].Rows[0]["Balance"].ToString();
                     ViewBag.PlotRate = ds.Tables[0].Rows[0]["PlotRate"].ToString();
                     ViewBag.SiteName = ds.Tables[0].Rows[0]["SiteName"].ToString();
                     ViewBag.InstallmentNo = ds.Tables[0].Rows[0]["InstallmentNo"].ToString();
@@ -1499,6 +1508,9 @@ namespace NeerajraiInfra.Controllers
                     obj.AssociateLoginID = r["LoginId"].ToString();
                     obj.FirstName = r["FirstName"].ToString();
                     obj.GrossAmount = r["GrossAmount"].ToString();
+                    obj.DirectIncome = r["DirectIncome"].ToString();
+                    obj.DifferentialIncome = r["DifferentialIncome"].ToString();
+                    obj.DirectLeadershipIncome = r["DirectLeadershipIncome"].ToString();
                     obj.TDS = r["TDS"].ToString();
                     obj.Processing = r["Processing"].ToString();
                     obj.NetAmount = r["NetAmount"].ToString();
@@ -1506,6 +1518,13 @@ namespace NeerajraiInfra.Controllers
                     lst.Add(obj);
                 }
                 model.lstPlot = lst;
+                ViewBag.GrossAmount = double.Parse(ds.Tables[0].Compute("sum(GrossAmount)", "").ToString()).ToString("n2");
+                ViewBag.TDS = double.Parse(ds.Tables[0].Compute("sum(TDS)", "").ToString()).ToString("n2");
+                ViewBag.Processing = double.Parse(ds.Tables[0].Compute("sum(Processing)", "").ToString()).ToString("n2");
+                ViewBag.NetAmount = double.Parse(ds.Tables[0].Compute("sum(NetAmount)", "").ToString()).ToString("n2");
+                ViewBag.DirectIncome = double.Parse(ds.Tables[0].Compute("sum(DirectIncome)", "").ToString()).ToString("n2");
+                ViewBag.DifferentialIncome = double.Parse(ds.Tables[0].Compute("sum(DifferentialIncome)", "").ToString()).ToString("n2");
+                ViewBag.DirectLeadershipIncome = double.Parse(ds.Tables[0].Compute("sum(DirectLeadershipIncome)", "").ToString()).ToString("n2");
             }
             return View(model);
         }
@@ -1533,6 +1552,9 @@ namespace NeerajraiInfra.Controllers
                     obj.AssociateLoginID = r["LoginId"].ToString();
                     obj.FirstName = r["FirstName"].ToString();
                     obj.GrossAmount = r["GrossAmount"].ToString();
+                    obj.DirectIncome = r["DirectIncome"].ToString();
+                    obj.DifferentialIncome = r["DifferentialIncome"].ToString();
+                    obj.DirectLeadershipIncome = r["DirectLeadershipIncome"].ToString();
                     obj.TDS = r["TDS"].ToString();
                     obj.Processing = r["Processing"].ToString();
                     obj.NetAmount = r["NetAmount"].ToString();
@@ -1540,6 +1562,13 @@ namespace NeerajraiInfra.Controllers
                     lst.Add(obj);
                 }
                 model.lstPlot = lst;
+                ViewBag.GrossAmount = double.Parse(ds.Tables[0].Compute("sum(GrossAmount)", "").ToString()).ToString("n2");
+                ViewBag.TDS = double.Parse(ds.Tables[0].Compute("sum(TDS)", "").ToString()).ToString("n2");
+                ViewBag.Processing = double.Parse(ds.Tables[0].Compute("sum(Processing)", "").ToString()).ToString("n2");
+                ViewBag.NetAmount = double.Parse(ds.Tables[0].Compute("sum(NetAmount)", "").ToString()).ToString("n2");
+                ViewBag.DirectIncome = double.Parse(ds.Tables[0].Compute("sum(DirectIncome)", "").ToString()).ToString("n2");
+                ViewBag.DifferentialIncome = double.Parse(ds.Tables[0].Compute("sum(DifferentialIncome)", "").ToString()).ToString("n2");
+                ViewBag.DirectLeadershipIncome = double.Parse(ds.Tables[0].Compute("sum(DirectLeadershipIncome)", "").ToString()).ToString("n2");
             }
             return View(model);
         }
@@ -2872,6 +2901,8 @@ namespace NeerajraiInfra.Controllers
                     obj.IsKharijDakhilDone = r["IsKharijDakhilDone"].ToString();
                     obj.KharijDakhilDate = r["KharijDakhilDate"].ToString();
                     obj.KharijDakhilRemarks = r["KharijDakhilRemarks"].ToString();
+                    obj.CustomerId = r["CustomerID"].ToString();
+                    obj.Customername = r["CustomerName"].ToString();
                     lst.Add(obj);
                 }
                 model.lstkharijdakhil = lst;
@@ -2899,6 +2930,8 @@ namespace NeerajraiInfra.Controllers
                     obj.IsKharijDakhilDone = r["IsKharijDakhilDone"].ToString();
                     obj.KharijDakhilDate = r["KharijDakhilDate"].ToString();
                     obj.KharijDakhilRemarks = r["KharijDakhilRemarks"].ToString();
+                    obj.CustomerId = r["CustomerID"].ToString();
+                    obj.Customername = r["CustomerName"].ToString();
                     lst.Add(obj);
                 }
                 model.lstkharijdakhil = lst;
@@ -2949,12 +2982,181 @@ namespace NeerajraiInfra.Controllers
 
         }
 
+        #region Income
+        public ActionResult DirectIncome(Reports objreports)
+        {
+            List<Reports> lst = new List<Reports>();
+            DataSet ds = objreports.GetDirectIncome();
 
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.ToLoginId = r["ToLoginId"].ToString();
+                    obj.ToUserName = r["ToUserName"].ToString();
+                    obj.FromLoginId = r["FromLoginId"].ToString();
+                    obj.FromUserName = r["FromUserName"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.IncomeType = (r["IncomeType"].ToString());
+                    obj.Income = (r["Income"].ToString());
+                    obj.Date = (r["CurrentDate"].ToString());
+                    obj.Status = (r["PaidStatus"].ToString());
+                    lst.Add(obj);
+                }
+                objreports.lstDirectIncome = lst;
+            }
+            return View(objreports);
+        }
 
+        [HttpPost]
+        [ActionName("DirectIncome")]
+        [OnAction(ButtonName = "btnSearch")]
+        public ActionResult DirectIncomeAction(Reports objreports)
+        {
+            List<Reports> lst = new List<Reports>();
+            objreports.FromDate = string.IsNullOrEmpty(objreports.FromDate) ? null : Common.ConvertToSystemDate(objreports.FromDate, "dd/MM/yyyy");
+            objreports.ToDate = string.IsNullOrEmpty(objreports.ToDate) ? null : Common.ConvertToSystemDate(objreports.ToDate, "dd/MM/yyyy");
+            DataSet ds = objreports.GetDirectIncome();
 
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.ToLoginId = r["ToLoginId"].ToString();
+                    obj.ToUserName = r["ToUserName"].ToString();
+                    obj.FromLoginId = r["FromLoginId"].ToString();
+                    obj.FromUserName = r["FromUserName"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.IncomeType = (r["IncomeType"].ToString());
+                    obj.Income = (r["Income"].ToString());
+                    obj.Date = (r["CurrentDate"].ToString());
+                    obj.Status = (r["PaidStatus"].ToString());
+                    lst.Add(obj);
+                }
+                objreports.lstDirectIncome = lst;
+            }
+            return View(objreports);
+        }
 
+      
+        public ActionResult DifferentialIncome(Reports objreports)
+        {
+            List<Reports> lst = new List<Reports>();
+            DataSet ds = objreports.GetDifferentialIncome();
 
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.ToLoginId = r["ToLoginId"].ToString();
+                    obj.ToUserName = r["ToUserName"].ToString();
+                    obj.FromLoginId = r["FromLoginId"].ToString();
+                    obj.FromUserName = r["FromUserName"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.IncomeType = (r["IncomeType"].ToString());
+                    obj.Income = (r["Income"].ToString());
+                    obj.Date = (r["CurrentDate"].ToString());
+                    obj.Status = (r["PaidStatus"].ToString());
+                    lst.Add(obj);
+                }
+                objreports.lstDifferentialIncome = lst;
+            }
+            return View(objreports);
+        }
 
+        [HttpPost]
+        [ActionName("DifferentialIncome")]
+        [OnAction(ButtonName = "btnSearch")]
+        public ActionResult DifferentialIncomeAction(Reports objreports)
+        {
+            List<Reports> lst = new List<Reports>();
+            objreports.FromDate = string.IsNullOrEmpty(objreports.FromDate) ? null : Common.ConvertToSystemDate(objreports.FromDate, "dd/MM/yyyy");
+            objreports.ToDate = string.IsNullOrEmpty(objreports.ToDate) ? null : Common.ConvertToSystemDate(objreports.ToDate, "dd/MM/yyyy");
+            DataSet ds = objreports.GetDifferentialIncome();
 
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.ToLoginId = r["ToLoginId"].ToString();
+                    obj.ToUserName = r["ToUserName"].ToString();
+                    obj.FromLoginId = r["FromLoginId"].ToString();
+                    obj.FromUserName = r["FromUserName"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.IncomeType = (r["IncomeType"].ToString());
+                    obj.Income = (r["Income"].ToString());
+                    obj.Date = (r["CurrentDate"].ToString());
+                    obj.Status = (r["PaidStatus"].ToString());
+                    lst.Add(obj);
+                }
+                objreports.lstDifferentialIncome = lst;
+            }
+            return View(objreports);
+        }
+
+        public ActionResult DirectLeadershipIncome(Reports objreports)
+        {
+            List<Reports> lst = new List<Reports>();
+            DataSet ds = objreports.GetDirectLeadershipIncome();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.ToLoginId = r["ToLoginId"].ToString();
+                    obj.ToUserName = r["ToUserName"].ToString();
+                    obj.FromLoginId = r["FromLoginId"].ToString();
+                    obj.FromUserName = r["FromUserName"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.IncomeType = (r["IncomeType"].ToString());
+                    obj.Income = (r["Income"].ToString());
+                    obj.Date = (r["CurrentDate"].ToString());
+                    obj.Status = (r["PaidStatus"].ToString());
+                    lst.Add(obj);
+                }
+                objreports.lstDirectLeadershipIncome = lst;
+            }
+            return View(objreports);
+        }
+
+        [HttpPost]
+        [ActionName("DirectLeadershipIncome")]
+        [OnAction(ButtonName = "btnSearch")]
+        public ActionResult DirectLeadershipIncomeAction(Reports objreports)
+        {
+            List<Reports> lst = new List<Reports>();
+            objreports.FromDate = string.IsNullOrEmpty(objreports.FromDate) ? null : Common.ConvertToSystemDate(objreports.FromDate, "dd/MM/yyyy");
+            objreports.ToDate = string.IsNullOrEmpty(objreports.ToDate) ? null : Common.ConvertToSystemDate(objreports.ToDate, "dd/MM/yyyy");
+            DataSet ds = objreports.GetDirectLeadershipIncome();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.ToLoginId = r["ToLoginId"].ToString();
+                    obj.ToUserName = r["ToUserName"].ToString();
+                    obj.FromLoginId = r["FromLoginId"].ToString();
+                    obj.FromUserName = r["FromUserName"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.IncomeType = (r["IncomeType"].ToString());
+                    obj.Income = (r["Income"].ToString());
+                    obj.Date = (r["CurrentDate"].ToString());
+                    obj.Status = (r["PaidStatus"].ToString());
+                    lst.Add(obj);
+                }
+                objreports.lstDirectLeadershipIncome = lst;
+            }
+            return View(objreports);
+        }
+        #endregion
+
+        public ActionResult PayPayout()
+        {
+            return View();
+        }
     }
 }

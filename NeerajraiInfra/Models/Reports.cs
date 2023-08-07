@@ -10,6 +10,7 @@ namespace NeerajraiInfra.Models
 {
     public class Reports : Common
     {
+        
         public string ErrorMessage { get; set; }
         public string ReturnBenefitStartDate { get; set; }
         public string SponsorName { get; set; }
@@ -127,6 +128,8 @@ namespace NeerajraiInfra.Models
         public string IsKharijDakhilDone { get; set; }
         public string KharijDakhilDate { get; set; }
         public string KharijDakhilRemarks { get; set; }
+        public string IFSCCode { get; set; }
+        public string MemberAccNo { get; set; }
 
         public DataSet GetBookingDetailsList()
         {
@@ -432,6 +435,7 @@ namespace NeerajraiInfra.Models
         {
             SqlParameter[] para =
                          {
+                 new SqlParameter("@CustomerId",CustomerId),
                      new SqlParameter("@Pk_KharijId",Pk_KharijId),
                                  new SqlParameter("@FromDate",FromDate),
                                   new SqlParameter("@ToDate",ToDate)
@@ -455,10 +459,74 @@ namespace NeerajraiInfra.Models
         }
 
 
+        #region Income
+
+        public string ToUserName { get; set; }
+        public string ToLoginId { get; set; }
+        public string FromUserName { get; set; }
+        public string Income { get; set; }
+        public string IncomeType { get; set; }
+        public string FromLoginId { get; set; }
+        public string Date { get; set; }
+        public List<Reports> lstDirectIncome { get; set; }
+        public List<Reports> lstDifferentialIncome { get; set; }
+        public List<Reports> lstDirectLeadershipIncome { get; set; }
 
 
+        public DataSet GetDirectIncome()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@LoginId", LoginId),
+                 new SqlParameter("@FromDate", FromDate),
+                  new SqlParameter("@ToDate", ToDate)
+            };
+            DataSet ds = Connection.ExecuteQuery("GetDirectIncome", para);
+            return ds;
+        }
+        public DataSet GetDifferentialIncome()
+        {
+            SqlParameter[] para = {
+               new SqlParameter("@LoginId", LoginId),
+                 new SqlParameter("@FromDate", FromDate),
+                  new SqlParameter("@ToDate", ToDate)
+            };
+            DataSet ds = Connection.ExecuteQuery("GetDifferentialIncome", para);
+            return ds;
+        }
+        public DataSet GetDirectLeadershipIncome()
+        {
+            SqlParameter[] para = {
+              new SqlParameter("@LoginId", LoginId),
+                 new SqlParameter("@FromDate", FromDate),
+                  new SqlParameter("@ToDate", ToDate)
+            };
+            DataSet ds = Connection.ExecuteQuery("GetDirectLeadershipIncome", para);
+            return ds;
+        }
 
 
+        #endregion
+
+        #region PayPayout
+        public DataSet GetPayPayout()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
+                                    new SqlParameter("@IsDownline", IsDownline),
+                                    new SqlParameter("@Leg", Leg), };
+            DataSet ds = Connection.ExecuteQuery("GetBalancePayoutforPayment", para);
+            return ds;
+        }
+        public DataSet SavePayPayout()
+        {
+            SqlParameter[] para = { new SqlParameter("@Fk_UserId", Fk_UserId),
+                                    new SqlParameter("@TransactionNo", TransactionNo),
+                                    new SqlParameter("@TransactionDate", TransactionDate),
+                                    new SqlParameter("@Amount", Amount),
+                                    new SqlParameter("@AddedBy", AddedBy) };
+            DataSet ds = Connection.ExecuteQuery("PayPayout", para);
+            return ds;
+        }
+        #endregion
 
 
 

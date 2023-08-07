@@ -294,7 +294,7 @@
                                     <div class="col-md-3" id="divtransactiono" style="display: none">
                                         <div class="form-group">
                                             <span id="txnNo"></span> <span id="spntrannumber" style="color: red">*</span>
-                                            @Html.TextBoxFor(m => m.TransactionNumber, new { @class = "form-control", @Placeholder = "Mobile Number", @maxlength = "50" })
+                                            @Html.TextBoxFor(m => m.TransactionNumber, new { @class = "form-control", @Placeholder = "Mobile Number", @maxlength = "50", @onchange = "return ChangeUTR();" })
                                         </div>
                                     </div>
                                     <div class="col-md-3" id="divPaymentMode" style="display: none">
@@ -302,6 +302,15 @@
                                             <span id="txndt"></span><span id="spntradate" style="color: red">*</span>
                                             @Html.TextBoxFor(m => m.TransactionDate, new { @class = "form-control", @Placeholder = "Date", @Readonly = "readonly" })
                                         </div>
+                                    </div>
+                                    <div class="col-md-3" id="divAssociateId" style="display: none">
+                                        <span id="txnAssociateId"></span> <span style="color: red">*</span>
+                                        @Html.TextBoxFor(m => m.AssociateLoginID, new { @class = "form-control", @Placeholder = "Associate Id", @maxlength = "50", @onchange = "return getAssociateName();" })
+                                        @Html.HiddenFor(m => m.AssociatesLoginID)
+                                    </div>
+                                    <div class="col-md-3" id="divAssociateName" style="display: none">
+                                        <span id="txnAssociateName"></span> <span style="color: red">*</span>
+                                        @Html.TextBoxFor(m => m.AssociateNames, new { @class = "form-control", @Placeholder = "Associate Name", @maxlength = "50", @readonly = "true" })
                                     </div>
                                     <div class="col-md-3" id="divbankname" style="display: none">
                                         <div class="form-group">
@@ -315,6 +324,18 @@
                                             @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @maxlength = "100", @Placeholder = "Bank Branch" })
                                         </div>
                                     </div>
+                                    <div class="col-md-3" id="divutrname" style="display: none">
+                                        <div class="form-group">
+                                            UTR No. <span style="color: red">*</span>
+                                            @Html.TextBoxFor(m => m.UtrNumber, new { @class = "form-control blockTyping", @Placeholder = "Utr Number" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3" id="divutramount" style="display: none">
+                                        <div class="form-group">
+                                            UTR Amount<span style="color: red">*</span>
+                                            @Html.TextBoxFor(m => m.UtrAmount, new { @class = "form-control", @Placeholder = "Utr Amount", onkeypress = "return isNumberOrDecimal(event);" })
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="row ">
                                     <div class="col-md-6">
@@ -323,6 +344,29 @@
                                             @Html.TextAreaFor(m => m.Remark, new { @class = "form-control", @Placeholder = "Remark" })
                                         </div>
                                     </div>
+                                <div class="col-md-12" style="padding-right: 24px; padding-left: 24px; display: none" id="TblAddress">
+                                    <div class="row">
+                                        <div class="table-responsive">
+                                            <table id="test-table" class="table table-bordered table-md">
+                                                <thead style="text-align:center">
+                                                    <tr class="thead">
+                                                        <th class="CustomerId">Customer Id</th>
+                                                        <th class="CustomerName">Customer Name</th>
+                                                        <th class="SiteName">Site Name</th>
+                                                        <th class="SectorName">Phase Name</th>
+                                                        <th class="BlockName">Block Name</th>
+                                                        <th class="PlotNumber">PlotNumber</th>
+                                                        <th class="UtrDate">Payment Date</th>
+                                                        <th class="Amount">Paid Utr Amount</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="test-body" style="padding: 0px 0px;text-align:center"></tbody>
+                                                <tfoot id="test-footer"></tfoot>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <br />
@@ -372,6 +416,99 @@
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
 <script>
+    function ChangeUTR() {
+        var ActualNeftNumber = $('#TransactionNumber').val();
+        var PaymentMode = $('#PaymentMode').val();
+        if (PaymentMode == "2" || PaymentMode == "3" || PaymentMode == "4" || PaymentMode == "5" || PaymentMode == "6" || PaymentMode == "7" || PaymentMode == "8" || PaymentMode == "9" || PaymentMode == "10" || PaymentMode == "11") {
+            $("#UtrNumber").val(ActualNeftNumber);
+
+            $.ajax({
+                url: '/Plot/CheckUTR', type: 'get', dataType: 'json',
+                data: { 'UtrNumber': ActualNeftNumber },
+                success: function (data) {
+                    //console.log(data)
+                    $("#divload").css({ 'display': 'none' });
+                    if (data.Result == "yes") {
+                        // debugger
+                        var UTRDetails = data.lstUtr;
+                        $("#test-table tbody tr").remove();
+                        $("#test-table #test-footer tr").remove();
+                        if (UTRDetails.length > 0) {
+                            var row = $("#test-table tr:first").clone(true);
+                            var html = '';
+                            $.each(UTRDetails, function (i, v) {
+                                $(row).find('.CustomerId').html(v.CustomerID);
+                                $(row).find('.CustomerName').html(v.CustomerName);
+                                $(row).find('.SiteName').html(v.SiteName);
+                                $(row).find('.SectorName').html(v.SectorName);
+                                $(row).find('.BlockName').html(v.BlockName);
+                                $(row).find('.PlotNumber').html(v.PlotNumber);
+                                $(row).find('.Amount').html(v.UtrPaidAmount);
+                                $(row).find('.UtrDate').html(v.UtrDate);
+                                $("#test-table").append(row);
+                                row = $("#test-table tr:first").clone(true)
+                                //console.log(i);
+                            });
+
+                            $('#test-table #test-footer').append('<tr><th colspan="7" style="text-align:right">Remaining UTR Amount: </th><th style="text-align:center">' + data.RemainingUtrAmount + '</th></tr>');
+
+                            $("#UtrAmount").val(data.UtrAmount);
+                            $("#UtrAmount").addClass('errortext');
+                            $("#test-table").show();
+                            $("#TblAddress").show();
+                            //console.log($("#PayAmount").val())
+                            //console.log(data.RemainingUtrAmount)
+                            if ($("#PaidAmount").val() == "") {
+                                alert('Please first of all fill Amount .....')
+                                $("#PaidAmount").focus();
+                                $("#TransactionNumber").val('');
+                                $("#UtrNumber").val('');
+                                $("#UtrAmount").val('');
+                                $("#UtrAmount").removeClass('errortext');
+                                $("#test-table thead tbody tr").remove();
+                                $("#test-table #test-footer tr").remove();
+                                $("#test-table").hide();
+                                return false();
+                            }
+                            if (Number($("#PaidAmount").val()) > Number(data.RemainingUtrAmount)) {
+                                alert('PayAmount is greater than Remaining UTR Amount.....')
+                                $("#PaidAmount").val('');
+                                $("#PaidAmount").focus();
+                                $("#TransactionNumber").val('');
+                                $("#UtrNumber").val('');
+                                $("#UtrAmount").val('');
+                                $("#UtrAmount").removeClass('errortext');
+                            }
+                            else {
+
+                            }
+                        }
+                        else {
+                            $("#test-table thead tbody tr").remove();
+                            $("#test-table #test-footer tr").remove();
+                            $("#test-table").hide();
+                        }
+
+                    }
+                    else {
+                        $("#UtrAmount").val('');
+                        $("#UtrAmount").removeClass('errortext');
+                        //$("#PayAmount").val('');
+                        $("#test-table").hide();
+                        $("#TblAddress").hide();
+                        $("#test-table thead tbody tr").remove();
+                    }
+                }
+
+            });
+        }
+        else {
+            $("#UtrAmount").val('');
+            $("#UtrAmount").removeClass('errortext');
+            $('#UtrNumber').val('');
+        }
+
+    }
     $(document).ready(function () {
         $("#divload").css({ 'display': 'none' });
         var UserType = $('#UserType').val();
@@ -535,6 +672,33 @@
             return false;
 
         return true;
+    }
+    function getAssociateName() {
+        $("#divload").css({ 'display': '' });
+        var AssociateLoginID = $('#AssociateLoginID').val();
+        $.ajax({
+            url: '/TraditionalAssociate/GetSponsorName', type: 'post', dataType: 'json',
+            data: { 'SponsorID': AssociateLoginID },
+            success: function (data) {
+                $("#divload").css({ 'display': 'none' });
+                if (data.Result == "yes") {
+                    $("#AssociateNames").val(data.SponsorName);
+                    $("#AssociatesLoginID").val(data.UserID);
+                    $("#AssociateNames").removeClass('errortext');
+                    $("#AssociateLoginID").removeClass('errortext');
+
+                }
+                else if (data.Result == "no") {
+                    $("#AssociateNames").val('');
+                    $("#AssociateNames").addClass('errortext');
+                    $("#AssociateLoginID").addClass('errortext');
+                    $('#AssociateLoginID').focus();
+                    $('#AssociateLoginID').val('');
+                    alert("Invalid Associate Id");
+                }
+            }
+
+        });
     }
 
     function onlyAlphabets(e, t) {
@@ -800,6 +964,10 @@
             $("#spntradate").show();
             $("#spnbankname").show();
             $("#spnbankbranch").show();
+            $("#divutrname").show();
+            $("#divutramount").show();
+            $("#divAssociateId").hide();
+            $("#divAssociateName").hide();
             $("#TransactionNumber").attr("placeholder", "Cheque No.");
             $("#TransactionDate").attr("placeholder", "Cheque Date");
         }
@@ -814,6 +982,10 @@
             $("#spntradate").hide();
             $("#spnbankname").hide();
             $("#spnbankbranch").hide();
+            $("#divutrname").show();
+            $("#divutramount").show();
+            $("#divAssociateId").hide();
+            $("#divAssociateName").hide();
             $("#TransactionNumber").attr("placeholder", "NEFT No.");
             $("#TransactionDate").attr("placeholder", "NEFT Date");
         }
@@ -828,6 +1000,10 @@
             $("#spnbankbranch").show();
             $("#divbankname").show();
             $("#divbankbranch").show();
+            $("#divutrname").show();
+            $("#divutramount").show();
+            $("#divAssociateId").hide();
+            $("#divAssociateName").hide();
             $("#TransactionNumber").attr("placeholder", "DD No.");
             $("#TransactionDate").attr("placeholder", "DD Date");
         }
@@ -842,6 +1018,10 @@
             $("#spntradate").hide();
             $("#spnbankname").hide();
             $("#spnbankbranch").hide();
+            $("#divutrname").show();
+            $("#divutramount").show();
+            $("#divAssociateId").hide();
+            $("#divAssociateName").hide();
             $("#TransactionNumber").attr("placeholder", "RTGS No.");
             $("#TransactionDate").attr("placeholder", "RTGS Date");
         }
@@ -856,6 +1036,10 @@
             $("#spnbankname").hide();
             $("#spnbankbranch").hide();
             $("#divbankbranch").show();
+            $("#divutrname").show();
+            $("#divutramount").show();
+            $("#divAssociateId").hide();
+            $("#divAssociateName").hide();
             $("#TransactionNumber").attr("placeholder", "IMPS No.");
             $("#TransactionDate").attr("placeholder", "IMPS Date");
         }
@@ -869,6 +1053,10 @@
 
             $("#divbankbranch").hide();
             $("#divPaymentMode").hide();
+            $("#divutrname").show();
+            $("#divutramount").show();
+            $("#divAssociateId").hide();
+            $("#divAssociateName").hide();
             $("#TransactionNumber").attr("placeholder", "Mobile No. / UPI ID");
         }
         else if ($('#PaymentMode').val() == '8') {
@@ -880,6 +1068,10 @@
             $("#divbankname").hide();
             $("#divbankbranch").hide();
             $("#divPaymentMode").hide();
+            $("#divutrname").show();
+            $("#divutramount").show();
+            $("#divAssociateId").hide();
+            $("#divAssociateName").hide();
             $("#TransactionNumber").attr("placeholder", "Mobile No. / UPI ID");
         }
         else if ($('#PaymentMode').val() == '9') {
@@ -891,6 +1083,10 @@
             $("#spntrannumber").show();
             $("#divbankbranch").hide();
             $("#divPaymentMode").hide();
+            $("#divutrname").show();
+            $("#divutramount").show();
+            $("#divAssociateId").hide();
+            $("#divAssociateName").hide();
             $("#TransactionNumber").attr("placeholder", "Mobile No. / UPI ID");
         }
         else if ($('#PaymentMode').val() == '10') {
@@ -901,6 +1097,10 @@
             $("#divbankname").hide();
             $("#divbankbranch").hide();
             $("#divPaymentMode").hide();
+            $("#divutrname").show();
+            $("#divutramount").show();
+            $("#divAssociateId").hide();
+            $("#divAssociateName").hide();
             $("#TransactionNumber").attr("placeholder", "Mobile No. / UPI ID");
         }
         else if ($('#PaymentMode').val() == '11') {
@@ -913,14 +1113,36 @@
             $("#divtransactiono").show();
             $("#divbankname").hide();
             $("#divbankbranch").hide();
+            $("#divutrname").show();
+            $("#divutramount").show();
+            $("#divAssociateId").hide();
+            $("#divAssociateName").hide();
             $("#TransactionNumber").attr("placeholder", "Reciept No.");
             $("#TransactionDate").attr("placeholder", "Transaction Date");
+        }
+        else if ($('#PaymentMode').val() == '13') {
+
+            $('#txnAssociateId').html('Associate Id');
+            $('#txnAssociateName').text('Associate Name');
+            $("#divPaymentMode").show();
+            $("#divtransactiono").hide();
+            $("#divbankname").hide();
+            $("#divbankbranch").hide();
+            $("#divPaymentMode").hide();
+            $("#divAssociateId").show();
+            $("#divAssociateName").show();
+            $("#divutrname").hide();
+            $("#divutramount").hide();
+            $("#AssociateLoginID").attr("placeholder", "Associate Id");
+            $("#AssociateName").attr("placeholder", "Associate Name");
         }
         else {
             $("#divPaymentMode").hide();
             $("#divtransactiono").hide();
             $("#divbankname").hide();
             $("#divbankbranch").hide();
+            $("#divutrname").hide();
+            $("#divutramount").hide();
         }
 
     }
@@ -1035,6 +1257,18 @@
                 $("#divload").css({ 'display': 'none' });
                 return false;
             }
+            if ($('#UtrNumber').val() == '') {
+                $("#UtrNumber").addClass('errortext');
+                $('#UtrNumber').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+            if ($('#UtrAmount').val() == '') {
+                $("#UtrAmount").addClass('errortext');
+                $('#UtrAmount').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
         }
             //else if ($('#PaymentMode').val() == '3') {
             //    if ($('#TransactionNumber').val() == '') {
@@ -1084,6 +1318,18 @@
             if ($('#BankBranch').val() == '') {
                 $("#BankBranch").addClass('errortext');
                 $('#BankBranch').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+            if ($('#UtrNumber').val() == '') {
+                $("#UtrNumber").addClass('errortext');
+                $('#UtrNumber').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+            if ($('#UtrAmount').val() == '') {
+                $("#UtrAmount").addClass('errortext');
+                $('#UtrAmount').focus();
                 $("#divload").css({ 'display': 'none' });
                 return false;
             }
@@ -1148,6 +1394,18 @@
                 $("#divload").css({ 'display': 'none' });
                 return false;
             }
+            if ($('#UtrNumber').val() == '') {
+                $("#UtrNumber").addClass('errortext');
+                $('#UtrNumber').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+            if ($('#UtrAmount').val() == '') {
+                $("#UtrAmount").addClass('errortext');
+                $('#UtrAmount').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
 
         }
         else if ($('#PaymentMode').val() == '8') {
@@ -1158,12 +1416,36 @@
                 $("#divload").css({ 'display': 'none' });
                 return false;
             }
+            if ($('#UtrNumber').val() == '') {
+                $("#UtrNumber").addClass('errortext');
+                $('#UtrNumber').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+            if ($('#UtrAmount').val() == '') {
+                $("#UtrAmount").addClass('errortext');
+                $('#UtrAmount').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
         }
         else if ($('#PaymentMode').val() == '9') {
 
             if ($('#TransactionNumber').val() == '') {
                 $("#TransactionNumber").addClass('errortext');
                 $('#TransactionNumber').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+            if ($('#UtrNumber').val() == '') {
+                $("#UtrNumber").addClass('errortext');
+                $('#UtrNumber').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+            if ($('#UtrAmount').val() == '') {
+                $("#UtrAmount").addClass('errortext');
+                $('#UtrAmount').focus();
                 $("#divload").css({ 'display': 'none' });
                 return false;
             }
@@ -1209,6 +1491,18 @@
                 $("#divload").css({ 'display': 'none' });
                 return false;
             }
+            if ($('#UtrNumber').val() == '') {
+                $("#UtrNumber").addClass('errortext');
+                $('#UtrNumber').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+            if ($('#UtrAmount').val() == '') {
+                $("#UtrAmount").addClass('errortext');
+                $('#UtrAmount').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
             //if ($('#BankName').val() == '') {
             //    $("#BankName").addClass('errortext');
             //    $('#BankName').focus();
@@ -1221,6 +1515,15 @@
             //    $("#divload").css({ 'display': 'none' });
             //    return false;
             //}
+        }
+        else if ($('#PaymentMode').val() == '13') {
+
+            if ($('#AssociateLoginID').val() == '') {
+                $("#AssociateLoginID").addClass('errortext');
+                $('#AssociateLoginID').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
         }
         return true;
     }

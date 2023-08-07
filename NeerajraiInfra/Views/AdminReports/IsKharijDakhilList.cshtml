@@ -32,24 +32,27 @@
                     </p>
                 </div>
                 <div class="card-body">
-                    <div class="row">
-                       
-                        <div class="col-md-3">
+                    <div class="row ">
+                        <div class="input-field col m3 s12">
                             <div class="form-group">
-                                From Date
-                                @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "From Date", @readonly = "readonly" })
+                                Customer ID
+                                @Html.TextBoxFor(m => m.CustomerId, new { @class = "form-control", @Placeholder = "Customer ID" })
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="input-field col m3 s12">
+                            <div class="form-group">
+                                FromDate
+                                @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "From Date", @autocomplete = "off" })
+                            </div>
+                        </div>
+                        <div class="input-field col m3 s12">
                             <div class="form-group">
                                 To Date
                                 @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @Placeholder = "To Date", @readonly = "readonly" })
                             </div>
                         </div>
-                        
-                      
-                        
-                        <div class="col-md-3">
+
+                        <div class="input-field col m3 s12 mt-4">
                             <div class="form-group">
                                 <br />
                                 <input class="btn btn-success" type="submit" value="Search" id="btnSearch" onclick="return GetMenuDetails();" name="Search" />
@@ -72,10 +75,11 @@
                             <thead>
                                 <tr>
                                     <th>Sr No.</th>
-                                    @*<th>IsKharijDakhilDone</th>*@
+                                    <th>Customer ID</th>
+                                    <th>Customer Name</th>
                                     <th>Kharij Dakhil Date</th>
                                     <th>Kharij Dakhil Remarks</th>
-                                    <th> Kharij Dakhil Status</th>
+                                    <th>Kharij Dakhil Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -91,7 +95,8 @@
                                         {
                                             <tr class="text-left">
                                                 <td>@i</td>
-                                                @*<td>@Item.IsKharijDakhilDone</td>*@
+                                                <td>@Item.CustomerId</td>
+                                                <td>@Item.Customername</td>
                                                 <td>@Item.KharijDakhilDate</td>
                                                 <td>@Item.KharijDakhilRemarks</td>
                                                 <td>

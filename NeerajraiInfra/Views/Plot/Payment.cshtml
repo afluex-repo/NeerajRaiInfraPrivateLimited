@@ -27,7 +27,7 @@
                 </a>
             </li>
             <li class="breadcrumb-item">Payment Approval</li>
-            <li class="breadcrumb-item">Aprprove Payment Detail</li>
+            <li class="breadcrumb-item">Approve Payment Detail</li>
         </ul>
     </section>
 
@@ -36,7 +36,7 @@
         <div class="col-12 col-md-12 col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h4>Aprprove Payment Detail</h4>
+                    <h4>Approve Payment Detail</h4>
 
                     <p style="color: red" id="Plot">
                         @TempData["Plot"]
@@ -78,12 +78,16 @@
                                     <th>S No.</th>
                                     <th>Customer ID</th>
                                     <th>Associate ID</th>
-                                    <th>Plot Details</th>
+                                    <th>Site</th>
+                                    <th>Phase</th>
+                                    <th>Block </th>
+                                    <th>Plot Number</th>
                                     <th>Mode</th>
                                     <th>Payment Date</th>
                                     <th>Transaction No.</th>
                                     <th>Bank Details</th>
                                     <th>Amount</th>
+                                    <th>Allotment Remarks</th>
                                     <th>Status</th>
                                     <th>Description</th>
                                     <th>Payment Clear Date</th>
@@ -104,12 +108,16 @@
                                                 <td>@i</td>
                                                 <td>@Item.CustomerID (@Item.CustomerName)</td>
                                                 <td>@Item.AssociateID (@Item.AssociateName)</td>
-                                                <td>@Item.PlotInfo</td>
+                                                <td>@Item.SiteName </td>
+                                                <td>@Item.SectorName </td>
+                                                <td>@Item.BlockName </td>
+                                                <td>@Item.PlotNumber</td>
                                                 <td>@Item.PaymentMode</td>
                                                 <td>@Item.PaymentDate</td>
                                                 <td>@Item.TransactionNumber</td>
                                                 <td>@Item.Remark</td>
                                                 <td>@Item.PaidAmount</td>
+                                                <td>@Item.AllotmentRemark</td>
                                                 <td>@Item.PaymentStatus</td>
                                                 <td>
                                                     <textarea type="text" id="txtDesc @i" name="txtDesc @i" onchange="getdata(this)"></textarea>

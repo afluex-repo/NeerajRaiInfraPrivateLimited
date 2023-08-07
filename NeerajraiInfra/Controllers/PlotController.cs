@@ -574,9 +574,9 @@ namespace NeerajraiInfra.Controllers
 
             return RedirectToAction(FormName, Controller);
         }
-        public ActionResult PrintPlotBooking(string PrintId)
+        public ActionResult PrintPlotBooking(Plot newdata,string PrintId)
         {
-            Plot newdata = new Plot();
+            //Plot newdata = new Plot();
             newdata.PK_BookingId = Crypto.Decrypt(PrintId);
             ViewBag.Name = Session["Name"].ToString();
             DataSet ds = newdata.List();
@@ -605,26 +605,29 @@ namespace NeerajraiInfra.Controllers
 
                     ViewBag.PlotNumber = ds.Tables[0].Rows[0]["PlotInfo"].ToString();
                     ViewBag.PaidAmount = ds.Tables[0].Rows[0]["PaidAmount"].ToString();
+                    //ViewBag.PaidAmount = ds.Tables[0].Rows[0]["latestpayment"].ToString();
+                    ViewBag.RemainingAmounts = ds.Tables[0].Rows[0]["RemainingAmounts"].ToString();
                     ViewBag.PlotArea = ds.Tables[0].Rows[0]["PlotArea"].ToString();
                     ViewBag.PaymentMode = ds.Tables[0].Rows[0]["PaymentMode"].ToString();
                     ViewBag.ReasonOfPayment = ds.Tables[0].Rows[0]["ReasonOfPayment"].ToString();
                     ViewBag.PaymentDate = ds.Tables[0].Rows[0]["PaymentDate"].ToString();
-                    ViewBag.BookingDate = ds.Tables[0].Rows[0]["BookingDate"].ToString();
                     ViewBag.ReceiptNo = ds.Tables[0].Rows[0]["ReceiptNo"].ToString();
                     ViewBag.CorporateOffice = ds.Tables[0].Rows[0]["CorporateOffice"].ToString();
                     ViewBag.AssociateName = ds.Tables[0].Rows[0]["AssociateName"].ToString();
-
+                    ViewBag.BookingDate = ds.Tables[0].Rows[0]["BookingDate"].ToString();
                     ViewBag.customerMobile = ds.Tables[0].Rows[0]["customerMobile"].ToString();
                     ViewBag.PLC = string.IsNullOrEmpty(ds.Tables[0].Rows[0]["PLC"].ToString()) ? "N/A" : ds.Tables[0].Rows[0]["PLC"].ToString();
                     ViewBag.AmountInWords = ds.Tables[0].Rows[0]["PaidAmountInWords"].ToString();
-                    ViewBag.NetPlotAmount = ds.Tables[0].Rows[0]["NetPlotAmount"].ToString();
+                    //ViewBag.NetPlotAmount = ds.Tables[0].Rows[0]["NetPlotAmount"].ToString();
                     ViewBag.NetPlotAmountInWords = ds.Tables[0].Rows[0]["NetPlotAmountInWords"].ToString();
 
                     ViewBag.TransactionNo = ds.Tables[0].Rows[0]["TransactionNo"].ToString();
                     ViewBag.TransactionDate = ds.Tables[0].Rows[0]["TransactionDate"].ToString();
                     ViewBag.BankName = ds.Tables[0].Rows[0]["BankName"].ToString();
                     ViewBag.BankBranch = ds.Tables[0].Rows[0]["BankBranch"].ToString();
-
+                    ViewBag.RemainingAmount = ds.Tables[0].Rows[0]["Balance"].ToString();
+                    ViewBag.PlotRate = ds.Tables[0].Rows[0]["PlotRate"].ToString();
+                    ViewBag.SiteName = ds.Tables[0].Rows[0]["SiteName"].ToString();
                     ViewBag.InstallmentNo = ds.Tables[0].Rows[0]["InstallmentNo"].ToString();
                     //ViewBag.AdjustmentloginId = ds.Tables[0].Rows[0]["AdjustmentloginId"].ToString();
 
@@ -722,7 +725,7 @@ namespace NeerajraiInfra.Controllers
                             obj.AssociateLoginID = r["AssociateLoginID"].ToString();
                             obj.Discount = r["Discount"].ToString();
                             obj.AssociateName = r["AssociateName"].ToString();
-                            obj.PlotNumber = r["PlotInfo"].ToString();
+                            //obj.PlotNumber = r["PlotInfo"].ToString();
                             obj.BookingDate = r["BookingDate"].ToString();
                             obj.BookingAmount = r["BookingAmt"].ToString();
                             obj.PaymentPlanID = r["PlanName"].ToString();
@@ -737,6 +740,10 @@ namespace NeerajraiInfra.Controllers
                             obj.RemainingAmount = r["RemainingAmount"].ToString();
                             obj.TotalPaidAmount = r["TotalPaid"].ToString();
                             obj.EncryptKey = Crypto.Encrypt(r["PK_BookingId"].ToString());
+                            obj.SiteName = r["SiteName"].ToString();
+                            obj.SectorName = r["SectorName"].ToString();
+                            obj.BlockName = r["BlockName"].ToString();
+                            obj.PlotNumber = r["PlotNumber"].ToString();
                             lst.Add(obj);
                         }
                        
@@ -785,7 +792,7 @@ namespace NeerajraiInfra.Controllers
                         obj.AssociateLoginID = r["AssociateLoginID"].ToString();
                         obj.Discount = r["Discount"].ToString();
                         obj.AssociateName = r["AssociateName"].ToString();
-                        obj.PlotNumber = r["PlotInfo"].ToString();
+                        //obj.PlotNumber = r["PlotInfo"].ToString();
                         obj.BookingDate = r["BookingDate"].ToString();
                         obj.BookingAmount = r["BookingAmt"].ToString();
                         obj.PaymentPlanID = r["PlanName"].ToString();
@@ -800,6 +807,10 @@ namespace NeerajraiInfra.Controllers
                         obj.RemainingAmount = r["RemainingAmount"].ToString();
                         obj.TotalPaidAmount = r["TotalPaid"].ToString();
                         obj.EncryptKey = Crypto.Encrypt(r["PK_BookingId"].ToString());
+                        obj.SiteName = r["SiteName"].ToString();
+                        obj.SectorName = r["SectorName"].ToString();
+                        obj.BlockName = r["BlockName"].ToString();
+                        obj.PlotNumber = r["PlotNumber"].ToString();
                         lst.Add(obj);
                     }
                     model.lstPlot = lst;
@@ -2128,7 +2139,7 @@ namespace NeerajraiInfra.Controllers
                     obj.BranchID = r["BranchName"].ToString();
                     obj.CustomerName = r["CustomerInfo"].ToString();
                     obj.AssociateName = r["AssociateInfo"].ToString();
-                    obj.PlotNumber = r["Plot"].ToString();
+                    //obj.PlotNumber = r["Plot"].ToString();
                     obj.BookingDate = r["BookingDate"].ToString();
                     obj.TotalPaidAmount = r["PaidAmount"].ToString();
                     obj.BookingAmount = r["BookingAmt"].ToString();
@@ -2137,6 +2148,10 @@ namespace NeerajraiInfra.Controllers
                     obj.CancelRemark = r["CancelRemark"].ToString();
                     obj.CancelDate = r["CancelledDate"].ToString();
                     obj.BookingNumber = r["BookingNo"].ToString();
+                    obj.SiteName = r["SiteName"].ToString();
+                    obj.SectorName = r["SectorName"].ToString();
+                    obj.BlockName = r["BlockName"].ToString();
+                    obj.PlotNumber = r["PlotNumber"].ToString();
                     lst.Add(obj);
                 }
                 model.lstPlot = lst;
@@ -2345,11 +2360,15 @@ namespace NeerajraiInfra.Controllers
                     Plot obj = new Plot();
                     obj.PK_PlotHoldID = r["PK_PlotHoldID"].ToString();
                     obj.EncryptKey = Crypto.Encrypt(r["PK_PlotHoldID"].ToString());
-                    obj.PlotNumber = r["Plot"].ToString();
+                    //obj.PlotNumber = r["Plot"].ToString();
                     obj.HoldFrom = r["HoldFrom"].ToString();
                     obj.HoldTo = r["HoldTo"].ToString();
                     obj.Name = r["Name"].ToString();
                     obj.Mobile = r["Mobile"].ToString();
+                    obj.SiteName = r["SiteName"].ToString();
+                    obj.SectorName = r["SectorName"].ToString();
+                    obj.BlockName = r["BlockName"].ToString();
+                    obj.PlotNumber = r["PlotNumber"].ToString();
 
                     lst.Add(obj);
                 }
@@ -2786,13 +2805,18 @@ namespace NeerajraiInfra.Controllers
                     obj.AssociateID = r["AssociateLoginID"].ToString();
                     obj.AssociateName = r["AssociateName"].ToString();
                     obj.PaymentMode = r["PaymentMode"].ToString();
-                    obj.PlotInfo = r["Plotdetails"].ToString();
+                    //obj.PlotInfo = r["Plotdetails"].ToString();
                     obj.TransactionDate = r["TransactionDate"].ToString();
                     obj.TransactionNumber = r["TransactionNo"].ToString();
                     obj.Remark = r["Details"].ToString();
                     obj.PaidAmount = r["PaidAmount"].ToString();
                     obj.PaymentStatus = r["PaymentStatus"].ToString();
                     obj.PaymentDate = r["PaymentDate"].ToString();
+                    obj.AllotmentRemark = r["Remarks"].ToString();
+                    obj.SiteName = r["SiteName"].ToString();
+                    obj.SectorName = r["SectorName"].ToString();
+                    obj.BlockName = r["BlockName"].ToString();
+                    obj.PlotNumber = r["PlotNumber"].ToString();
                     lst.Add(obj);
                 }
                 model.lstPlot = lst;
@@ -2981,6 +3005,7 @@ namespace NeerajraiInfra.Controllers
                     obj.PaymentDate = r["PaymentDate"].ToString();
                     obj.AssociateID = r["AssociateLoginID"].ToString();
                     obj.AssociateName = r["AssociateName"].ToString();
+                    obj.AllotmentRemark = r["AllotmentRemarks"].ToString();
                     lst.Add(obj);
                 }
                 model.lstPlot = lst;
@@ -3402,6 +3427,8 @@ namespace NeerajraiInfra.Controllers
                     model.BankBranch = dsBookingDetails.Tables[0].Rows[0]["BankBranch"].ToString();
                     model.PlotSize = dsBookingDetails.Tables[0].Rows[0]["PlotSize"].ToString();
                     model.NetPlotAmount = dsBookingDetails.Tables[0].Rows[0]["NetPlotAmount"].ToString();
+                    model.UtrAmount = dsBookingDetails.Tables[0].Rows[0]["UTR_Amount"].ToString();
+                    model.UtrNumber = dsBookingDetails.Tables[0].Rows[0]["UTR_Number"].ToString();
                     // model.MLMLoginId = dsBookingDetails.Tables[0].Rows[0]["MLMLoginId"].ToString();
                 }
                 #region BlockList
@@ -3843,5 +3870,49 @@ namespace NeerajraiInfra.Controllers
             return RedirectToAction(FormName, Controller);
         }
         #endregion
+        public ActionResult CheckUTR(string UtrNumber)
+        {
+            Plot model = new Plot();
+            model.UtrNumber = UtrNumber;
+            List<Plot> lstUtr = new List<Plot>();
+            DataSet ds = model.CheckUtrNumber();
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                {
+                    if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (DataRow r in ds.Tables[0].Rows)
+                        {
+                            Plot obj = new Plot();
+                            obj.CustomerID = r["CustomerId"].ToString();
+                            obj.CustomerName = r["CustomerName"].ToString();
+                            obj.SiteName = r["SiteName"].ToString();
+                            obj.SectorName = r["SectorName"].ToString();
+                            obj.BlockName = r["BlockName"].ToString();
+                            obj.PlotNumber = r["PlotNumber"].ToString();
+                            obj.UtrPaidAmount = r["UtrPaidAmount"].ToString();
+                            obj.UtrDate = r["UTRDate"].ToString();
+                            lstUtr.Add(obj);
+                        }
+                        model.lstUtr = lstUtr;
+                    }
+                    model.UtrAmount = ds.Tables[1].Rows[0]["UTR_Amount"].ToString();
+                    model.RemainingUtrAmount = ds.Tables[1].Rows[0]["RemainingUtrAmount"].ToString();
+                    model.Result = "yes";
+                }
+                else
+                {
+                    model.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+            }
+            else
+            {
+                model.Result = "Invalid";
+
+            }
+
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
     }
 }

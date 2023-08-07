@@ -68,7 +68,10 @@
                                         <th>Branch</th>
                                         <th>Customer Name</th>
                                         <th>Associate Name</th>
-                                        <th>Plot No.</th>
+                                        <th>Site</th>
+                                        <th>Phase</th>
+                                        <th>Block </th>
+                                        <th>Plot Number</th>
                                         <th>Booking Number</th>
                                         <th>Booking Date</th>
                                         <th>Booking Amount</th>
@@ -82,18 +85,21 @@
                                 </thead>
                                 <tbody>
                                     @if (Model != null)
-                {
-                    if (Model.lstPlot != null)
-                    {
-                        int i = 1;
-                        foreach (var Item in Model.lstPlot)
-                        {
+                                     {
+                                         if (Model.lstPlot != null)
+                                         {
+                                             int i = 1;
+                                             foreach (var Item in Model.lstPlot)
+                                             {
                                                 <tr class="text-left">
                                                     <td hidden>@Item.PK_BookingId</td>
                                                     <td>@i</td>
                                                     <td>@Item.BranchID</td>
                                                     <td>@Item.CustomerName</td>
                                                     <td>@Item.AssociateName</td>
+                                                    <td>@Item.SiteName </td>
+                                                    <td>@Item.SectorName </td>
+                                                    <td>@Item.BlockName </td>
                                                     <td>@Item.PlotNumber</td>
                                                     <td>@Item.BookingNumber</td>
                                                     <td>@Item.BookingDate</td>
