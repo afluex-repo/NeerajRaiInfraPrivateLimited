@@ -39,6 +39,7 @@ namespace NeerajraiInfra.Models
         public string PlotID { get; set; }
         public string PlotNumber { get; set; }
         public string PlotStatus { get; set; }
+      
         public string PlotRate { get; set; }
         public string PlotAmount { get; set; }
         public string PlotPrefix { get; set; }
@@ -318,7 +319,7 @@ namespace NeerajraiInfra.Models
                                   new SqlParameter("@PlotID", PlotID),
                                   new SqlParameter("@PlotNumber", PlotNumber),
                                   };
-            DataSet ds = Connection.ExecuteQuery("PlotList", para);
+            DataSet ds = Connection.ExecuteQuery("PlotListForUpdatePlotStatus", para);
             return ds;
         }
 
@@ -966,6 +967,21 @@ namespace NeerajraiInfra.Models
             DataSet ds = Connection.ExecuteQuery("DeletePlanMaster", para);
             return ds;
         }
+
+
+        public DataSet UpdatePlotStatus()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@PK_PlotID",PlotID),
+                new SqlParameter("@PlotStatus",PlotStatus),
+                new SqlParameter("@UpdatedBy",AddedBy)
+            };
+            DataSet ds = Connection.ExecuteQuery("UpdatePlotStatus", para);
+            return ds;
+        }
+
+        
 
     }
 }

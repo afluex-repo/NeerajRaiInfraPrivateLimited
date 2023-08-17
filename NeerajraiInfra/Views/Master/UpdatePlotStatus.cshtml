@@ -41,7 +41,7 @@
                 <h4>Update Plot Status</h4>
 
                 <p style="color: red">
-                    @TempData["Plot"]
+                    @TempData["PlotStatus"]
                 </p>
             </div>
 
@@ -52,7 +52,7 @@
 
                         <div class="card-header table-card-header">
 
-                            <a class="btn btn-primary btn-sm" style="margin-left:89%;" href="/Master/PlotMaster">Add New</a>
+                            @*<a class="btn btn-primary btn-sm" style="margin-left:89%;" href="/Master/PlotMaster">Add New</a>*@
                         </div>
                         <div class="card-block" style="margin-left:5px;margin-right:5px">
                             <div class="form-group row">
@@ -88,19 +88,12 @@
                                     <thead>
                                         <tr>
                                             <th>S No.</th>
-                                            <th>SiteName</th>
-                                            <th>PhaseName</th>
-                                            <th>BlockName</th>
-                                            <th>PlotNumber</th>
-                                            <th>PlotArea</th>
-                                            <th>PlotRate</th>
-                                            <th>PlotAmount</th>
-                                            <th>PLCCharge</th>
-                                            @*<th>BookingPercent</th>*@
-                                            @*<th>AllottmentPercent</th>*@
+                                            <th>Site Name</th>
+                                            <th>Phase Name</th>
+                                            <th>Block Name</th>
+                                            <th>Plot Number</th>
                                             <th>Status</th>
-                                            <th>Edit</th>
-                                            <th>Delete</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -117,28 +110,17 @@
                                                         <td>@Item.SectorName</td>
                                                         <td>@Item.BlockName</td>
                                                         <td>@Item.PlotNumber</td>
-                                                        <td>@Item.PlotArea</td>
-                                                        <td>@Item.PlotRate</td>
-                                                        <td>@Item.PlotAmount</td>
-                                                        <td>@Item.PLCCharge</td>
-                                                        @*<th>@Item.BookingPercent</th>
-                                                            <th>@Item.AllottmentPercent</th>*@
-                                                        <td><a class="@Item.ColorCSS">@Item.PlotStatus</a></td>
+                                                        <td id="PlotStatus_@Item.PlotID">@Item.PlotStatus</td>
                                                         @if (Item.PlotStatus == "Available")
                                                         {
                                                             <td>
-
-                                                                <a href="/Master/UpdatePlot?PlotID=@Item.EncryptKey" class="btn btn-info btn-sm" style="margin-top:5px">Edit</a>
-                                                            </td>
-                                                            <td>
-                                                                <a href="/Master/DeletePlot?id=@Item.PlotID" class="btn btn-danger btn-sm" style="margin-top:5px;margin-bottom:5px" onclick="return confirm('Are you sure you wish to delete this Plot?');">Delete</a>
-
+                                                                <a onclick="UpdatePlotStatusDetails(@Item.PlotID)" href="javascript:void(0)" class="btn btn-success btn-sm" style="margin-top:5px">Click For Booked</a>
                                                             </td>
                                                         }
                                                         else
                                                         {
-                                                            <td></td>
-                                                            <td></td>
+                                                            <td><span style="color:red;">Booked</span></td>
+                                                         
                                                         }
                                                     </tr>
 
@@ -153,6 +135,8 @@
                         </div>
                         <input type="hidden" id="UserType" value="@Session["UserType"]" />
                         <input type="hidden" id="UserTypeName" value="@Session["UserTypeName"]" />
+                        <input type="hidden" id="PlotId" />
+
                     </div>
                 </div>
             </div>
@@ -269,6 +253,63 @@
             }
 
         });
+    }
+
+
+    //function UpdatePlotStatusDetails(Id) {
+    //    debugger;
+    //    var PlotId = $('#PlotId').val(Id);
+    //    var PlotStatus_ = $("#PlotStatus_" + Id).text();
+    //        $.ajax({
+    //            url:'/Master/UpdatePlotStatusDetails',
+    //            type: 'Post',
+    //            dataType: 'json',
+    //            data: {PlotId: PlotId, PlotStatus: PlotStatus_ },
+    //            success: function (data) {
+    //                if (data.Result == "yes") {
+    //                    //alert('Record updated successfully !!');
+    //                    window.location.reload();
+    //                }
+    //                else {
+    //                    //alert(data.Result);
+    //                }
+    //            }
+    //        });
+    //}
+
+
+
+    function UpdatePlotStatusDetails(Id) {
+        debugger;
+        //var r = confirm('Are you sure you want to book this plot details');
+        //if(r==true)
+        //{
+            var formData = new FormData();
+            formData.append("PlotID", Id);
+            formData.append("PlotStatus", $("#PlotStatus_" + Id).text());
+            $.ajax({
+                url: '/Master/UpdatePlotStatusDetails',
+                type: 'Post',
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                data: formData,
+                success: function (data) {
+                    if (data.Result == "yes") {
+                        //alert('Address updated successfully !!');
+                        window.location.reload();
+                    }
+                    else if (data.Result == "no") {
+                        //alert('Address not updated successfully !!');
+                        window.location.reload();
+                    }
+                    else {
+                        //alert(data.Result);
+                    }
+                }
+        
+            });
+        //}
     }
 </script>
 
