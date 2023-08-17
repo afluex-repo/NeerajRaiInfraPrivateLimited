@@ -1646,7 +1646,7 @@ namespace NeerajraiInfra.Controllers
                         string name = ds.Tables[0].Rows[0]["Name"].ToString();
                         string Amount = ds.Tables[0].Rows[0]["Amount"].ToString();
                         string TempId = "1707166296882557362";
-                        BLSMS.SendSMS(mob, "Dear " + name + ", Your Payout Request of Rs" + Amount + " has been approved and processed successfully. Please check your account. SHRIRADHEYKUNJ", TempId);
+                        BLSMS.SendSMS(mob, "Dear " + name + ", Your Payout Request of Rs" + Amount + " has been approved and processed successfully. Please check your account. NeerajRaiInfra", TempId);
                     }
                     else
                     {
