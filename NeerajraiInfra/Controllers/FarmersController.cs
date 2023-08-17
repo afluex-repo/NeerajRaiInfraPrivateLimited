@@ -1006,7 +1006,7 @@ namespace NeerajraiInfra.Controllers
                 }
             }
             ViewBag.ddlSite = ddlSite;
-            #endregion
+            #endregion 
             List<SelectListItem> ddlSector = new List<SelectListItem>();
             ddlSector.Add(new SelectListItem { Text = "Select Phase", Value = "0" });
             ViewBag.ddlSector = ddlSector;
