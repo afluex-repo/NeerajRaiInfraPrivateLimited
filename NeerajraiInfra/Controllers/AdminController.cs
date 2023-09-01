@@ -1117,7 +1117,7 @@ namespace NeerajraiInfra.Controllers
             ViewBag.ddlLeg = ddlLeg;
             #endregion ddlLeg
             model.LoginId = string.IsNullOrEmpty(model.LoginId) ? null : model.LoginId;
-           
+
             List<Reports> lst = new List<Reports>();
             DataSet ds = model.GetPayPayout();
 
@@ -1211,7 +1211,7 @@ namespace NeerajraiInfra.Controllers
                 transactiondate = Request["txttransdate_ " + i].ToString();
                 model.Amount = Request["txtamount_ " + i].ToString();
                 model.Fk_UserId = Pk_PaidBoosterId_;
-
+                
                 model.TransactionNo = transactiono;
                 DataSet ds = null;
                 if (!string.IsNullOrEmpty(transactiondate))
@@ -1232,7 +1232,6 @@ namespace NeerajraiInfra.Controllers
                         TempData["BoosterPay"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
-
             }
             return RedirectToAction("PayPayout");
         }
@@ -1799,7 +1798,7 @@ namespace NeerajraiInfra.Controllers
                     obj.Pincode = dsPlotDetails.Tables[0].Rows[0]["PinCode"].ToString();
                     obj.PanCard = dsPlotDetails.Tables[0].Rows[0]["PanNumber"].ToString();
                     obj.BranchName = dsPlotDetails.Tables[0].Rows[0]["BranchName"].ToString();
-                   // objViewBag.Disabled = "disabled";
+                    // objViewBag.Disabled = "disabled";
                     obj.AdharNumber = dsPlotDetails.Tables[0].Rows[0]["AdharNumber"].ToString();
                     obj.BankAccountNo = dsPlotDetails.Tables[0].Rows[0]["MemberAccNo"].ToString();
                     obj.BankName = dsPlotDetails.Tables[0].Rows[0]["MemberBankName"].ToString();
@@ -2483,9 +2482,9 @@ namespace NeerajraiInfra.Controllers
             return View(model);
         }
 
-        
 
-     
+
+
         public ActionResult DeleteContactDetails(string id)
         {
             try
