@@ -2427,11 +2427,7 @@ namespace NeerajraiInfra.Controllers
             return RedirectToAction("PlanMaster", "Master");
         }
 
-
-
-
-
-
+         
         public ActionResult DeletePlanMaster(Master obj, string Id)
         {
             try
