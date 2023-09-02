@@ -6748,6 +6748,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="LevelTree.aspx" />
     <Content Include="Models\WebService\AgentServices.asmx" />
+    <Content Include="Scripts\FileSaver.js" />
     <Content Include="Views\Master\UpdatePlotStatus.cshtml" />
     <Content Include="Website\about.html" />
     <Content Include="Website\contact.html" />

@@ -118,6 +118,7 @@
                                             i++;
                                         }
                                         <input type="text" id="hdRows2" name="hdRows2" value="@i" style="display:none"/>
+                                        
                                     }
 
                                 }
@@ -148,6 +149,21 @@
     $(document).ready(function () {
         $("#divload").css({ 'display': 'none' });
 
+
+
+
+        //debugger;
+        //var table =$('#tableExport').DataTable()
+        //alert(
+        //    'Number of row entries: '+
+        //    table
+        //        .column( 0 )
+        //        .data()
+        //        .length
+        //     );
+       
+        
+        
         if ($("#IsDownline").is(':checked')) {
             $("#divLeg").show();
         }
@@ -170,6 +186,12 @@
         changeYear: true,
         changeMonth: true
     });
+
+   
+
+       
+    
+   
 </script>
 
 
@@ -182,6 +204,7 @@
     .btn {
         margin-top: 27px;
     }
+
 </style>
 
 

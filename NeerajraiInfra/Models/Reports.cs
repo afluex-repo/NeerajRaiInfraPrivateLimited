@@ -12,6 +12,7 @@ namespace NeerajraiInfra.Models
     {
         
         public string ErrorMessage { get; set; }
+        public int hdRows1 { get; set; }
         public string ReturnBenefitStartDate { get; set; }
         public string SponsorName { get; set; }
         public string SponsorId { get; set; }

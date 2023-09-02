@@ -1166,7 +1166,6 @@ namespace NeerajraiInfra.Controllers
                 ds.Tables[0].Columns.Remove("Pk_UserID");
                 ds.Tables[0].Columns.Remove("MemberBranch");
                 ds.Tables[0].Columns.Remove("BankHolderName");
-                ds.Tables[0].Columns.Remove("TransactionDate");
                 GridView1.DataSource = ds.Tables[0];
                 GridView1.DataBind();
                 string style = @" .text { mso-number-format:\@; }  ";
@@ -1234,6 +1233,7 @@ namespace NeerajraiInfra.Controllers
                 }
 
             }
+          
             return RedirectToAction("PayPayout");
         }
         #endregion

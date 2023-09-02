@@ -77,7 +77,7 @@
                             </div>
                             <div class="form-group row">
                                 <div class="input-field col m3 s12">
-                                    <input type="submit" name="SearchPlot" value="Search" id="btnSearchPlot" class="btn btn-success" onclick="return load();" />
+                                    <input type="submit" name="SearchPlot" value="Search" id="btnSearchPlot" class="btn btn-success" />
                                 </div>
                             </div>
                             <div class="table-responsive">
@@ -111,13 +111,16 @@
                                                         @if (Item.PlotStatus == "Available")
                                                         {
                                                             <td>
-                                                                <a onclick="UpdatePlotStatusDetails(@Item.PlotID)" href="javascript:void(0)" class="btn btn-success btn-sm" style="margin-top:5px">Click For Booked</a>
+                                                                <a onclick="UpdatePlotStatusDetails(@Item.PlotID)" href="javascript:void(0)" class="btn btn-danger btn-sm" style="margin-top:5px">Click For Booked</a>
                                                             </td>
                                                         }
                                                         else
                                                         {
-                                                            <td><span style="color:red;">Booked</span></td>
-                                                         
+
+                                                            <td>
+                                                                <a onclick="UpdatePlotStatusDetails(@Item.PlotID)" href="javascript:void(0)" class="btn btn-success btn-sm" style="margin-top:5px">Click For Available</a>
+                                                            </td>
+
                                                         }
                                                     </tr>
 
