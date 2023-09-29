@@ -373,6 +373,7 @@ namespace NeerajraiInfra.Controllers
                     obj.BranchName = r["BranchName"].ToString();
                     obj.PK_BookingId = r["PK_BookingID"].ToString();
                     obj.CustomerName = r["CustomerInfo"].ToString();
+                    obj.Mobile = r["Mobile"].ToString();
                     obj.AssociateID = r["AssociateInfo"].ToString();
                     obj.PaidAmount = r["PaidAmount"].ToString();
                     obj.PaymentDate = r["LastPaymentDate"].ToString();
