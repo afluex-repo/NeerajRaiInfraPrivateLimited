@@ -37,7 +37,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <IntermediateOutputPath>C:\Users\DELL\AppData\Local\Temp\vs61FF.tmp\Debug\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\DELL\AppData\Local\Temp\vs5D4D.tmp\Debug\</IntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -46,7 +46,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <IntermediateOutputPath>C:\Users\DELL\AppData\Local\Temp\vs61FF.tmp\Release\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\DELL\AppData\Local\Temp\vs5D4D.tmp\Release\</IntermediateOutputPath>
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
@@ -7633,7 +7633,7 @@
     <Content Include="Views\AdminReports\DirectIncome.cshtml" />
     <Content Include="Views\AdminReports\DifferentialIncome.cshtml" />
     <Content Include="Views\AdminReports\DirectLeadershipIncome.cshtml" />
-    <Content Include="Views\AdminReports\PayPayout.cshtml" />
+    <Content Include="Views\Admin\PayPayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -3154,9 +3154,6 @@ namespace NeerajraiInfra.Controllers
         }
         #endregion
 
-        public ActionResult PayPayout()
-        {
-            return View();
-        }
+       
     }
 }
