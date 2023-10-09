@@ -71,7 +71,6 @@
                                 @Html.TextBoxFor(m => m.BookingNumber, new { @class = "form-control", @Placeholder = "Search by Booking Number" })
                             </div>
                         </div>
-
                     </div>
                     <div class="row">
                         <div class="input-field col m3 s12">
@@ -114,6 +113,18 @@
                         </div>
                         <div class="col-12 col-md-3 col-lg-3">
                             <div class="form-group">
+                                    Leg
+                                    @Html.DropDownListFor(m => m.Leg, new SelectList(ViewBag.Leg, "Value", "Text"), new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3 col-lg-3">
+                            <div class="form-group">
+                                IsDownline
+                                @Html.CheckBoxFor(m => m.IsDownline)
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3 col-lg-3">
+                            <div class="form-group">
                                 <br />
                                 <input class="btn btn-success pull-left" type="submit" value="Search" id="btnSearch" name="Search" />
                             </div>
@@ -130,6 +141,7 @@
                                     <th>Booking Number</th>
                                     <th>Associate Info</th>
                                     <th>Customer Info</th>
+                                    <th>Customer Mobile No</th>
                                     <th>Site </th>
                                     <th>Phase </th>
                                     <th>Block </th>
@@ -154,6 +166,7 @@
                                                 <td>@Item.BookingNumber</td>
                                                 <td>@Item.AssociateID</td>
                                                 <td>@Item.CustomerName</td>
+                                                <td>@Item.Mobile</td>
                                                 <td>@Item.SiteName </td>
                                                 <td>@Item.SectorName </td>
                                                 <td>@Item.BlockName </td>

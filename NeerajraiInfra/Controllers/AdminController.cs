@@ -1094,6 +1094,7 @@ namespace NeerajraiInfra.Controllers
                 {
                     Reports obj = new Reports();
                     obj.Name = r["Name"].ToString();
+                    obj.BankHolderName = r["BankHolderName"].ToString();
                     obj.LoginId = r["LoginId"].ToString();
                     obj.MemberAccNo = r["MemberAccNo"].ToString();
                     obj.IFSCCode = (r["IFSCCode"].ToString());
