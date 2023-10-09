@@ -63,7 +63,8 @@
                                     <th>Login Id</th>
                                     <th>Name</th>
                                     <th>Account No</th>
-                                    <th>Bank Name</th>
+                                    <th style="min-width:80px">Bank Holder Name</th>
+                                    <th style="min-width:80px">Bank Name</th>
                                     <th>IFSC Code</th>
                                     <th>Amount</th>
                                     <th>Pay Amount</th>
@@ -73,6 +74,7 @@
                             </thead>
                             <tfoot>
                                 <tr>
+                                    <th></th>
                                     <th></th>
                                     <th></th>
                                     <th></th>
@@ -99,6 +101,7 @@
                                                 <td>@Item.LoginId</td>
                                                 <td>@Item.Name</td>
                                                 <td>@Item.MemberAccNo</td>
+                                                <td>@Item.BankHolderName</td>
                                                 <td>@Item.BankName</td>
                                                 <td>@Item.IFSCCode</td>
                                                 <td>
