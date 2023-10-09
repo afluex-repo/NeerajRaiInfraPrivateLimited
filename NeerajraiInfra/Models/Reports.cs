@@ -508,6 +508,8 @@ namespace NeerajraiInfra.Models
         #endregion
 
         #region PayPayout
+
+        public string BankHolderName { get; set; }
         public DataSet GetPayPayout()
         {
             SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
