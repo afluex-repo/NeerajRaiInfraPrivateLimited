@@ -13,7 +13,7 @@ namespace NeerajraiInfra.Models
         public List<SelectListItem> ddlPLC { get; set; }
         public List<SelectListItem> ddlRate { get; set; }
         public string BookingType { get; set; }
-        
+        public string Leg { get; set; }
         public string GrossAmount { get; set; }
         public string NetAmount { get; set; }
         public List<SelectListItem> ddlPlan { get; set; }
@@ -22,6 +22,7 @@ namespace NeerajraiInfra.Models
         public string AssociatesLoginID { get; set; }
         public string PLCAmount { get; set; }
         public string AllotmentRemark { get; set; }
+        public bool IsDownline { get; set; }
 
         #region Properties
         public string Type { get; set; }

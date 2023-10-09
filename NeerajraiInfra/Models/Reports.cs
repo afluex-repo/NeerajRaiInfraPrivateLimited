@@ -12,6 +12,7 @@ namespace NeerajraiInfra.Models
     {
         
         public string ErrorMessage { get; set; }
+        public int hdRows1 { get; set; }
         public string ReturnBenefitStartDate { get; set; }
         public string SponsorName { get; set; }
         public string SponsorId { get; set; }
@@ -123,9 +124,16 @@ namespace NeerajraiInfra.Models
         List<SelectListItem> ddlPaymentMode = new List<SelectListItem>();
         public List<Reports> EMIBookingReports { get; set; }
         public List<Reports> lstkharijdakhil { get; set; }
+        public List<Reports> lstAssSelfdownBusinessReport { get; set; }
+        
+
 
         public string Pk_KharijId { get; set; }
         public string IsKharijDakhilDone { get; set; }
+
+
+        public string SelfBusiness { get; set; }
+        public string TeamBusiness { get; set; }
         public string KharijDakhilDate { get; set; }
         public string KharijDakhilRemarks { get; set; }
         public string IFSCCode { get; set; }
@@ -530,6 +538,18 @@ namespace NeerajraiInfra.Models
         }
         #endregion
 
+
+        public DataSet GetAssociateSelfdownBusinessReport()
+        {
+            SqlParameter[] para =
+                         {
+                 new SqlParameter("@AssociateID",AssociateID),
+                                 new SqlParameter("@FromDate",FromDate),
+                                  new SqlParameter("@ToDate",ToDate)
+                            };
+            DataSet ds = Connection.ExecuteQuery("GetAssociateSelfdownBusinessReport", para);
+            return ds;
+        }
 
 
     }
