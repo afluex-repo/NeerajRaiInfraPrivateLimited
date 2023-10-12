@@ -273,6 +273,10 @@ namespace NeerajraiInfra.Controllers
 
             ViewBag.ddlBlock = lstBlock;
             #endregion
+            #region ddlleg
+            List<SelectListItem> Leg = Common.Leg();
+            ViewBag.Leg = Leg;
+            #endregion ddlleg
             //#endregion
             //List<SelectListItem> ddlSector = new List<SelectListItem>();
             //ddlSector.Add(new SelectListItem { Text = "Select Phase", Value = "0" });
@@ -292,6 +296,7 @@ namespace NeerajraiInfra.Controllers
             int count1 = 0;
             Master objmaster = new Master();
             List<SelectListItem> ddlSite = new List<SelectListItem>();
+            model.Leg = string.IsNullOrEmpty(model.Leg) ? null : model.Leg;
             DataSet dsSite = objmaster.GetSiteList();
             if (dsSite != null && dsSite.Tables.Count > 0 && dsSite.Tables[0].Rows.Count > 0)
             {
@@ -1647,7 +1652,7 @@ namespace NeerajraiInfra.Controllers
                         string name = ds.Tables[0].Rows[0]["Name"].ToString();
                         string Amount = ds.Tables[0].Rows[0]["Amount"].ToString();
                         string TempId = "1707166296882557362";
-                        BLSMS.SendSMS(mob, "Dear " + name + ", Your Payout Request of Rs" + Amount + " has been approved and processed successfully. Please check your account. SHRIRADHEYKUNJ", TempId);
+                        BLSMS.SendSMS(mob, "Dear " + name + ", Your Payout Request of Rs" + Amount + " has been approved and processed successfully. Please check your account. NeerajRaiInfra", TempId);
                     }
                     else
                     {
@@ -3155,6 +3160,33 @@ namespace NeerajraiInfra.Controllers
         }
         #endregion
 
-       
+        public ActionResult AssociateSelfdownBusinessReport()
+        {
+           return View();
+        }
+        [HttpPost]
+        [ActionName("AssociateSelfdownBusinessReport")]
+        [OnAction(ButtonName = "GetList")]
+        public ActionResult AssociateSelfdownBusinessReportAction(Reports model)
+        {
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            List<Reports> lst = new List<Reports>();
+            DataSet ds = model.GetAssociateSelfdownBusinessReport();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.LoginId = r["LoginID"].ToString();
+                    obj.AssociateID = r["AssociateID"].ToString();
+                    obj.SelfBusiness = r["SelfBusiness"].ToString();
+                    obj.TeamBusiness = r["TeamBusiness"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstAssSelfdownBusinessReport = lst;
+            }
+            return View(model);
+        }
     }
 }
