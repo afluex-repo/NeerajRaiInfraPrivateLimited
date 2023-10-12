@@ -813,7 +813,7 @@ namespace NeerajraiInfra.Models
                                 new SqlParameter("@PK_SiteID",SiteID),
                                 new SqlParameter("@PK_SectorID",SectorID),
                                 new SqlParameter("@PK_BlockID",BlockID),
-                                new SqlParameter("@AssociateName",AssociateName)
+                                new SqlParameter("@AssociateName",AssociateName),
                             };
 
             DataSet ds = Connection.ExecuteQuery("GetDetailsForSummaryReport", para);

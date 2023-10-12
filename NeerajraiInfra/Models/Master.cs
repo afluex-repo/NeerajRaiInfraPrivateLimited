@@ -318,6 +318,7 @@ namespace NeerajraiInfra.Models
                                   new SqlParameter("@BlockID", BlockID),
                                   new SqlParameter("@PlotID", PlotID),
                                   new SqlParameter("@PlotNumber", PlotNumber),
+                                  new SqlParameter("@PlotStatus", PlotStatus),
                                   };
             DataSet ds = Connection.ExecuteQuery("PlotListForUpdatePlotStatus", para);
             return ds;
