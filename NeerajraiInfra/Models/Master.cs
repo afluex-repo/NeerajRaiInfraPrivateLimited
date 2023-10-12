@@ -311,6 +311,7 @@ namespace NeerajraiInfra.Models
 
         #region PlotMaster-List-Update-Delete
 
+        //public string PlotStatus_ { get; set; }
         public DataSet GetPlotList()
         {
             SqlParameter[] para = { new SqlParameter("@SiteID", SiteID),

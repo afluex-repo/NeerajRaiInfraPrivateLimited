@@ -2631,6 +2631,9 @@ namespace NeerajraiInfra.Controllers
 
         public ActionResult UpdatePlotStatusDetails(Master model,string PlotId, string PlotStatus)
         {
+            string FormName = "";
+            string Controller = "";
+
             model.PlotID = PlotId;
             model.PlotStatus = PlotStatus;
             model.AddedBy = Session["Pk_AdminId"].ToString();
@@ -2639,15 +2642,21 @@ namespace NeerajraiInfra.Controllers
             {
                 if (ds.Tables[0].Rows[0]["msg"].ToString() == "1")
                 {
-                    model.Result = "yes";
+                    //model.Result = "yes";
                     TempData["PlotStatus"] = "Plot Details Updated  Successfully";
+                    FormName = "UpdatePlotStatus";
+                    Controller = "Master";
                 }
                 else
                 {
-                    model.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    //model.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    TempData["PlotStatus"]= ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    FormName = "UpdatePlotStatus";
+                    Controller = "Master";
                 }
             }
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return RedirectToAction(FormName,Controller);
+            //return Json(model, JsonRequestBehavior.AllowGet);
         }
 
 

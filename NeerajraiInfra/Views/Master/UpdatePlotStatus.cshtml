@@ -122,14 +122,20 @@
                                                         @if (Item.PlotStatus == "Available")
                                                         {
                                                             <td>
-                                                                <a onclick="UpdatePlotStatusDetails(@Item.PlotID)" href="javascript:void(0)" class="btn btn-danger btn-sm" style="margin-top:5px" >Click For Booked </a>
+                                                                @*<a onclick="UpdatePlotStatusDetails(@Item.PlotID)" href="javascript:void(0)" class="btn btn-danger btn-sm" style="margin-top:5px" >Click For Booked </a>*@
+                                                                <a href="/Master/UpdatePlotStatusDetails?PlotId=@Item.PlotID&&PlotStatus=@Item.PlotStatus" class="btn btn-danger btn-sm" onclick="return confirm('are you sure you want to book this plot.')">
+                                                                    Click For Booked
+                                                                </a>
                                                             </td>
                                                         }
                                                         else
                                                         {
 
                                                             <td>
-                                                                <a onclick="UpdatePlotStatusDetails(@Item.PlotID)" href="javascript:void(0)" class="btn btn-success btn-sm" style="margin-top:5px">Click For Available</a>
+                                                                @*<a onclick="UpdatePlotStatusDetails(@Item.PlotID)" href="javascript:void(0)" class="btn btn-success btn-sm" style="margin-top:5px">Click For Available</a>*@
+                                                                <a href="/Master/UpdatePlotStatusDetails?PlotId=@Item.PlotID&&PlotStatus=@Item.PlotStatus" class="btn btn-success btn-sm" onclick="return confirm('are you sure you want to available this plot.')">
+                                                                    Click For Available
+                                                                </a>
                                                             </td>
 
                                                         }
@@ -285,13 +291,13 @@
 
     function UpdatePlotStatusDetails(Id) {
         debugger;
-        var a=$('#PlotStatus').val();
-        if( a == 'A'){
-            confirm('Are you sure you want to Book this plot');
-        }
-        else{
-            confirm('Are you sure you want to Available this plot');
-        }
+        //var a=$('#plotstatus').val();
+        //if( a == 'a'){
+        //   var r= confirm('are you sure you want to book this plot');
+        //}
+        //else{
+        //   var r= confirm('are you sure you want to available this plot');
+        //}
         //var r = confirm('Are you sure you want to book this plot details');
         //if(r==true)
         //{
@@ -320,6 +326,9 @@
                 }
         
             });
+        //}
+        //else{
+        //    window.location.reload();
         //}
     }
 </script>
