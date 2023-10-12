@@ -293,6 +293,11 @@ namespace NeerajraiInfra.Controllers
         [OnAction(ButtonName = "Search")]
         public ActionResult GetSummaryRep(Plot model)
         {
+            #region ddlleg
+            List<SelectListItem> Leg = Common.Leg();
+            ViewBag.Leg = Leg;
+            #endregion ddlleg
+
             int count1 = 0;
             Master objmaster = new Master();
             List<SelectListItem> ddlSite = new List<SelectListItem>();
@@ -3179,7 +3184,7 @@ namespace NeerajraiInfra.Controllers
                 {
                     Reports obj = new Reports();
                     obj.LoginId = r["LoginID"].ToString();
-                    obj.AssociateID = r["AssociateID"].ToString();
+                    obj.Name = r["Name"].ToString();
                     obj.SelfBusiness = r["SelfBusiness"].ToString();
                     obj.TeamBusiness = r["TeamBusiness"].ToString();
                     lst.Add(obj);

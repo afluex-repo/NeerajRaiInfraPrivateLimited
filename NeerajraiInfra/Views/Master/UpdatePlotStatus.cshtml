@@ -76,10 +76,21 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="input-field col m3 s12">
-                                    <input type="submit" name="SearchPlot" value="Search" id="btnSearchPlot" class="btn btn-success" />
+                                <div class="input-field col-md-3">
+                                    Status
+                                    @Html.DropDownListFor(m => m.PlotStatus, new SelectList(ViewBag.ddlPlotStatus, "Value", "Text"), new { @class = "form-control" })
+                                    <span class="form-bar"></span>
                                 </div>
+
+                               
+                                    <div class="input-field col m3 s12 bb">
+                                        <input type="submit" name="SearchPlot" value="Search" id="btnSearchPlot" class="btn btn-success" />
+                                    </div>
+                               
+
                             </div>
+
+                           
                             <div class="table-responsive">
                                 <table class="table table-bordered table-md" data-page-length='50' id="tableExport" style="width:100%;">
                                     <thead>
@@ -111,7 +122,7 @@
                                                         @if (Item.PlotStatus == "Available")
                                                         {
                                                             <td>
-                                                                <a onclick="UpdatePlotStatusDetails(@Item.PlotID)" href="javascript:void(0)" class="btn btn-danger btn-sm" style="margin-top:5px">Click For Booked</a>
+                                                                <a onclick="UpdatePlotStatusDetails(@Item.PlotID)" href="javascript:void(0)" class="btn btn-danger btn-sm" style="margin-top:5px" >Click For Booked </a>
                                                             </td>
                                                         }
                                                         else
@@ -274,6 +285,13 @@
 
     function UpdatePlotStatusDetails(Id) {
         debugger;
+        var a=$('#PlotStatus').val();
+        if( a == 'A'){
+            confirm('Are you sure you want to Book this plot');
+        }
+        else{
+            confirm('Are you sure you want to Available this plot');
+        }
         //var r = confirm('Are you sure you want to book this plot details');
         //if(r==true)
         //{
@@ -306,3 +324,8 @@
     }
 </script>
 
+<style>
+    .bb{
+        margin-top:23px;
+    }
+</style>

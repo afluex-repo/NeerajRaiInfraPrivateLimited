@@ -2499,6 +2499,13 @@ namespace NeerajraiInfra.Controllers
             ViewBag.ddlSite = ddlSite;
             #endregion
 
+            #region PlotStatus
+
+            List<SelectListItem> ddlPlotStatus = Common.BindPlotStatus();
+            ViewBag.ddlPlotStatus = ddlPlotStatus;
+
+            #endregion
+
             return View(model);
         }
 
@@ -2610,6 +2617,13 @@ namespace NeerajraiInfra.Controllers
 
             ViewBag.ddlBlock = lstBlock;
             #endregion
+
+            #region PlotStatus
+
+            List<SelectListItem> ddlPlotStatus = Common.BindPlotStatus();
+            ViewBag.ddlPlotStatus = ddlPlotStatus;
+
+            #endregion
             return View(model);
         }
 
@@ -2626,7 +2640,7 @@ namespace NeerajraiInfra.Controllers
                 if (ds.Tables[0].Rows[0]["msg"].ToString() == "1")
                 {
                     model.Result = "yes";
-                    TempData["PlotStatus"] = "Plot Details Booked  Successfully";
+                    TempData["PlotStatus"] = "Plot Details Updated  Successfully";
                 }
                 else
                 {

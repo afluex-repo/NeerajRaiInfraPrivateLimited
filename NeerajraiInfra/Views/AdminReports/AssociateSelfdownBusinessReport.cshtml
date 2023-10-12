@@ -35,9 +35,9 @@
                     <div class="row ">
                         <div class="input-field col-md-3 m3 s12">
                             <div class="form-group">
-                                Associate Name
-                                @Html.TextBoxFor(m => m.AssociateID, new { @class = "form-control", @Placeholder = "Search by Associate Name" })
-                                @Html.HiddenFor(m => m.AssociateLoginID)
+                                Associate ID
+                                @Html.TextBoxFor(m => m.AssociateID, new { @class = "form-control", @Placeholder = " Associate ID" })
+                                @*@Html.HiddenFor(m => m.AssociateLoginID)*@
                             </div>
                         </div>
                         <div class="input-field col-md-3 m3 s12">
@@ -52,8 +52,6 @@
                                 @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @Placeholder = "To Date" , @readonly = "readonly" })
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
 
                         <div class="input-field col-md-3 m3 s12">
                             <div class="form-group">
@@ -61,8 +59,10 @@
                                 <input class="btn btn-success pull-left" type="submit" value="Search" id="btnSearch" name="GetList" />
                             </div>
                         </div>
-
                     </div>
+                    @*<div class="row">*@
+
+                    @*</div>*@
                     <br />
                     <div class="table-responsive">
                         <table class="table table-bordered table-md" data-page-length='50' id="tableExport" style="width:100%;">
@@ -70,7 +70,7 @@
                                 <tr>
                                     <th>Sr No.</th>
                                     <th>LoginId</th>
-                                    <th>Associate ID</th>
+                                    <th>Name</th>
                                     <th>Self Business</th>
                                     <th>Team Business</th>
                                 </tr>
@@ -80,15 +80,15 @@
 
                                 @if (Model != null)
                                 {
-                                    if (Model.lstassociate != null)
+                                    if (Model.lstAssSelfdownBusinessReport != null)
                                     {
                                         int i = 1;
-                                        foreach (var Item in Model.lstassociate)
+                                        foreach (var Item in Model.lstAssSelfdownBusinessReport)
                                         {
                                             <tr class="text-left">
                                                 <td>@i</td>
                                                 <td>@Item.LoginId</td>
-                                                <td>@Item.AssociateID</td>
+                                                <td>@Item.Name</td>
                                                 <td>@Item.SelfBusiness</td>
                                                 <td>@Item.TeamBusiness</td>
                                             </tr>
@@ -116,44 +116,44 @@
 
 
 <script>
-    $(document).ready(function () {
-        $("#divload").css({ 'display': 'none' });
-        $("input").attr("autocomplete", "off");
-        var AssociateList = [];
-        $("#loader").css({ 'display': '' });
-        $.ajax({
-            url: '/Plot/GetUserList',
-            type: 'Post',
-            success: function (response) {
-                if (response != null) {
-                    $(response).each(function (index, item) {
-                        AssociateList.push(item.UserName + "(" + item.LoginIDD + ")");
-                    });
-                    debugger
-                    $('#AssociateID').autocomplete({
-                        source: AssociateList,
-                        select: function (event, ui) {
-                            var str = ui.item.label;
-                            var strsplit = str.split("(");
+    //$(document).ready(function () {
+    //    $("#divload").css({ 'display': 'none' });
+    //    $("input").attr("autocomplete", "off");
+    //    var AssociateList = [];
+    //    $("#loader").css({ 'display': '' });
+    //    $.ajax({
+    //        url: '/Plot/GetUserList',
+    //        type: 'Post',
+    //        success: function (response) {
+    //            if (response != null) {
+    //                $(response).each(function (index, item) {
+    //                    AssociateList.push(item.UserName + "(" + item.LoginIDD + ")");
+    //                });
+    //                debugger
+    //                $('#AssociateID').autocomplete({
+    //                    source: AssociateList,
+    //                    select: function (event, ui) {
+    //                        var str = ui.item.label;
+    //                        var strsplit = str.split("(");
 
-                            $('#AssociateLoginID').val(strsplit[1].substr(0, strsplit[1].length - 1));
-                        }
-                    })
-                    $('#PlotNumber').autocomplete({
-                        source: cityuse,
-                        select: function (event, ui) {
-                            var str = ui.item.label;
-                            var strsplit = str.split("(");
-                            $('#CustomerID').val(strsplit[1].substr(0, strsplit[1].length - 1));
-                        }
-                    })
-                }
-            }, error: function () {
-                alert('Some Thing wrong!');
-                $("#loader").css({ 'display': 'none' });
-            }
-        });
-    });
+    //                        $('#AssociateLoginID').val(strsplit[1].substr(0, strsplit[1].length - 1));
+    //                    }
+    //                })
+    //                $('#PlotNumber').autocomplete({
+    //                    source: cityuse,
+    //                    select: function (event, ui) {
+    //                        var str = ui.item.label;
+    //                        var strsplit = str.split("(");
+    //                        $('#CustomerID').val(strsplit[1].substr(0, strsplit[1].length - 1));
+    //                    }
+    //                })
+    //            }
+    //        }, error: function () {
+    //            alert('Some Thing wrong!');
+    //            $("#loader").css({ 'display': 'none' });
+    //        }
+    //    });
+    //});
 
     $('#FromDate').datepicker({
         dateFormat: 'dd/mm/yy',
@@ -168,3 +168,9 @@
 
 
 </script>
+<style>
+    .btn-success{
+        margin-top:23px;
+    }
+
+</style>
