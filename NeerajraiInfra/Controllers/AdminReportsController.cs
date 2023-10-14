@@ -3193,5 +3193,11 @@ namespace NeerajraiInfra.Controllers
             }
             return View(model);
         }
+
+        public ActionResult CheckDesignationUpdateLog()
+        {
+            return View();
+        }
+
     }
 }
