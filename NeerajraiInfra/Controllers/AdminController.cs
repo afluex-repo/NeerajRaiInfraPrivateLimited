@@ -1094,6 +1094,7 @@ namespace NeerajraiInfra.Controllers
                 {
                     Reports obj = new Reports();
                     obj.Name = r["Name"].ToString();
+                    obj.BankHolderName = r["BankHolderName"].ToString();
                     obj.LoginId = r["LoginId"].ToString();
                     obj.MemberAccNo = r["MemberAccNo"].ToString();
                     obj.IFSCCode = (r["IFSCCode"].ToString());
@@ -1117,7 +1118,7 @@ namespace NeerajraiInfra.Controllers
             ViewBag.ddlLeg = ddlLeg;
             #endregion ddlLeg
             model.LoginId = string.IsNullOrEmpty(model.LoginId) ? null : model.LoginId;
-           
+
             List<Reports> lst = new List<Reports>();
             DataSet ds = model.GetPayPayout();
 
@@ -1166,7 +1167,6 @@ namespace NeerajraiInfra.Controllers
                 ds.Tables[0].Columns.Remove("Pk_UserID");
                 ds.Tables[0].Columns.Remove("MemberBranch");
                 ds.Tables[0].Columns.Remove("BankHolderName");
-                ds.Tables[0].Columns.Remove("TransactionDate");
                 GridView1.DataSource = ds.Tables[0];
                 GridView1.DataBind();
                 string style = @" .text { mso-number-format:\@; }  ";
@@ -1211,7 +1211,7 @@ namespace NeerajraiInfra.Controllers
                 transactiondate = Request["txttransdate_ " + i].ToString();
                 model.Amount = Request["txtamount_ " + i].ToString();
                 model.Fk_UserId = Pk_PaidBoosterId_;
-
+                
                 model.TransactionNo = transactiono;
                 DataSet ds = null;
                 if (!string.IsNullOrEmpty(transactiondate))
@@ -1232,8 +1232,8 @@ namespace NeerajraiInfra.Controllers
                         TempData["BoosterPay"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
-
             }
+          
             return RedirectToAction("PayPayout");
         }
         #endregion
@@ -1799,7 +1799,7 @@ namespace NeerajraiInfra.Controllers
                     obj.Pincode = dsPlotDetails.Tables[0].Rows[0]["PinCode"].ToString();
                     obj.PanCard = dsPlotDetails.Tables[0].Rows[0]["PanNumber"].ToString();
                     obj.BranchName = dsPlotDetails.Tables[0].Rows[0]["BranchName"].ToString();
-                   // objViewBag.Disabled = "disabled";
+                    // objViewBag.Disabled = "disabled";
                     obj.AdharNumber = dsPlotDetails.Tables[0].Rows[0]["AdharNumber"].ToString();
                     obj.BankAccountNo = dsPlotDetails.Tables[0].Rows[0]["MemberAccNo"].ToString();
                     obj.BankName = dsPlotDetails.Tables[0].Rows[0]["MemberBankName"].ToString();
@@ -2483,9 +2483,9 @@ namespace NeerajraiInfra.Controllers
             return View(model);
         }
 
-        
 
-     
+
+
         public ActionResult DeleteContactDetails(string id)
         {
             try

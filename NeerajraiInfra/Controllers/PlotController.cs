@@ -721,6 +721,7 @@ namespace NeerajraiInfra.Controllers
                             obj.CustomerID = r["CustomerID"].ToString();
                             obj.CustomerLoginID = r["CustomerLoginID"].ToString();
                             obj.CustomerName = r["CustomerName"].ToString();
+                            obj.Contact = r["Mobile"].ToString();
                             obj.AssociateID = r["AssociateID"].ToString();
                             obj.AssociateLoginID = r["AssociateLoginID"].ToString();
                             obj.Discount = r["Discount"].ToString();
@@ -788,6 +789,7 @@ namespace NeerajraiInfra.Controllers
                         obj.CustomerID = r["CustomerID"].ToString();
                         obj.CustomerLoginID = r["CustomerLoginID"].ToString();
                         obj.CustomerName = r["CustomerName"].ToString();
+                        obj.Contact = r["Mobile"].ToString();
                         obj.AssociateID = r["AssociateID"].ToString();
                         obj.AssociateLoginID = r["AssociateLoginID"].ToString();
                         obj.Discount = r["Discount"].ToString();

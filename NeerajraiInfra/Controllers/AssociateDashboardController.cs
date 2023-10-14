@@ -199,7 +199,7 @@ namespace NeerajraiInfra.Controllers
                             string name = ds.Tables[0].Rows[0]["Column3"].ToString();
                             string payout = ds.Tables[0].Rows[0]["Column2"].ToString();
                             string TempId = "1707166296876400822";
-                            BLSMS.SendSMS(mob, "Dear "+ name + ", Your Payout Request of Rs"+ payout + " has been processed successfully. Your amount will be credited in your account within 1 to 5 working days. SHRIRADHEYKUNJ", TempId);
+                            BLSMS.SendSMS(mob, "Dear "+ name + ", Your Payout Request of Rs"+ payout + " has been processed successfully. Your amount will be credited in your account within 1 to 5 working days. NeerajRaiInfra", TempId);
                             
                         }
                         catch
@@ -1449,7 +1449,7 @@ namespace NeerajraiInfra.Controllers
             string FormName = "";
             string Controller = "";
             obj.DOB = string.IsNullOrEmpty(obj.DOB) ? null : Common.ConvertToSystemDate(obj.DOB, "dd/MM/yyyy");
-
+            
             try
             {
                 if (fileProfilePicture != null)
