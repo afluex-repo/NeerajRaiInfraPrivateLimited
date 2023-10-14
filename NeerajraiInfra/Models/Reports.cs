@@ -543,11 +543,11 @@ namespace NeerajraiInfra.Models
         {
             SqlParameter[] para =
                          {
-                 new SqlParameter("@AssociateID",AssociateID),
+                                 new SqlParameter("@LoginId",AssociateID),
                                  new SqlParameter("@FromDate",FromDate),
-                                  new SqlParameter("@ToDate",ToDate)
+                                 new SqlParameter("@ToDate",ToDate)
                             };
-            DataSet ds = Connection.ExecuteQuery("GetAssociateSelfdownBusinessReport", para);
+            DataSet ds = Connection.ExecuteQuery("GetSelftDownReport", para);
             return ds;
         }
 
