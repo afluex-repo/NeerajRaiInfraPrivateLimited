@@ -71,6 +71,9 @@
                                         <th>  Login ID</th>
                                         <th> First Name</th>
                                         <th> Gross Amount</th>
+                                        <th>Direct Income</th>
+                                        <th>Differential Income</th>
+                                        <th>Direct Leadership Income</th>
                                         <th> TDS</th>
                                         <th> Processing</th>
                                         <th> NetAmount</th>
@@ -93,6 +96,9 @@
                                                     <td>@Item.AssociateLoginID  </td>
                                                     <td>@Item.FirstName </td>
                                                     <td>@Item.GrossAmount</td>
+                                                    <td>@Item.DirectIncome</td>
+                                                    <td>@Item.DifferentialIncome</td>
+                                                    <td>@Item.DirectLeadershipIncome</td>
                                                     <td>@Item.TDS</td>
                                                     <td>@Item.Processing</td>
                                                     <td>@Item.NetAmount</td>
@@ -105,6 +111,23 @@
                                         }
                                     }
                                 </tbody>
+                                <tfoot>
+                                    <tr style="font-weight: bold;">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>Total:-</td>
+                                        <td>@ViewBag.GrossAmount</td>
+                                        <td>@ViewBag.DirectIncome</td>
+                                        <td>@ViewBag.DifferentialIncome</td>
+                                        <td>@ViewBag.DirectLeadershipIncome</td>
+                                        <td>@ViewBag.TDS</td>
+                                        <td>@ViewBag.Processing</td>
+                                        <td>@ViewBag.NetAmount</td>
+                                        <td></td>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
                     </div>

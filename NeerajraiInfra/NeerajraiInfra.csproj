@@ -7627,6 +7627,7 @@
     <Content Include="Views\AdminReports\PrintAllotments.cshtml" />
     <Content Include="Views\Plot\IsKharijDakhil.cshtml" />
     <Content Include="Views\AdminReports\IsKharijDakhilList.cshtml" />
+    <Content Include="Views\AdminReports\CheckDesignationUpdateLog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

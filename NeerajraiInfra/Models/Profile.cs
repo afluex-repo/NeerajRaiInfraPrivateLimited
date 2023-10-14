@@ -51,8 +51,8 @@ namespace NeerajraiInfra.Models
         public DataSet UpdateProfile()
         {
             SqlParameter[] para = { new SqlParameter("@PK_UserID",PK_UserID ) ,
-                                      new SqlParameter("@FirstName", FirstName) ,
-                                      new SqlParameter("@LastName", LastName) ,
+                                      //new SqlParameter("@FirstName", FirstName) ,
+                                      //new SqlParameter("@LastName", LastName) ,
                                       new SqlParameter("@Mobile", Mobile) ,
                                       new SqlParameter("@Email", EmailId) ,
                                       new SqlParameter("@AccountHolderName", AccountHolderName),

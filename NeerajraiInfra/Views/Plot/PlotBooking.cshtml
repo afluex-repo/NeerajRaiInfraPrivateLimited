@@ -221,7 +221,15 @@
                                 @Html.DropDownListFor(m => m.Fk_BankId, new SelectList(ViewBag.ddlTransactionType, "Value", "Text"), new { @class = "TransactionID form-control" })
                             </div>
                         </div>*@
-                         
+                        <div class="col-md-3" id="divAssociateId" style="display: none">
+                            <span id="txnAssociateId"></span> <span style="color: red">*</span>
+                            @Html.TextBoxFor(m => m.AssociateLoginID, new { @class = "form-control", @Placeholder = "Associate Id", @maxlength = "50", @onchange = "return getAssociateName();" })
+                            @Html.HiddenFor(m => m.AssociatesLoginID)
+                        </div>
+                        <div class="col-md-3" id="divAssociateName" style="display: none">
+                            <span id="txnAssociateName"></span> <span style="color: red">*</span>
+                            @Html.TextBoxFor(m => m.AssociateNames, new { @class = "form-control", @Placeholder = "Associate Name", @maxlength = "50", @readonly = "true" })
+                        </div>
                         <div class="col-md-3" id="divtransactiono" style="display: none">
                             <div class="form-group">
                                 <span id="txnNo"></span> <span id="spntrannumber" style="color: red">*</span>
@@ -411,6 +419,45 @@
         }
 
     }
+
+    //$(document).ready(function () {
+    //    $("input").attr("autocomplete", "off");
+    //    var AssociateList = [];
+    //    $("#loader").css({ 'display': '' });
+    //    $.ajax({
+    //        url: '/Plot/GetUserList',
+    //        type: 'Post',
+    //        success: function (response) {
+    //            if (response != null) {
+    //                $(response).each(function (index, item) {
+    //                    AssociateList.push(item.UserName + "(" + item.LoginIDD + ")");
+    //                });
+    //                debugger
+    //                $('#AssociateLoginID').autocomplete({
+    //                    source: AssociateList,
+    //                    select: function (event, ui) {
+    //                        var str = ui.item.label;
+    //                        var strsplit = str.split("(");
+
+    //                        $('#AssociatesLoginID').val(strsplit[1].substr(0, strsplit[1].length - 1));
+    //                    }
+    //                })
+
+    //            }
+    //        }, error: function () {
+    //            alert('Some Thing wrong!');
+    //            $("#loader").css({ 'display': 'none' });
+    //        }
+    //    });
+    //    var UserType = $('#UserType').val();
+    //    var UserTypeName = $('#UserTypeName').val();
+    //    if (UserType == 'Admin' && UserTypeName != 'Admin') {
+    //        GetMenuDetails();
+    //    }
+
+    //});
+
+
     $(document).ready(function () {
         $("#divload").css({ 'display': 'none' });
         $("#NoOfEMI").prop('disabled', true);
@@ -1119,7 +1166,16 @@
             //    return false;
             //}
         }
-        
+        else if ($('#PaymentMode').val() == '13') {
+
+            if ($('#AssociateLoginID').val() == '') {
+                $("#AssociateLoginID").addClass('errortext');
+                $('#AssociateLoginID').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+        }
+
         if ($('#Remark').val() == '') {
             $("#Remark").addClass('errortext');
             $('#Remark').focus();
@@ -1220,6 +1276,33 @@
 
         });
     }
+    function getAssociateName() {
+        $("#divload").css({ 'display': '' });
+        var AssociateLoginID = $('#AssociateLoginID').val();
+        $.ajax({
+            url: '/TraditionalAssociate/GetSponsorName', type: 'post', dataType: 'json',
+            data: { 'SponsorID': AssociateLoginID },
+            success: function (data) {
+                $("#divload").css({ 'display': 'none' });
+                if (data.Result == "yes") {
+                    $("#AssociateNames").val(data.SponsorName);
+                    $("#AssociatesLoginID").val(data.UserID);
+                    $("#AssociateNames").removeClass('errortext');
+                    $("#AssociateLoginID").removeClass('errortext');
+
+                }
+                else if (data.Result == "no") {
+                    $("#AssociateNames").val('');
+                    $("#AssociateNames").addClass('errortext');
+                    $("#AssociateLoginID").addClass('errortext');
+                    $('#AssociateLoginID').focus();
+                    $('#AssociateLoginID').val('');
+                    alert("Invalid Associate Id");
+                }
+            }
+
+        });
+    }
 
     function CheckPlotStatus() {
         debugger
@@ -1286,6 +1369,8 @@
             $("#spnbankbranch").show();
             $("#divutrname").show();
             $("#divutramount").show();
+            $("#divAssociateId").hide();
+            $("#divAssociateName").hide();
             $("#TransactionNumber").attr("placeholder", "Cheque No.");
             $("#TransactionDate").attr("placeholder", "Cheque Date");
         }
@@ -1302,6 +1387,8 @@
             $("#spnbankbranch").hide();
             $("#divutrname").show();
             $("#divutramount").show();
+            $("#divAssociateId").hide();
+            $("#divAssociateName").hide();
             $("#TransactionNumber").attr("placeholder", "NEFT No.");
             $("#TransactionDate").attr("placeholder", "NEFT Date");
         }
@@ -1318,6 +1405,8 @@
             $("#divbankbranch").show();
             $("#divutrname").show();
             $("#divutramount").show();
+            $("#divAssociateId").hide();
+            $("#divAssociateName").hide();
             $("#TransactionNumber").attr("placeholder", "DD No.");
             $("#TransactionDate").attr("placeholder", "DD Date");
         }
@@ -1334,6 +1423,8 @@
             $("#spnbankbranch").hide();
             $("#divutrname").show();
             $("#divutramount").show();
+            $("#divAssociateId").hide();
+            $("#divAssociateName").hide();
             $("#TransactionNumber").attr("placeholder", "RTGS No.");
             $("#TransactionDate").attr("placeholder", "RTGS Date");
         }
@@ -1350,6 +1441,8 @@
             $("#divbankbranch").show();
             $("#divutrname").show();
             $("#divutramount").show();
+            $("#divAssociateId").hide();
+            $("#divAssociateName").hide();
             $("#TransactionNumber").attr("placeholder", "IMPS No.");
             $("#TransactionDate").attr("placeholder", "IMPS Date");
         }
@@ -1365,6 +1458,8 @@
             $("#divPaymentMode").hide();
             $("#divutrname").show();
             $("#divutramount").show();
+            $("#divAssociateId").hide();
+            $("#divAssociateName").hide();
             $("#TransactionNumber").attr("placeholder", "Mobile No. / UPI ID");
         }
         else if ($('#PaymentMode').val() == '8') {
@@ -1378,6 +1473,8 @@
             $("#divPaymentMode").hide();
             $("#divutrname").show();
             $("#divutramount").show();
+            $("#divAssociateId").hide();
+            $("#divAssociateName").hide();
             $("#TransactionNumber").attr("placeholder", "Mobile No. / UPI ID");
         }
         else if ($('#PaymentMode').val() == '9') {
@@ -1391,6 +1488,8 @@
             $("#divPaymentMode").hide();
             $("#divutrname").show();
             $("#divutramount").show();
+            $("#divAssociateId").hide();
+            $("#divAssociateName").hide();
             $("#TransactionNumber").attr("placeholder", "Mobile No. / UPI ID");
         }
         else if ($('#PaymentMode').val() == '10') {
@@ -1403,6 +1502,8 @@
             $("#divPaymentMode").hide();
             $("#divutrname").show();
             $("#divutramount").show();
+            $("#divAssociateId").hide();
+            $("#divAssociateName").hide();
             $("#TransactionNumber").attr("placeholder", "Mobile No. / UPI ID");
         }
         else if ($('#PaymentMode').val() == '11') {
@@ -1417,14 +1518,34 @@
             $("#divbankbranch").hide();
             $("#divutrname").show();
             $("#divutramount").show();
+            $("#divAssociateId").hide();
+            $("#divAssociateName").hide();
             $("#TransactionNumber").attr("placeholder", "Reciept No.");
             $("#TransactionDate").attr("placeholder", "Transaction Date");
+        }
+        else if ($('#PaymentMode').val() == '13') {
+
+            $('#txnAssociateId').html('Associate Id');
+            $('#txnAssociateName').text('Associate Name');
+            $("#divPaymentMode").show();
+            $("#divtransactiono").hide();
+            $("#divbankname").hide();
+            $("#divbankbranch").hide();
+            $("#divPaymentMode").hide();
+            $("#divAssociateId").show();
+            $("#divAssociateName").show();
+            $("#divutrname").hide();
+            $("#divutramount").hide();
+            $("#AssociateLoginID").attr("placeholder", "Associate Id");
+            $("#AssociateName").attr("placeholder", "AssociateName");
         }
         else {
             $("#divPaymentMode").hide();
             $("#divtransactiono").hide();
             $("#divbankname").hide();
             $("#divbankbranch").hide();
+            $("#divutrname").hide();
+            $("#divutramount").hide();
         }
 
     }
