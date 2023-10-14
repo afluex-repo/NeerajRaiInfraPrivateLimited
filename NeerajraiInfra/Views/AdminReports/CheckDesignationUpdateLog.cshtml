@@ -8,7 +8,7 @@
 
 
 <div class="loader" id="divload"></div>
-@using (Html.BeginForm("CheckDesignationUpdateLog", "AdminReports", FormMethod.Post, new { @id = "form1" }))
+@using (Html.BeginForm("CheckDesignationUpdateLog", "AdminReports", FormMethod.Post, new { @id = "form1" ,@autocomplete="off"}))
 {
     <section class="section">
         <ul class="breadcrumb breadcrumb-style ">
@@ -36,6 +36,18 @@
                     <div class="row ">
                         <div class="input-field col-md-3 m3 s12">
                             <div class="form-group">
+                                LoginID
+                                @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Login ID" })
+                            </div>
+                        </div>
+                        <div class="input-field col-md-3 m3 s12">
+                            <div class="form-group">
+                                Designation
+                                @Html.DropDownListFor(m => m.DesignationID, new SelectList(ViewBag.ddlDesignation, "Value", "Text"), new { @class = "form-control", @onchange = "return onSiteChange();" })
+                            </div>
+                        </div>
+                        <div class="input-field col-md-3 m3 s12">
+                            <div class="form-group">
                                 From Date
                                 @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "From Date", @readonly = "readonly" })
                             </div>
@@ -50,7 +62,7 @@
                         <div class="input-field col-md-3 m3 s12">
                             <div class="form-group">
 
-                                <input class="btn btn-success pull-left" type="submit" value="Search" id="btnSearch" name="GetList" />
+                                <input class="btn btn-success pull-left" type="submit" value="Search" id="btnSearch" name="btnSearch" />
                             </div>
                         </div>
                     </div>
@@ -74,7 +86,27 @@
 
                             <tbody>
 
-                               
+                                @if (Model != null)
+                                {
+                                    if (Model.lstAutoUpdateDesignation != null)
+                                    {
+                                        int i = 1;
+                                        foreach (var Item in Model.lstAutoUpdateDesignation)
+                                        {
+                                            <tr class="text-left">
+                                                <td>@i</td>
+                                                <td>@Item.LoginId</td>
+                                                <td>@Item.OldFk_DesignationId</td>
+                                                <td>@Item.OldBusiness</td>
+                                                <td>@Item.NewDesignationName</td>
+                                                <td>@Item.NewBusiness</td>
+                                                <td>@Item.DesignationUpgradeDate</td>
+                                            </tr>
+                                            i++;
+                                        }
+
+                                    }
+                                }
 
                             </tbody>
                         </table>
