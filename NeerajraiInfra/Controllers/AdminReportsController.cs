@@ -3193,5 +3193,85 @@ namespace NeerajraiInfra.Controllers
             }
             return View(model);
         }
+
+        public ActionResult CheckDesignationUpdateLog(Reports model)
+        {
+            #region ddlDesignation
+
+            int desgnationCount = 0;
+            List<SelectListItem> ddlDesignation = new List<SelectListItem>();
+            DataSet dsdesignation = model.GetDesignationList();
+            if (dsdesignation != null && dsdesignation.Tables.Count > 0 && dsdesignation.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsdesignation.Tables[0].Rows)
+                {
+                    if (desgnationCount == 0)
+                    {
+                        ddlDesignation.Add(new SelectListItem { Text = "Select Designation"});
+                    }
+                    ddlDesignation.Add(new SelectListItem { Text = r["DesignationName"].ToString(), Value = r["PK_DesignationID"].ToString() });
+                    desgnationCount = desgnationCount + 1;
+                }
+            }
+
+            ViewBag.ddlDesignation = ddlDesignation;
+
+            #endregion
+
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [ActionName("CheckDesignationUpdateLog")]
+        [OnAction(ButtonName = "btnSearch")]
+        public ActionResult SearchCheckDesignationUpdateLog(Reports model)
+        {
+            #region ddlDesignation
+
+            int desgnationCount = 0;
+            List<SelectListItem> ddlDesignation = new List<SelectListItem>();
+            DataSet dsdesignation = model.GetDesignationList();
+            if (dsdesignation != null && dsdesignation.Tables.Count > 0 && dsdesignation.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsdesignation.Tables[0].Rows)
+                {
+                    if (desgnationCount == 0)
+                    {
+                        ddlDesignation.Add(new SelectListItem { Text = "Select Designation"});
+                    }
+                    ddlDesignation.Add(new SelectListItem { Text = r["DesignationName"].ToString(), Value = r["PK_DesignationID"].ToString() });
+                    desgnationCount = desgnationCount + 1;
+                }
+            }
+
+            ViewBag.ddlDesignation = ddlDesignation;
+
+            #endregion
+
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            model.DesignationID = model.DesignationID == "0" ? null : model.DesignationID;
+            List<Reports> lst = new List<Reports>();
+            DataSet ds = model.GetAutoUpdateDesignation();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.LoginId = r["LoginID"].ToString();
+                    obj.OldFk_DesignationId = r["OldFk_DesignationId"].ToString();
+                    obj.OldBusiness = r["OldBusiness"].ToString();
+                    obj.NewFk_DesignationId = r["NewFk_DesignationId"].ToString();
+                    obj.NewDesignationName = r["NewDesignationName"].ToString();
+                    obj.NewBusiness = r["NewBusiness"].ToString();
+                    obj.DesignationUpgradeDate = r["DesignationUpgradeDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstAutoUpdateDesignation = lst;
+ 
+            }
+            return View(model);
+        }
     }
 }

@@ -125,7 +125,8 @@ namespace NeerajraiInfra.Models
         public List<Reports> EMIBookingReports { get; set; }
         public List<Reports> lstkharijdakhil { get; set; }
         public List<Reports> lstAssSelfdownBusinessReport { get; set; }
-        
+        public List<Reports> lstAutoUpdateDesignation { get; set; }
+
 
 
         public string Pk_KharijId { get; set; }
@@ -138,6 +139,14 @@ namespace NeerajraiInfra.Models
         public string KharijDakhilRemarks { get; set; }
         public string IFSCCode { get; set; }
         public string MemberAccNo { get; set; }
+        public string Percentage { get; set; }
+        public string DesignationID { get; set; }
+        public string OldFk_DesignationId { get; set; }
+        public string OldBusiness { get; set; }
+        public string NewFk_DesignationId { get; set; }
+        public string NewDesignationName { get; set; }
+        public string NewBusiness { get; set; }
+        public string DesignationUpgradeDate { get; set; }
 
         public DataSet GetBookingDetailsList()
         {
@@ -551,7 +560,27 @@ namespace NeerajraiInfra.Models
             return ds;
         }
 
+        
 
+        public DataSet GetDesignationList()
+        {
+            DataSet ds = Connection.ExecuteQuery("GetDesignationListNew");
+            return ds;
+        }
+
+
+        public DataSet GetAutoUpdateDesignation()
+        {
+            SqlParameter[] para =
+                         {
+                                 new SqlParameter("@LoginId",LoginId),
+                                 new SqlParameter("@NewFk_Designationid",DesignationID),
+                                 new SqlParameter("@FromDate",FromDate),
+                                 new SqlParameter("@ToDate",ToDate)
+                            };
+            DataSet ds = Connection.ExecuteQuery("GetAutoUpdateDesignation", para);
+            return ds;
+        }
     }
 }
 
