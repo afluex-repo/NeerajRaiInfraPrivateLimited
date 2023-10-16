@@ -142,11 +142,15 @@ namespace NeerajraiInfra.Models
         public string Percentage { get; set; }
         public string DesignationID { get; set; }
         public string OldFk_DesignationId { get; set; }
+        public string OldDesignationName { get; set; }
         public string OldBusiness { get; set; }
         public string NewFk_DesignationId { get; set; }
         public string NewDesignationName { get; set; }
         public string NewBusiness { get; set; }
         public string DesignationUpgradeDate { get; set; }
+
+        public string OldDesignationPercentage { get; set; }
+        public string NewDesignationPercentage { get; set; }
 
         public DataSet GetBookingDetailsList()
         {

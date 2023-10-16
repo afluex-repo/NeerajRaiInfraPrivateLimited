@@ -3260,10 +3260,12 @@ namespace NeerajraiInfra.Controllers
                 {
                     Reports obj = new Reports();
                     obj.LoginId = r["LoginID"].ToString();
-                    obj.OldFk_DesignationId = r["OldFk_DesignationId"].ToString();
+                    obj.OldDesignationName = r["OldDesignationName"].ToString();
+                    obj.OldDesignationPercentage = r["OldDesignationPercentage"].ToString();
                     obj.OldBusiness = r["OldBusiness"].ToString();
                     obj.NewFk_DesignationId = r["NewFk_DesignationId"].ToString();
                     obj.NewDesignationName = r["NewDesignationName"].ToString();
+                    obj.NewDesignationPercentage = r["NewDesignationPercentage"].ToString();
                     obj.NewBusiness = r["NewBusiness"].ToString();
                     obj.DesignationUpgradeDate = r["DesignationUpgradeDate"].ToString();
                     lst.Add(obj);
