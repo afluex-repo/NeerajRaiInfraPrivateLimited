@@ -23,6 +23,7 @@ namespace NeerajraiInfra.Models
         public string PLCAmount { get; set; }
         public string AllotmentRemark { get; set; }
         public bool IsDownline { get; set; }
+        public string Downline { get; set; }
 
         #region Properties
         public string Type { get; set; }
@@ -810,10 +811,11 @@ namespace NeerajraiInfra.Models
                                  new SqlParameter("@Mobile",Mobile),
                                  new SqlParameter("@PlotNumber",PlotNumber),
                                  new SqlParameter("@BookingNo",BookingNumber),
-                                new SqlParameter("@PK_SiteID",SiteID),
-                                new SqlParameter("@PK_SectorID",SectorID),
-                                new SqlParameter("@PK_BlockID",BlockID),
-                                new SqlParameter("@AssociateName",AssociateName),
+                                 new SqlParameter("@PK_SiteID",SiteID),
+                                 new SqlParameter("@PK_SectorID",SectorID),
+                                 new SqlParameter("@PK_BlockID",BlockID),
+                                 new SqlParameter("@AssociateName",AssociateName),
+                                 new SqlParameter("@IsDownline",Downline)
                             };
 
             DataSet ds = Connection.ExecuteQuery("GetDetailsForSummaryReport", para);

@@ -1079,10 +1079,6 @@ namespace NeerajraiInfra.Controllers
         #region PayPayout
         public ActionResult PayPayout()
         {
-            #region ddlLeg
-            List<SelectListItem> ddlLeg = Common.Leg();
-            ViewBag.ddlLeg = ddlLeg;
-            #endregion ddlLeg
             Reports model = new Reports();
 
             List<Reports> lst = new List<Reports>();
@@ -1113,12 +1109,9 @@ namespace NeerajraiInfra.Controllers
         [OnAction(ButtonName = "GetDetails")]
         public ActionResult GetPayPayout(Reports model)
         {
-            #region ddlLeg
-            List<SelectListItem> ddlLeg = Common.Leg();
-            ViewBag.ddlLeg = ddlLeg;
-            #endregion ddlLeg
+           
             model.LoginId = string.IsNullOrEmpty(model.LoginId) ? null : model.LoginId;
-
+            model.Downline = model.IsDownline == true ? "1" : "0";
             List<Reports> lst = new List<Reports>();
             DataSet ds = model.GetPayPayout();
 
@@ -1150,10 +1143,6 @@ namespace NeerajraiInfra.Controllers
         [OnAction(ButtonName = "Export")]
         public ActionResult ExportToExcelPayout(Reports model)
         {
-            #region ddlLeg
-            List<SelectListItem> ddlLeg = Common.Leg();
-            ViewBag.ddlLeg = ddlLeg;
-            #endregion ddlLeg
             model.LoginId = string.IsNullOrEmpty(model.LoginId) ? null : model.LoginId;
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");

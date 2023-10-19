@@ -47,7 +47,7 @@
                         <div class="input-field col m3 s12">
                             <div class="form-group">
                                 Customer Name
-                                @Html.TextBoxFor(m => m.UserID, new { @class = "form-control", @Placeholder = "Search by Customer Name" })
+                                @Html.TextBoxFor(m => m.UserID, new { @class = "form-control", @Placeholder = "Search by Customer Name"})
                                 @Html.HiddenFor(m => m.CustomerID)
                             </div>
                         </div>
@@ -113,16 +113,12 @@
                         </div>
                         <div class="col-12 col-md-3 col-lg-3">
                             <div class="form-group">
-                                    Leg
-                                    @Html.DropDownListFor(m => m.Leg, new SelectList(ViewBag.Leg, "Value", "Text"), new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-3 col-lg-3">
-                            <div class="form-group">
                                 IsDownline
                                 @Html.CheckBoxFor(m => m.IsDownline)
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-12 col-md-3 col-lg-3">
                             <div class="form-group">
                                 <br />
@@ -130,7 +126,6 @@
                             </div>
                         </div>
                     </div>
-                    
                     <br />
                     <div class="dt-responsive table-responsive">
                         <table class="table table-striped table-hover" data-page-length='50' id="tableExport" style="width:100%;">
@@ -197,6 +192,13 @@
 
 <script>
     $(document).ready(function () {
+
+           
+
+
+
+
+
         $("#divload").css({ 'display': 'none' });
         $("input").attr("autocomplete", "off");
         var cityuse = [];
