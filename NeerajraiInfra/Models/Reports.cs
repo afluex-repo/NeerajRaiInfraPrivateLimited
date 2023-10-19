@@ -12,6 +12,7 @@ namespace NeerajraiInfra.Models
     {
         
         public string ErrorMessage { get; set; }
+        public string Downline { get; set; }
         public int hdRows1 { get; set; }
         public string ReturnBenefitStartDate { get; set; }
         public string SponsorName { get; set; }
@@ -534,8 +535,8 @@ namespace NeerajraiInfra.Models
         public DataSet GetPayPayout()
         {
             SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
-                                    new SqlParameter("@IsDownline", IsDownline),
-                                    new SqlParameter("@Leg", Leg), };
+                                    new SqlParameter("@IsDownline", Downline)
+            };
             DataSet ds = Connection.ExecuteQuery("GetBalancePayoutforPayment", para);
             return ds;
         }

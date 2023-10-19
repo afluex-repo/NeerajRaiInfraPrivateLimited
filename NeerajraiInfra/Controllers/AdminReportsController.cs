@@ -293,15 +293,11 @@ namespace NeerajraiInfra.Controllers
         [OnAction(ButtonName = "Search")]
         public ActionResult GetSummaryRep(Plot model)
         {
-            #region ddlleg
-            List<SelectListItem> Leg = Common.Leg();
-            ViewBag.Leg = Leg;
-            #endregion ddlleg
+            
 
             int count1 = 0;
             Master objmaster = new Master();
             List<SelectListItem> ddlSite = new List<SelectListItem>();
-            model.Leg = string.IsNullOrEmpty(model.Leg) ? null : model.Leg;
             DataSet dsSite = objmaster.GetSiteList();
             if (dsSite != null && dsSite.Tables.Count > 0 && dsSite.Tables[0].Rows.Count > 0)
             {
@@ -372,7 +368,7 @@ namespace NeerajraiInfra.Controllers
             model.BlockID = model.BlockID == "0" ? null : model.BlockID;
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
-
+            model.Downline = model.IsDownline == true ? "1" : "0";
             DataSet ds = model.GetSummaryList();
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
