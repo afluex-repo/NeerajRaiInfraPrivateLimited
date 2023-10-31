@@ -383,6 +383,16 @@ namespace NeerajraiInfra.Models
         }
 
 
+        public static List<SelectListItem> BindPlotStatus()
+        {
+            List<SelectListItem> ddlPlotStatus = new List<SelectListItem>();
+            ddlPlotStatus.Add(new SelectListItem { Text = "Available", Value = "A" });
+            ddlPlotStatus.Add(new SelectListItem { Text = "Booked", Value = "B" });
+            
+            return ddlPlotStatus;
+        }
+
+
 
 
         public static List<SelectListItem> Abbreviation()

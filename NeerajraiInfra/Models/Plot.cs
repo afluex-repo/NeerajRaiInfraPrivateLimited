@@ -13,7 +13,7 @@ namespace NeerajraiInfra.Models
         public List<SelectListItem> ddlPLC { get; set; }
         public List<SelectListItem> ddlRate { get; set; }
         public string BookingType { get; set; }
-        
+        public string Leg { get; set; }
         public string GrossAmount { get; set; }
         public string NetAmount { get; set; }
         public List<SelectListItem> ddlPlan { get; set; }
@@ -22,6 +22,8 @@ namespace NeerajraiInfra.Models
         public string AssociatesLoginID { get; set; }
         public string PLCAmount { get; set; }
         public string AllotmentRemark { get; set; }
+        public bool IsDownline { get; set; }
+        public string Downline { get; set; }
 
         #region Properties
         public string Type { get; set; }
@@ -41,6 +43,9 @@ namespace NeerajraiInfra.Models
         public string BranchName { get; set; }
         public string PlotID { get; set; }
         public string PlotNumber { get; set; }
+
+        public string PaymentModeRemarks { get; set; }
+        
         public string CustomerID { get; set; }
         public string ToCustomerID { get; set; }
         public string CustomerLoginID { get; set; }
@@ -809,10 +814,11 @@ namespace NeerajraiInfra.Models
                                  new SqlParameter("@Mobile",Mobile),
                                  new SqlParameter("@PlotNumber",PlotNumber),
                                  new SqlParameter("@BookingNo",BookingNumber),
-                                new SqlParameter("@PK_SiteID",SiteID),
-                                new SqlParameter("@PK_SectorID",SectorID),
-                                new SqlParameter("@PK_BlockID",BlockID),
-                                new SqlParameter("@AssociateName",AssociateName)
+                                 new SqlParameter("@PK_SiteID",SiteID),
+                                 new SqlParameter("@PK_SectorID",SectorID),
+                                 new SqlParameter("@PK_BlockID",BlockID),
+                                 new SqlParameter("@AssociateName",AssociateName),
+                                 new SqlParameter("@IsDownline",Downline)
                             };
 
             DataSet ds = Connection.ExecuteQuery("GetDetailsForSummaryReport", para);

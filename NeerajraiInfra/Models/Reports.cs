@@ -12,6 +12,8 @@ namespace NeerajraiInfra.Models
     {
         
         public string ErrorMessage { get; set; }
+        public string Downline { get; set; }
+        public int hdRows1 { get; set; }
         public string ReturnBenefitStartDate { get; set; }
         public string SponsorName { get; set; }
         public string SponsorId { get; set; }
@@ -123,13 +125,33 @@ namespace NeerajraiInfra.Models
         List<SelectListItem> ddlPaymentMode = new List<SelectListItem>();
         public List<Reports> EMIBookingReports { get; set; }
         public List<Reports> lstkharijdakhil { get; set; }
+        public List<Reports> lstAssSelfdownBusinessReport { get; set; }
+        public List<Reports> lstAutoUpdateDesignation { get; set; }
+
+
 
         public string Pk_KharijId { get; set; }
         public string IsKharijDakhilDone { get; set; }
+
+
+        public string SelfBusiness { get; set; }
+        public string TeamBusiness { get; set; }
         public string KharijDakhilDate { get; set; }
         public string KharijDakhilRemarks { get; set; }
         public string IFSCCode { get; set; }
         public string MemberAccNo { get; set; }
+        public string Percentage { get; set; }
+        public string DesignationID { get; set; }
+        public string OldFk_DesignationId { get; set; }
+        public string OldDesignationName { get; set; }
+        public string OldBusiness { get; set; }
+        public string NewFk_DesignationId { get; set; }
+        public string NewDesignationName { get; set; }
+        public string NewBusiness { get; set; }
+        public string DesignationUpgradeDate { get; set; }
+
+        public string OldDesignationPercentage { get; set; }
+        public string NewDesignationPercentage { get; set; }
 
         public DataSet GetBookingDetailsList()
         {
@@ -508,11 +530,13 @@ namespace NeerajraiInfra.Models
         #endregion
 
         #region PayPayout
+
+        public string BankHolderName { get; set; }
         public DataSet GetPayPayout()
         {
             SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
-                                    new SqlParameter("@IsDownline", IsDownline),
-                                    new SqlParameter("@Leg", Leg), };
+                                    new SqlParameter("@IsDownline", Downline)
+            };
             DataSet ds = Connection.ExecuteQuery("GetBalancePayoutforPayment", para);
             return ds;
         }
@@ -529,7 +553,39 @@ namespace NeerajraiInfra.Models
         #endregion
 
 
+        public DataSet GetAssociateSelfdownBusinessReport()
+        {
+            SqlParameter[] para =
+                         {
+                                 new SqlParameter("@LoginId",AssociateID),
+                                 new SqlParameter("@FromDate",FromDate),
+                                 new SqlParameter("@ToDate",ToDate)
+                            };
+            DataSet ds = Connection.ExecuteQuery("GetSelftDownReport", para);
+            return ds;
+        }
 
+        
+
+        public DataSet GetDesignationList()
+        {
+            DataSet ds = Connection.ExecuteQuery("GetDesignationListNew");
+            return ds;
+        }
+
+
+        public DataSet GetAutoUpdateDesignation()
+        {
+            SqlParameter[] para =
+                         {
+                                 new SqlParameter("@LoginId",LoginId),
+                                 new SqlParameter("@NewFk_Designationid",DesignationID),
+                                 new SqlParameter("@FromDate",FromDate),
+                                 new SqlParameter("@ToDate",ToDate)
+                            };
+            DataSet ds = Connection.ExecuteQuery("GetAutoUpdateDesignation", para);
+            return ds;
+        }
     }
 }
 

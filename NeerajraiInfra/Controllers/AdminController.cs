@@ -1079,10 +1079,6 @@ namespace NeerajraiInfra.Controllers
         #region PayPayout
         public ActionResult PayPayout()
         {
-            #region ddlLeg
-            List<SelectListItem> ddlLeg = Common.Leg();
-            ViewBag.ddlLeg = ddlLeg;
-            #endregion ddlLeg
             Reports model = new Reports();
 
             List<Reports> lst = new List<Reports>();
@@ -1094,6 +1090,7 @@ namespace NeerajraiInfra.Controllers
                 {
                     Reports obj = new Reports();
                     obj.Name = r["Name"].ToString();
+                    obj.BankHolderName = r["BankHolderName"].ToString();
                     obj.LoginId = r["LoginId"].ToString();
                     obj.MemberAccNo = r["MemberAccNo"].ToString();
                     obj.IFSCCode = (r["IFSCCode"].ToString());
@@ -1112,12 +1109,9 @@ namespace NeerajraiInfra.Controllers
         [OnAction(ButtonName = "GetDetails")]
         public ActionResult GetPayPayout(Reports model)
         {
-            #region ddlLeg
-            List<SelectListItem> ddlLeg = Common.Leg();
-            ViewBag.ddlLeg = ddlLeg;
-            #endregion ddlLeg
+           
             model.LoginId = string.IsNullOrEmpty(model.LoginId) ? null : model.LoginId;
-
+            model.Downline = model.IsDownline == true ? "1" : "0";
             List<Reports> lst = new List<Reports>();
             DataSet ds = model.GetPayPayout();
 
@@ -1149,10 +1143,6 @@ namespace NeerajraiInfra.Controllers
         [OnAction(ButtonName = "Export")]
         public ActionResult ExportToExcelPayout(Reports model)
         {
-            #region ddlLeg
-            List<SelectListItem> ddlLeg = Common.Leg();
-            ViewBag.ddlLeg = ddlLeg;
-            #endregion ddlLeg
             model.LoginId = string.IsNullOrEmpty(model.LoginId) ? null : model.LoginId;
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
@@ -1166,7 +1156,6 @@ namespace NeerajraiInfra.Controllers
                 ds.Tables[0].Columns.Remove("Pk_UserID");
                 ds.Tables[0].Columns.Remove("MemberBranch");
                 ds.Tables[0].Columns.Remove("BankHolderName");
-                ds.Tables[0].Columns.Remove("TransactionDate");
                 GridView1.DataSource = ds.Tables[0];
                 GridView1.DataBind();
                 string style = @" .text { mso-number-format:\@; }  ";
@@ -1233,6 +1222,7 @@ namespace NeerajraiInfra.Controllers
                     }
                 }
             }
+          
             return RedirectToAction("PayPayout");
         }
         #endregion

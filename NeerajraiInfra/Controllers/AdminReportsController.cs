@@ -273,6 +273,10 @@ namespace NeerajraiInfra.Controllers
 
             ViewBag.ddlBlock = lstBlock;
             #endregion
+            #region ddlleg
+            List<SelectListItem> Leg = Common.Leg();
+            ViewBag.Leg = Leg;
+            #endregion ddlleg
             //#endregion
             //List<SelectListItem> ddlSector = new List<SelectListItem>();
             //ddlSector.Add(new SelectListItem { Text = "Select Phase", Value = "0" });
@@ -289,6 +293,8 @@ namespace NeerajraiInfra.Controllers
         [OnAction(ButtonName = "Search")]
         public ActionResult GetSummaryRep(Plot model)
         {
+            
+
             int count1 = 0;
             Master objmaster = new Master();
             List<SelectListItem> ddlSite = new List<SelectListItem>();
@@ -362,7 +368,7 @@ namespace NeerajraiInfra.Controllers
             model.BlockID = model.BlockID == "0" ? null : model.BlockID;
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
-
+            model.Downline = model.IsDownline == true ? "1" : "0";
             DataSet ds = model.GetSummaryList();
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -1647,7 +1653,7 @@ namespace NeerajraiInfra.Controllers
                         string name = ds.Tables[0].Rows[0]["Name"].ToString();
                         string Amount = ds.Tables[0].Rows[0]["Amount"].ToString();
                         string TempId = "1707166296882557362";
-                        BLSMS.SendSMS(mob, "Dear " + name + ", Your Payout Request of Rs" + Amount + " has been approved and processed successfully. Please check your account. SHRIRADHEYKUNJ", TempId);
+                        BLSMS.SendSMS(mob, "Dear " + name + ", Your Payout Request of Rs" + Amount + " has been approved and processed successfully. Please check your account. NeerajRaiInfra", TempId);
                     }
                     else
                     {
@@ -3155,6 +3161,115 @@ namespace NeerajraiInfra.Controllers
         }
         #endregion
 
-       
+        public ActionResult AssociateSelfdownBusinessReport()
+        {
+           return View();
+        }
+        [HttpPost]
+        [ActionName("AssociateSelfdownBusinessReport")]
+        [OnAction(ButtonName = "GetList")]
+        public ActionResult AssociateSelfdownBusinessReportAction(Reports model)
+        {
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            List<Reports> lst = new List<Reports>();
+            DataSet ds = model.GetAssociateSelfdownBusinessReport();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.LoginId = r["LoginID"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.SelfBusiness = r["SelfBusiness"].ToString();
+                    obj.TeamBusiness = r["TeamBusiness"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstAssSelfdownBusinessReport = lst;
+            }
+            return View(model);
+        }
+
+        public ActionResult CheckDesignationUpdateLog(Reports model)
+        {
+            #region ddlDesignation
+
+            int desgnationCount = 0;
+            List<SelectListItem> ddlDesignation = new List<SelectListItem>();
+            DataSet dsdesignation = model.GetDesignationList();
+            if (dsdesignation != null && dsdesignation.Tables.Count > 0 && dsdesignation.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsdesignation.Tables[0].Rows)
+                {
+                    if (desgnationCount == 0)
+                    {
+                        ddlDesignation.Add(new SelectListItem { Text = "Select Designation"});
+                    }
+                    ddlDesignation.Add(new SelectListItem { Text = r["DesignationName"].ToString(), Value = r["PK_DesignationID"].ToString() });
+                    desgnationCount = desgnationCount + 1;
+                }
+            }
+
+            ViewBag.ddlDesignation = ddlDesignation;
+
+            #endregion
+
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [ActionName("CheckDesignationUpdateLog")]
+        [OnAction(ButtonName = "btnSearch")]
+        public ActionResult SearchCheckDesignationUpdateLog(Reports model)
+        {
+            #region ddlDesignation
+
+            int desgnationCount = 0;
+            List<SelectListItem> ddlDesignation = new List<SelectListItem>();
+            DataSet dsdesignation = model.GetDesignationList();
+            if (dsdesignation != null && dsdesignation.Tables.Count > 0 && dsdesignation.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsdesignation.Tables[0].Rows)
+                {
+                    if (desgnationCount == 0)
+                    {
+                        ddlDesignation.Add(new SelectListItem { Text = "Select Designation"});
+                    }
+                    ddlDesignation.Add(new SelectListItem { Text = r["DesignationName"].ToString(), Value = r["PK_DesignationID"].ToString() });
+                    desgnationCount = desgnationCount + 1;
+                }
+            }
+
+            ViewBag.ddlDesignation = ddlDesignation;
+
+            #endregion
+
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            model.DesignationID = model.DesignationID == "0" ? null : model.DesignationID;
+            List<Reports> lst = new List<Reports>();
+            DataSet ds = model.GetAutoUpdateDesignation();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.LoginId = r["LoginID"].ToString();
+                    obj.OldDesignationName = r["OldDesignationName"].ToString();
+                    obj.OldDesignationPercentage = r["OldDesignationPercentage"].ToString();
+                    obj.OldBusiness = r["OldBusiness"].ToString();
+                    obj.NewFk_DesignationId = r["NewFk_DesignationId"].ToString();
+                    obj.NewDesignationName = r["NewDesignationName"].ToString();
+                    obj.NewDesignationPercentage = r["NewDesignationPercentage"].ToString();
+                    obj.NewBusiness = r["NewBusiness"].ToString();
+                    obj.DesignationUpgradeDate = r["DesignationUpgradeDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstAutoUpdateDesignation = lst;
+ 
+            }
+            return View(model);
+        }
     }
 }
