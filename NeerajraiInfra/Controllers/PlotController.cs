@@ -2819,6 +2819,7 @@ namespace NeerajraiInfra.Controllers
                     obj.SectorName = r["SectorName"].ToString();
                     obj.BlockName = r["BlockName"].ToString();
                     obj.PlotNumber = r["PlotNumber"].ToString();
+                    obj.PaymentModeRemarks = r["PaymentModeRemarks"].ToString();
                     lst.Add(obj);
                 }
                 model.lstPlot = lst;

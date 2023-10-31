@@ -43,6 +43,9 @@ namespace NeerajraiInfra.Models
         public string BranchName { get; set; }
         public string PlotID { get; set; }
         public string PlotNumber { get; set; }
+
+        public string PaymentModeRemarks { get; set; }
+        
         public string CustomerID { get; set; }
         public string ToCustomerID { get; set; }
         public string CustomerLoginID { get; set; }
