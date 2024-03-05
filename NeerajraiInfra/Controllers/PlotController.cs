@@ -2823,6 +2823,7 @@ namespace NeerajraiInfra.Controllers
                     lst.Add(obj);
                 }
                 model.lstPlot = lst;
+                ViewBag.TotalAmount = double.Parse(ds.Tables[0].Compute("sum(PaidAmount)", "").ToString()).ToString("n2");
             }
             #region ddlPaymentMode
             int count3 = 0;
@@ -3108,6 +3109,7 @@ namespace NeerajraiInfra.Controllers
                     i = i + 1;
                 }
                 model.lstPlot = lst;
+                ViewBag.TotalPaidAmount = double.Parse(ds.Tables[0].Compute("sum(PaidAmount)", "").ToString()).ToString("n2");
             }
             #region ddlpaymentStatus
             List<SelectListItem> ddlpaymentStatus = Common.BindPaymentStatus();
@@ -3151,6 +3153,7 @@ namespace NeerajraiInfra.Controllers
                     lst.Add(obj);
                 }
                 model.lstPlot = lst;
+                ViewBag.TotalPaidAmount = double.Parse(ds.Tables[0].Compute("sum(PaidAmount)", "").ToString()).ToString("n2");
             }
             #region ddlpaymentStatus
             List<SelectListItem> ddlpaymentStatus = Common.BindPaymentStatus();
