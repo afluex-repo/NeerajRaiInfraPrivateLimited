@@ -73,12 +73,10 @@
                                         <th>Mode</th>
                                         <th>Date</th>
                                         <th>Transaction No.</th>
-
                                         <th>Amount</th>
                                         <th>Status</th>
                                         <th>Approved/Rejected Date</th>
                                         <th>Description</th>
-
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -96,7 +94,6 @@
                                                     <td>@Item.PaymentMode</td>
                                                     <td>@Item.TransactionDate</td>
                                                     <td>@Item.TransactionNumber</td>
-
                                                     <td>@Item.PaidAmount</td>
                                                     <td>@Item.PaymentStatus</td>
                                                     <td>@Item.ApprovedDate</td>
@@ -109,7 +106,20 @@
                                     }
 
                                 </tbody>
-
+                                <tfoot>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th>Total:-</th>
+                                        <th>@ViewBag.TotalPaidAmount</th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
                     </div>
