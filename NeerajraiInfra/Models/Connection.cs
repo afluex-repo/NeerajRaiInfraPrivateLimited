@@ -80,6 +80,3 @@ namespace NeerajraiInfra.Models
         }
     }
 }
-
-
-
