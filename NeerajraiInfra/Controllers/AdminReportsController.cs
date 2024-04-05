@@ -397,6 +397,9 @@ namespace NeerajraiInfra.Controllers
                     lst.Add(obj);
                 }
                 model.lstPlot = lst;
+                ViewBag.TotalNetPlotAmount = double.Parse(ds.Tables[0].Compute("sum(NetPlotAmount)", "").ToString()).ToString("n2");
+                ViewBag.TotalPaidAmount = double.Parse(ds.Tables[0].Compute("sum(PaidAmount)", "").ToString()).ToString("n2");
+                ViewBag.TotalBalance = double.Parse(ds.Tables[0].Compute("sum(Balance)", "").ToString()).ToString("n2");
             }
             return View(model);
         }
