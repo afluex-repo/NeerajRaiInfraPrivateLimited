@@ -1,0 +1,474 @@
+﻿@model NeerajraiInfra.Models.Plot
+
+@{
+    ViewBag.Title = "CancelPrintReceipt";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    #divload {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        z-index: 9999;
+        background: url("../files/assets/images/login-gif-11.gif") no-repeat center center rgba(0,0,0,0.25);
+    }
+
+    .errortext {
+        border: 1px solid red !important;
+    }
+</style>
+<div class="loader" id="divload"></div>
+@using (Html.BeginForm("CancelPrintReceipt", "AdminReports", FormMethod.Post, new { @id = "form1" }))
+{
+
+
+    <section class="section">
+        <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+                <a href="#">
+                    <i data-feather="home"></i>
+                </a>
+            </li>
+            <li class="breadcrumb-item">Reports</li>
+            <li class="breadcrumb-item">Cancel Receipt</li>
+        </ul>
+    </section>
+
+    <div class="section-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Cancel Receipt</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row ">
+                            <div class="input-field col m3 s12">
+                                <div class="form-group">
+                                    Customer ID
+                                    @Html.TextBoxFor(m => m.UserID, new { @class = "form-control", @Placeholder = "Customer ID" })
+                                    @Html.HiddenFor(m => m.CustomerID)
+                                </div>
+                            </div>
+                            <div class="input-field col m3 s12">
+                                <div class="form-group">
+                                    Associate ID
+                                    @Html.TextBoxFor(m => m.AssociateLoginID, new { @class = "form-control", @Placeholder = "Associate ID" })
+                                    @Html.HiddenFor(m => m.AssociateID)
+                                </div>
+                            </div>
+
+                            <div class="input-field col m3 s12">
+                                <div class="form-group">
+                                    From Date
+                                    @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "From Date", @readonly = "readonly" })
+                                </div>
+                            </div>
+                            <div class="input-field col m3 s12">
+                                <div class="form-group">
+                                    To Date
+                                    @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @Placeholder = "To Date", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="input-field col m3 s12">
+                                <div class="form-group">
+                                    Select Site
+                                    @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control", @onchange = "return onSiteChange();" })
+                                </div>
+                            </div>
+                            <div class="input-field col m3 s12">
+                                <div class="form-group">
+                                    Select Phase
+                                    @Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control", @onchange = "return onSectorChange();" })
+                                </div>
+                            </div>
+                            <div class="input-field col m3 s12">
+                                <div class="form-group">
+                                    Select Block
+                                    @Html.DropDownListFor(m => m.BlockID, new SelectList(ViewBag.ddlBlock, "Value", "Text"), new { @class = "form-control" })
+                                </div>
+                            </div>
+
+
+                            <div class="input-field col m3 s12">
+                                <div class="form-group">
+                                    Plot Number
+                                    @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @Placeholder = "Search by Plot Number" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="input-field col-3">
+                                <div class="form-group">
+                                    Booking Number
+                                    @Html.TextBoxFor(m => m.BookingNumber, new { @class = "form-control", @Placeholder = "Search by Booking Number" })
+                                </div>
+                            </div>
+
+                            <div class="input-field col m3 s12">
+                                <div class="form-group">
+                                    <br />
+                                    <input class="btn btn-success pull-left" type="submit" value="Search" id="btnSearch" name="Search" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-md" data-page-length='50' id="tableExport" style="width:100%;">
+                                <thead>
+                                    <tr>
+                                        <th hidden>PK_BookingID</th>
+                                        <th>S No.</th>
+                                        <th>Customer ID</th>
+                                        <th>Customer Name</th>
+                                        <th>Associate ID</th>
+                                        <th>Allotment Date</th>
+                                        <th>Amount</th>
+                                        <th>Booking Number</th>
+                                        <th>Site </th>
+                                        <th>Phase </th>
+                                        <th>Block </th>
+                                        <th>Plot Number</th>
+                                        <th>Mode</th>
+                                        <th>Action</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.lstPlot != null)
+                                        {
+                                            int i = 1;
+                                            foreach (var Item in Model.lstPlot)
+                                            {
+                                                <tr class="text-left">
+
+                                                    <td>@i</td>
+                                                    <td>@Item.CustomerID</td>
+                                                    <td>@Item.CustomerName</td>
+                                                    <td>@Item.AssociateID</td>
+                                                    <td>@Item.PaymentDate</td>
+                                                    <td>@Item.PaidAmount</td>
+                                                    <td>@Item.BookingNumber</td>
+                                                    <td>@Item.SiteName </td>
+                                                    <td>@Item.SectorName </td>
+                                                    <td>@Item.BlockName </td>
+                                                    <td>@Item.PlotNumber</td>
+                                                    <td>@Item.PaymentMode</td>
+                                                    <td>
+                                                        @*<a href="/Reports/PrintAllotment?PK_BookingId=@Item.PK_BookingId" class="btn btn-primary btn-sm" type="submit" name="Print" >Print</a>*@
+                                                        @*<a href="/AdminReports/PrintAllotment?PrintId=@Item.EncryptKey" class="btn btn-danger btn-sm">Cancel</a>*@
+
+                                                        <a href="#" class="btn btn-danger btn-sm" style="margin-top:5px;margin-bottom:5px;" data-toggle="modal" data-target="#exampleModal" id="Bookinddetaisid_@Item.PK_BookingDetailsId" onclick="return openPopup(@Item.PK_BookingDetailsId)">Cancel</a>
+                                                        @*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                                                Cancel
+                                                            </button>*@
+                                                    </td>
+                                                </tr>
+                                                i++;
+                                            }
+                                        }
+                                    }
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal with form -->
+    @Html.HiddenFor(m => m.PK_BookingDetailsId)
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="formModal"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="formModal">Cancellation</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="return Closemodal();">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="">
+                        <div class="form-group mb-0">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" name="remember" class="custom-control-input" id="remember-me">
+                                <label class="custom-control-label" for="remember-me">Are you sure you want to cancel this receipt ?</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 form-group mb-0">
+                                <input type="text" id="Pk_BookingDetailsID123" name="Pk_BookingDetailsID123" hidden />
+
+                                <label>Cancel Date <span style="color:red">*</span></label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="cancelleddate" placeholder="Date" name="date" autocomplete="off" disabled>
+                                </div>
+                            </div>
+                            <div class="col-md-8 form-group mb-0">
+                                <label>Description <span style="color:red">*</span></label>
+                                <div class="input-group">
+                                    <textarea type="text" class="form-control" id="description" placeholder="Type Here..." name="email" disabled></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn btn-success m-t-15 waves-effect" onclick="return Cancel();">OK</button>
+                        <button type="button" class="btn btn-danger m-t-15 waves-effect" data-dismiss="modal" aria-label="Close" onclick="return Closemodal();">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+}
+<script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
+
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+
+<script>
+
+    $(document).ready(function () {
+
+        $("#SectorID").html(""); // clear before appending new list
+        $("#SectorID").empty();
+        $("#SectorID").append(
+              $('<option></option>').val(0).html('Select Phase'));
+        $("#BlockID").html(""); // clear before appending new list
+        $("#BlockID").empty();
+        $("#BlockID").append(
+              $('<option></option>').val(0).html('Select Block'));
+
+        $("#divload").css({ 'display': 'none' });
+        var cityuse = [];
+        $("#loader").css({ 'display': '' });
+        $.ajax({
+            url: '/Plot/CustomerListForAutoSearch',
+            type: 'Post',
+            success: function (response) {
+                if (response != null) {
+                    $(response).each(function (index, item) {
+                        cityuse.push(item.UserName + "(" + item.LoginIDD + ")");
+                    });
+                    debugger
+                    $('#UserID').autocomplete({
+                        source: cityuse,
+                        select: function (event, ui) {
+                            var str = ui.item.label;
+                            var strsplit = str.split("(");
+
+                            $('#CustomerID').val(strsplit[1].substr(0, strsplit[1].length - 1));
+                        }
+                    })
+                }
+            }, error: function () {
+                alert('Some Thing wrong!');
+                $("#loader").css({ 'display': 'none' });
+            }
+        });
+        var AssociateList = [];
+        $("#loader").css({ 'display': '' });
+        $.ajax({
+            url: '/Plot/GetUserList',
+            type: 'Post',
+            success: function (response) {
+                if (response != null) {
+                    $(response).each(function (index, item) {
+                        AssociateList.push(item.UserName + "(" + item.LoginIDD + ")");
+                    });
+                    debugger
+                    $('#AssociateLoginID').autocomplete({
+                        source: AssociateList,
+                        select: function (event, ui) {
+                            var str = ui.item.label;
+                            var strsplit = str.split("(");
+
+                            $('#AssociateID').val(strsplit[1].substr(0, strsplit[1].length - 1));
+                        }
+                    })
+                }
+            }, error: function () {
+                alert('Some Thing wrong!');
+                $("#loader").css({ 'display': 'none' });
+            }
+        });
+    });
+
+    function onSiteChange() {
+        $("#divload").css({ 'display': '' });
+        var value = $('#SiteID').val();
+        var values = $('#SectorID').val();
+        var tr = [];
+        $.ajax({
+            url: "/Plot/GetSiteDetails",
+            Type: "Get",
+            DataType: "JSON",
+            data: { SiteID: value },
+            success: function (data) {
+                $("#divload").css({ 'display': 'none' });
+                var j = 1;
+                if (data.Result == "yes") {
+                    $('#Rate').val(data.Rate);
+                    $("#SectorID").html(""); // clear before appending new list
+                    $("#SectorID").empty();
+                    $("#SectorID").append(
+                          $('<option></option>').val(0).html('Select Phase'));
+                    $.each(data.ddlSector, function (index, Sectorcount) {
+                        $("#SectorID").append(
+                              $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
+
+                    });
+                    $("#SectorID").formSelect();
+                }
+                else {
+                    $("#SectorID").empty();
+                    $('#Rate').val('');
+                }
+
+
+            }
+
+        });
+
+    }
+
+
+
+
+
+    function onSectorChange() {
+
+        $("#divload").css({ 'display': '' });
+        var siteID = $('#SiteID').val();
+        var sectorID = $('#SectorID').val();
+        $.ajax({
+            url: '/Plot/GetBlockList', type: 'post', dataType: 'json',
+            data: { 'SiteID': siteID, 'sectorID': sectorID },
+            success: function (data) {
+                $("#divload").css({ 'display': 'none' });
+                $("#BlockID").html(""); // clear before appending new list
+                $("#BlockID").empty();
+                $("#BlockID").append(
+                      $('<option></option>').val(0).html('Select Block'));
+                $.each(data.lstBlock, function (index, BlockCount) {
+                    $("#BlockID").append(
+                          $('<option></option>').val(BlockCount.Value).html(BlockCount.Text));
+                });
+                $("#BlockID").formSelect();
+            }
+
+        });
+    }
+
+
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
+    });
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
+    });
+    $('#cancelleddate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
+    });
+
+    $("#remember-me").click(function () {
+        if ($(this).is(":checked")) {
+            $("#cancelleddate").removeAttr('disabled');
+            $("#description").removeAttr('disabled');
+        } else {
+            $("#cancelleddate").attr('disabled', 'disabled');
+            $("#description").attr('disabled', 'disabled');
+        }
+    });
+
+    function openPopup(Id) {
+        debugger;
+        var BookingDetailsID = $("#Pk_BookingDetailsID123").val(Id);
+        $('#remember-me').prop('checked', false);
+        $('#cancelleddate').val('');
+        $('#description').val('');
+        $("#cancelleddate").attr('disabled', 'disabled');
+        $("#description").attr('disabled', 'disabled');
+        $(".errortext").removeClass("errortext");
+        $("#myModal").modal('show');
+    };
+    function Closemodal() {
+        $('#remember-me').prop('checked', false);
+        $('#cancelleddate').val('');
+        $('#description').val('');
+        $("#cancelleddate").attr('disabled', 'disabled');
+        $("#description").attr('disabled', 'disabled');
+        $(".errortext").removeClass("errortext");
+        $("#myModal").modal('hide');
+    };
+    function Cancel() {
+        $(".errortext").removeClass("errortext");
+        debugger;
+        if ($('input[type=checkbox]:checked').length == 0) {
+            alert('Please select checkbox for canceled');
+            return false;
+        }
+        if ($('#cancelleddate').val() == '') {
+            $("#cancelleddate").addClass('errortext');
+            $('#cancelleddate').focus();
+            return false;
+        }
+        if ($('#description').val() == '') {
+            $("#description").addClass('errortext');
+            $('#description').focus();
+            return false;
+        }
+        var canceldate=$('#cancelleddate').val();
+        var Description=$('#description').val();
+        var BookingDetailsId=$('#Pk_BookingDetailsID123').val();
+        //alert(canceldate);
+        //alert(Description);
+        //alert(BookingDetailsId);
+            $.ajax({
+                url: "/AdminReports/CancelPrintReceiptWise",
+                Type: "Get",
+                DataType: "JSON",
+                data: { canceldate: canceldate, Description: Description,BookingDetailsId: BookingDetailsId },
+                success: function (data) {
+                    if (data.Result == "yes") {
+                        alert("Receipt canceled !! ");
+                        location.reload();
+                    }
+                    else {
+                        alert("Receipt not canceled !! ");
+                        location.reload();
+                    }
+                    @*window.location.href = '@Url.Action("Payment", "Plot")';*@
+
+                }
+
+            });
+
+    }
+</script>
+
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>
+
