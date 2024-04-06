@@ -878,6 +878,18 @@ namespace NeerajraiInfra.Models
             DataSet ds = Connection.ExecuteQuery("UtrList", para);
             return ds;
         }
+        public DataSet CancelPrintReceipt()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@BookingDetailsId", PK_BookingDetailsId),
+                                      new SqlParameter("@Description", Description),
+                                      new SqlParameter("@CancelDate", CancelDate),
+                                      new SqlParameter("@LoginId", LoginId),
+
+                                     };
+            DataSet ds = Connection.ExecuteQuery("CancelPrintReceipt", para);
+            return ds;
+        }
         #region RowHouseBooking
         public string RowHouseBookingID { get; set; }
         public string PK_PLCCharge { get; set; }

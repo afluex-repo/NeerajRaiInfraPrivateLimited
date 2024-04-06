@@ -37,7 +37,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <IntermediateOutputPath>C:\Users\MUTILE~1\AppData\Local\Temp\vsB6FE.tmp\Debug\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\MUTILE~1\AppData\Local\Temp\vs7CC2.tmp\Debug\</IntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -46,7 +46,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <IntermediateOutputPath>C:\Users\MUTILE~1\AppData\Local\Temp\vsB6FE.tmp\Release\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\MUTILE~1\AppData\Local\Temp\vs7CC2.tmp\Release\</IntermediateOutputPath>
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
@@ -7637,6 +7637,7 @@
     <Content Include="Views\Admin\PayPayout.cshtml" />
     <Content Include="Views\AdminReports\AssociateSelfdownBusinessReport.cshtml" />
     <Content Include="Views\AdminReports\CheckDesignationUpdateLog.cshtml" />
+    <Content Include="Views\AdminReports\CancelPrintReceipt.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
