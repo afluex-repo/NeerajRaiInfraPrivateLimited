@@ -25,13 +25,13 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-12 col-md-4 col-lg-4">
+                    <div class="col-12 col-md-3 col-lg-3">
                         <div class="form-group">
                             <label>Customer ID</label>
                             @Html.TextBoxFor(m => m.CustomerID, new { @class = "form-control", @Placeholder = "Search by Customer ID" })
                         </div>
                     </div>
-                    <div class="col-12 col-md-4 col-lg-4">
+                    <div class="col-12 col-md-3 col-lg-3">
                         <div class="form-group">
                             <label>Associate ID</label>
                             @Html.TextBoxFor(m => m.AssociateID, new { @class = "form-control", @Placeholder = "Search by Associate ID" })
@@ -39,54 +39,60 @@
                         </div>
                     </div>
                     
-                    <div class="col-12 col-md-4 col-lg-4">
+                    <div class="col-12 col-md-3 col-lg-3">
                         <div class="form-group">
                             <label>Booking No</label>
                             @Html.TextBoxFor(m => m.BookingNumber, new { @class = "form-control", @Placeholder = "Booking No" })
 
                         </div>
                     </div>
-                    <div class="col-12 col-md-4 col-lg-4">
+                    <div class="col-12 col-md-3 col-lg-3">
                         <div class="form-group">
                             <label>Select Site</label>
                             @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control", @onchange = "return onSiteChange();" })
                         </div>
                     </div>
-                    <div class="col-12 col-md-4 col-lg-4">
+                    <div class="col-12 col-md-3 col-lg-3">
                         <div class="form-group">
                             <label>Select Phase</label>
                             @Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control", @onchange = "return onSectorChange();" })
                         </div>
                     </div>
-                    <div class="col-12 col-md-4 col-lg-4">
+                    <div class="col-12 col-md-3 col-lg-3">
                         <div class="form-group">
                             <label> Select Block</label>
                             @Html.DropDownListFor(m => m.BlockID, new SelectList(ViewBag.ddlBlock, "Value", "Text"), new { @class = "form-control" })
                         </div>
                     </div>
-                    <div class="col-12 col-md-4 col-lg-4">
+                    <div class="col-12 col-md-3 col-lg-3">
                         <div class="form-group">
                             <label>Plot Number</label>
                             @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @Placeholder = "PlotNumber" })
                         </div>
                     </div>
-                    <div class="col-12 col-md-4 col-lg-4">
+                    <div class="col-12 col-md-4 col-lg-3">
                         <div class="form-group">
                             <label>From Date</label>
                             @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "From Date", @readonly = "readonly" })
 
                         </div>
                     </div>
-                    <div class="col-12 col-md-4 col-lg-4">
+                    <div class="col-12 col-md-4 col-lg-3">
                         <div class="form-group">
                             <label>To Date</label>
                             @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @Placeholder = "To Date", @readonly = "readonly" })
 
                         </div>
                     </div>
+                    <div class="col-12 col-md-2 col-lg-2 mt-4">
+                        <div class="form-group">
+                            <label>IsDownline</label>
+                            @Html.CheckBoxFor(m => m.IsDownline)
+                        </div>
+                    </div>
                     <div class="col-12 col-md-4 col-lg-4">
                         <div class="form-group">
-                       
+                       <label class="d-block">&nbsp;</label>
                             <input class="btn btn-primary mr-1" type="submit" value="Search" id="btnSearch" name="Search" />
                         </div>
                     </div>
