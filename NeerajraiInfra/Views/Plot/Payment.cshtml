@@ -88,6 +88,7 @@
                                     <th>Bank Details</th>
                                     <th>Amount</th>
                                     <th>Allotment Remarks</th>
+                                    <th>Payment Mode Remarks</th>
                                     <th>Status</th>
                                     <th>Description</th>
                                     <th>Payment Clear Date</th>
@@ -105,7 +106,7 @@
 
                                             <tr class="text-left">
                                                 @*  <td hidden>@Item.UserID</td>*@
-                                                <td>@i</td>
+                                                <td>@i</td> 
                                                 <td>@Item.CustomerID (@Item.CustomerName)</td>
                                                 <td>@Item.AssociateID (@Item.AssociateName)</td>
                                                 <td>@Item.SiteName </td>
@@ -118,6 +119,7 @@
                                                 <td>@Item.Remark</td>
                                                 <td>@Item.PaidAmount</td>
                                                 <td>@Item.AllotmentRemark</td>
+                                                <td>@Item.PaymentModeRemarks</td>
                                                 <td>@Item.PaymentStatus</td>
                                                 <td>
                                                     <textarea type="text" id="txtDesc @i" name="txtDesc @i" onchange="getdata(this)"></textarea>
@@ -136,7 +138,28 @@
                                     }
                                 }
                             </tbody>
-
+                            <tfoot>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th>Total:-</th>
+                                    <th>@ViewBag.TotalAmount</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                 </div>

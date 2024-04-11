@@ -2819,9 +2819,11 @@ namespace NeerajraiInfra.Controllers
                     obj.SectorName = r["SectorName"].ToString();
                     obj.BlockName = r["BlockName"].ToString();
                     obj.PlotNumber = r["PlotNumber"].ToString();
+                    obj.PaymentModeRemarks = r["PaymentModeRemarks"].ToString();
                     lst.Add(obj);
                 }
                 model.lstPlot = lst;
+                ViewBag.TotalAmount = double.Parse(ds.Tables[0].Compute("sum(PaidAmount)", "").ToString()).ToString("n2");
             }
             #region ddlPaymentMode
             int count3 = 0;
@@ -3080,11 +3082,10 @@ namespace NeerajraiInfra.Controllers
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
-                var i = 0;
+              
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
-                    if (i < 25)
-                    {
+                   
                     Plot obj = new Plot();
                     obj.AssociateID = r["AssociateLoginID"].ToString();
                     obj.AssociateName = r["AssociateName"].ToString();
@@ -3104,9 +3105,8 @@ namespace NeerajraiInfra.Controllers
                     //  obj.RejectDescription = r["RejectDescription"].ToString();
                     lst.Add(obj);
                 }
-                    i = i + 1;
-                }
                 model.lstPlot = lst;
+                ViewBag.TotalPaidAmount = double.Parse(ds.Tables[0].Compute("sum(PaidAmount)", "").ToString()).ToString("n2");
             }
             #region ddlpaymentStatus
             List<SelectListItem> ddlpaymentStatus = Common.BindPaymentStatus();
@@ -3150,6 +3150,7 @@ namespace NeerajraiInfra.Controllers
                     lst.Add(obj);
                 }
                 model.lstPlot = lst;
+                ViewBag.TotalPaidAmount = double.Parse(ds.Tables[0].Compute("sum(PaidAmount)", "").ToString()).ToString("n2");
             }
             #region ddlpaymentStatus
             List<SelectListItem> ddlpaymentStatus = Common.BindPaymentStatus();
