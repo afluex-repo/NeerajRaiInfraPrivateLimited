@@ -3096,6 +3096,7 @@ namespace NeerajraiInfra.Controllers
                     obj.TransactionDate = r["TransactionDate"].ToString();
                     obj.TransactionNumber = r["TransactionNo"].ToString();
                     obj.Remark = r["Remark"].ToString();
+                    obj.AllotmentRemark = r["AllotmentRemarks"].ToString();
                     obj.PaidAmount = r["PaidAmount"].ToString();
                     obj.PaymentStatus = r["PaymentStatus"].ToString();
                     obj.PaymentDate = r["PaymentDate"].ToString();

@@ -120,6 +120,7 @@ namespace NeerajraiInfra.Models
         public string TotalPaid { get; set; }
         public string RemainingAmount { get; set; }
         public int MaxJsonLength { get; set; }
+        //public List<SelectListItem> ddlSite { get; set; }
         public List<SelectListItem> ddlSector { get; set; }
         public List<SelectListItem> lstBlock { get; set; }
         List<SelectListItem> ddlPaymentMode = new List<SelectListItem>();
