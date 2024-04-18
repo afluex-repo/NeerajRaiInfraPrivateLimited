@@ -703,6 +703,7 @@ namespace NeerajraiInfra.Controllers
             model.BlockID = model.BlockID == "0" ? null : model.BlockID;
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            //model.Downline = model.IsDownline == true ? "1" : "0";
             DataSet ds = model.List();
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)

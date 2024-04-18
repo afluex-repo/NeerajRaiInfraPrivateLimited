@@ -45,7 +45,7 @@
                                         Select Phase @*<span style="color: red">*</span>*@
                                         @Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control", @onchange = "return onSectorChange();" })
                                     </div>
-                                    <div class="col-md-3 form-group" hidden="hidden">
+                                    <div class="col-md-3 form-group">
                                         Select Block
                                         @Html.DropDownListFor(m => m.BlockID, new SelectList(ViewBag.ddlBlock, "Value", "Text"), new { @class = "form-control" })
                                     </div>

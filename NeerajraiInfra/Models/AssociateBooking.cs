@@ -11,7 +11,9 @@ namespace NeerajraiInfra.Models
     public class AssociateBooking : Common
     {
         #region Properties
-        
+
+        public string Downline { get; set; }
+        public bool IsDownline { get; set; }
         public string Abbreviation { get; set; }
         public string Fk_SponsorId { get; set; }
         public string ActiveStatus { get; set; }
@@ -128,18 +130,18 @@ namespace NeerajraiInfra.Models
         public DataSet List()
         {
             SqlParameter[] para = {
-                                      new SqlParameter("@PK_BookingId", PK_BookingId),
-                                     new SqlParameter("@AssociateID", LoginId)   ,                               
-                                  
-                                     new SqlParameter("@CustomerLoginID", CustomerLoginID)   ,  
-                                    new SqlParameter("@CustomerName", CustomerName)   ,  
-                                    new SqlParameter("@PK_SiteID", SiteID)   ,  
-                                    new SqlParameter("@PK_SectorID", SectorID)   ,  
-                                    new SqlParameter("@PK_BlockID", BlockID)   , 
-                                    new SqlParameter("@PlotNumber", PlotNumber)   ,  
-                                    new SqlParameter("@BookingNumber", BookingNumber)   ,  
-                                    new SqlParameter("@FromDate", FromDate)   , 
-                                    new SqlParameter("@ToDate", ToDate)   
+                                    new SqlParameter("@PK_BookingId", PK_BookingId),
+                                    new SqlParameter("@AssociateID", LoginId), 
+                                    new SqlParameter("@CustomerLoginID", CustomerLoginID),  
+                                    new SqlParameter("@CustomerName", CustomerName),  
+                                    new SqlParameter("@PK_SiteID", SiteID),  
+                                    new SqlParameter("@PK_SectorID", SectorID),  
+                                    new SqlParameter("@PK_BlockID", BlockID), 
+                                    new SqlParameter("@PlotNumber", PlotNumber),  
+                                    new SqlParameter("@BookingNumber", BookingNumber),  
+                                    new SqlParameter("@FromDate", FromDate), 
+                                    new SqlParameter("@ToDate", ToDate),
+                                    //new SqlParameter("@IsDownline",Downline)
                                   };
             DataSet ds = Connection.ExecuteQuery("GetPlotBookingForAssociate", para);
             return ds;
