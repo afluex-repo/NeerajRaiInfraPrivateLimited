@@ -17,18 +17,12 @@ namespace NeerajraiInfra.Models
             try
             {
 
-                connectionString = "Data Source=101.53.150.222,1440;Initial Catalog=NeerajRaiInfraDB; User Id=sa; Password=Fx1479LVAPbF; Integrated Security=false;";
+                //connectionString = "Data Source=101.53.150.222,1440;Initial Catalog=NeerajRaiInfraDB; User Id=sa; Password=Fx1479LVAPbF; Integrated Security=false;";
+                
+                connectionString = "Data Source=101.53.150.222,1440;Initial Catalog=NeerajRaiInfraDBTest_22Apr24; User Id=sa; Password=Fx1479LVAPbF; Integrated Security=false;";
 
 
-                //connectionString = "Data Source=103.48.51.111,1232;Initial Catalog= NeerajRaiInfraDB; User Id= neerajraiinfrauser; Password=Neeraj123!@#;Integrated Security=false;";
-
-
-                //Sudhakardb
-                //connectionString = "Data Source=DESKTOP-02J59E3\\SQLEXPRESS;Initial Catalog=NeerajRaiInfraDBTest;Integrated Security=True";
-                //Sarfrazdb
-                //connectionString = "Data Source=DESKTOP-ICNPI6I\\SQLEXPRESS;Initial Catalog=NeerajraiInfraDB;Integrated Security=True";
-                //tanishq
-                //connectionString = "Data Source=DESKTOP-OEAINLG\\SQLEXPRESS;Initial Catalog=NeerajraiInfraDB;Integrated Security=True";
+             
             }
             catch (Exception) 
             {
