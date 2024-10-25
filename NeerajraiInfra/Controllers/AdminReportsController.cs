@@ -1259,6 +1259,8 @@ namespace NeerajraiInfra.Controllers
                     ViewBag.Contact = ds.Tables[0].Rows[0]["AssociateMobile"].ToString();
                     ViewBag.CustomerID = ds.Tables[0].Rows[0]["CustomerLoginID"].ToString();
                     ViewBag.SiteName = ds.Tables[0].Rows[0]["SiteName"].ToString();
+
+
                     ViewBag.SectorName = ds.Tables[0].Rows[0]["SectorName"].ToString();
                     ViewBag.BlockName = ds.Tables[0].Rows[0]["BlockName"].ToString();
                     ViewBag.PlotNo = ds.Tables[0].Rows[0]["PlotNumber"].ToString();
@@ -1273,8 +1275,9 @@ namespace NeerajraiInfra.Controllers
                     ViewBag.ReceiptNo = ds.Tables[0].Rows[0]["ReceiptNo"].ToString();
                     ViewBag.CorporateOffice = ds.Tables[0].Rows[0]["CorporateOffice"].ToString();
                     ViewBag.AssociateName = ds.Tables[0].Rows[0]["AssociateName"].ToString();
+                    ViewBag.ImageUrl = ds.Tables[0].Rows[0]["ImageUrl"].ToString();
                     ViewBag.BookingDate = ds.Tables[0].Rows[0]["BookingDate"].ToString();
-                    ViewBag.customerMobile = ds.Tables[0].Rows[0]["customerMobile"].ToString();
+                       ViewBag.customerMobile = ds.Tables[0].Rows[0]["customerMobile"].ToString();
                     ViewBag.PLC = string.IsNullOrEmpty(ds.Tables[0].Rows[0]["PLC"].ToString()) ? "N/A" : ds.Tables[0].Rows[0]["PLC"].ToString();
                     ViewBag.AmountInWords = ds.Tables[0].Rows[0]["PaidAmountInWords"].ToString();
                     //ViewBag.NetPlotAmount = ds.Tables[0].Rows[0]["NetPlotAmount"].ToString();
