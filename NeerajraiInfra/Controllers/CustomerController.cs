@@ -91,6 +91,25 @@ namespace NeerajraiInfra.Controllers
 
         }
 
+        public ActionResult GetUserList()
+        {
+            Customer obj = new Customer();
+            List<Customer> lst = new List<Customer>();
+            obj.LoginID = Session["LoginId"].ToString();
+            DataSet ds = obj.GettingUserProfile();
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Customer objList = new Customer();
+                    objList.UserName = dr["Fullname"].ToString();
+                    objList.LoginIDD = dr["LoginId"].ToString();
+                    lst.Add(objList);
+                }
+            }
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult GetSponsorName(string SponsorID)
         {
             try
