@@ -197,7 +197,7 @@
     var AssociateList = [];
     $("#loader").css({ 'display': '' });
     $.ajax({
-        url: '/Plot/GetUserList',
+        url: '/Customer/GetUserList',
         type: 'Post',
         success: function (response) {
             if (response != null) {
