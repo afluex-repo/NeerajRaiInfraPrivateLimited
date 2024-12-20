@@ -37,7 +37,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <IntermediateOutputPath>C:\Users\AFLUEX\AppData\Local\Temp\vs2CCD.tmp\Debug\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\AFLUEX\AppData\Local\Temp\vs2F09.tmp\Debug\</IntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -46,7 +46,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <IntermediateOutputPath>C:\Users\AFLUEX\AppData\Local\Temp\vs2CCD.tmp\Release\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\AFLUEX\AppData\Local\Temp\vs2F09.tmp\Release\</IntermediateOutputPath>
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
@@ -6749,6 +6749,10 @@
     <Content Include="LevelTree.aspx" />
     <Content Include="Models\WebService\AgentServices.asmx" />
     <Content Include="Views\Master\UpdatePlotStatus.cshtml" />
+    <Content Include="WebsiteCss\images\Eco_Garden.png" />
+    <Content Include="WebsiteCss\images\grow_height.png" />
+    <Content Include="WebsiteCss\images\neture_part.png" />
+    <Content Include="WebsiteCss\images\neture_welness.png" />
     <Content Include="Website\about.html" />
     <Content Include="Website\contact.html" />
     <Content Include="Website\css\ace-responsive-menu.css" />

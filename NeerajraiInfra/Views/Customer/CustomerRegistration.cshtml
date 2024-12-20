@@ -45,17 +45,17 @@
                             Associate Code<span style="color:red">*</span>
                             @if (Model.UserID == null)
                             {
-                                @Html.TextBoxFor(m => m.SponsorID, new { @class = "form-control", @Placeholder = "Associate ID"@*, @onchange = "return getSponsorName();"*@ })
+                                @Html.TextBoxFor(m => m.SponsorID, new { @class = "form-control", @placeholder = "Associate ID"@*, @onchange = "return getSponsorName();"*@ })
                             }
                             else
                             {
-                                @Html.TextBoxFor(m => m.SponsorID, new { @class = "form-control", @Placeholder = "Sponsor ID", @readonly = "readonly" })
+                                @Html.TextBoxFor(m => m.SponsorID, new { @class = "form-control", @placeholder = "Sponsor ID", @readonly = "readonly" })
                             }
                             @Html.HiddenFor(m => m.UserID)
                         </div>
                         <div class="input-field col m6 s12">
                             Associate Name<span style="color:red">*</span>
-                            @Html.TextBoxFor(m => m.SponsorName, new { @class = "form-control", @Placeholder = "Sponsor Name", @readonly = "readonly" })
+                            @Html.TextBoxFor(m => m.SponsorName, new { @class = "form-control", @placeholder = "Sponsor Name", @readonly = "readonly" })
                         </div>
                         <div class="input-field col m6 s12">
                                 <img src="" style="margin-left: 37%;width: 86px;" id="AssociateImage" class="rounded-circle author-box-picture" />
@@ -64,11 +64,11 @@
                     <div class="row">
                         <div class="input-field col-md-4 s12">
                             First Name<span style="color:red">*</span>
-                            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @Placeholder = "First Name" })
+                            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "First Name" })
                         </div>
                         <div class="input-field col-md-4 s12">
                             Last Name
-                            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @Placeholder = "Last Name" })
+                            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Last Name" })
                         </div>
                         &nbsp;
                         &nbsp;
@@ -81,7 +81,7 @@
                         &nbsp;
                         <div class="input-field s12">
                             Father Name,Spouse Name
-                            @Html.TextBoxFor(m => m.FatherName, new { @class = "form-control", @Placeholder = "Father Name", @style = "width: 274px;" })
+                            @Html.TextBoxFor(m => m.FatherName, new { @class = "form-control", @placeholder = "Father Name", @style = "width: 274px;" })
                         </div>
 
                     </div>
@@ -89,15 +89,15 @@
                     <div class="row">
                         <div class="input-field col m3 s12">
                             Email
-                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @Placeholder = "Email" })
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email" })
                         </div>
                         <div class="input-field col m3 s12">
                             Mobile<span style="color:red">*</span>
-                            @Html.TextBoxFor(m => m.Contact, new { @class = "form-control", @Placeholder = "Mobile Number", @onkeypress = "return isNumberOrDecimal(event);", @maxlength = "10" })
+                            @Html.TextBoxFor(m => m.Contact, new { @class = "form-control", @placeholder = "Mobile Number", @onkeypress = "return isNumberOrDecimal(event);", @maxlength = "10" })
                         </div>
                         <div class="input-field  col m3 s12">
                             Pan No.
-                            @Html.TextBoxFor(m => m.PanNo, new { @class = "form-control", @Placeholder = "PAN Number", @maxlength = "10", @onchange = "return validatePan();" })
+                            @Html.TextBoxFor(m => m.PanNo, new { @class = "form-control", @placeholder = "PAN Number", @maxlength = "10", @onchange = "return validatePan();" })
                         </div>
                         </div>
                         <div class="row">
@@ -155,12 +155,7 @@
                                 }
                                 <a class="btn btn-info" href="/Customer/CustomerList" style="margin-left:5px">Back To List</a>
                             </div>
-
-
-                        </div>
-
-
-
+                           </div>
                     </div>
             </div>
         </div>
@@ -174,6 +169,7 @@
 
 <script>
     $(document).ready(function () {
+        debugger;
         $("#divload").css({ 'display': 'none' });
         var cityuse = [];
         $("#loader").css({ 'display': '' });
@@ -181,18 +177,19 @@
             url: '/Plot/GetUserList',
             type: 'Post',
             success: function (response) {
+                debugger;
                 if (response != null) {
                     $(response).each(function (index, item) {
                         cityuse.push(item.UserName + "(" + item.LoginIDD + ")");
                     });
-                    debugger
+                    debugger;
                     $('#SponsorID').autocomplete({
                         source: cityuse,
                         select: function (event, ui) {
                             var str = ui.item.label;
                             var strsplit = str.split("(");
                             $('#UserID').val(strsplit[1].substr(0, strsplit[1].length - 1));
-                            getSponsorName();
+                             getSponsorName();
                         }
                     })
                 }

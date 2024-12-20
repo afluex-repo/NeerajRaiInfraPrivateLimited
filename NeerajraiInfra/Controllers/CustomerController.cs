@@ -224,6 +224,7 @@ namespace NeerajraiInfra.Controllers
         {
             return View();
         }
+
         [HttpPost]
         [ActionName("CustomerList")]
         [OnAction(ButtonName = "btnSearchCustomer")]
