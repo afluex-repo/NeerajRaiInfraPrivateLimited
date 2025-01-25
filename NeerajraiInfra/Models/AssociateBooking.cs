@@ -641,11 +641,9 @@ namespace NeerajraiInfra.Models
         {
 
             SqlParameter[] para = {
-
                                       new SqlParameter("@Percentage", Percentage)
-
                                   };
-            DataSet ds = Connection.ExecuteQuery("GetDesignationList", para);
+            DataSet ds = Connection.ExecuteQuery("GetDesignationListForAssociate", para);
 
             return ds;
         }
@@ -762,6 +760,8 @@ namespace NeerajraiInfra.Models
             return ds;
         }
 
+        public string UserName { get; set; }
+        public string LoginIDD { get; set; }
 
 
         public DataSet GettingUserProfile()
@@ -815,6 +815,8 @@ namespace NeerajraiInfra.Models
         }
 
         #endregion
+
+        
     }
 
 }
