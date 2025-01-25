@@ -45,6 +45,17 @@ namespace NeerajraiInfra.Models
 
         #endregion
 
+        public string LoginIDD { get; set; }
+        public string UserName { get; set; }
+
+        public DataSet GettingUserProfile()
+        {
+            SqlParameter[] para = {
+                                        new SqlParameter("@LoginId", LoginID)};
+            DataSet ds = Connection.ExecuteQuery("GetUserProfile", para);
+            return ds;
+        }
+
         public DataSet GetAssociateList()
         {
             SqlParameter[] para = { new SqlParameter("@LoginID", LoginID) };
