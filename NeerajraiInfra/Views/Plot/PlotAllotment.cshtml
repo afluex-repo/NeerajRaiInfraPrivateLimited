@@ -245,7 +245,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label>Balance Amount:</label>
-                                            <label id="remamt"></label>
+                                            <label id="bal"></label>
                                         </div>
                                     </div>
                                 </div>
@@ -288,7 +288,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             Pay Amount<span style="color: red">*</span>
-                                            @Html.TextBoxFor(m => m.PaidAmount, new { @class = "form-control", @Placeholder = "Pay Amount", @type = "number" })
+                                            @Html.TextBoxFor(m => m.PaidAmount, new { @class = "form-control", @onchange = "return validatePayAmount()", @onkeypress = "return  isNumberOrDecimal(event);", @Placeholder = "Pay Amount", @type = "number" })
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -391,7 +391,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <br />
-                                            <input type="submit" name="Save" value="Save" id="btnSave" class="btn btn-success" onclick="return validateform();" />
+                                            <input type="submit" name="Save" value="Save" id="btnSave" class="btn btn-success" />
                                         </div>
                                     </div>
                                 </div>
@@ -665,10 +665,20 @@
 
         });
     }
+    document.getElementById("form1").addEventListener("submit", function (event) {
+        event.preventDefault();
+        let isValid = validateform(); 
+        if (isValid) {
+            this.submit();
+        } else {
+            console.log("Form validation failed!");
+        }
+    });
 
     function validateform() {
-        $("#divload").css({ 'display': '' });
+        //$("#divload").css({ 'display': '' });
         $(".errortext").removeClass("errortext");
+
         if ($('#PaidAmount').val() == '') {
             $("#PaidAmount").addClass('errortext');
             $('#PaidAmount').focus();
@@ -729,33 +739,9 @@
                 $("#divload").css({ 'display': 'none' });
                 return false;
             }
+            //form1.submit();
         }
-            //else if ($('#PaymentMode').val() == '3') {
-            //    if ($('#TransactionNumber').val() == '') {
-            //        $("#TransactionNumber").addClass('errortext');
-            //        $('#TransactionNumber').focus();
-            //        $("#divload").css({ 'display': 'none' });
-            //        return false;
-            //    }
-            //    if ($('#TransactionDate').val() == '') {
-            //        $("#TransactionDate").addClass('errortext');
-            //        $('#TransactionDate').focus();
-            //        $("#divload").css({ 'display': 'none' });
-            //        return false;
-            //    }
-            //    if ($('#BankName').val() == '') {
-            //        $("#BankName").addClass('errortext');
-            //        $('#BankName').focus();
-            //        $("#divload").css({ 'display': 'none' });
-            //        return false;
-            //    }
-            //    if ($('#BankBranch').val() == '') {
-            //        $("#BankBranch").addClass('errortext');
-            //        $('#BankBranch').focus();
-            //        $("#divload").css({ 'display': 'none' });
-            //        return false;
-            //    }
-            //}
+           
         else if ($('#PaymentMode').val() == '4') {
             if ($('#TransactionNumber').val() == '') {
                 $("#TransactionNumber").addClass('errortext');
@@ -794,59 +780,7 @@
                 return false;
             }
         }
-            //else if ($('#PaymentMode').val() == '5') {
-            //    if ($('#TransactionNumber').val() == '') {
-            //        $("#TransactionNumber").addClass('errortext');
-            //        $('#TransactionNumber').focus();
-            //        $("#divload").css({ 'display': 'none' });
-            //        return false;
-            //    }
-            //    if ($('#TransactionDate').val() == '') {
-            //        $("#TransactionDate").addClass('errortext');
-            //        $('#TransactionDate').focus();
-            //        $("#divload").css({ 'display': 'none' });
-            //        return false;
-            //    }
-            //    if ($('#BankName').val() == '') {
-            //        $("#BankName").addClass('errortext');
-            //        $('#BankName').focus();
-            //        $("#divload").css({ 'display': 'none' });
-            //        return false;
-            //    }
-            //    if ($('#BankBranch').val() == '') {
-            //        $("#BankBranch").addClass('errortext');
-            //        $('#BankBranch').focus();
-            //        $("#divload").css({ 'display': 'none' });
-            //        return false;
-            //    }
-            //}
-            //else if ($('#PaymentMode').val() == '6') {
-            //    if ($('#TransactionNumber').val() == '') {
-            //        $("#TransactionNumber").addClass('errortext');
-            //        $('#TransactionNumber').focus();
-            //        $("#divload").css({ 'display': 'none' });
-            //        return false;
-            //    }
-            //    if ($('#TransactionDate').val() == '') {
-            //        $("#TransactionDate").addClass('errortext');
-            //        $('#TransactionDate').focus();
-            //        $("#divload").css({ 'display': 'none' });
-            //        return false;
-            //    }
-            //    if ($('#BankName').val() == '') {
-            //        $("#BankName").addClass('errortext');
-            //        $('#BankName').focus();
-            //        $("#divload").css({ 'display': 'none' });
-            //        return false;
-            //    }
-            //    if ($('#BankBranch').val() == '') {
-            //        $("#BankBranch").addClass('errortext');
-            //        $('#BankBranch').focus();
-            //        $("#divload").css({ 'display': 'none' });
-            //        return false;
-            //    }
-            //}
-        else if ($('#PaymentMode').val() == '7') {
+           else if ($('#PaymentMode').val() == '7') {
 
             if ($('#TransactionNumber').val() == '') {
                 $("#TransactionNumber").addClass('errortext');
@@ -930,24 +864,7 @@
                 $("#divload").css({ 'display': 'none' });
                 return false;
             }
-            //if ($('#TransactionDate').val() == '') {
-            //    $("#TransactionDate").addClass('errortext');
-            //    $('#TransactionDate').focus();
-            //    $("#divload").css({ 'display': 'none' });
-            //    return false;
-            //}
-            //if ($('#BankName').val() == '') {
-            //    $("#BankName").addClass('errortext');
-            //    $('#BankName').focus();
-            //    $("#divload").css({ 'display': 'none' });
-            //    return false;
-            //}
-            //if ($('#BankBranch').val() == '') {
-            //    $("#BankBranch").addClass('errortext');
-            //    $('#BankBranch').focus();
-            //    $("#divload").css({ 'display': 'none' });
-            //    return false;
-            //}
+           
         }
         else if ($('#PaymentMode').val() == '11') {
 
@@ -975,18 +892,7 @@
                 $("#divload").css({ 'display': 'none' });
                 return false;
             }
-            //if ($('#BankName').val() == '') {
-            //    $("#BankName").addClass('errortext');
-            //    $('#BankName').focus();
-            //    $("#divload").css({ 'display': 'none' });
-            //    return false;
-            //}
-            //if ($('#BankBranch').val() == '') {
-            //    $("#BankBranch").addClass('errortext');
-            //    $('#BankBranch').focus();
-            //    $("#divload").css({ 'display': 'none' });
-            //    return false;
-            //}
+           
         }
         else if ($('#PaymentMode').val() == '13') {
 
@@ -997,6 +903,7 @@
                 return false;
             }
         }
+        //e.formsubmit
         return true;
     }
 
@@ -1162,7 +1069,7 @@
                         $("#paidaltamt").text(data.PaidAllotmentAmount);
                         $("#balalotamt").text(data.BalanceAllotmentAmount);
                         $("#Plotarea").text(data.PlotArea);
-                        $("#bal").text(data.Balance);
+                        //$("#bal").text(data.Balance);
                         $("#SiteName").text(data.SiteName);
                         $("#NPlotNumber").text(data.PlotNumber);
                         $("#SectorName").text(data.SectorName);
@@ -1171,7 +1078,7 @@
                         //var totalAmt = $('#ActPlotAmt').text();
                         //var paidAmt = $('#Payamt').text();
                         //var checkAmt = (Number)(totalAmt) - (Number)(paidAmt);
-                        $("#remamt").text(data.Balance);
+                        $("#bal").text(data.Balance);
 
                         //$("#SiteID").val('');
                         //$("#SectorID").val('');
@@ -1235,7 +1142,7 @@
                         $("#paidaltamt").text(data.PaidAllotmentAmount);
                         $("#balalotamt").text(data.BalanceAllotmentAmount);
                         $("#Plotarea").text(data.PlotArea);
-                        $("#bal").text(data.Balance);
+                        //$("#bal").text(data.Balance);
                         $("#netPlotAmt").text(data.NetPlotAmount);
                         $("#SiteName").text(data.SiteName);
                         $("#NPlotNumber").text(data.PlotNumber);
@@ -1245,7 +1152,7 @@
                         //var paidAmt = $('#Payamt').text();
                         //var checkAmt = (Number)(totalAmt) - (Number)(paidAmt);
 
-                        $("#remamt").text(data.Balance);
+                        $("#bal").text(data.Balance);
                         //$("#SiteID").val('');
                         //$("#SectorID").val('');
                         //$("#BlockID").val('');
@@ -1479,21 +1386,39 @@
         return true;
     }
 
+
     function validatePayAmount() {
-        var totalAmt = $('#ActPlotAmt').text();
-        var paidAmt = $('#Payamt').text();
-        var checkAmt = (Number)(totalAmt) - (Number)(paidAmt);
-        var payAmt = $('#PaidAmount').val();
-        if (Number(payAmt) > Number(checkAmt)) {
-            alert('Pay Amount cannot be greater than Remaining Amount.\nRemaining Amount is : Rs.' + checkAmt);
-            $("#PaidAmount").val("");
+        debugger;
+        var balanceAmount = document.getElementById("bal").innerHTML;
+        var payAmount = $('#PaidAmount').val();
+
+        if ((Number)(payAmount) > (Number)(balanceAmount)) {
+            $("#PaidAmount").val('');
             $("#PaidAmount").addClass('errortext');
-            $('#PaidAmount').focus();
+            alert('Pay Amount cannot be greater than Remaining Amount.\nRemaining Amount is : Rs.' + balanceAmount);
         }
         else {
             $("#PaidAmount").removeClass('errortext');
         }
     }
+
+    //function validatePayAmount() {
+    //    debugger;
+    //    var totalAmt = $('#ActPlotAmt').text();
+    //    var paidAmt = $('#Payamt').text();
+    //    var checkAmt = $('#remamt').text();
+    //    //var checkAmt = (Number)(totalAmt) - (Number)(paidAmt);
+    //    var payAmt = $('#PaidAmount').val();
+    //    if (Number(payAmt) > Number(checkAmt)) {
+    //        alert('Pay Amount cannot be greater than Remaining Amount.\nRemaining Amount is : Rs.' + remamt);
+    //        $("#PaidAmount").val("");
+    //        $("#PaidAmount").addClass('errortext');
+    //        $('#PaidAmount').focus();
+    //    }
+    //    else {
+    //        $("#PaidAmount").removeClass('errortext');
+    //    }
+    //}
 </script>
 
 
