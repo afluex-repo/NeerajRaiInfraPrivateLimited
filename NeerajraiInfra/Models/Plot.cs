@@ -998,7 +998,31 @@ namespace NeerajraiInfra.Models
         public string Rate { get; set; }
         public string Months { get; internal set; }
         #endregion
-        
+
+
+        public DataSet SaveEVBooking()
+        {
+            SqlParameter[] para =
+                            {
+                                        new SqlParameter("@CustomerId ",UserID),
+                                        new SqlParameter("@AssociateId" , AssociateID),
+                                        new SqlParameter("@Fk_BranchId" , BranchID),
+                                        new SqlParameter("@BookingDate"  ,BookingDate),
+                                        new SqlParameter("@Amount" ,Amount),
+                                        new SqlParameter("@PaymentMode"  , PaymentMode),
+                                        new SqlParameter("@TransactionNo"  , TransactionNumber),
+                                        new SqlParameter("@TransactionDate"  , TransactionDate),
+                                        new SqlParameter("@BankName"  , BankName),
+                                        new SqlParameter("@BankBranch"   , BankBranch),
+                                        new SqlParameter("@AddedBy",AddedBy),
+                                        new SqlParameter("@Remarks",Remark),
+                                        new SqlParameter("@UTR_Number",UtrNumber),
+                                        new SqlParameter("@UTR_Amount",UtrAmount),
+                            };
+            DataSet ds = Connection.ExecuteQuery("EVBooking", para);
+            return ds;
+        }
+
     }
 }
 
