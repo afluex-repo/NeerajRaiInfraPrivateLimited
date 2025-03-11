@@ -11,6 +11,18 @@ namespace NeerajraiInfra.Models
     public class Reports : Common
     {
         
+        public string UserID { get; set; }
+        public string CustomerID { get; set; }
+        public string CouponNumber { get; set; }
+        public string CustomerName { get; set; }
+        public string Contact { get; set; }
+        public string BookingStatus { get; set; }
+        public string TransactionDetails { get; set; }
+        public List<Reports> lstEV { get; set; }
+
+
+
+
         public string ErrorMessage { get; set; }
         public string Downline { get; set; }
         public int hdRows1 { get; set; }
@@ -585,6 +597,24 @@ namespace NeerajraiInfra.Models
                                  new SqlParameter("@ToDate",ToDate)
                             };
             DataSet ds = Connection.ExecuteQuery("GetAutoUpdateDesignation", para);
+            return ds;
+        }
+
+
+
+        public DataSet GetEVBookingDetailsList()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@PK_BookingId", PK_BookingId),
+                                      new SqlParameter("@CustomerID", CustomerID),
+                                      new SqlParameter("@AssociateID", AssociateID),
+                                      new SqlParameter("@BookingNo", BookingNumber),
+                                      new SqlParameter("@FromDate", FromDate),
+                                      new SqlParameter("@ToDate", ToDate)
+                                     
+                                  };
+
+            DataSet ds = Connection.ExecuteQuery("GetEVBooking", para);
             return ds;
         }
     }

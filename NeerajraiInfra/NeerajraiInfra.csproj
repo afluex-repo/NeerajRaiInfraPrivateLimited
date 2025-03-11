@@ -7642,6 +7642,7 @@
     <Content Include="Views\AdminReports\AssociateSelfdownBusinessReport.cshtml" />
     <Content Include="Views\AdminReports\CheckDesignationUpdateLog.cshtml" />
     <Content Include="Views\AdminReports\CancelPrintReceipt.cshtml" />
+    <Content Include="Views\AdminReports\EVBookingDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

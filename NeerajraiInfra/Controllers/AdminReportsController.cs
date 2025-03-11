@@ -293,7 +293,7 @@ namespace NeerajraiInfra.Controllers
         [OnAction(ButtonName = "Search")]
         public ActionResult GetSummaryRep(Plot model)
         {
-            
+
 
             int count1 = 0;
             Master objmaster = new Master();
@@ -1277,7 +1277,7 @@ namespace NeerajraiInfra.Controllers
                     ViewBag.AssociateName = ds.Tables[0].Rows[0]["AssociateName"].ToString();
                     ViewBag.ImageUrl = ds.Tables[0].Rows[0]["ImageUrl"].ToString();
                     ViewBag.BookingDate = ds.Tables[0].Rows[0]["BookingDate"].ToString();
-                       ViewBag.customerMobile = ds.Tables[0].Rows[0]["customerMobile"].ToString();
+                    ViewBag.customerMobile = ds.Tables[0].Rows[0]["customerMobile"].ToString();
                     ViewBag.PLC = string.IsNullOrEmpty(ds.Tables[0].Rows[0]["PLC"].ToString()) ? "N/A" : ds.Tables[0].Rows[0]["PLC"].ToString();
                     ViewBag.AmountInWords = ds.Tables[0].Rows[0]["PaidAmountInWords"].ToString();
                     //ViewBag.NetPlotAmount = ds.Tables[0].Rows[0]["NetPlotAmount"].ToString();
@@ -2903,7 +2903,7 @@ namespace NeerajraiInfra.Controllers
         public ActionResult IsKharijDakhilList(Reports model)
         {
             List<Reports> lst = new List<Reports>();
-         
+
             DataSet ds = model.GetKharijDakhilList();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -2951,7 +2951,7 @@ namespace NeerajraiInfra.Controllers
             }
             return View(model);
         }
-        
+
         public ActionResult DeleteIsKharijDakhil(Reports model, string Id)
         {
             string FormName = "";
@@ -3053,7 +3053,7 @@ namespace NeerajraiInfra.Controllers
             return View(objreports);
         }
 
-      
+
         public ActionResult DifferentialIncome(Reports objreports)
         {
             List<Reports> lst = new List<Reports>();
@@ -3169,7 +3169,7 @@ namespace NeerajraiInfra.Controllers
 
         public ActionResult AssociateSelfdownBusinessReport()
         {
-           return View();
+            return View();
         }
         [HttpPost]
         [ActionName("AssociateSelfdownBusinessReport")]
@@ -3209,7 +3209,7 @@ namespace NeerajraiInfra.Controllers
                 {
                     if (desgnationCount == 0)
                     {
-                        ddlDesignation.Add(new SelectListItem { Text = "Select Designation"});
+                        ddlDesignation.Add(new SelectListItem { Text = "Select Designation" });
                     }
                     ddlDesignation.Add(new SelectListItem { Text = r["DesignationName"].ToString(), Value = r["PK_DesignationID"].ToString() });
                     desgnationCount = desgnationCount + 1;
@@ -3240,7 +3240,7 @@ namespace NeerajraiInfra.Controllers
                 {
                     if (desgnationCount == 0)
                     {
-                        ddlDesignation.Add(new SelectListItem { Text = "Select Designation"});
+                        ddlDesignation.Add(new SelectListItem { Text = "Select Designation" });
                     }
                     ddlDesignation.Add(new SelectListItem { Text = r["DesignationName"].ToString(), Value = r["PK_DesignationID"].ToString() });
                     desgnationCount = desgnationCount + 1;
@@ -3273,7 +3273,7 @@ namespace NeerajraiInfra.Controllers
                     lst.Add(obj);
                 }
                 model.lstAutoUpdateDesignation = lst;
- 
+
             }
             return View(model);
         }
@@ -3438,7 +3438,7 @@ namespace NeerajraiInfra.Controllers
             newdata.PK_BookingDetailsId = BookingDetailsId;
             newdata.Description = Description;
             newdata.CancelDate = canceldate;
-            newdata.LoginId= Session["LoginID"].ToString();
+            newdata.LoginId = Session["LoginID"].ToString();
             DataSet ds = newdata.CancelPrintReceipt();
 
             if (ds != null && ds.Tables[0].Rows.Count > 0)
@@ -3454,9 +3454,63 @@ namespace NeerajraiInfra.Controllers
                 }
             }
 
-            return Json(newdata,JsonRequestBehavior.AllowGet);
+            return Json(newdata, JsonRequestBehavior.AllowGet);
         }
 
         #endregion
+
+        public ActionResult EVBookingDetails()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        [ActionName("EVBookingDetails")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult GetEVBookingList(Reports model)
+        {
+            List<Reports> lst = new List<Reports>();
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+
+            DataSet ds = model.GetEVBookingDetailsList();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                {
+                    TempData["EVMessage"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+                else
+                {
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        Reports obj = new Reports();
+                        obj.PK_BookingId = r["PK_BookingId"].ToString();
+                        obj.CouponNumber = r["CouponNumber"].ToString();
+                        obj.BookingDate = r["BookingDate"].ToString();
+                        obj.CustomerID = r["CustomerID"].ToString();
+                        obj.CustomerLoginID = r["CustomerLoginID"].ToString();
+                        obj.CustomerName = r["CustomerName"].ToString();
+                        obj.Contact = r["Mobile"].ToString();
+                        obj.AssociateID = r["AssociateID"].ToString();
+                        obj.AssociateLoginID = r["AssociateLoginID"].ToString();
+                        obj.AssociateName = r["AssociateName"].ToString();
+                        obj.BookingStatus = r["BookingStatus"].ToString();
+                        obj.Amount = r["BookingAmount"].ToString();
+                        obj.PaymentMode = r["PaymentMode"].ToString();
+                        obj.TransactionDetails = r["TransactionDetails"].ToString();
+                        obj.Remarks = r["Remarks"].ToString();
+                        lst.Add(obj);
+                    }
+                    model.lstEV = lst;
+                }
+            }
+            return RedirectToAction("EVBookingDetails", "AdminReports");
+            
+        }
+
+
     }
 }
