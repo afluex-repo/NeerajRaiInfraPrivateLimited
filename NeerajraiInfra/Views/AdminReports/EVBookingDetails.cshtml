@@ -103,14 +103,14 @@
                                             <th>Coupon No.</th>
                                             <th>Booking Date</th>
                                             <th>Customer Detail</th>
-                                            <th>Customer Mobile No</th>
+                                            @*<th>Customer Mobile No</th>*@
                                             <th>Associate Details</th>
-                                            <th>Booking Status</th>
+                                            @*<th>Booking Status</th>*@
                                             <th>Amount</th>
-                                            <th>Payment Mode</th>
-                                            <th>Transaction Details</th>
+                                            @*<th>Payment Mode</th>*@
+                                            @*<th>Transaction Details</th>*@
                                             <th>Remarks</th>
-                                            <th>Action</th>
+                                            @*<th>Action</th>*@
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -119,23 +119,23 @@
                                             if (Model.lstEV != null)
                                             {
                                                 int i = 1;
-                                                foreach (var Item in Model.lstPlot)
+                                                foreach (var Item in Model.lstEV)
                                                 {
                                                     <tr class="text-left">
                                                         <td>@i</td>
                                                         <td>@Item.CouponNumber</td>
                                                         <td>@Item.BookingDate</td>
-                                                        <td>@Item.CustomerName (@Item.CustomerLoginID)</td>
-                                                        <td>@Item.Contact</td>
-                                                        <td>@Item.AssociateName (@Item.AssociateLoginID)</td>
-                                                        <td class="label label-info">@Item.BookingStatus</td>
+                                                        <td>@Item.CustomerLoginID</td>
+                                                        @*<td>@Item.Contact</td>*@
+                                                        <td>@Item.AssociateLoginID</td>
+                                                        @*<td class="label label-info">@Item.BookingStatus</td>*@
                                                         <td>@Item.Amount</td>
-                                                        <td>@Item.PaymentMode</td>
-                                                        <td>@Item.TransactionDetails</td>
+                                                        @*<td>@Item.PaymentMode</td>*@
+                                                        @*<td>@Item.TransactionDetails</td>*@
                                                         <td>@Item.Remarks</td>
-                                                        <td>
+                                                        @*<td>
                                                       <a href="#" class="btn-danger btn" name="Delete"                                      id="Deletebtn"></a>
-                                                        </td>
+                                                        </td>*@
                                                     </tr>
                                                     i++;
                                                 }

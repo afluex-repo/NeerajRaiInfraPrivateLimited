@@ -3459,9 +3459,47 @@ namespace NeerajraiInfra.Controllers
 
         #endregion
 
-        public ActionResult EVBookingDetails()
+        public ActionResult EVBookingDetails(Reports model)
         {
-            return View();
+
+            List<Reports> lst = new List<Reports>();
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+
+            DataSet ds = model.GetEVBookingDetailsList();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                {
+                    TempData["EVMessage"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+                else
+                {
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        Reports obj = new Reports();
+                        obj.PK_BookingId = r["Pk_EVBookingId"].ToString();
+                        obj.CouponNumber = r["CouponCode"].ToString();
+                        obj.BookingDate = r["BookingDate"].ToString();
+
+                        obj.CustomerLoginID = r["CustomerDetails"].ToString();
+
+                        //obj.Contact = r["Mobile"].ToString();
+
+                        obj.AssociateLoginID = r["AssociateDetails"].ToString();
+
+                        //obj.BookingStatus = r["BookingStatus"].ToString();
+                        obj.Amount = r["Amount"].ToString();
+                        obj.PaymentMode = r["PaymentMode"].ToString();
+                        obj.TransactionDetails = r["TransactionDetails"].ToString();
+                        obj.Remarks = r["Remarks"].ToString();
+                        lst.Add(obj);
+                    }
+                    model.lstEV = lst;
+                }
+            }
+            return View(model);
         }
 
 
@@ -3487,18 +3525,18 @@ namespace NeerajraiInfra.Controllers
                     foreach (DataRow r in ds.Tables[0].Rows)
                     {
                         Reports obj = new Reports();
-                        obj.PK_BookingId = r["PK_BookingId"].ToString();
-                        obj.CouponNumber = r["CouponNumber"].ToString();
+                        obj.PK_BookingId = r["Pk_EVBookingId"].ToString();
+                        obj.CouponNumber = r["CouponCode"].ToString();
                         obj.BookingDate = r["BookingDate"].ToString();
-                        obj.CustomerID = r["CustomerID"].ToString();
-                        obj.CustomerLoginID = r["CustomerLoginID"].ToString();
-                        obj.CustomerName = r["CustomerName"].ToString();
-                        obj.Contact = r["Mobile"].ToString();
-                        obj.AssociateID = r["AssociateID"].ToString();
-                        obj.AssociateLoginID = r["AssociateLoginID"].ToString();
-                        obj.AssociateName = r["AssociateName"].ToString();
-                        obj.BookingStatus = r["BookingStatus"].ToString();
-                        obj.Amount = r["BookingAmount"].ToString();
+                       
+                        obj.CustomerLoginID = r["CustomerDetails"].ToString();
+                      
+                        //obj.Contact = r["Mobile"].ToString();
+                     
+                        obj.AssociateLoginID = r["AssociateDetails"].ToString();
+                     
+                        //obj.BookingStatus = r["BookingStatus"].ToString();
+                        obj.Amount = r["Amount"].ToString();
                         obj.PaymentMode = r["PaymentMode"].ToString();
                         obj.TransactionDetails = r["TransactionDetails"].ToString();
                         obj.Remarks = r["Remarks"].ToString();

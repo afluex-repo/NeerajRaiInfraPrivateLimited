@@ -605,7 +605,7 @@ namespace NeerajraiInfra.Models
         public DataSet GetEVBookingDetailsList()
         {
             SqlParameter[] para = {
-                                      new SqlParameter("@PK_BookingId", PK_BookingId),
+                                      new SqlParameter("@Pk_EVBookingId", PK_BookingId),
                                       new SqlParameter("@CustomerID", CustomerID),
                                       new SqlParameter("@AssociateID", AssociateID),
                                       new SqlParameter("@BookingNo", BookingNumber),
