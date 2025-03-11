@@ -1174,8 +1174,6 @@ namespace NeerajraiInfra.Controllers
 
                     model.PlotID = dsBookingDetails.Tables[0].Rows[0]["Fk_PlotId"].ToString();
                     model.SiteID = dsBookingDetails.Tables[0].Rows[0]["FK_SiteID"].ToString();
-
-
                     #region GetSectors
                     List<SelectListItem> ddlSector = new List<SelectListItem>();
                     DataSet dsSector = model.GetSectorList();
