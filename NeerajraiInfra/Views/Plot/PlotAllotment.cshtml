@@ -391,7 +391,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <br />
-                                            <input type="submit" name="Save" value="Save" id="btnSave" class="btn btn-success" />
+                                            <input type="submit" name="Save" value="Save" id="btnSave" class="btn btn-success" onclick="return validateform()" />
                                         </div>
                                     </div>
                                 </div>
@@ -665,18 +665,20 @@
 
         });
     }
-    document.getElementById("form1").addEventListener("submit", function (event) {
-        event.preventDefault();
-        let isValid = validateform(); 
-        if (isValid) {
-            this.submit();
-        } else {
-            console.log("Form validation failed!");
-        }
-    });
+
+
+    //document.getElementById("form1").addEventListener("submit", function (event) {
+    //    event.preventDefault();
+    //    let isValid = validateform(); 
+    //    if (isValid) {
+    //        this.submit();
+    //    } else {
+    //        console.log("Form validation failed!");
+    //    }
+    //});
 
     function validateform() {
-        //$("#divload").css({ 'display': '' });
+        $("#divload").css({ 'display': '' });
         $(".errortext").removeClass("errortext");
 
         if ($('#PaidAmount').val() == '') {
