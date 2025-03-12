@@ -10,6 +10,8 @@ namespace NeerajraiInfra.Models
 {
     public class Plot : Common
     {
+        public string CouponNumber { get; set; }
+        public string PK_EVBookingId { get; set; }
         public List<SelectListItem> ddlPLC { get; set; }
         public List<SelectListItem> ddlRate { get; set; }
         public string BookingType { get; set; }
@@ -1020,6 +1022,22 @@ namespace NeerajraiInfra.Models
                                         new SqlParameter("@UTR_Amount",UtrAmount),
                             };
             DataSet ds = Connection.ExecuteQuery("EVBooking", para);
+            return ds;
+        }
+
+        public DataSet GetEVBookingDetailsList()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@Pk_EVBookingId", PK_EVBookingId),
+                                      new SqlParameter("@CustomerID", UserID),
+                                      new SqlParameter("@AssociateID", LoginId),
+                                      new SqlParameter("@CouponCode", CouponNumber),
+                                      new SqlParameter("@FromDate", FromDate),
+                                      new SqlParameter("@ToDate", ToDate)
+
+                                  };
+
+            DataSet ds = Connection.ExecuteQuery("GetEVBooking", para);
             return ds;
         }
 
