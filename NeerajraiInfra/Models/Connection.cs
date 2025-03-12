@@ -21,8 +21,8 @@ namespace NeerajraiInfra.Models
 
                 connectionString = "Data Source=101.53.150.222,1440;Initial Catalog=NeerajRaiInfraDBTest_22Apr24; User Id=sa; Password=Fx1479LVAPbF; Integrated Security=false;";
             }
-            catch (Exception) 
-            {
+            catch (Exception)
+            {   
                 throw;  
             }
         }

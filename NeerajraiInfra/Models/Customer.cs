@@ -52,7 +52,7 @@ namespace NeerajraiInfra.Models
         {
             SqlParameter[] para = {
                                         new SqlParameter("@LoginId", LoginID)};
-            DataSet ds = Connection.ExecuteQuery("GetUserProfile", para);
+            DataSet ds = Connection.ExecuteQuery("GetUserProfileforSearch", para);
             return ds;
         }
 

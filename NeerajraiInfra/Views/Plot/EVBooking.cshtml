@@ -47,7 +47,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 Customer ID <span style="color: red">*</span>
-                                    @Html.TextBoxFor(m => m.CustomerID, new { @class = "form-control", @Placeholder = "Customer ID", @onchange = "return getCustomerName();", @readonly = "d" })
+                                    @Html.TextBoxFor(m => m.CustomerID, new { @class = "form-control", @Placeholder = "Customer ID", @onchange = "return getCustomerName();"})
                                 @Html.HiddenFor(m => m.UserID)
                             </div>
                         </div>
@@ -828,12 +828,12 @@
 
 </script>
 @section script{
-    @if (TempData["PlotBookingSucesssMessage"] != null && Session["BookingId"] != null)
+    @if (TempData["PlotEVBookingSucesssMessage"] != null && Session["EVBookingId"] != null)
     {
 
         <script>
             swal({
-                title: "Plot Booked successfully !!",
+                title: "User EVBooked successfully !!",
                 text: "If you want to print Click OK !!",
                 icon: "success",
                 buttons: true,
@@ -842,8 +842,8 @@
             }).then((willDelete) => {
                 if (willDelete) {
                     var a = window.location.href;
-                    id = "@Session["BookingId"]";
-                    window.open('/Plot/PrintPlotBooking' + '?PrintId=' + id + "");
+                    id = "@Session["EVBookingId"]";
+                    window.open('/Plot/PrintEVBooking' + '?PrintId=' + id + "");
                 }
                 else {
 

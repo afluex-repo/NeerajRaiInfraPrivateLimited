@@ -3975,6 +3975,12 @@ namespace NeerajraiInfra.Controllers
                 {
                     if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
+                        if (ds.Tables[0].Rows[0]["Pk_EVBookingId"].ToString() != "")
+                        {
+                            TempData["PlotEVBookingSucesssMessage"] = "User EVBooked successfully !";
+                            Session["EVBookingId"] = ds.Tables[0].Rows[0]["Pk_EVBookingId"].ToString();
+                        }
+
                         TempData["Plot"] = "EV Booking Done Successfully";
                     }
                     else
@@ -3990,6 +3996,52 @@ namespace NeerajraiInfra.Controllers
             FormName = "EVBooking";
             Controller = "Plot";
             return RedirectToAction(FormName, Controller);
+        }
+
+        public ActionResult PrintEVBooking(Plot newdata, string PrintId)
+        {
+            newdata.PK_EVBookingId = PrintId;
+            DataSet ds = newdata.GetEVBookingDetailsList();
+
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+
+                if (ds.Tables[0].Rows[0]["MSG"].ToString() == "1")
+                {
+
+                    newdata.Result = "yes";
+                    ViewBag.PK_EVBookingId = ds.Tables[0].Rows[0]["PK_EVBookingId"].ToString();
+                    ViewBag.CustomerName = ds.Tables[0].Rows[0]["CustomerName"].ToString();
+                    ViewBag.LoginId = ds.Tables[0].Rows[0]["LoginID"].ToString();
+                    ViewBag.CouponNumber = ds.Tables[0].Rows[0]["CouponCode"].ToString();
+                    ViewBag.BookingDate = ds.Tables[0].Rows[0]["BookingDate"].ToString();
+                    ViewBag.Amount = ds.Tables[0].Rows[0]["Amount"].ToString();
+                    ViewBag.PaymentMode = ds.Tables[0].Rows[0]["PaymentMode"].ToString();
+                    ViewBag.TransactionNo = ds.Tables[0].Rows[0]["TransactionNo"].ToString();
+                    ViewBag.TransactionDate = ds.Tables[0].Rows[0]["TransactionDate"].ToString();
+                    ViewBag.BankName = ds.Tables[0].Rows[0]["BankName"].ToString();
+                    ViewBag.BankBranch = ds.Tables[0].Rows[0]["BranchName"].ToString();
+                    ViewBag.Address = ds.Tables[0].Rows[0]["Address"].ToString();
+                    ViewBag.Pin = ds.Tables[0].Rows[0]["PinCode"].ToString();
+                    ViewBag.State = ds.Tables[0].Rows[0]["State"].ToString();
+                    ViewBag.City = ds.Tables[0].Rows[0]["City"].ToString();
+                    ViewBag.ReceiptNo = ds.Tables[0].Rows[0]["ReciptNo"].ToString();
+                    ViewBag.customerMobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
+
+
+                    ViewBag.CompanyName = SoftwareDetails.CompanyName;
+                    ViewBag.CompanyAddress = SoftwareDetails.CompanyAddress;
+                    ViewBag.Pin1 = SoftwareDetails.Pin1;
+                    ViewBag.State1 = SoftwareDetails.State1;
+                    ViewBag.City1 = SoftwareDetails.City1;
+                    ViewBag.ContactNo = SoftwareDetails.ContactNo;
+                    ViewBag.LandLine = SoftwareDetails.LandLine;
+                    ViewBag.Website = SoftwareDetails.Website;
+                    ViewBag.EmailID = SoftwareDetails.EmailID;
+                }
+            }
+
+            return View(newdata);
         }
 
 

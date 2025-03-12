@@ -1,0 +1,280 @@
+﻿@model NeerajraiInfra.Models.Reports
+
+@{
+    ViewBag.Title = "EVBookingDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    #divload {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        z-index: 9999;
+        background: url("../files/assets/images/login-gif-11.gif") no-repeat center center rgba(0,0,0,0.25);
+    }
+
+    .errortext {
+        border: 1px solid red !important;
+    }
+</style>
+<div class="loader" id="divload"></div>
+@using (Html.BeginForm("EVBookingDetails", "AdminReports", FormMethod.Post, new { @id = "form1" }))
+{    <section class="section">
+        <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+                <a href="#">
+                    <i data-feather="home"></i>
+                </a>
+            </li>
+            <li class="breadcrumb-item">Reports</li>
+            <li class="breadcrumb-item">EV Booking Details </li>
+        </ul>
+    </section>
+
+
+    <div class="section-body">
+
+        <div class="card">
+            <div class="card-header">
+                <h4>EV Booking Details</h4>
+                <p style="color: red">
+                    @TempData["Update"]
+                </p>
+
+            </div>
+        <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- HTML5 Export Buttons table start -->
+
+                        @*<div class="card-header table-card-header">
+                            <a class="btn btn-primary btn-sm" style="margin-left:92%;" href="/Employee/EmployeeRegistration">Add New</a>
+                        </div>*@
+                        <div class="card-block" style="margin-left:5px;margin-right:5px">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        Customer ID
+                                        @Html.TextBoxFor(m => m.UserID, new { @class = "form-control", @Placeholder = "Search by Customer ID" })
+                                        @Html.HiddenFor(m => m.CustomerId)
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        Associate ID
+                                        @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Search by Associate ID" })
+                                        @Html.HiddenFor(m => m.AssociateID)
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        From Date
+                                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "From Date", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        To Date
+                                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @Placeholder = "To Date", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        Coupon No
+                                        @Html.TextBoxFor(m => m.CouponNumber, new { @class = "form-control", @Placeholder = "Coupon Number" })
+                                    </div>
+                                </div>
+                              <div class="col-md-3">
+                                    <div class="form-group">
+                                        <br />
+                                        <input class="btn btn-success" type="submit" value="Search" id="btnSearch" name="btnSearch" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-md" data-page-length='50' id="tableExport" style="width:100%;">
+                                    <thead>
+                                        <tr>
+                                            <th>S No.</th>
+                                            <th>Coupon No.</th>
+                                            <th>Booking Date</th>
+                                            <th>Customer Detail</th>
+                                            @*<th>Customer Mobile No</th>*@
+                                            <th>Associate Details</th>
+                                            @*<th>Booking Status</th>*@
+                                            <th>Amount</th>
+                                            @*<th>Payment Mode</th>*@
+                                            <th>Transaction Details</th>
+                                            <th>Remarks</th>
+                                            @*<th>Action</th>*@
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model != null)
+                                        {
+                                            if (Model.lstEV != null)
+                                            {
+                                                int i = 1;
+                                                foreach (var Item in Model.lstEV)
+                                                {
+                                                    <tr class="text-left">
+                                                        <td>@i</td>
+                                                        <td>@Item.CouponNumber</td>
+                                                        <td>@Item.BookingDate</td>
+                                                        <td>@Item.CustomerLoginID</td>
+                                                        @*<td>@Item.Contact</td>*@
+                                                        <td>@Item.AssociateLoginID</td>
+                                                        @*<td class="label label-info">@Item.BookingStatus</td>*@
+                                                        <td>@Item.Amount</td>
+                                                        @*<td>@Item.PaymentMode</td>*@
+                                                        <td>@Item.TransactionDetails</td>
+                                                        <td>@Item.Remarks</td>
+                                                        @*<td>
+                                                      <a href="#" class="btn-danger btn" name="Delete"                                      id="Deletebtn"></a>
+                                                        </td>*@
+                                                    </tr>
+                                                    i++;
+                                                }
+                                            }
+                                        }
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                            <input type="hidden" id="UserType" value="@Session["UserType"]" />
+                            <input type="hidden" id="UserTypeName" value="@Session["UserTypeName"]" />
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+<script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+
+
+<script>
+
+    $(document).ready(function () {
+        $("input").attr("autocomplete", "off");
+        var cityuse = [];
+        $("#loader").css({ 'display': '' });
+        $.ajax({
+            url: '/Plot/CustomerListForAutoSearch',
+            type: 'Post',
+            success: function (response) {
+                if (response != null) {
+
+                    $(response).each(function (index, item) {
+                        cityuse.push(item.UserName + "(" + item.LoginIDD + ")");
+                    });
+                    
+                    $('#UserID').autocomplete({
+                        source: cityuse,
+                        select: function (event, ui) {
+                            var str = ui.item.label;
+                            var strsplit = str.split("(");
+                            $('#CustomerId').val(strsplit[1].substr(0, strsplit[1].length - 1));
+                        }
+                    })
+                }
+            }, error: function () {
+                //alert('Some Thing wrong!');
+                $("#loader").css({ 'display': 'none' });
+            }
+        });
+        var AssociateList = [];
+        $("#loader").css({ 'display': '' });
+        $.ajax({
+            url: '/Adminreports/GetUserList',
+            type: 'Post',
+            success: function (response) {
+                if (response != null) {
+                    $(response).each(function (index, item) {
+                        AssociateList.push(item.UserName + "(" + item.LoginIDD + ")");
+                    });
+                    
+                    $('#LoginId').autocomplete({
+                        source: AssociateList,
+                        select: function (event, ui) {
+                            var str = ui.item.label;
+                            var strsplit = str.split("(");
+
+                            $('#AssociateID').val(strsplit[1].substr(0, strsplit[1].length - 1));
+                        }
+                    })
+
+                }
+            }, error: function () {
+                //alert('Some Thing wrong!');
+                $("#loader").css({ 'display': 'none' });
+            }
+        });
+        var UserType = $('#UserType').val();
+        var UserTypeName = $('#UserTypeName').val();
+        if (UserType == 'Admin' && UserTypeName != 'Admin') {
+            GetMenuDetails();
+        }
+
+    });
+    function GetMenuDetails() {
+        var URL = "/Plot/PlotBookingList";
+        $.ajax({
+            type: "POST",
+            url: "/Master/GetMenuDetails",
+            data: { URL: URL },
+            dataType: "json",
+            //contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                var obj = jQuery.parseJSON(data);
+                console.log(data)
+                for (var i = 0; i < obj.length; i++) {
+                    if (obj[i].FormDelete == true) {
+                        $(".delete").show();
+                    }
+                    else {
+                        $(".delete").hide();
+                    }
+                    if (obj[i].FormUpdate == true) {
+                        $(".edit").show();
+                    }
+                    else {
+                        var table = $('#tableExport').DataTable();
+                        table.column(15).visible(false);
+                    }
+
+                }
+            },
+            error: function () {
+                alert("Error occured!!")
+            }
+        });
+    }
+
+   
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
+    });
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
+    });
+
+    
+
+   
+
+</script>
