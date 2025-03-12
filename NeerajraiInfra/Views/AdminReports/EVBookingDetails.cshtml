@@ -102,14 +102,12 @@
                                             <th>Coupon No.</th>
                                             <th>Booking Date</th>
                                             <th>Customer Detail</th>
-                                            @*<th>Customer Mobile No</th>*@
                                             <th>Associate Details</th>
-                                            @*<th>Booking Status</th>*@
                                             <th>Amount</th>
-                                            @*<th>Payment Mode</th>*@
+                                            <th>PaymentMode</th>
                                             <th>Transaction Details</th>
                                             <th>Remarks</th>
-                                            @*<th>Action</th>*@
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -122,20 +120,19 @@
                                                 {
                                                     <tr class="text-left">
                                                         <td>@i</td>
+                                                        
                                                         <td>@Item.CouponNumber</td>
                                                         <td>@Item.BookingDate</td>
                                                         <td>@Item.CustomerLoginID</td>
-                                                        @*<td>@Item.Contact</td>*@
                                                         <td>@Item.AssociateLoginID</td>
-                                                        @*<td class="label label-info">@Item.BookingStatus</td>*@
                                                         <td>@Item.Amount</td>
-                                                        @*<td>@Item.PaymentMode</td>*@
+                                                        <td>@Item.PaymentMode</td>
                                                         <td>@Item.TransactionDetails</td>
                                                         <td>@Item.Remarks</td>
-                                                        @*<td>
-                                                      <a href="#" class="btn-danger btn" name="Delete"                                      id="Deletebtn"></a>
-                                                        </td>*@
-                                                    </tr>
+                                                        <td>
+                                                            <div class="badge badge-success badge-shadow"><a target="_blank" class="badge badge-success badge-shadow" href="/AdminReports/PrintEVBooking?PrintId=@Item.PK_BookingId"><span>Print</span></a></div>
+                                                        </td>
+                                                       </tr>
                                                     i++;
                                                 }
                                             }

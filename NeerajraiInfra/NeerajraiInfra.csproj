@@ -7645,6 +7645,7 @@
     <Content Include="Views\AdminReports\CancelPrintReceipt.cshtml" />
     <Content Include="Views\Plot\EVBooking.cshtml" />
     <Content Include="Views\AdminReports\EVBookingDetails.cshtml" />
+    <Content Include="Views\AdminReports\PrintEVBooking.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -617,6 +617,24 @@ namespace NeerajraiInfra.Models
             DataSet ds = Connection.ExecuteQuery("GetEVBooking", para);
             return ds;
         }
+
+        public DataSet EVList()
+        {
+            SqlParameter[] para =
+                            {
+                               
+                                 new SqlParameter("@CustomerID",CustomerId),
+                                 new SqlParameter("@AssociateID",AssociateID),
+                                 new SqlParameter("@FromDate",FromDate),
+                                 new SqlParameter("@ToDate",ToDate),
+                                 new SqlParameter("@CouponCode",CouponNumber),
+                                 new SqlParameter("@Pk_EVBookingId",PK_BookingId),
+
+
+                            };
+            DataSet ds = Connection.ExecuteQuery("GetEVBooking", para);
+            return ds;
+        }
     }
 }
 
