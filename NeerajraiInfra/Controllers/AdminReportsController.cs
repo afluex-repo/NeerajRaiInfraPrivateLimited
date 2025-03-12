@@ -3463,6 +3463,7 @@ namespace NeerajraiInfra.Controllers
         {
 
             List<Reports> lst = new List<Reports>();
+          
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
 
@@ -3482,14 +3483,8 @@ namespace NeerajraiInfra.Controllers
                         obj.PK_BookingId = r["Pk_EVBookingId"].ToString();
                         obj.CouponNumber = r["CouponCode"].ToString();
                         obj.BookingDate = r["BookingDate"].ToString();
-
                         obj.CustomerLoginID = r["CustomerDetails"].ToString();
-
-                        //obj.Contact = r["Mobile"].ToString();
-
                         obj.AssociateLoginID = r["AssociateDetails"].ToString();
-
-                        //obj.BookingStatus = r["BookingStatus"].ToString();
                         obj.Amount = r["Amount"].ToString();
                         obj.PaymentMode = r["PaymentMode"].ToString();
                         obj.TransactionDetails = r["TransactionDetails"].ToString();
@@ -3505,10 +3500,12 @@ namespace NeerajraiInfra.Controllers
 
         [HttpPost]
         [ActionName("EVBookingDetails")]
-        [OnAction(ButtonName = "Search")]
+        [OnAction(ButtonName = "btnSearch")]
         public ActionResult GetEVBookingList(Reports model)
         {
             List<Reports> lst = new List<Reports>();
+            model.UserID = model.CustomerId;
+            model.LoginId = model.AssociateID;
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
 
@@ -3528,14 +3525,8 @@ namespace NeerajraiInfra.Controllers
                         obj.PK_BookingId = r["Pk_EVBookingId"].ToString();
                         obj.CouponNumber = r["CouponCode"].ToString();
                         obj.BookingDate = r["BookingDate"].ToString();
-                       
                         obj.CustomerLoginID = r["CustomerDetails"].ToString();
-                      
-                        //obj.Contact = r["Mobile"].ToString();
-                     
                         obj.AssociateLoginID = r["AssociateDetails"].ToString();
-                     
-                        //obj.BookingStatus = r["BookingStatus"].ToString();
                         obj.Amount = r["Amount"].ToString();
                         obj.PaymentMode = r["PaymentMode"].ToString();
                         obj.TransactionDetails = r["TransactionDetails"].ToString();
@@ -3545,10 +3536,27 @@ namespace NeerajraiInfra.Controllers
                     model.lstEV = lst;
                 }
             }
-            return RedirectToAction("EVBookingDetails", "AdminReports");
+            return View(model);
             
         }
 
-
+        public ActionResult GetUserList()
+        {
+            Reports obj = new Reports();
+            List<Reports> lst = new List<Reports>();
+            obj.LoginId = Session["LoginId"].ToString();
+            DataSet ds = obj.GettingUserProfile();
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Reports objList = new Reports();
+                    objList.UserName = dr["Fullname"].ToString();
+                    objList.LoginIDD = dr["LoginId"].ToString();
+                    lst.Add(objList);
+                }
+            }
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
     }
 }

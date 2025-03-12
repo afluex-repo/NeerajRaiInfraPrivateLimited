@@ -28,6 +28,7 @@
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
     <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,7 +38,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <IntermediateOutputPath>C:\Users\AFLUEX\AppData\Local\Temp\vs9AC7.tmp\Debug\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\AFLUEX\AppData\Local\Temp\vsB377.tmp\Debug\</IntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -46,7 +47,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <IntermediateOutputPath>C:\Users\AFLUEX\AppData\Local\Temp\vs9AC7.tmp\Release\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\AFLUEX\AppData\Local\Temp\vsB377.tmp\Release\</IntermediateOutputPath>
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
@@ -7642,6 +7643,7 @@
     <Content Include="Views\AdminReports\AssociateSelfdownBusinessReport.cshtml" />
     <Content Include="Views\AdminReports\CheckDesignationUpdateLog.cshtml" />
     <Content Include="Views\AdminReports\CancelPrintReceipt.cshtml" />
+    <Content Include="Views\Plot\EVBooking.cshtml" />
     <Content Include="Views\AdminReports\EVBookingDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>

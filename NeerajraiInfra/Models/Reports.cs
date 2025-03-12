@@ -12,11 +12,11 @@ namespace NeerajraiInfra.Models
     {
         
         public string UserID { get; set; }
-        public string CustomerID { get; set; }
+        //public string CustomerID { get; set; }
         public string CouponNumber { get; set; }
-        public string CustomerName { get; set; }
-        public string Contact { get; set; }
-        public string BookingStatus { get; set; }
+       
+      
+       
         public string TransactionDetails { get; set; }
         public List<Reports> lstEV { get; set; }
 
@@ -429,7 +429,7 @@ namespace NeerajraiInfra.Models
         {
             SqlParameter[] para = {
                                         new SqlParameter("@LoginId", LoginId)};
-            DataSet ds = Connection.ExecuteQuery("GetUserProfile", para);
+            DataSet ds = Connection.ExecuteQuery("GetUserProfileforSearch", para);
             return ds;
         }
         public DataSet GetCustomerListAutoSeach()
@@ -601,14 +601,14 @@ namespace NeerajraiInfra.Models
         }
 
 
-
+        
         public DataSet GetEVBookingDetailsList()
         {
             SqlParameter[] para = {
                                       new SqlParameter("@Pk_EVBookingId", PK_BookingId),
-                                      new SqlParameter("@CustomerID", CustomerID),
-                                      new SqlParameter("@AssociateID", AssociateID),
-                                      new SqlParameter("@BookingNo", BookingNumber),
+                                      new SqlParameter("@CustomerID", UserID),
+                                      new SqlParameter("@AssociateID", LoginId),
+                                      new SqlParameter("@CouponCode", CouponNumber),
                                       new SqlParameter("@FromDate", FromDate),
                                       new SqlParameter("@ToDate", ToDate)
                                      
