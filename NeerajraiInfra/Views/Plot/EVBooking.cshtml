@@ -47,14 +47,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 Customer ID <span style="color: red">*</span>
-                                @if (Model.PK_BookingId == null)
-                                {
-                                    @Html.TextBoxFor(m => m.CustomerID, new { @class = "form-control", @Placeholder = "Customer ID", @onchange = "return getCustomerName();" })
-                                }
-                                else
-                                {
                                     @Html.TextBoxFor(m => m.CustomerID, new { @class = "form-control", @Placeholder = "Customer ID", @onchange = "return getCustomerName();", @readonly = "d" })
-                                }
                                 @Html.HiddenFor(m => m.UserID)
                             </div>
                         </div>
