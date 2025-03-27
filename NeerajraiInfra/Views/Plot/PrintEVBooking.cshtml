@@ -1,5 +1,4 @@
-﻿@model NeerajraiInfra.Models.Reports
-
+﻿@model NeerajraiInfra.Models.Plot
 
 @{
     Layout = null;
@@ -8,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>PrintEVBooking Receipt</title>
+    <title>EV Receipt</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link href="~/css/bootstrap.css" rel="stylesheet" />
@@ -70,16 +69,11 @@
                     @*<br /><br /><br /><br /><br /><B>CIN : U74999UP2019PTC116517</B>*@
                 </td>
                 <td style="width:30%">
-                    <h2 style="color:#00a654">EV Booking Receipt Acknowledgement</h2>
+                    <h2 style="color:#00a654">EV Booking Receipt</h2>
                 </td>
                 <td style="width:30%">
-                    @*@if (@ViewBag.ImageUrl != "#")
-                    {
-                        <img src="@ViewBag.ImageUrl" class="img-fluid" alt="logo1" style="max-width: 30%;" />
-                    }*@
-
-
-                    @*<br /><B>CIN : U70200UP2019PTC116042</B>*@
+                    @*<img src="~/AssociatePanelcss/assets/img/blossom.png" class="img-fluid" alt="logo1" style="max-width: 30%;" />
+                        <br /><B>CIN : U70200UP2019PTC116042</B>*@
                 </td>
             </tr>
         </table>
@@ -96,15 +90,14 @@
         <table style="width:100%;" class="table table-striped">
             <tr>
                 <td colspan="3" style="border: 1px solid black;"><b>Receipt No. :   </b>@ViewBag.ReceiptNo</td>
-                <td colspan="3" style="border: 1px solid black;"><b>Booking Date:</b>@ViewBag.BookingDate</td>
-                <td colspan="3" style="border: 1px solid black;"><b>Coupon No. :   </b>@ViewBag.CouponNumber</td>
-
+                <td colspan="3" style="border: 1px solid black;"><b>Coupon No. :    </b>@ViewBag.CouponNumber</td>
+                <td colspan="3" style="border: 1px solid black;"><b>Booking Date : </b>@ViewBag.BookingDate</td>
 
             </tr>
             <tr>
                 <td colspan="4" style="border: 1px solid black;"><b>Received From :     </b>@ViewBag.CustomerName</td>
-                <td colspan="2" style="border: 1px solid black;"><b>ID :   </b>@ViewBag.CustomerID</td>
-                <td colspan="3" style="border: 1px solid black;"><b>Mobile No :    </b>@ViewBag.Mobile</td>
+                <td colspan="2" style="border: 1px solid black;"><b>ID :   </b>@ViewBag.LoginId</td>
+                <td colspan="3" style="border: 1px solid black;"><b>Mobile No :    </b>@ViewBag.customerMobile</td>
 
             </tr>
             <tr>
@@ -117,29 +110,34 @@
                 <td colspan="3" style="border: 1px solid black;"><b>State:    </b>@ViewBag.State</td>
                 <td colspan="3" style="border: 1px solid black;"><b>Pin Code:    </b>@ViewBag.Pin</td>
             </tr>
-
             @*<tr>
-            <td colspan="2" style="border: 1px solid black;display:none;"><b>Plot Booking Rate: </b>@ViewBag.PLCRate</td>
-            <td colspan="2" style="border: 1px solid black;display:none;"><b>PLC Percentage: </b>@ViewBag.PLC %</td>
-            <td colspan="2" style="border: 1px solid black;display:none;"><b>PLC Amount:     </b>@ViewBag.PLCCharge </td>
-        </tr>*@
+                <td colspan="3" style="border: 1px solid black;"><b>Project Name : </b>@ViewBag.SiteName</td>
+                <td colspan="3" style="border: 1px solid black;"><b>Plot No.:    </b>@ViewBag.PlotNumber</td>
+                @*<td colspan="2" style="border: 1px solid black;"><b>Plot size :    </b>@ViewBag.PlotSize</td>
+                <td colspan="3" style="border: 1px solid black;"><b>Plot Area :   </b>@ViewBag.PlotArea</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="border: 1px solid black;display:none;"><b>Plot Booking Rate: </b>@ViewBag.PLCRate</td>
+                <td colspan="2" style="border: 1px solid black;display:none;"><b>PLC Percentage: </b>@ViewBag.PLC %</td>
+                <td colspan="2" style="border: 1px solid black;display:none;"><b>PLC Amount:     </b>@ViewBag.PLCCharge </td>
+            </tr>*@
             <tr>
 
-
-                <td colspan="2" style="border: 1px solid black;"><b>Amount:  </b>@ViewBag.Amount</td>
-                <td style="border: 1px solid black;" colspan="9"><b>In Words:     </b>@ViewBag.NetPlotAmountInWords</td>
-                @*<td colspan="2" style="border: 1px solid black;"><b>Total Deposit:     </b> @ViewBag.TotalDeposit</td>
-            <td colspan="2" style="border: 1px solid black;"><b>Balance:     </b>@ViewBag.RemainingAmount</td>
-            <td colspan="2" style="border: 1px solid black;"><b>Plot Booking Rate: </b>@ViewBag.PlotRate</td>
-            <td colspan="1" style="border: 1px solid black;"><b>Installment No.:</b> @ViewBag.InstallmentNo </td>*@
+                @*<td colspan="2" style="border: 1px solid black;"><b>Amount:  </b>@ViewBag.NetPlotAmount </td>*@
+                <td colspan="3" style="border: 1px solid black;"><b>Amount:  </b>@ViewBag.Amount</td>
+                <td style="border: 1px solid black;" colspan="6"><b>In Words:     </b>@ViewBag.AmountInWords</td>
+                @*<td colspan="2" style="border: 1px solid black;"><b>Total Deposit:     </b> @ViewBag.PaidAmount</td>
+                <td colspan="2" style="border: 1px solid black;"><b>Balance:     </b>@ViewBag.RemainingAmounts</td>
+                <td colspan="2" style="border: 1px solid black;"><b>Plot Booking Rate: </b>@ViewBag.PlotRate</td>
+                <td colspan="1" style="border: 1px solid black;"><b>Installment No.:</b> @ViewBag.InstallmentNo </td>*@
             </tr>
             <tr>
                 @*<td style="border: 1px solid black;" colspan="2"></td>
-            <td style="border: 1px solid black;" colspan="2"><b>In Words:</b>@ViewBag.NetPlotAmountInWords</td>
-            <td style="border: 1px solid black;" colspan="5"><b>Adjustment LoginId:     </b>@ViewBag.AdjustmentloginId</td>*@
+                    <td style="border: 1px solid black;" colspan="2"><b>In Words:</b>@ViewBag.NetPlotAmountInWords</td>
+                    <td style="border: 1px solid black;" colspan="5"><b>Adjustment LoginId:     </b>@ViewBag.AdjustmentloginId</td>*@
 
 
-                @*<td style="border: 1px solid black;" colspan="9"><b>In Words:     </b>@ViewBag.NetPlotAmountInWords</td>*@
+               
                 @*<td style="border: 1px solid black;" colspan="3"><b>Adjustment LoginId:     </b>@ViewBag.AdjustmentloginId</td>*@
 
             </tr>
@@ -156,7 +154,7 @@
                         <td colspan="2" style="border: 1px solid black;"><b> Cheque No:    </b>@ViewBag.TransactionNo</td>
                         <td colspan="5" style="border: 1px solid black;"><b> Cheque Date:    </b>@ViewBag.TransactionDate</td>
                         @*<td colspan="2" style="border: 1px solid black;"><b> BankName:    </b>@ViewBag.BankName</td>
-                    <td colspan="1" style="border: 1px solid black;"><b> BankBranch:    </b>@ViewBag.BankBranch</td>*@
+                            <td colspan="1" style="border: 1px solid black;"><b> BankBranch:    </b>@ViewBag.BankBranch</td>*@
                     }
                     else if (ViewBag.PaymentMode == "NEFT")
                     {
@@ -164,7 +162,7 @@
                         <td colspan="1" style="border: 1px solid black;"><b> NEFT No:    </b>@ViewBag.TransactionNo</td>
                         <td colspan="5" style="border: 1px solid black;"><b> NEFT Date:    </b>@ViewBag.TransactionDate</td>
                         @*<td colspan="2" style="border: 1px solid black;"><b> BankName:    </b>@ViewBag.BankName</td>
-                    <td colspan="2" style="border: 1px solid black;"><b> BankBranch:    </b>@ViewBag.BankBranch</td>*@
+                            <td colspan="2" style="border: 1px solid black;"><b> BankBranch:    </b>@ViewBag.BankBranch</td>*@
                     }
                     else if (ViewBag.PaymentMode == "DD")
                     {
@@ -172,7 +170,7 @@
                         <td colspan="2" style="border: 1px solid black;"><b> DD No:    </b>@ViewBag.TransactionNo</td>
                         <td colspan="5" style="border: 1px solid black;"><b> DD Date:    </b>@ViewBag.TransactionDate</td>
                         @*<td colspan="2" style="border: 1px solid black;"><b> BankName:    </b>@ViewBag.BankName</td>
-                    <td colspan="1" style="border: 1px solid black;"><b> BankBranch:    </b>@ViewBag.BankBranch</td>*@
+                            <td colspan="1" style="border: 1px solid black;"><b> BankBranch:    </b>@ViewBag.BankBranch</td>*@
                     }
                     else if (ViewBag.PaymentMode == "RTGS")
                     {
@@ -180,7 +178,7 @@
                         <td colspan="2" style="border: 1px solid black;"><b> RTGS No:    </b>@ViewBag.TransactionNo</td>
                         <td colspan="5" style="border: 1px solid black;"><b> RTGS Date:    </b>@ViewBag.TransactionDate</td>
                         @*<td colspan="2" style="border: 1px solid black;"><b> BankName:    </b>@ViewBag.BankName</td>
-                    <td colspan="1" style="border: 1px solid black;"><b> BankBranch:    </b>@ViewBag.BankBranch</td>*@
+                            <td colspan="1" style="border: 1px solid black;"><b> BankBranch:    </b>@ViewBag.BankBranch</td>*@
                     }
                     else if (ViewBag.PaymentMode == "IMPS")
                     {
@@ -188,7 +186,7 @@
                         <td colspan="2" style="border: 1px solid black;"><b> IMPS No:    </b>@ViewBag.TransactionNo</td>
                         <td colspan="5" style="border: 1px solid black;"><b> IMPS Date:    </b>@ViewBag.TransactionDate</td>
                         @*<td colspan="2" style="border: 1px solid black;"><b> BankName:    </b>@ViewBag.BankName</td>
-                    <td colspan="1" style="border: 1px solid black;"><b> BankBranch:    </b>@ViewBag.BankBranch</td>*@
+                            <td colspan="1" style="border: 1px solid black;"><b> BankBranch:    </b>@ViewBag.BankBranch</td>*@
                     }
                     else if (ViewBag.PaymentMode == "BHIM" || ViewBag.PaymentMode == "Google Pay" || ViewBag.PaymentMode == "Paytm" || ViewBag.PaymentMode == "UPI")
                     {
@@ -196,7 +194,7 @@
                         <td colspan="2" style="border: 1px solid black;"><b> Transaction No:    </b>@ViewBag.TransactionNo</td>
                         <td colspan="5" style="border: 1px solid black;"><b> Transaction Date:    </b>@ViewBag.PaymentDate</td>
                         @*<td colspan="2" style="border: 1px solid black;"><b> BankName:    </b>@ViewBag.BankName</td>
-                    <td colspan="1" style="border: 1px solid black;"><b> BankBranch:    </b>@ViewBag.BankBranch</td>*@
+                            <td colspan="1" style="border: 1px solid black;"><b> BankBranch:    </b>@ViewBag.BankBranch</td>*@
                     }
                     else
                     {
@@ -204,14 +202,12 @@
                         <td colspan="2" style="border: 1px solid black;"><b> Transaction No:    </b>@ViewBag.TransactionNo</td>
                         <td colspan="5" style="border: 1px solid black;"><b> Transaction Date:    </b>@ViewBag.TransactionDate</td>
                         @*<td colspan="2" style="border: 1px solid black;"><b> BankName:    </b>@ViewBag.BankName</td>
-                    <td colspan="1" style="border: 1px solid black;"><b> BankBranch:    </b>@ViewBag.BankBranch</td>*@
+                            <td colspan="1" style="border: 1px solid black;"><b> BankBranch:    </b>@ViewBag.BankBranch</td>*@
                     }
+                }
 
-               
-            }
-
-                </tr>
-            </table>
+            </tr>
+        </table>
         @*new*@
 
 
@@ -383,17 +379,11 @@
                     @*<br /><br /><br /><br /><br /><B>CIN : U74999UP2019PTC116517</B>*@
                 </td>
                 <td style="width:30%">
-                    <h2 style="color:#00a654">EV Booking Receipt Acknowledgement</h2>
+                    <h2 style="color:#00a654">EV Booking Receipt</h2>
                 </td>
                 <td style="width:30%">
-                    @*@if (@ViewBag.ImageUrl != "#")
-                    {
-                        <img src="@ViewBag.ImageUrl" class="img-fluid" alt="logo1" style="max-width: 30%;" />
-                    }*@
-
-
-                    @*<img src="~/WebsiteCss/assets/images/Neerajrai_logo.jpg" class="img-fluid" alt="logo1" style="max-width: 30%;" />*@
-                    @*<br /><B>CIN : U70200UP2019PTC116042</B>*@
+                    @*<img src="~/AssociatePanelcss/assets/img/blossom.png" class="img-fluid" alt="logo1" style="max-width: 30%;" />
+                        <br /><B>CIN : U70200UP2019PTC116042</B>*@
                 </td>
             </tr>
         </table>
@@ -409,14 +399,14 @@
         <table style="width:100%;" class="table table-striped">
             <tr>
                 <td colspan="3" style="border: 1px solid black;"><b>Receipt No. :   </b>@ViewBag.ReceiptNo</td>
-                <td colspan="3" style="border: 1px solid black;"><b>Booking Date:</b>@ViewBag.BookingDate</td>
-                <td colspan="3" style="border: 1px solid black;"><b>Coupon No. :   </b>@ViewBag.CouponNumber</td>
+                <td colspan="3" style="border: 1px solid black;"><b>Coupon No. :    </b>@ViewBag.CouponNumber</td>
+                <td colspan="3" style="border: 1px solid black;"><b>Booking Date : </b>@ViewBag.BookingDate</td>
 
             </tr>
             <tr>
                 <td colspan="4" style="border: 1px solid black;"><b>Received From :     </b>@ViewBag.CustomerName</td>
-                <td colspan="2" style="border: 1px solid black;"><b>ID :   </b>@ViewBag.CustomerID</td>
-                <td colspan="3" style="border: 1px solid black;"><b>Mobile No :    </b>@ViewBag.Mobile</td>
+                <td colspan="2" style="border: 1px solid black;"><b>ID :   </b>@ViewBag.LoginId</td>
+                <td colspan="3" style="border: 1px solid black;"><b>Mobile No :    </b>@ViewBag.customerMobile</td>
 
             </tr>
             <tr>
@@ -429,12 +419,12 @@
                 <td colspan="3" style="border: 1px solid black;"><b>State:    </b>@ViewBag.State</td>
                 <td colspan="3" style="border: 1px solid black;"><b>Pin Code:    </b>@ViewBag.Pin</td>
             </tr>
-            <!--<tr>
+            @*<tr>
                 <td colspan="3" style="border: 1px solid black;"><b>Project Name : </b>@ViewBag.SiteName</td>
-                <td colspan="3" style="border: 1px solid black;"><b>Plot No.:    </b>@ViewBag.PlotNumber</td>-->
-                @*<td colspan="2" style="border: 1px solid black;"><b>Plot size :    </b>@ViewBag.PlotSize</td>*@
-                <!--<td colspan="3" style="border: 1px solid black;"><b>Plot Area :   </b>@ViewBag.PlotArea</td>
-            </tr>-->
+                <td colspan="3" style="border: 1px solid black;"><b>Plot No.:    </b>@ViewBag.PlotNumber</td>
+                @*<td colspan="2" style="border: 1px solid black;"><b>Plot size :    </b>@ViewBag.PlotSize</td>
+                <td colspan="3" style="border: 1px solid black;"><b>Plot Area :   </b>@ViewBag.PlotArea</td>
+            </tr>
             <tr>
                 <td colspan="2" style="border: 1px solid black;display:none;"><b>Plot Booking Rate: </b>@ViewBag.PLCRate</td>
                 <td colspan="2" style="border: 1px solid black;display:none;"><b>PLC Percentage: </b>@ViewBag.PLC %</td>
@@ -442,26 +432,23 @@
             </tr>
             <tr>
 
-                <td colspan="2" style="border: 1px solid black;"><b>Amount:  </b>@ViewBag.Amount</td>
-                <td style="border: 1px solid black;" colspan="9"><b>In Words:     </b>@ViewBag.NetPlotAmountInWords</td>
-
-                @*<td colspan="2" style="border: 1px solid black;"><b>Amount:  </b>@ViewBag.PaidAmount </td>
-        <td colspan="2" style="border: 1px solid black;"><b>Total Deposit:     </b> @ViewBag.TotalDeposit</td>
-        <td colspan="2" style="border: 1px solid black;"><b>Balance:     </b>@ViewBag.RemainingAmount</td>
-        <td colspan="2" style="border: 1px solid black;"><b>Plot Booking Rate: </b>@ViewBag.PlotRate</td>
-        <td colspan="1" style="border: 1px solid black;"><b>Installment No.:</b> @ViewBag.InstallmentNo </td>*@
-            </tr>
-            @*<tr>
+                <td colspan="2" style="border: 1px solid black;"><b>Amount:  </b>@ViewBag.PaidAmount</td>
+                <td colspan="2" style="border: 1px solid black;"><b>Total Deposit:     </b> @ViewBag.PaidAmount</td>
+                <td colspan="2" style="border: 1px solid black;"><b>Balance:     </b>@ViewBag.RemainingAmounts</td>
+                <td colspan="2" style="border: 1px solid black;"><b>Plot Booking Rate: </b>@ViewBag.PlotRate</td>
+                <td colspan="1" style="border: 1px solid black;"><b>Installment No.:</b> @ViewBag.InstallmentNo </td>
+            </tr>*@
+            <tr>
                 @*<td style="border: 1px solid black;" colspan="2"></td>
                     <td style="border: 1px solid black;" colspan="2"><b>In Words:</b>@ViewBag.NetPlotAmountInWords</td>
-                    <td style="border: 1px solid black;" colspan="5"><b>Adjustment LoginId:     </b>@ViewBag.AdjustmentloginId</td>
+                    <td style="border: 1px solid black;" colspan="5"><b>Adjustment LoginId:     </b>@ViewBag.AdjustmentloginId</td>*@
+
+                <td colspan="3" style="border: 1px solid black;"><b>Amount:  </b>@ViewBag.Amount</td>
+                <td style="border: 1px solid black;" colspan="6"><b>In Words:     </b>@ViewBag.AmountInWords</td>
+                @*<td style="border: 1px solid black;" colspan="3"><b>Adjustment LoginId:     </b>@ViewBag.AdjustmentloginId</td>*@
 
 
-                <td style="border: 1px solid black;" colspan="9"><b>In Words:     </b>@ViewBag.NetPlotAmountInWords</td>
-                @*<td style="border: 1px solid black;" colspan="3"><b>Adjustment LoginId:     </b>@ViewBag.AdjustmentloginId</td>
-
-
-            </tr>*@
+            </tr>
             <tr>
                 @if (ViewBag.PaymentMode == "Cash")
                 {
@@ -553,8 +540,3 @@
     </div>
 </body>
 </html>
-
-
-
-
-

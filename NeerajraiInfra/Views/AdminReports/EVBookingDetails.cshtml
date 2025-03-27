@@ -99,6 +99,7 @@
                                     <thead>
                                         <tr>
                                             <th>S No.</th>
+                                            <td hidden></td>
                                             <th>Coupon No.</th>
                                             <th>Booking Date</th>
                                             <th>Customer Detail</th>
@@ -120,7 +121,7 @@
                                                 {
                                                     <tr class="text-left">
                                                         <td>@i</td>
-                                                        
+                                                        <td hidden>@Item.Pk_EVBookingId</td>
                                                         <td>@Item.CouponNumber</td>
                                                         <td>@Item.BookingDate</td>
                                                         <td>@Item.CustomerLoginID</td>
@@ -130,7 +131,7 @@
                                                         <td>@Item.TransactionDetails</td>
                                                         <td>@Item.Remarks</td>
                                                         <td>
-                                                            <div class="badge badge-success badge-shadow"><a target="_blank" class="badge badge-success badge-shadow" href="/AdminReports/PrintEVBooking?PrintId=@Item.PK_BookingId"><span>Print</span></a></div>
+                                                            <div class="badge badge-success badge-shadow"><a target="_blank" class="badge badge-success badge-shadow" href="/AdminReports/PrintEVBooking?PrintId=@Item.Pk_EVBookingId"><span>Print</span></a></div>
                                                         </td>
                                                        </tr>
                                                     i++;

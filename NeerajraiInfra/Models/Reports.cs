@@ -78,6 +78,7 @@ namespace NeerajraiInfra.Models
         public string Password { get; set; }
         public List<Reports> lstassociate { get; set; }
         public string PK_BookingId { get; set; }
+        public string Pk_EVBookingId { get; set; }
         public string BookingNumber { get; set; }
         public List<Reports> lstP { get; set; }
         public string PlotAmount { get; set; }
@@ -605,7 +606,7 @@ namespace NeerajraiInfra.Models
         public DataSet GetEVBookingDetailsList()
         {
             SqlParameter[] para = {
-                                      new SqlParameter("@Pk_EVBookingId", PK_BookingId),
+                                      new SqlParameter("@Pk_EVBookingId", Pk_EVBookingId),
                                       new SqlParameter("@CustomerID", UserID),
                                       new SqlParameter("@AssociateID", LoginId),
                                       new SqlParameter("@CouponCode", CouponNumber),
@@ -618,23 +619,23 @@ namespace NeerajraiInfra.Models
             return ds;
         }
 
-        public DataSet EVList()
-        {
-            SqlParameter[] para =
-                            {
+        //public DataSet EVList()
+        //{
+        //    SqlParameter[] para =
+        //                    {
                                
-                                 new SqlParameter("@CustomerID",CustomerId),
-                                 new SqlParameter("@AssociateID",AssociateID),
-                                 new SqlParameter("@FromDate",FromDate),
-                                 new SqlParameter("@ToDate",ToDate),
-                                 new SqlParameter("@CouponCode",CouponNumber),
-                                 new SqlParameter("@Pk_EVBookingId",PK_BookingId),
+        //                         new SqlParameter("@CustomerID",CustomerId),
+        //                         new SqlParameter("@AssociateID",AssociateID),
+        //                         new SqlParameter("@FromDate",FromDate),
+        //                         new SqlParameter("@ToDate",ToDate),
+        //                         new SqlParameter("@CouponCode",CouponNumber),
+        //                         new SqlParameter("@Pk_EVBookingId",Pk_EVBookingId),
 
 
-                            };
-            DataSet ds = Connection.ExecuteQuery("GetEVBooking", para);
-            return ds;
-        }
+        //                    };
+        //    DataSet ds = Connection.ExecuteQuery("GetEVBooking", para);
+        //    return ds;
+        //}
     }
 }
 

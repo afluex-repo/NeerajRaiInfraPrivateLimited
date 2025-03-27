@@ -3480,7 +3480,7 @@ namespace NeerajraiInfra.Controllers
                     foreach (DataRow r in ds.Tables[0].Rows)
                     {
                         Reports obj = new Reports();
-                        obj.PK_BookingId = r["Pk_EVBookingId"].ToString();
+                        obj.Pk_EVBookingId = r["Pk_EVBookingId"].ToString();
                         obj.CouponNumber = r["CouponCode"].ToString();
                         obj.BookingDate = r["BookingDate"].ToString();
                         obj.CustomerLoginID = r["CustomerDetails"].ToString();
@@ -3522,7 +3522,7 @@ namespace NeerajraiInfra.Controllers
                     foreach (DataRow r in ds.Tables[0].Rows)
                     {
                         Reports obj = new Reports();
-                        obj.PK_BookingId = r["Pk_EVBookingId"].ToString();
+                        obj.Pk_EVBookingId = r["Pk_EVBookingId"].ToString();
                         obj.CouponNumber = r["CouponCode"].ToString();
                         obj.BookingDate = r["BookingDate"].ToString();
                         obj.CustomerLoginID = r["CustomerDetails"].ToString();
@@ -3563,9 +3563,9 @@ namespace NeerajraiInfra.Controllers
         public ActionResult PrintEVBooking(string PrintId)
         {
             Reports newdata = new Reports();
-           
-            ViewBag.Name = Session["Name"].ToString();
-            DataSet ds = newdata.EVList();
+            newdata.Pk_EVBookingId = PrintId;
+            //ViewBag.Name = Session["Name"].ToString();
+            DataSet ds = newdata.GetEVBookingDetailsList();
 
             if (ds != null && ds.Tables[0].Rows.Count > 0)
             {
