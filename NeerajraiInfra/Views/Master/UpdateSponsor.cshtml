@@ -1,0 +1,185 @@
+﻿@model NeerajraiInfra.Models.Master
+
+@{
+    ViewBag.Title = "UpdateSponsor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("UpdateSponsor", "Master", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    <section class="section">
+        <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+                <a href="#">
+                    <i data-feather="home"></i>
+                </a>
+            </li>
+            <li class="breadcrumb-item">Master</li>
+            <li class="breadcrumb-item">Update Sponsor</li>
+        </ul>
+    </section>
+
+    <div class="section-body">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Plot Booking</h4>
+                    <p style="color: red">
+                        @TempData["UpdateSponsor"]
+                       
+                    </p>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                     
+                        <div class="col-md-3">
+                            LoginId <span style="color: red">*</span>
+                            
+                             @Html.TextBoxFor(m => m.CustomerID, new { @class = "form-control", @Placeholder = "LoginId", @onchange = "return getCustomerName();" })
+                            </div>
+
+                        <div class="form-group">
+                             Name
+                            @Html.TextBoxFor(m => m.CustomerName, new { @class = "form-control", @Placeholder = "Name", @readonly = "readonly" })
+                        </div>
+                       
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                Associate ID
+                                @Html.TextBoxFor(m => m.AssociateID, new { @class = "form-control", @Placeholder = "Affiliate ID", @readonly = "abc" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                Associate Name
+                                @Html.TextBoxFor(m => m.AssociateName, new { @class = "form-control", @Placeholder = "Associate Name", @readonly = "readonly" })
+                            </div>
+                        </div>
+                     
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                New Associate ID
+                                @Html.TextBoxFor(m => m.NewAssociateID, new { @class = "form-control", @Placeholder = "New Affiliate ID", @onchange = "return getsponsorName();" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                New Associate Name
+                                @Html.TextBoxFor(m => m.NewAssociateName, new { @class = "form-control", @Placeholder = "New Associate Name", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="col-md-3 d-flex align-items-end">
+                            <div class="form-group">
+                                <input class="btn btn-success" type="submit" value="Update" id="btnUpdate" name="btnUpdate" />
+                            </div>
+                        </div>
+                       </div>
+                   </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+
+<script>
+
+    function validateAssociateID() {
+        var associateID = document.querySelector("[name='AssociateID']").value;
+        var newAssociateID = document.querySelector("[name='NewAssociateID']").value;
+        var newAssociateName = document.querySelector("[name='NewAssociateName']");
+
+        if (associateID && newAssociateID && associateID === newAssociateID) {
+            alert("Existing Associate & New Associate cannot be same");
+            document.querySelector("[name='NewAssociateID']").value = ""; // Clear the new associate ID
+            if (newAssociateName) {
+                newAssociateName.value = ""; // Clear the new associate name
+            }
+            return false;
+        }
+        return true;
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var newAssociateIDField = document.querySelector("[name='NewAssociateID']");
+        if (newAssociateIDField) {
+            newAssociateIDField.addEventListener("change", validateAssociateID);
+        }
+    });
+
+
+
+    function getCustomerName() {
+
+        $("#divload").css({ 'display': '' });
+        var sponsorID = $('#CustomerID').val();
+        $.ajax({
+            url: '/Master/GetCustomerNameFromCustomerID', type: 'post', dataType: 'json',
+            data: { 'CustomerID': sponsorID },
+            success: function (data) {
+                $("#divload").css({ 'display': 'none' });
+                if (data.Result == "yes") {
+                    $("#CustomerName").val(data.CustomerName);
+                    $("#AssociateName").val(data.AssociateName);
+                    $("#AssociateID").val(data.AssociateID);
+                    //document.getElementById('AssociateImage').src = data.ProfileImage;
+
+                    $("#CustomerName").removeClass('errortext');
+                    $("#CustomerID").removeClass('errortext');
+                }
+                else if (data.Result == "no") {
+                    $("#CustomerName").val('');
+                    //document.getElementById('AssociateImage').src = '';
+                    $("#AssociateName").val('');
+                    $("#UserID").val('');
+                    $("#AssociateID").val('');
+                    $("#CustomerName").addClass('errortext');
+                    $("#CustomerID").addClass('errortext');
+                    $('#CustomerID').focus();
+                    alert("Invalid Customer ID");
+                    $('#CustomerID').val('');
+                }
+            }
+
+        });
+    }
+  
+    function getsponsorName() {
+        $("#divload").css({ 'display': '' });
+        var sponsorID = $('#NewAssociateID').val();
+        var customerID = $('#CustomerID').val(); // Fetching LoginId
+
+        $.ajax({
+            url: '/Master/GetSponsorNameFromCustomerID',
+            type: 'post',
+            dataType: 'json',
+            data: { 'NewAssociateID': sponsorID, 'CustomerId': customerID }, // Sending both IDs
+            success: function (data) {
+                $("#divload").css({ 'display': 'none' });
+
+                if (data.Result == "yes") {
+                    $("#NewAssociateName").val(data.NewAssociateName); // Setting the New Associate Name
+                   
+
+                    $("#NewAssociateName").removeClass('errortext');
+                    $("#NewAssociateID").removeClass('errortext');
+                } else if (data.Result == "no") {
+                    $("#NewAssociateName").val('');
+                    $("#NewAssociateName").addClass('errortext');
+                    $("#NewAssociateID").addClass('errortext');
+
+                   
+                    alert("Invalid New Associate ID");
+                    $('#NewAssociateID').focus();
+                    $('#NewAssociateID').val('');
+                }
+            },
+            error: function () {
+                $("#divload").css({ 'display': 'none' });
+                alert("Error retrieving data. Please try again.");
+            }
+        });
+    }
+</script>

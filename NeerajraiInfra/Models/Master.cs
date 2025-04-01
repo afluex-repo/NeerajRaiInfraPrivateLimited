@@ -983,8 +983,48 @@ namespace NeerajraiInfra.Models
             return ds;
         }
 
-        
+        public string CustomerID { get; set; }
+        public string CustomerName { get; set; }
+        public string UserID { get; set; }
+        public string AssociateID { get; set; }
+        public string AssociateName { get; set; }
+        public string PK_BookingId { get; set; }
+        public string LoginId { get; set; }
+        public string NewAssociateID { get; set; }
+        public string NewAssociateName { get; set; }
 
+        public DataSet GetCustomerName()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginID", LoginId) };
+            DataSet ds = Connection.ExecuteQuery("GetCustomerAssociateDetailsForBooking", para);
+            return ds;
+        }
+
+
+        public DataSet GetSponsorName()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@LoginID", LoginId),
+                new SqlParameter("@AssociateID", AssociateID)
+            };
+
+            DataSet ds = Connection.ExecuteQuery("GetCustomerAssociateDetails", para);
+            return ds;
+        }
+
+        public DataSet UpdateSponsor()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@CustomerID",CustomerID),
+                 new SqlParameter("@AssociateIdOld",AssociateID),
+                new SqlParameter("@NewAssociateID",NewAssociateID),
+                new SqlParameter("@Updatedby",UpdatedBy)
+
+            };
+            DataSet ds = Connection.ExecuteQuery("UpdateSponsorName", para);
+            return ds;
+        }
     }
 }
 

@@ -90,6 +90,7 @@
                                     <th>Allotment Remarks</th>
                                     <th>Payment Mode Remarks</th>
                                     <th>Status</th>
+                                    <th>Income Not Generate </th>
                                     <th>Description</th>
                                     <th>Payment Clear Date</th>
                                     <th>Action</th>
@@ -121,6 +122,9 @@
                                                 <td>@Item.AllotmentRemark</td>
                                                 <td>@Item.PaymentModeRemarks</td>
                                                 <td>@Item.PaymentStatus</td>
+                                                <td>
+                                              <input type="checkbox" id="calculation" name="calculation">
+                                                </td>
                                                 <td>
                                                     <textarea type="text" id="txtDesc @i" name="txtDesc @i" onchange="getdata(this)"></textarea>
                                                 </td>

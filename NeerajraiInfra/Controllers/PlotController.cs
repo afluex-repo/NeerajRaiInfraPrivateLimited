@@ -4045,5 +4045,201 @@ namespace NeerajraiInfra.Controllers
         }
 
 
+        public ActionResult ApproveEVBookingPayment(Plot model)
+        {
+            List<Plot> lst = new List<Plot>();
+            model.PaymentMode = model.PaymentMode == "0" ? null : model.PaymentMode;
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+
+            #region ddlPaymentMode
+            int count3 = 0;
+            List<SelectListItem> ddlPaymentMode = new List<SelectListItem>();
+            DataSet dsPayMode = model.GetPaymentModeList();
+            if (dsPayMode != null && dsPayMode.Tables.Count > 0 && dsPayMode.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsPayMode.Tables[0].Rows)
+                {
+                    if (count3 == 0)
+                    {
+                        ddlPaymentMode.Add(new SelectListItem { Text = "Select Payment Mode", Value = "0" });
+                    }
+                    ddlPaymentMode.Add(new SelectListItem { Text = r["PaymentMode"].ToString(), Value = r["PK_paymentID"].ToString() });
+                    count3 = count3 + 1;
+                }
+            }
+            ViewBag.ddlPaymentMode = ddlPaymentMode;
+            #endregion
+
+            DataSet ds = model.GetEVBookingDetailsforApproval();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                {
+                    TempData["EVMessage"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+                else
+                {
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        Plot obj = new Plot();
+                        obj.UserID = r["Pk_EVBookingId"].ToString();
+                        obj.CouponNumber = r["CouponCode"].ToString();
+                        obj.BookingDate = r["BookingDate"].ToString();
+                        obj.CustomerLoginID = r["CustomerDetails"].ToString();
+                        obj.AssociateLoginID = r["AssociateDetails"].ToString();
+                        obj.Amount = r["Amount"].ToString();
+                        obj.PaymentMode = r["PaymentMode"].ToString();
+                        obj.TransactionDetails = r["TransactionDetails"].ToString();
+                        obj.TransactionDate = r["TransactionDate"].ToString();
+                        obj.Remarks = r["Remarks"].ToString();
+                        obj.PaymentStatus = r["PaymentStatus"].ToString();
+                        lst.Add(obj);
+                    }
+                    model.lstEV = lst;
+                }
+            }
+        return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("ApproveEVBookingPayment")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult GetEVBookingList(Plot model)
+        {
+            List<Plot> lst = new List<Plot>();
+            model.PaymentMode = model.PaymentMode == "0" ? null : model.PaymentMode;
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+
+            #region ddlPaymentMode
+            int count3 = 0;
+            List<SelectListItem> ddlPaymentMode = new List<SelectListItem>();
+            DataSet dsPayMode = model.GetPaymentModeList();
+            if (dsPayMode != null && dsPayMode.Tables.Count > 0 && dsPayMode.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsPayMode.Tables[0].Rows)
+                {
+                    if (count3 == 0)
+                    {
+                        ddlPaymentMode.Add(new SelectListItem { Text = "Select Payment Mode", Value = "0" });
+                    }
+                    ddlPaymentMode.Add(new SelectListItem { Text = r["PaymentMode"].ToString(), Value = r["PK_paymentID"].ToString() });
+                    count3 = count3 + 1;
+                }
+            }
+            ViewBag.ddlPaymentMode = ddlPaymentMode;
+            #endregion
+
+
+            DataSet ds = model.GetEVBookingDetailsforApproval();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                {
+                    TempData["EVMessage"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+                else
+                {
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        Plot obj = new Plot();
+                        obj.UserID = r["Pk_EVBookingId"].ToString();
+                        obj.CouponNumber = r["CouponCode"].ToString();
+                        obj.BookingDate = r["BookingDate"].ToString();
+                        obj.CustomerLoginID = r["CustomerDetails"].ToString();
+                        obj.AssociateLoginID = r["AssociateDetails"].ToString();
+                        obj.Amount = r["Amount"].ToString();
+                        obj.PaymentMode = r["PaymentMode"].ToString();
+                        obj.TransactionDetails = r["TransactionDetails"].ToString();
+                        obj.TransactionDate = r["TransactionDate"].ToString();
+                        obj.Remarks = r["Remarks"].ToString();
+                        obj.PaymentStatus = r["PaymentStatus"].ToString();
+                        lst.Add(obj);
+                    }
+                    model.lstEV = lst;
+                }
+            }
+
+
+            return View(model);
+        }
+
+        public ActionResult ApproveEVPayment(string UserID, string Description, string ApprovedDate)
+        {
+            string FormName = "";
+            string Controller = "";
+            try
+            {
+                Plot model = new Plot();
+                model.UserID = UserID;
+                model.Description = Description;
+                model.ApprovedDate = string.IsNullOrEmpty(ApprovedDate) ? null : Common.ConvertToSystemDate(ApprovedDate, "dd/MM/yyyy");
+
+                model.AddedBy = Session["Pk_AdminId"].ToString();
+                model.Result = "yes";
+                DataSet ds = model.ApproveEVPayment();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["EVPayment"] = "EV Payment Approved successfully !";
+                    }
+                    else
+                    {
+                        TempData["EVPayment"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                TempData["EVPayment"] = ex.Message;
+            }
+            FormName = "ApproveEVBookingPayment";
+            Controller = "Plot";
+
+            return RedirectToAction(FormName, Controller);
+
+        }
+
+        public ActionResult RejectEVPayment(string UserID, string Description, string ApprovedDate)
+        {
+            string FormName = "";
+            string Controller = "";
+            try
+            {
+                Plot model = new Plot();
+
+                model.UserID = UserID;
+                model.Description = Description;
+                model.ApprovedDate = string.IsNullOrEmpty(ApprovedDate) ? null : Common.ConvertToSystemDate(ApprovedDate, "dd/MM/yyyy");
+                model.AddedBy = Session["Pk_AdminId"].ToString();
+
+                DataSet ds = model.RejectEVPayment();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["EVPayment"] = "Payment Rejected  !";
+                    }
+                    else
+                    {
+                        TempData["EVPayment"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["EVPayment"] = ex.Message;
+            }
+            FormName = "ApproveEVBookingPayment";
+            Controller = "Plot";
+
+            return RedirectToAction(FormName, Controller);
+        }
+
     }
 }

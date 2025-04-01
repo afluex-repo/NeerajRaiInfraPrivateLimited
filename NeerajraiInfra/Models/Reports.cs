@@ -14,9 +14,10 @@ namespace NeerajraiInfra.Models
         public string UserID { get; set; }
         //public string CustomerID { get; set; }
         public string CouponNumber { get; set; }
-       
-      
-       
+       public string CouponStatus { get; set; }
+
+
+
         public string TransactionDetails { get; set; }
         public List<Reports> lstEV { get; set; }
 
@@ -142,6 +143,8 @@ namespace NeerajraiInfra.Models
         public List<Reports> lstAssSelfdownBusinessReport { get; set; }
         public List<Reports> lstAutoUpdateDesignation { get; set; }
 
+
+        public List<Reports> lstAssSelfdownEVBusiness { get; set; }
 
 
         public string Pk_KharijId { get; set; }
@@ -611,31 +614,26 @@ namespace NeerajraiInfra.Models
                                       new SqlParameter("@AssociateID", LoginId),
                                       new SqlParameter("@CouponCode", CouponNumber),
                                       new SqlParameter("@FromDate", FromDate),
-                                      new SqlParameter("@ToDate", ToDate)
-                                     
+                                      new SqlParameter("@ToDate", ToDate),
+                                      new SqlParameter("@PaymentStatus",PaymentStatus)
+
                                   };
 
             DataSet ds = Connection.ExecuteQuery("GetEVBooking", para);
             return ds;
         }
 
-        //public DataSet EVList()
-        //{
-        //    SqlParameter[] para =
-        //                    {
-                               
-        //                         new SqlParameter("@CustomerID",CustomerId),
-        //                         new SqlParameter("@AssociateID",AssociateID),
-        //                         new SqlParameter("@FromDate",FromDate),
-        //                         new SqlParameter("@ToDate",ToDate),
-        //                         new SqlParameter("@CouponCode",CouponNumber),
-        //                         new SqlParameter("@Pk_EVBookingId",Pk_EVBookingId),
-
-
-        //                    };
-        //    DataSet ds = Connection.ExecuteQuery("GetEVBooking", para);
-        //    return ds;
-        //}
+        public DataSet GetAssociateSelfdownEVBusinessReport()
+        {
+            SqlParameter[] para =
+                         {
+                                 new SqlParameter("@LoginId",AssociateID),
+                                 new SqlParameter("@FromDate",FromDate),
+                                 new SqlParameter("@ToDate",ToDate)
+                            };
+            DataSet ds = Connection.ExecuteQuery("GetSelftDownReportForEVBuisness", para);
+            return ds;
+        }
     }
 }
 

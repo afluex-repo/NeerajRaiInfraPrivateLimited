@@ -11,6 +11,8 @@
     padding: 10px;
 }
 </style>
+
+
 @using (Html.BeginForm("PlotBooking", "Plot", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 
 {
@@ -692,6 +694,7 @@
     }
 
     function getCustomerName() {
+        debugger;
 
         $("#divload").css({ 'display': '' });
         var sponsorID = $('#UserID').val();
