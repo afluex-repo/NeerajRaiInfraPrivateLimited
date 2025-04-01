@@ -521,8 +521,11 @@ namespace NeerajraiInfra.Controllers
             string Controller = "";
             try
             {
-
-                obj.Discount = string.IsNullOrEmpty(obj.Discount) ? "0" : obj.Discount;
+                decimal discountAmount = string.IsNullOrEmpty(obj.DiscountAmount) ? 0 : Convert.ToDecimal(obj.DiscountAmount);
+                decimal discount = string.IsNullOrEmpty(obj.Discount) ? 0 : Convert.ToDecimal(obj.Discount);
+                decimal totalDiscount = discountAmount + discount;
+                obj.TotalDiscount = totalDiscount.ToString();
+                //obj.Discount = string.IsNullOrEmpty(obj.Discount) ? "0" : obj.Discount;
                 obj.TotalPLC = string.IsNullOrEmpty(obj.TotalPLC) ? "0" : obj.TotalPLC;
                 obj.Fk_BankId = string.IsNullOrEmpty(obj.Fk_BankId) ? "0" : obj.Fk_BankId;
                 obj.BookingDate = string.IsNullOrEmpty(obj.BookingDate) ? null : Common.ConvertToSystemDate(obj.BookingDate, "dd/MM/yyyy");
@@ -554,7 +557,7 @@ namespace NeerajraiInfra.Controllers
                         string str = BLSMS.Booking(Bookno, Bookamt, AsstName, plot, plotamount);
                         try
                         {
-                            BLSMS.SendSMS(mob, str,tempid);
+                            BLSMS.SendSMS(mob, str, tempid);
                         }
                         catch { }
 
@@ -574,7 +577,7 @@ namespace NeerajraiInfra.Controllers
 
             return RedirectToAction(FormName, Controller);
         }
-        public ActionResult PrintPlotBooking(Plot newdata,string PrintId)
+        public ActionResult PrintPlotBooking(Plot newdata, string PrintId)
         {
             //Plot newdata = new Plot();
             newdata.PK_BookingId = Crypto.Decrypt(PrintId);
@@ -709,7 +712,7 @@ namespace NeerajraiInfra.Controllers
                 {
                     var i = 0;
                     foreach (DataRow r in ds.Tables[0].Rows)
-                        {
+                    {
 
                         if (i < 25)
                         {
@@ -747,10 +750,10 @@ namespace NeerajraiInfra.Controllers
                             obj.PlotNumber = r["PlotNumber"].ToString();
                             lst.Add(obj);
                         }
-                       
-                         i = i + 1;
-                        }
-                        model.lstPlot = lst;
+
+                        i = i + 1;
+                    }
+                    model.lstPlot = lst;
                 }
             }
             return View(model);
@@ -1619,7 +1622,7 @@ namespace NeerajraiInfra.Controllers
                         string str = BLSMS.PlotAllotment(name, Plot, amt);
                         try
                         {
-                            BLSMS.SendSMS(mob, str,tempid);
+                            BLSMS.SendSMS(mob, str, tempid);
                         }
                         catch { }
                     }
@@ -1639,7 +1642,7 @@ namespace NeerajraiInfra.Controllers
             return RedirectToAction(FormName, Controller);
         }
         #endregion
-        
+
         #region EMIPayment
 
         public ActionResult EMIPayment(string PK_BookingId)
@@ -1657,7 +1660,7 @@ namespace NeerajraiInfra.Controllers
 
                     model.PlotID = dsBookingDetails.Tables[0].Rows[0]["Fk_PlotId"].ToString();
                     model.SiteID = dsBookingDetails.Tables[0].Rows[0]["FK_SiteID"].ToString();
-                    
+
                     #region GetSectors
                     List<SelectListItem> ddlSector = new List<SelectListItem>();
                     DataSet dsSector = model.GetSectorList();
@@ -1899,7 +1902,7 @@ namespace NeerajraiInfra.Controllers
                         string str = BLSMS.EMIPayment(name, Plot, bookno, instno, amt);
                         try
                         {
-                            BLSMS.SendSMS(mob, str,tempid);
+                            BLSMS.SendSMS(mob, str, tempid);
                         }
                         catch
                         {
@@ -3080,10 +3083,10 @@ namespace NeerajraiInfra.Controllers
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
-              
+
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
-                   
+
                     Plot obj = new Plot();
                     obj.AssociateID = r["AssociateLoginID"].ToString();
                     obj.AssociateName = r["AssociateName"].ToString();
@@ -3200,8 +3203,8 @@ namespace NeerajraiInfra.Controllers
                 }
                 model.lstPlot = lst;
             }
-                #region ddlPaymentMode
-                int count3 = 0;
+            #region ddlPaymentMode
+            int count3 = 0;
             List<SelectListItem> ddlPaymentMode = new List<SelectListItem>();
             DataSet dsPayMode = model.GetPaymentModeList();
             if (dsPayMode != null && dsPayMode.Tables.Count > 0 && dsPayMode.Tables[0].Rows.Count > 0)
@@ -3838,7 +3841,7 @@ namespace NeerajraiInfra.Controllers
             string Controller = "";
             try
             {
-                if(obj.IsKharijDakhil != null)
+                if (obj.IsKharijDakhil != null)
                 {
                     obj.IsKharijDakhila = "1";
                 }
@@ -3848,7 +3851,7 @@ namespace NeerajraiInfra.Controllers
                 }
                 obj.AddedBy = Session["Pk_AdminId"].ToString();
                 obj.KharijDakhilDate = string.IsNullOrEmpty(obj.KharijDakhilDate) ? null : Common.ConvertToSystemDate(obj.KharijDakhilDate, "dd/MM/yyyy");
-              
+
                 DataSet ds = obj.SaveIsKharijDakhil();
                 if (ds != null && ds.Tables.Count > 0)
                 {
@@ -3935,7 +3938,7 @@ namespace NeerajraiInfra.Controllers
             }
             ViewBag.ddlBranch = ddlBranch;
             #endregion
-            
+
             #region ddlPaymentMode
             int count3 = 0;
             List<SelectListItem> ddlPaymentMode = new List<SelectListItem>();
@@ -3954,7 +3957,7 @@ namespace NeerajraiInfra.Controllers
             }
             ViewBag.ddlPaymentMode = ddlPaymentMode;
             #endregion
-            
+
             return View(model);
         }
 
@@ -4043,6 +4046,39 @@ namespace NeerajraiInfra.Controllers
 
             return View(newdata);
         }
+
+        #region CheckCouponcode
+
+        public ActionResult CheckCouponcode(string couponCode)
+        {
+            Plot model = new Plot();
+            model.CouponNumber = couponCode;
+            DataSet ds = model.CheckCouponNumber();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                string msg = ds.Tables[0].Rows[0]["Msg"].ToString();
+
+                if (msg == "1")
+                {
+                    model.Amount = ds.Tables[0].Rows[0]["Amount"].ToString();
+                    model.Result = "Yes";
+                }
+                else
+                {
+                    model.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+            }
+            else
+            {
+                model.Result = "Invalid or Used coupon code.";
+            }
+
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+
+        #endregion
 
 
     }

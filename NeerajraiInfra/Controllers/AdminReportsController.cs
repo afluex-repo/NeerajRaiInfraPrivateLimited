@@ -3480,7 +3480,7 @@ namespace NeerajraiInfra.Controllers
                     foreach (DataRow r in ds.Tables[0].Rows)
                     {
                         Reports obj = new Reports();
-                        obj.PK_BookingId = r["Pk_EVBookingId"].ToString();
+                        obj.Pk_EVBookingId = r["Pk_EVBookingId"].ToString();
                         obj.CouponNumber = r["CouponCode"].ToString();
                         obj.BookingDate = r["BookingDate"].ToString();
                         obj.CustomerLoginID = r["CustomerDetails"].ToString();
@@ -3522,7 +3522,7 @@ namespace NeerajraiInfra.Controllers
                     foreach (DataRow r in ds.Tables[0].Rows)
                     {
                         Reports obj = new Reports();
-                        obj.PK_BookingId = r["Pk_EVBookingId"].ToString();
+                        obj.Pk_EVBookingId = r["Pk_EVBookingId"].ToString();
                         obj.CouponNumber = r["CouponCode"].ToString();
                         obj.BookingDate = r["BookingDate"].ToString();
                         obj.CustomerLoginID = r["CustomerDetails"].ToString();
@@ -3557,6 +3557,62 @@ namespace NeerajraiInfra.Controllers
                 }
             }
             return Json(lst, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public ActionResult PrintEVBooking(string PrintId)
+        {
+            Reports newdata = new Reports();
+            newdata.Pk_EVBookingId = PrintId;
+            //ViewBag.Name = Session["Name"].ToString();
+            DataSet ds = newdata.GetEVBookingDetailsList();
+
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+
+                //if (ds.Tables[0].Rows[0]["MSG"].ToString() == "1")
+                
+
+                    newdata.Result = "yes";
+                    ViewBag.PK_BookingId = ds.Tables[0].Rows[0]["Pk_EVBookingId"].ToString();
+                    ViewBag.CustomerName = ds.Tables[0].Rows[0]["CustomerName"].ToString();
+                  
+                    ViewBag.ReceiptNo = ds.Tables[0].Rows[0]["ReciptNo"].ToString();
+                    ViewBag.Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                    ViewBag.Address = ds.Tables[0].Rows[0]["Address"].ToString();
+                    ViewBag.CustomerID = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                 
+                    ViewBag.Amount = ds.Tables[0].Rows[0]["Amount"].ToString();
+                    ViewBag.PaymentMode = ds.Tables[0].Rows[0]["PaymentMode"].ToString();
+                 
+                  
+                    ViewBag.CouponNumber = ds.Tables[0].Rows[0]["CouponCode"].ToString();
+                   
+                    ViewBag.City = ds.Tables[0].Rows[0]["City"].ToString();
+                    ViewBag.BookingDate = ds.Tables[0].Rows[0]["BookingDate"].ToString();
+                    ViewBag.State = ds.Tables[0].Rows[0]["State"].ToString();
+                    ViewBag.Pin = ds.Tables[0].Rows[0]["PinCode"].ToString();
+
+                    ViewBag.TransactionNo = ds.Tables[0].Rows[0]["TransactionNo"].ToString();
+                    ViewBag.TransactionDate = ds.Tables[0].Rows[0]["TransactionDate"].ToString();
+                    ViewBag.BankName = ds.Tables[0].Rows[0]["BankName"].ToString();
+                    ViewBag.BankBranch = ds.Tables[0].Rows[0]["BranchName"].ToString();
+                   
+                    //ViewBag.AdjustmentloginId = ds.Tables[0].Rows[0]["AdjustmentloginId"].ToString();
+
+                    ViewBag.CompanyName = SoftwareDetails.CompanyName;
+                    ViewBag.CompanyAddress = SoftwareDetails.CompanyAddress;
+                    ViewBag.Pin1 = SoftwareDetails.Pin1;
+                    ViewBag.State1 = SoftwareDetails.State1;
+                    ViewBag.City1 = SoftwareDetails.City1;
+                    ViewBag.ContactNo = SoftwareDetails.ContactNo;
+                    ViewBag.LandLine = SoftwareDetails.LandLine;
+                    ViewBag.Website = SoftwareDetails.Website;
+                    ViewBag.EmailID = SoftwareDetails.EmailID;
+                
+            }
+
+            return View(newdata);
         }
     }
 }
