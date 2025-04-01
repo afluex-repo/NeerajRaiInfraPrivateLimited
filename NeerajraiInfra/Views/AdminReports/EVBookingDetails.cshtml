@@ -87,6 +87,18 @@
                                         @Html.TextBoxFor(m => m.CouponNumber, new { @class = "form-control", @Placeholder = "Coupon Number" })
                                     </div>
                                 </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        Payment Status
+                                        @Html.DropDownListFor(m => m.PaymentStatus, new List<SelectListItem>
+                                        {
+                                    new SelectListItem { Text = "Select", Value = "" },
+                                    new SelectListItem { Text = "Pending", Value = "Pending" },
+                                    new SelectListItem { Text = "Approved", Value = "Approved" },
+                                    new SelectListItem { Text = "Rejected", Value = "Rejected" }
+                                    }, new { @class = "form-control" })
+                                    </div>
+                                </div>
                               <div class="col-md-3">
                                     <div class="form-group">
                                         <br />
@@ -108,6 +120,8 @@
                                             <th>PaymentMode</th>
                                             <th>Transaction Details</th>
                                             <th>Remarks</th>
+                                            <th>Payment Status</th>
+                                            <th>Coupon Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -124,12 +138,14 @@
                                                         <td hidden>@Item.Pk_EVBookingId</td>
                                                         <td>@Item.CouponNumber</td>
                                                         <td>@Item.BookingDate</td>
-                                                        <td>@Item.CustomerLoginID</td>
-                                                        <td>@Item.AssociateLoginID</td>
+                                                        <td class="text-nowrap">@Item.CustomerLoginID</td>
+                                                        <td class="text-nowrap">@Item.AssociateLoginID</td>
                                                         <td>@Item.Amount</td>
                                                         <td>@Item.PaymentMode</td>
                                                         <td>@Item.TransactionDetails</td>
                                                         <td>@Item.Remarks</td>
+                                                        <td>@Item.PaymentStatus</td>
+                                                        <td>@Item.CouponStatus</td>
                                                         <td>
                                                             <div class="badge badge-success badge-shadow"><a target="_blank" class="badge badge-success badge-shadow" href="/AdminReports/PrintEVBooking?PrintId=@Item.Pk_EVBookingId"><span>Print</span></a></div>
                                                         </td>
