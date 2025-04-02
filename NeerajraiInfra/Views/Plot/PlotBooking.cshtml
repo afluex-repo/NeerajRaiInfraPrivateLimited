@@ -147,10 +147,23 @@
                                 @Html.TextBoxFor(m => m.PlotRate, new { @class = "form-control", @maxlength = "6", @Placeholder = "Plot Rate", @onchange = "return calculatePlotAmount();", onkeypress = "return isNumberOrDecimal(event);" })
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="form-group">
                                 Total PLC 
                                 @Html.TextBoxFor(m => m.TotalPLC, new { @class = "form-control", @Placeholder = "TotalPLC", @onchange = "return calculatePlotAmount()", onkeypress = "return isNumberOrDecimal(event);" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                EV Coupon Number
+                                @Html.TextBoxFor(m => m.CouponNumber, new { @class = "form-control", @Placeholder = "EV Coupon Number", @onchange = "return CheckCouponcode()", @maxlength = "10"})
+                                @*<input type="hidden" id="DiscountAmount" />*@
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                EV Discount
+                                @Html.TextBoxFor(m => m.DiscountAmount, new { @class = "form-control", @Placeholder = "EV Discount", @readonly = "readonly" })
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -165,8 +178,6 @@
                                 @Html.DropDownListFor(m => m.PaymentPlanID, new SelectList(ViewBag.ddlPlan, "Value", "Text"), new { @class = "form-control", @onchange = "return Flexi();" })
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-3" id="emi">
                             <div class="form-group">
                                 No. Of EMI
@@ -175,7 +186,7 @@
                         </div>
                         <div class="col-md-3" hidden="hidden">
                             <div class="form-group">
-                                Booking Amount <span  style="color: red">*</span>
+                                Booking Amount <span style="color: red">*</span>
                                 @Html.TextBoxFor(m => m.BookingAmount, new { @class = "form-control", @maxlength = "8", @Placeholder = "BookingAmount", @onkeypress = "return isNumberOrDecimal(event);", @readonly = "readonly" })
                             </div>
                         </div>
@@ -191,14 +202,15 @@
                                 @Html.TextBoxFor(m => m.Discount, new { @class = "form-control", @Placeholder = "Discount", @onchange = "return checkDiscount()", @onkeypress = "return isNumberOrDecimal(event);", @maxlength = "10" })
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
+                        
                         <div class="col-md-3">
                             <div class="form-group">
                                 Pay Amount <span style="color: red">*</span>
                                 @Html.TextBoxFor(m => m.PayAmount, new { @class = "form-control", @Placeholder = "PayAmount", onkeypress = "return isNumberOrDecimal(event);", @onchange = "return validatePayAmount();" })
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
                                 Remaining Amount
@@ -217,6 +229,9 @@
                                 @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlPaymentMode, "Value", "Text"), new { @class = "form-control", @onchange = "return CheckPayMode()" })
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
+                        
                         @*<div class="col-md-3">
                             <div class="form-group">
                                 Bank <span style="color: red">*</span>
@@ -328,6 +343,57 @@
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
 <script>
+
+    function CheckCouponcode() {
+        var CouponCode = $('#CouponNumber').val().trim();
+        $('#DiscountAmount').val('');
+        $.ajax({
+            url: '/Plot/CheckCouponcode',
+            type: 'GET',
+            data: { couponCode: CouponCode },
+            dataType: 'json',
+            success: function (response) {
+                if (response.Result === "Yes") {
+                    alert("Coupon is valid! EV Discount Amount: " + response.Amount);
+                    $('#DiscountAmount').val(response.Amount);
+                    CalcPlotAmt();
+                } else {
+                    alert(response.Result);
+                    $('#CouponNumber').val("");
+                    $('#DiscountAmount').val(0);
+                    $('#NetPlotAmount').val($('#PlotAmount').val());
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+
+    function CalcPlotAmt() {
+        var netAmount = parseFloat($('#NetPlotAmount').val());
+        var EVamount = parseFloat($('#DiscountAmount').val());
+
+        if (isNaN(netAmount)) {
+            alert("Invalid Net Plot Amount.");
+            return;
+        }
+
+        if (isNaN(EVamount)) {
+            EVamount = 0;
+        }
+
+        if (EVamount === 0) {
+            $('#NetPlotAmount').val(netAmount);
+        } else {
+            var finalamount = netAmount - EVamount;
+            $('#NetPlotAmount').val(finalamount);
+        }
+    }
+
+
+
+
     function ChangeUTR() {
         var ActualNeftNumber = $('#TransactionNumber').val();
         var PaymentMode = $('#PaymentMode').val();

@@ -3649,7 +3649,146 @@ namespace NeerajraiInfra.Controllers
             return View(model);
         }
 
+        #region SelfDownlineBussinessReport
 
+        public ActionResult SelfDownlineBusinessReport(Plot model)
+        {
+
+            #region ddlSite
+            int count1 = 0;
+            List<SelectListItem> ddlSite = new List<SelectListItem>();
+            DataSet dsSite = model.GetSiteList();
+            if (dsSite != null && dsSite.Tables.Count > 0 && dsSite.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsSite.Tables[0].Rows)
+                {
+                    if (count1 == 0)
+                    {
+                        ddlSite.Add(new SelectListItem { Text = "Select Site", Value = "0" });
+                    }
+                    ddlSite.Add(new SelectListItem { Text = r["SiteName"].ToString(), Value = r["PK_SiteID"].ToString() });
+                    count1 = count1 + 1;
+
+                }
+            }
+            ViewBag.ddlSite = ddlSite;
+            #endregion
+
+            List<SelectListItem> ddlSector = new List<SelectListItem>();
+            ddlSector.Add(new SelectListItem { Text = "Select Sector", Value = "0" });
+            ViewBag.ddlSector = ddlSector;
+
+            List<SelectListItem> ddlBlock = new List<SelectListItem>();
+            ddlBlock.Add(new SelectListItem { Text = "Select Block", Value = "0" });
+            ViewBag.ddlBlock = ddlBlock;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("SelfDownlineBusinessReport")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult GetSelfDownlineBusinessReport(Plot model)
+        {
+            List<Plot> lst = new List<Plot>();
+            model.SiteID = model.SiteID == "0" ? null : model.SiteID;
+            model.SectorID = model.SectorID == "0" ? null : model.SectorID;
+            model.BlockID = model.BlockID == "0" ? null : model.BlockID;
+            model.Downline = model.IsDownline == true ? "1" : "0";
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            DataSet ds = model.GetSelfDownlineBusiness();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Plot obj = new Plot();
+                    obj.BranchName = r["BranchName"].ToString();
+                    obj.PK_BookingId = r["PK_BookingID"].ToString();
+                    obj.CustomerName = r["CustomerInfo"].ToString();
+                    obj.CustomerID = r["LoginId"].ToString();
+                    obj.AssociateID = r["AssoLoginId"].ToString();
+                    obj.AssociateName = r["AssociateInfo"].ToString();
+                    obj.PaidAmount = r["NewPaidAmount"].ToString();
+                    obj.PaymentDate = r["LastPaymentDate"].ToString();
+                    obj.PlotNumber = r["PlotInfo"].ToString();
+                    obj.PlotAmount = r["NetPlotAmount"].ToString();
+                    obj.Balance = r["Balance"].ToString();
+                    obj.Amount = r["PlotAmount"].ToString();
+                    obj.BookingNumber = r["BookingNo"].ToString();
+                    obj.Discount = r["Discount"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstPlot = lst;
+                ViewBag.PaidAmount = double.Parse(ds.Tables[0].Compute("sum(NewPaidAmount)", "").ToString()).ToString("n2");
+                ViewBag.PlotAmount = double.Parse(ds.Tables[0].Compute("sum(NetPlotAmount)", "").ToString()).ToString("n2");
+                ViewBag.Balance = double.Parse(ds.Tables[0].Compute("sum(Balance)", "").ToString()).ToString("n2");
+                ViewBag.Amount = double.Parse(ds.Tables[0].Compute("sum(PlotAmount)", "").ToString()).ToString("n2");
+                ViewBag.Discount = double.Parse(ds.Tables[0].Compute("sum(Discount)", "").ToString()).ToString("n2");
+            }
+            #region ddlSite
+            int count1 = 0;
+            Master objmaster = new Master();
+            List<SelectListItem> ddlSite = new List<SelectListItem>();
+            DataSet dsSite = objmaster.GetSiteList();
+            if (dsSite != null && dsSite.Tables.Count > 0 && dsSite.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsSite.Tables[0].Rows)
+                {
+                    if (count1 == 0)
+                    {
+                        ddlSite.Add(new SelectListItem { Text = "Select Site", Value = "0" });
+                    }
+                    ddlSite.Add(new SelectListItem { Text = r["SiteName"].ToString(), Value = r["PK_SiteID"].ToString() });
+                    count1 = count1 + 1;
+                }
+            }
+            ViewBag.ddlSite = ddlSite;
+            #endregion
+
+            #region GetSectors
+            List<SelectListItem> ddlSector = new List<SelectListItem>();
+            DataSet dsSector = objmaster.GetSectorList();
+            int sectorcount = 0;
+            if (dsSector != null && dsSector.Tables.Count > 0)
+            {
+                foreach (DataRow r in dsSector.Tables[0].Rows)
+                {
+                    if (sectorcount == 0)
+                    {
+                        ddlSector.Add(new SelectListItem { Text = "Select Sector", Value = "0" });
+                    }
+                    ddlSector.Add(new SelectListItem { Text = r["SectorName"].ToString(), Value = r["PK_SectorID"].ToString() });
+                    sectorcount = 1;
+                }
+            }
+            ViewBag.ddlSector = ddlSector;
+            #endregion
+
+            #region BlockList
+            List<SelectListItem> lstBlock = new List<SelectListItem>();
+            int blockcount = 0;
+            DataSet dsblock = objmaster.GetBlockList();
+            if (dsblock != null && dsblock.Tables.Count > 0 && dsblock.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in dsblock.Tables[0].Rows)
+                {
+                    if (blockcount == 0)
+                    {
+                        lstBlock.Add(new SelectListItem { Text = "Select Block", Value = "0" });
+                    }
+                    lstBlock.Add(new SelectListItem { Text = dr["BlockName"].ToString(), Value = dr["PK_BlockID"].ToString() });
+                    blockcount = 1;
+                }
+            }
+            
+            ViewBag.ddlBlock = lstBlock;
+            #endregion
+            return View(model);
+        }
+
+        #endregion
 
     }
 }
