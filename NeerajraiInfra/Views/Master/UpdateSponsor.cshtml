@@ -72,7 +72,7 @@
                         </div>
                         <div class="col-md-3 d-flex align-items-end">
                             <div class="form-group">
-                                <input class="btn btn-success" type="submit" value="Update" id="btnUpdate" name="btnUpdate" />
+                                <input class="btn btn-success" type="submit" onclick="return validateform();"  value="Update" id="btnUpdate" name="btnUpdate" />
                             </div>
                         </div>
                        </div>
@@ -84,7 +84,33 @@
 }
 
 
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>
+
 <script>
+
+    function validateform() {
+        debugger;
+        $("#divload").css({ 'display': '' });
+        $(".errortext").removeClass("errortext");
+
+        if ($('#CustomerID').val() == '') {
+            $("#CustomerID").addClass('errortext');
+            $('#CustomerID').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#NewAssociateID').val() == '') {
+            $("#NewAssociateID").addClass('errortext');
+            $('#NewAssociateID').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+    }
 
     function validateAssociateID() {
         var associateID = document.querySelector("[name='AssociateID']").value;

@@ -2844,43 +2844,87 @@ namespace NeerajraiInfra.Controllers
             return View(model);
         }
 
-        public ActionResult ApprovePayment(string UserID, string Description, string ApprovedDate)
+        public ActionResult ApprovePayment(string UserID, string Description, string ApprovedDate, bool CalculationChecked)
         {
-            string FormName = "";
-            string Controller = "";
+            Plot model = new Plot();
             try
             {
-                Plot model = new Plot();
+               
                 model.UserID = UserID;
                 model.Description = Description;
                 model.ApprovedDate = string.IsNullOrEmpty(ApprovedDate) ? null : Common.ConvertToSystemDate(ApprovedDate, "dd/MM/yyyy");
 
                 model.AddedBy = Session["Pk_AdminId"].ToString();
-                model.Result = "yes";
+
+                model.CalculationChecked = CalculationChecked;
+
+               
                 DataSet ds = model.ApprovePayment();
                 if (ds != null && ds.Tables.Count > 0)
                 {
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
-                        TempData["Plot"] = "Payment Approved successfully !";
+                        model.Result = "Yes";
                     }
                     else
                     {
-                        TempData["Plot"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        model.Result= ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
 
             }
             catch (Exception ex)
             {
-                TempData["Plot"] = ex.Message;
+                model.Result = ex.Message;
             }
-            FormName = "Payment";
-            Controller = "Plot";
-
-            return RedirectToAction(FormName, Controller);
+             return Json(model, JsonRequestBehavior.AllowGet);
 
         }
+
+
+        public ActionResult DeletePayment(string UserID)
+        {
+            Plot model = new Plot();
+            try
+            {
+                model.UserID = UserID;
+                model.DeletedBy = Session["Pk_AdminId"].ToString();
+
+                DataSet ds = model.DeletePayment();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        model.Result = "Yes";
+                    }
+                    else
+                    {
+                        model.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                model.Result = ex.Message;
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         public ActionResult RejectPayment(string UserID, string Description, string ApprovedDate)
         {
             string FormName = "";
@@ -4241,5 +4285,216 @@ namespace NeerajraiInfra.Controllers
             return RedirectToAction(FormName, Controller);
         }
 
+        #region UpdatePlot
+
+        public ActionResult UpdatePlot(string PK_BookingId)
+        {
+            Plot model = new Plot();
+            #region ddlSite
+            int count1 = 0;
+            List<SelectListItem> ddlSite = new List<SelectListItem>();
+            DataSet dsSite = model.GetSiteList();
+            if (dsSite != null && dsSite.Tables.Count > 0 && dsSite.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsSite.Tables[0].Rows)
+                {
+                    if (count1 == 0)
+                    {
+                        ddlSite.Add(new SelectListItem { Text = "Select Site", Value = "0" });
+                    }
+                    ddlSite.Add(new SelectListItem { Text = r["SiteName"].ToString(), Value = r["PK_SiteID"].ToString() });
+                    count1 = count1 + 1;
+
+                }
+            }
+            ViewBag.ddlSite = ddlSite;
+            #endregion
+
+            List<SelectListItem> ddlSector = new List<SelectListItem>();
+            ddlSector.Add(new SelectListItem { Text = "Select Sector", Value = "0" });
+            ViewBag.ddlSector = ddlSector;
+
+            List<SelectListItem> ddlBlock = new List<SelectListItem>();
+            ddlBlock.Add(new SelectListItem { Text = "Select Block", Value = "0" });
+            ViewBag.ddlBlock = ddlBlock;
+            return View(model);
+           
+        }
+
+        [HttpPost]
+        [OnAction(ButtonName = "Transfer")]
+        [ActionName("UpdatePlot")]
+        public ActionResult TransferPlot(Plot model)
+        {
+
+            #region ddlSite
+            int count1 = 0;
+            List<SelectListItem> ddlSite = new List<SelectListItem>();
+            DataSet dsSite = model.GetSiteList();
+            if (dsSite != null && dsSite.Tables.Count > 0 && dsSite.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsSite.Tables[0].Rows)
+                {
+                    if (count1 == 0)
+                    {
+                        ddlSite.Add(new SelectListItem { Text = "Select Site", Value = "0" });
+                    }
+                    ddlSite.Add(new SelectListItem { Text = r["SiteName"].ToString(), Value = r["PK_SiteID"].ToString() });
+                    count1 = count1 + 1;
+
+                }
+            }
+            ViewBag.ddlSite = ddlSite;
+            #endregion
+
+            List<SelectListItem> ddlSector = new List<SelectListItem>();
+            ddlSector.Add(new SelectListItem { Text = "Select Sector", Value = "0" });
+            ViewBag.ddlSector = ddlSector;
+
+            List<SelectListItem> ddlBlock = new List<SelectListItem>();
+            ddlBlock.Add(new SelectListItem { Text = "Select Block", Value = "0" });
+            ViewBag.ddlBlock = ddlBlock;
+
+
+            model.PK_BookingId = model.PK_BookingId;
+            model.PK_BookingDetailsId = model.PK_BookingDetailsId;
+            model.AddedBy = Session["Pk_AdminId"].ToString();
+            DataSet ds = model.UpdatePlot();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                {
+                    TempData["TransferPlotBooking"] = "Plot Updated !! ";
+                }
+                else if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
+                {
+                    TempData["TransferPlotBooking"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+            }
+            return View(model);
+        }
+
+        public ActionResult BookingDetails(string SiteID, string SectorID, string BlockID, string PlotNumber, string BookingNumber)
+        {
+            Plot model = new Plot();
+            model.SiteID = SiteID == "0" ? null : SiteID;
+            model.SectorID = SectorID == "0" ? null : SectorID;
+            model.BlockID = BlockID == "0" ? null : BlockID;
+            model.BookingNumber = string.IsNullOrEmpty(BookingNumber) ? null : BookingNumber;
+            model.PlotNumber = string.IsNullOrEmpty(PlotNumber) ? null : PlotNumber;
+            DataSet dd = model.FillBookedPlotDetails();
+            if (dd != null && dd.Tables[0].Rows.Count > 0)
+            {
+
+                if (dd.Tables[0].Rows[0]["MSG"].ToString() == "1")
+                {
+
+                    model.Result = "yes";
+
+                    model.PK_PlotID = dd.Tables[0].Rows[0]["PK_PlotID"].ToString();
+                    model.PlotAmount = dd.Tables[0].Rows[0]["PlotAmount"].ToString();
+                    model.ActualPlotRate = dd.Tables[0].Rows[0]["ActualPlotRate"].ToString();
+                    model.PlotRate = dd.Tables[0].Rows[0]["PlotRate"].ToString();
+                    model.PayAmount = dd.Tables[0].Rows[0]["PaidAmount"].ToString();
+                    model.BookingDate = dd.Tables[0].Rows[0]["BookingDate"].ToString();
+                    model.BookingAmount = dd.Tables[0].Rows[0]["BookingAmt"].ToString();
+                    model.PK_BookingDetailsId = dd.Tables[0].Rows[0]["PK_BookingDetailsId"].ToString();
+                    model.PaymentDate = dd.Tables[0].Rows[0]["PaymentDate"].ToString();
+                    model.PaidAmount = dd.Tables[0].Rows[0]["PaidAmount"].ToString();
+                    model.Discount = dd.Tables[0].Rows[0]["Discount"].ToString();
+                    model.PaymentPlanID = dd.Tables[0].Rows[0]["Fk_PlanId"].ToString();
+                    model.PlanName = dd.Tables[0].Rows[0]["PlanName"].ToString();
+                    model.PK_BookingId = dd.Tables[0].Rows[0]["PK_BookingId"].ToString();
+                    model.TotalAllotmentAmount = dd.Tables[0].Rows[0]["TotalAllotmentAmount"].ToString();
+                    model.PaidAllotmentAmount = dd.Tables[0].Rows[0]["PaidAllotmentAmount"].ToString();
+                    model.BalanceAllotmentAmount = dd.Tables[0].Rows[0]["BalanceAllotmentAmount"].ToString();
+                    model.TotalInstallment = dd.Tables[0].Rows[0]["TotalInstallment"].ToString();
+                    model.InstallmentAmount = dd.Tables[0].Rows[0]["InstallmentAmount"].ToString();
+                    model.PlotArea = dd.Tables[0].Rows[0]["PlotArea"].ToString();
+                    model.Balance = dd.Tables[0].Rows[0]["BalanceAmount"].ToString();
+                }
+                else
+                {
+                    model.Result = dd.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+            }
+            else
+            {
+
+            }
+            #region ddlSite
+            int count1 = 0;
+            Master objmaster = new Master();
+            List<SelectListItem> ddlSite = new List<SelectListItem>();
+            DataSet dsSite = objmaster.GetSiteList();
+            if (dsSite != null && dsSite.Tables.Count > 0 && dsSite.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsSite.Tables[0].Rows)
+                {
+                    if (count1 == 0)
+                    {
+                        ddlSite.Add(new SelectListItem { Text = "Select Site", Value = "0" });
+                    }
+                    ddlSite.Add(new SelectListItem { Text = r["SiteName"].ToString(), Value = r["PK_SiteID"].ToString() });
+                    count1 = count1 + 1;
+
+                }
+            }
+            ViewBag.ddlSite = ddlSite;
+            #endregion
+
+            #region GetSectors
+            List<SelectListItem> ddlSector = new List<SelectListItem>();
+            DataSet dsSector = objmaster.GetSectorList();
+            int sectorcount = 0;
+
+            if (dsSector != null && dsSector.Tables.Count > 0)
+            {
+
+                foreach (DataRow r in dsSector.Tables[0].Rows)
+                {
+                    if (sectorcount == 0)
+                    {
+                        ddlSector.Add(new SelectListItem { Text = "Select Sector", Value = "0" });
+                    }
+                    ddlSector.Add(new SelectListItem { Text = r["SectorName"].ToString(), Value = r["PK_SectorID"].ToString() });
+                    sectorcount = 1;
+                }
+            }
+
+            ViewBag.ddlSector = ddlSector;
+            #endregion
+
+            #region BlockList
+            List<SelectListItem> lstBlock = new List<SelectListItem>();
+
+            int blockcount = 0;
+            //objmodel.SiteID = ds.Tables[0].Rows[0]["PK_SiteID"].ToString();
+            //objmodel.SectorID = ds.Tables[0].Rows[0]["PK_SectorID"].ToString();
+            DataSet dsblock1 = objmaster.GetBlockList();
+
+
+            if (dsblock1 != null && dsblock1.Tables.Count > 0 && dsblock1.Tables[0].Rows.Count > 0)
+            {
+
+                foreach (DataRow dr in dsblock1.Tables[0].Rows)
+                {
+                    if (blockcount == 0)
+                    {
+                        lstBlock.Add(new SelectListItem { Text = "Select Block", Value = "0" });
+                    }
+                    lstBlock.Add(new SelectListItem { Text = dr["BlockName"].ToString(), Value = dr["PK_BlockID"].ToString() });
+                    blockcount = 1;
+                }
+
+            }
+
+
+            ViewBag.ddlBlock = lstBlock;
+            #endregion
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
     }
 }

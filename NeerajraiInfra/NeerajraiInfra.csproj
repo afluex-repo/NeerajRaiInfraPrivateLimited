@@ -7650,6 +7650,7 @@
     <Content Include="Views\Master\UpdateSponsor.cshtml" />
     <Content Include="Views\Plot\ApproveEVBookingPayment.cshtml" />
     <Content Include="Views\AdminReports\AssociateSelfdownEVBusinessReport.cshtml" />
+    <Content Include="Views\Plot\UpdatePlot.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
