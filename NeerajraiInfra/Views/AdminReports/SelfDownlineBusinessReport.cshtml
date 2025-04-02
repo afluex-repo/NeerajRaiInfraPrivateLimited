@@ -1,0 +1,280 @@
+﻿@model NeerajraiInfra.Models.Plot
+
+@{
+    ViewBag.Title = "SelfDownlineBusinessReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .errortext {
+        border: 1px solid red !important;
+    }
+</style>
+<div class="loader" id="divload"></div>
+@using (Html.BeginForm("SelfDownlineBusinessReport", "AdminReports", FormMethod.Post, new { @id = "form1" }))
+{
+    <section class="section">
+        <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+                <a href="#">
+                    <i data-feather="home"></i>
+                </a>
+            </li>
+            <li class="breadcrumb-item">Report</li>
+            <li class="breadcrumb-item">Self Downline Business Report</li>
+        </ul>
+    </section>
+    <div class="section-body">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Self Downline Business Report</h4>
+                    <p style="color: red">
+                        @TempData["SectorMaster"]
+                    </p>
+                </div>
+                
+                <div class="card-body">
+                    <div class="row ">
+                        <div class="input-field col-md-3 m3 s12">
+                            <div class="form-group">
+                                Affiliate ID
+                                @Html.TextBoxFor(m => m.AssociateID, new { @class = "form-control", @Placeholder = "Search by Affiliate ID" })
+                            </div>
+                        </div>
+                        <div class="input-field col-md-3 m3 s12">
+                            <div class="form-group">
+                               Affiliate Name
+                                @Html.TextBoxFor(m => m.AssociateName, new { @class = "form-control", @Placeholder = "Search by Affiliate Name" })
+                            </div>
+                        </div>
+                        <div class="input-field col-md-3 m3 s12">
+                            <div class="form-group">
+                                Customer ID
+                                @Html.TextBoxFor(m => m.CustomerID, new { @class = "form-control", @Placeholder = "Search by Customer ID" })
+                            </div>
+                        </div>
+                        <div class="input-field col-md-3 m3 s12">
+                            <div class="form-group">
+                                Customer Name
+                                @Html.TextBoxFor(m => m.CustomerName, new { @class = "form-control", @Placeholder = "Search by Customer Name" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                Mobile Number
+                                @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @Placeholder = "Customer Mobile Number" })
+                            </div>
+                        </div>
+                        <div class="input-field col-md-3 m3 s12">
+                            <div class="form-group">
+                                Booking No.
+                                @Html.TextBoxFor(m => m.BookingNumber, new { @class = "form-control", @Placeholder = "Search by Booking Number" })
+                            </div>
+                        </div>
+                        <div class="input-field col-md-3 m3 s12">
+                            <div class="form-group">
+                                From Date
+                                @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "From Date", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="input-field col-md-3 m3 s12">
+                            <div class="form-group">
+                                To Date
+                                @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @Placeholder = "To Date", @readonly = "readonly" })
+                            </div>
+                        </div>
+
+                        <div class="input-field col-md-3 m3 s12">
+                            <div class="form-group">
+                                Select Site
+                                @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control form-select", @onchange = "return onSiteChange();" })
+                            </div>
+                        </div>
+                        <div class="input-field col-md-3 m3 s12">
+                            <div class="form-group">
+                                Select Sector
+                                @Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control form-select", @onchange = "return onSectorChange();" })
+                            </div>
+                        </div>
+                        <div class="input-field col-md-3 m3 s12">
+                            <div class="form-group">
+                                Select Block
+                                @Html.DropDownListFor(m => m.BlockID, new SelectList(ViewBag.ddlBlock, "Value", "Text"), new { @class = "form-control form-select" })
+                            </div>
+                        </div>
+                        <div class="input-field col-md-3 m3 s12">
+                            <div class="form-group">
+                                Plot Number
+                                @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @Placeholder = "Search by Plot Number" })
+                            </div>
+                        </div>
+
+                        <div class="input-field col-md-3 m3 s12">
+                            <div class="form-group">
+                                Is DownLine
+                                @Html.CheckBoxFor(m => m.IsDownline)
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="d-block">  &nbsp;</label>
+                                <input class="btn btn-success pull-left" type="submit" value="Search" id="btnSearch" name="Search" />
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-md" data-page-length='50' id="tableExport" style="width:100%;">
+                            <thead>
+                                <tr class="table-active">
+                                    <th hidden>PK_BookingID</th>
+                                    <th>Sr No.</th>
+                                    <th>Branch Name</th>
+                                    <th>Booking Number</th>
+                                    <th>Affiliate Info</th>
+                                    <th>Customer Info</th>
+                                    <th>Plot </th>
+                                    <th>Actual Plot Amount</th>
+                                    <th>Discount</th>
+                                    <th>Net Plot Amount</th>
+                                    <th>Balance Amount</th>
+                                    <th>Payment Date</th>
+                                    <th>Paid Amt</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
+                                {
+                                    if (Model.lstPlot != null)
+                                    {
+                                        int i = 1;
+                                        foreach (var Item in Model.lstPlot)
+                                        {
+                                            <tr class="text-left">
+                                                <td hidden></td>
+                                                <td>@i</td>
+                                                <td>@Item.BranchName</td>
+                                                <td>@Item.BookingNumber</td>
+                                                <td>@Item.AssociateName (@Item.AssociateID)</td>
+                                                <td>@Item.CustomerName (@Item.CustomerID)</td>
+                                                <td>@Item.PlotNumber</td>
+                                                <td>@Item.Amount</td>
+                                                <td>@Item.Discount</td>
+                                                <td>@Item.PlotAmount</td>
+                                                <td>@Item.Balance</td>
+                                                <td>@Item.PaymentDate</td>
+                                                <td>@Item.PaidAmount</td>
+                                            </tr>
+                                            i++;
+                                        }
+                                    }
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr class="table-active">
+                                    <th colspan="6" style="text-align:end;">Total</th>
+                                    <th>@ViewBag.Amount</th>
+                                    <th>@ViewBag.Discount</th>
+                                    <th>@ViewBag.PlotAmount</th>
+                                    <th>@ViewBag.Balance</th>
+                                    <th></th>
+                                    <th>@ViewBag.PaidAmount</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+}
+<script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+
+<script>
+    $(document).ready(function () {
+        $("#divload").css({ 'display': 'none' });
+    });
+
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
+    });
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
+    });
+
+
+    function onSiteChange() {
+        $("#divload").css({ 'display': '' });
+        var value = $('#SiteID').val();
+        var values = $('#SectorID').val();
+        var tr = [];
+        $.ajax({
+            url: "/Plot/GetSiteDetails",
+            Type: "Get",
+            DataType: "JSON",
+            data: { SiteID: value },
+            success: function (data) {
+                $("#divload").css({ 'display': 'none' });
+                var j = 1;
+                if (data.Result == "yes") {
+                    $('#Rate').val(data.Rate);
+                    $("#SectorID").html("");
+                    $("#SectorID").empty();
+                    $("#SectorID").append(
+                          $('<option></option>').val(0).html('Select Sector'));
+                    $.each(data.ddlSector, function (index, Sectorcount) {
+                        $("#SectorID").append(
+                              $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
+
+                    });
+
+                }
+                else {
+                    $("#SectorID").empty();
+                    $('#Rate').val('');
+                }
+
+
+            }
+
+        });
+
+    }
+
+    function onSectorChange() {
+
+        $("#divload").css({ 'display': '' });
+        var siteID = $('#SiteID').val();
+        var sectorID = $('#SectorID').val();
+        $.ajax({
+            url: '/Plot/GetBlockList', type: 'post', dataType: 'json',
+            data: { 'SiteID': siteID, 'sectorID': sectorID },
+            success: function (data) {
+                $("#divload").css({ 'display': 'none' });
+                $("#BlockID").html("");
+                $("#BlockID").empty();
+                $("#BlockID").append(
+                      $('<option></option>').val(0).html('Select Block'));
+                $.each(data.lstBlock, function (index, BlockCount) {
+                    $("#BlockID").append(
+                          $('<option></option>').val(BlockCount.Value).html(BlockCount.Text));
+                });
+
+            }
+
+        });
+    }
+</script>
+
+

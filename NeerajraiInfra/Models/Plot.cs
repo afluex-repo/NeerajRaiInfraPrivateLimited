@@ -10,6 +10,8 @@ namespace NeerajraiInfra.Models
 {
     public class Plot : Common
     {
+        public string TotalDiscount { get; set; }
+        public string DiscountAmount { get; set; }
         public string CouponNumber { get; set; }
         public string PK_EVBookingId { get; set; }
         public List<SelectListItem> ddlPLC { get; set; }
@@ -239,7 +241,7 @@ namespace NeerajraiInfra.Models
                                         new SqlParameter("@Fk_PlanId" ,PaymentPlanID),
                                         new SqlParameter("@BookingDate"  ,BookingDate),
                                         new SqlParameter("@PlotAmount" ,PlotAmount),
-                                        new SqlParameter("@Discount", Discount),
+                                        new SqlParameter("@Discount", TotalDiscount),
                                         new SqlParameter("@ActualPlotRate"  , ActualPlotRate),
                                         new SqlParameter("@PlotRate"  , PlotRate),
                                         new SqlParameter("@BookingAmt"  , BookingAmount),
@@ -257,7 +259,8 @@ namespace NeerajraiInfra.Models
                                         new SqlParameter("@Remarks",Remark),
                                         new SqlParameter("@UTR_Number",UtrNumber),
                                         new SqlParameter("@UTR_Amount",UtrAmount),
-                                       new SqlParameter("@AdjustmentId",AssociatesLoginID)
+                                        new SqlParameter("@AdjustmentId",AssociatesLoginID),
+                                        new SqlParameter("@CouponNumber",CouponNumber)
                             };
             DataSet ds = Connection.ExecuteQuery("PlotBooking", para);
             return ds;
@@ -1093,6 +1096,39 @@ namespace NeerajraiInfra.Models
             return ds;
         }
 
+        public DataSet CheckCouponNumber()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@CouponCode", CouponNumber)
+                                  };
+
+            DataSet ds = Connection.ExecuteQuery("GetEVCouponcode", para);
+            return ds;
+        }
+
+        public DataSet GetSelfDownlineBusiness()
+        {
+            SqlParameter[] para =
+                             {
+                          new SqlParameter("@PK_BookingId",PK_BookingId),
+                          new SqlParameter("@CustomerID",CustomerID ),
+                          new SqlParameter("@AssociateID",AssociateID ),
+                          new SqlParameter("@FromDate",FromDate),
+                          new SqlParameter("@ToDate",ToDate),
+                          new SqlParameter("@CustomerName",CustomerName),
+                          new SqlParameter("@Mobile",Mobile),
+                          new SqlParameter("@PlotNumber",PlotNumber),
+                          new SqlParameter("@BookingNo",BookingNumber),
+                         new SqlParameter("@PK_SiteID",SiteID),
+                         new SqlParameter("@PK_SectorID",SectorID),
+                         new SqlParameter("@PK_BlockID",BlockID),
+                         new SqlParameter("@AssociateName",AssociateName),
+                          new SqlParameter("@IsDownline",Downline)
+                     };
+
+            DataSet ds = Connection.ExecuteQuery("GetSelfDownlineBusiness", para);
+            return ds;
+        }
     }
 }
 
