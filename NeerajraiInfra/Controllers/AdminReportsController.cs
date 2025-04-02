@@ -3631,6 +3631,7 @@ namespace NeerajraiInfra.Controllers
         {
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+
             List<Reports> lst = new List<Reports>();
             DataSet ds = model.GetAssociateSelfdownEVBusinessReport();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
