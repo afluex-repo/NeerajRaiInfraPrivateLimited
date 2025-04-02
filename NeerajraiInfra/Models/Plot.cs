@@ -29,6 +29,8 @@ namespace NeerajraiInfra.Models
         public bool IsDownline { get; set; }
         public string Downline { get; set; }
 
+        public string PK_PlotID { get; set; }
+
         #region Properties
         public string Type { get; set; }
         public string PreviousBookingAmount { get; set; }
@@ -647,6 +649,8 @@ namespace NeerajraiInfra.Models
 
         public string Description { get; set; }
 
+        public bool CalculationChecked { get; set; }
+
         public DataSet ApprovePayment()
         {
             SqlParameter[] para =
@@ -654,9 +658,26 @@ namespace NeerajraiInfra.Models
                                  new SqlParameter("@PK_BookingDetailsId",UserID),
                                   new SqlParameter("@Description",Description),
                                    new SqlParameter("@UpdatedBy",AddedBy),
-                                    new SqlParameter("@ApprovedDate",ApprovedDate)
+                                    new SqlParameter("@ApprovedDate",ApprovedDate),
+                                    new SqlParameter("@CalculationChecked",CalculationChecked)
                             };
             DataSet ds = Connection.ExecuteQuery("ApprovePayment", para);
+            return ds;
+        }
+
+
+        public string DeletedBy { get; set; }
+        public string DeletedOn { get; set; }
+
+        public DataSet DeletePayment()
+        {
+            SqlParameter[] para =
+                            {
+                                 new SqlParameter("@PK_BookingDetailsId",UserID),
+                                 new SqlParameter("@DeletedBy",DeletedBy)
+                                
+                            };
+            DataSet ds = Connection.ExecuteQuery("DeletePaymentfromPaymentApproval", para);
             return ds;
         }
 
@@ -1129,6 +1150,22 @@ namespace NeerajraiInfra.Models
             DataSet ds = Connection.ExecuteQuery("GetSelfDownlineBusiness", para);
             return ds;
         }
+        public DataSet UpdatePlot()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@PK_BookingId", PK_BookingId),
+                new SqlParameter("@PK_BookingDetailsId", PK_BookingDetailsId),
+                  new SqlParameter("@TransferPlotID", PlotID),
+                   new SqlParameter("@PK_PlotID", PK_PlotID),
+                    new SqlParameter("@AddedBy", AddedBy),
+                     new SqlParameter("@TotalPLC", TotalPLC),
+                      new SqlParameter("@PlotRate", PlotRate),
+            };
+            DataSet ds = Connection.ExecuteQuery("UpdatePlotBooking", para);
+            return ds;
+        }
+
+
     }
 }
 

@@ -116,11 +116,10 @@ namespace NeerajraiInfra.Models
                                       new SqlParameter("@AssociatName", DelearName),
                                       new SqlParameter("@GataGhasaraN",GataKhasaraN),
                                       new SqlParameter("@Village",Village),
-                                        new SqlParameter("@Registry",Registry),
-                                          new SqlParameter("@Agreement",Agreement),
-                                           new SqlParameter("@Notary",Notary)
-
-                                  };
+                                      new SqlParameter("@Registry",Registry),
+                                      new SqlParameter("@Agreement",Agreement),
+                                      new SqlParameter("@Notary",Notary)
+                                    };
             DataSet ds = Connection.ExecuteQuery("SaveFarmerDetails", para);
             return ds;
         }
@@ -249,12 +248,11 @@ namespace NeerajraiInfra.Models
         {
             SqlParameter[] para =
                             {
-                                new SqlParameter("@PK_paymentID",PaymentMode)
+                             new SqlParameter("@PK_paymentID",PaymentMode)
                             };
             DataSet ds = Connection.ExecuteQuery("GetPaymentModeList", para);
             return ds;
         }
-
         public DataSet SavePayMentFarmerDetails()
         {
             SqlParameter[] para = {
@@ -262,11 +260,10 @@ namespace NeerajraiInfra.Models
                                       new SqlParameter("@Mobile", Mobile),
                                       new SqlParameter("@TotalBalanc", TotalBalance),
                                       new SqlParameter("@PaidAmount",PaidAmount),
-                                      //new SqlParameter("@PaidDate", CashDate),
                                       new SqlParameter("@Paytyp",PayType),
                                       new SqlParameter("@TransactionNo", TransactionNo),
                                       new SqlParameter("@TransactionDate", TransactionDate),
-                                       new SqlParameter("@BankName", BankName),
+                                      new SqlParameter("@BankName", BankName),
                                       new SqlParameter("@BankBranch", BankBranch),
                                       new SqlParameter("@Remark", Remarks),
                                       new SqlParameter("@AddedBy",AddedBy),
