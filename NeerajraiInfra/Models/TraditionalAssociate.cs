@@ -12,8 +12,8 @@ namespace NeerajraiInfra.Models
     {
         #region Properties
         
-            
-             public string ProfilePic { get; set; }
+        public string BankHolderName { get; set; }
+        public string ProfilePic { get; set; }
         public string Signature { get; set; }
 
         public string id { get; set; }
@@ -152,6 +152,7 @@ namespace NeerajraiInfra.Models
                                    new SqlParameter("@ProfilePic", ProfilePic) ,
                                       new SqlParameter("@Signature", Signature) ,
                                        new SqlParameter("@DesignationID", DesignationID) ,
+                                       new SqlParameter("@BankHolderName",BankHolderName)
 
                                   };
             DataSet ds = Connection.ExecuteQuery("UpdateAssociateTraditional", para);

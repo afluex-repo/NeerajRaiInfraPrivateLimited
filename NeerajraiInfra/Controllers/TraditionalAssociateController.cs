@@ -319,6 +319,7 @@ namespace NeerajraiInfra.Controllers
                         model.ProfilePic = dsPlotDetails.Tables[0].Rows[0]["ProfilePic"].ToString();
                         model.Signature = dsPlotDetails.Tables[0].Rows[0]["Signature"].ToString();
                         model.Percentage = dsPlotDetails.Tables[0].Rows[0]["Percentage"].ToString();
+                        model.BankHolderName = dsPlotDetails.Tables[0].Rows[0]["BankHolderName"].ToString();
 
                         #region ddlDesignation
 

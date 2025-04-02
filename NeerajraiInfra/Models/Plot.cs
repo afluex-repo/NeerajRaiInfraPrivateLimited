@@ -131,6 +131,12 @@ namespace NeerajraiInfra.Models
         public string UtrPaidAmount { get; set; }
         public List<Plot> lstUtr { get; set; }
 
+        public List<Plot> lstEV { get; set; }
+
+        public string Pk_EVBooking { get; set; }
+        public string TransactionDetails { get; set; }
+        public string Remarks { get; set; }
+
         #endregion
 
         #region PlotBooking
@@ -1028,6 +1034,8 @@ namespace NeerajraiInfra.Models
             return ds;
         }
 
+
+        //public string Pk_EVBookingId { get; set; }
         public DataSet GetEVBookingDetailsList()
         {
             SqlParameter[] para = {
@@ -1044,6 +1052,50 @@ namespace NeerajraiInfra.Models
             return ds;
         }
 
+        public DataSet GetEVBookingDetailsforApproval()
+        {
+            SqlParameter[] para = {
+                                      //new SqlParameter("@Pk_EVBookingId", PK_EVBookingId),
+                                      new SqlParameter("@PaymentMode",PaymentMode),
+                                      //new SqlParameter("@CustomerID", UserID),
+                                      //new SqlParameter("@AssociateID", LoginId),
+                                      new SqlParameter("@CouponCode", CouponNumber),
+                                      new SqlParameter("@FromDate", FromDate),
+                                      new SqlParameter("@ToDate", ToDate)
+
+                                  };
+
+            DataSet ds = Connection.ExecuteQuery("GetEVBookingForApproval", para);
+            return ds;
+        }
+
+
+        public DataSet ApproveEVPayment()
+        {
+            SqlParameter[] para =
+                            {
+                                 new SqlParameter("@PK_BookingDetailsId",UserID),
+                                 new SqlParameter("@Description",Description),
+                                 new SqlParameter("@UpdatedBy",AddedBy),
+                                 new SqlParameter("@ApprovedDate",ApprovedDate)
+                            };
+            DataSet ds = Connection.ExecuteQuery("ApprovePaymentEVBooking", para);
+            return ds;
+        }
+
+        public DataSet RejectEVPayment()
+        {
+            SqlParameter[] para =
+                            {
+                                 new SqlParameter("@PK_BookingDetailsId",UserID),
+                                  new SqlParameter("@Description",Description),
+                                   new SqlParameter("@UpdatedBy",AddedBy),
+                                     new SqlParameter("@ApprovedDate",ApprovedDate)
+                            };
+            DataSet ds = Connection.ExecuteQuery("RejectPaymentEVBooking", para);
+            return ds;
+        }
+
         public DataSet CheckCouponNumber()
         {
             SqlParameter[] para = {
@@ -1051,6 +1103,30 @@ namespace NeerajraiInfra.Models
                                   };
 
             DataSet ds = Connection.ExecuteQuery("GetEVCouponcode", para);
+            return ds;
+        }
+
+        public DataSet GetSelfDownlineBusiness()
+        {
+            SqlParameter[] para =
+                             {
+                          new SqlParameter("@PK_BookingId",PK_BookingId),
+                          new SqlParameter("@CustomerID",CustomerID ),
+                          new SqlParameter("@AssociateID",AssociateID ),
+                          new SqlParameter("@FromDate",FromDate),
+                          new SqlParameter("@ToDate",ToDate),
+                          new SqlParameter("@CustomerName",CustomerName),
+                          new SqlParameter("@Mobile",Mobile),
+                          new SqlParameter("@PlotNumber",PlotNumber),
+                          new SqlParameter("@BookingNo",BookingNumber),
+                         new SqlParameter("@PK_SiteID",SiteID),
+                         new SqlParameter("@PK_SectorID",SectorID),
+                         new SqlParameter("@PK_BlockID",BlockID),
+                         new SqlParameter("@AssociateName",AssociateName),
+                          new SqlParameter("@IsDownline",Downline)
+                     };
+
+            DataSet ds = Connection.ExecuteQuery("GetSelfDownlineBusiness", para);
             return ds;
         }
     }

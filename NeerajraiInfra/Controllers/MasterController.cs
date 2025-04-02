@@ -1781,7 +1781,7 @@ namespace NeerajraiInfra.Controllers
         [HttpPost]
         [ActionName("PlotList")]
         [OnAction(ButtonName = "SearchPlot")]
-        public ActionResult PlotListDetails(Master model,string SiteID,string SectorID)
+        public ActionResult PlotListDetails(Master model, string SiteID, string SectorID)
         {
             List<Master> lst = new List<Master>();
             model.SiteID = model.SiteID == "0" ? null : model.SiteID;
@@ -2427,7 +2427,7 @@ namespace NeerajraiInfra.Controllers
             return RedirectToAction("PlanMaster", "Master");
         }
 
-         
+
         public ActionResult DeletePlanMaster(Master obj, string Id)
         {
             try
@@ -2627,9 +2627,9 @@ namespace NeerajraiInfra.Controllers
             return View(model);
         }
 
-        
 
-        public ActionResult UpdatePlotStatusDetails(Master model,string PlotId, string PlotStatus)
+
+        public ActionResult UpdatePlotStatusDetails(Master model, string PlotId, string PlotStatus)
         {
             string FormName = "";
             string Controller = "";
@@ -2650,19 +2650,127 @@ namespace NeerajraiInfra.Controllers
                 else
                 {
                     //model.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-                    TempData["PlotStatus"]= ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    TempData["PlotStatus"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     FormName = "UpdatePlotStatus";
                     Controller = "Master";
                 }
             }
-            return RedirectToAction(FormName,Controller);
+            return RedirectToAction(FormName, Controller);
             //return Json(model, JsonRequestBehavior.AllowGet);
         }
 
+        #region UpdateSponsor
+
+        public ActionResult UpdateSponsor(Master model)
+        {
+         return View(model);
+
+        }
+        #endregion
 
 
+        public ActionResult GetCustomerNameFromCustomerID(string CustomerID)
+        {
+            try
+            {
+                Master model = new Master();
+
+                model.LoginId = CustomerID;
+
+                #region GetCustomerName
+                DataSet dsCustomerName = model.GetCustomerName();
+                if (dsCustomerName != null && dsCustomerName.Tables[0].Rows.Count > 0)
+                {
+                    model.CustomerName = dsCustomerName.Tables[0].Rows[0]["Name"].ToString();
+                    model.LoginId = dsCustomerName.Tables[0].Rows[0]["LoginId"].ToString();
+                    model.AssociateID = dsCustomerName.Tables[0].Rows[0]["AssociateLoginId"].ToString();
+                    model.AssociateName = dsCustomerName.Tables[0].Rows[0]["AssociateName"].ToString();
+                    model.Result = "yes";
+                }
+                else
+                {
+                    model.CustomerID = "";
+                    model.Result = "no";
+                }
+                #endregion
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return View(ex.Message);
+            }
+        }
+
+        public ActionResult GetSponsorNameFromCustomerID(string CustomerId, string NewAssociateID)
+        {
+            try
+            {
+                Master model = new Master();
+                model.LoginId = CustomerId;
+                model.AssociateID = NewAssociateID;
+
+                #region GetSponsorName
+                DataSet dsSponsorName = model.GetSponsorName();
+                if (dsSponsorName != null && dsSponsorName.Tables[0].Rows.Count > 0)
+                {
+                   
+                    model.LoginId = dsSponsorName.Tables[0].Rows[0]["LoginId"].ToString();
+                    model.NewAssociateName = dsSponsorName.Tables[0].Rows[0]["Name"].ToString();
+                    model.Result = "yes";
+                }
+                else
+                {
+                    model.CustomerName = "";
+                    model.NewAssociateName = "";
+                    model.AssociateName = "";
+                    model.AssociateID = "";
+                    model.Result = "no";
+                }
+                #endregion
+
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "error", Message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
 
 
+        [HttpPost]
+        [ActionName("UpdateSponsor")]
+        [OnAction(ButtonName = "btnUpdate")]
+        public ActionResult UpdateSponsorName(Master model)
+        {
+            try
+            {
+                model.UpdatedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.UpdateSponsor();
+
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["UpdateSponsor"] = "Sponsor  updated successfully";
+                    }
+                    else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        TempData["UpdateSponsor"] = ds.Tables[0].Rows[0][0].ToString();
+                    }
+                }
+                else
+                {
+                    TempData["UpdateSponsor"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["UpdateSponsor"] = ex.Message;
+            }
+
+
+            return RedirectToAction("UpdateSponsor","Master");
+        }
 
     }
 }
