@@ -90,10 +90,11 @@
                                     <th>Allotment Remarks</th>
                                     <th>Payment Mode Remarks</th>
                                     <th>Status</th>
-                                    <th>Income Not Generate </th>
+                                    <th> Not Generate Income</th>
                                     <th>Description</th>
                                     <th>Payment Clear Date</th>
                                     <th>Action</th>
+                                    <th>Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -123,7 +124,7 @@
                                                 <td>@Item.PaymentModeRemarks</td>
                                                 <td>@Item.PaymentStatus</td>
                                                 <td>
-                                              <input type="checkbox" id="calculation" name="calculation">
+                                              <input type="checkbox" id="calculation_@i" name="calculation">
                                                 </td>
                                                 <td>
                                                     <textarea type="text" id="txtDesc @i" name="txtDesc @i" onchange="getdata(this)"></textarea>
@@ -135,6 +136,10 @@
                                                     <a href="#" class="btn btn-success btn-sm" style="margin-top:5px" onclick="Approve('@i','@Item.UserID');">Cleared</a>
                                                     <a href="#" class="btn btn-warning btn-sm" style="margin-top:5px;margin-bottom:5px;" onclick="Bounce('@i','@Item.UserID');">Bounce</a>
                                                     <a href="#" class="btn btn-danger btn-sm" style="margin-top:5px;margin-bottom:5px;" onclick="Reject('@i','@Item.UserID');">Cancel</a>
+                                                </td>
+
+                                                <td>
+                                                    <a href="#" class="btn btn-danger btn-sm" style="margin-top:5px;margin-bottom:5px;" onclick="Delete('@Item.UserID');">Delete</a>
                                                 </td>
                                             </tr>
                                             i++;
@@ -186,28 +191,76 @@
         $("#divload").css({ 'display': 'none' });
     });
 
-    function Approve(id, userid) {
-        debugger
-        var r = confirm('Are you sure you want to approve this Payment ?');
+
+    function Delete(userid) {
+        var r = confirm('Are you sure you want to Delete this Payment ?');
         if (r == true) {
             $("#divload").css({ 'display': '' });
-            var Description = $('#txtdecription').val();
-            var Date = $('#txtAppDt').val();
-            $.ajax({
-                url: "/Plot/ApprovePayment",
+           $.ajax({
+                url: "/Plot/DeletePayment",
                 Type: "Get",
                 DataType: "JSON",
-                data: { UserID: userid, Description: $('#txtdecription').val(), ApprovedDate: $('#txtAppDt').val() },
-                success: function (data) {
-                    alert("Payment Approved successfully");
-                    location.reload();
-                    @*window.location.href = '@Url.Action("Payment", "Plot")';*@
-                    $("#divload").css({ 'display': 'none' });
+                data: { UserID: userid },
+               success: function (data)
+                {
+                    if (data.Result == "Yes") {
+                        alert("Payment Deleted successfully");
+                        location.reload();
+                    }
+                    else {
+                        alert("Something went wrong !!");
+                    }
+                    //$("#divload").css({ 'display': 'none' });
                 }
-
             });
         }
     }
+
+
+
+
+
+
+
+
+    function Approve(id, userid) {
+        debugger;
+        var r = confirm('Are you sure you want to approve this Payment ?');
+        if (r == true) {
+            $("#divload").css({ 'display': '' });
+
+            var checkboxId = "#calculation_" + id;  // Get the checkbox ID dynamically
+            var isChecked = $(checkboxId).is(":checked"); // Check if checkbox is selected
+
+            $.ajax({
+                url: "/Plot/ApprovePayment",
+                type: "GET",
+                dataType: "JSON",
+                data: {
+                    UserID: userid,
+                    Description: $('#txtdecription').val(),
+                    ApprovedDate: $('#txtAppDt').val(),
+                    CalculationChecked: isChecked // Sending checkbox value
+                },
+                success: function (data)
+                {
+                    if (data.Result == "Yes") {
+                        alert("Payment Approved successfully");
+                        location.reload();
+                    }
+                    else {
+                        alert("Something went wrong !!");
+                    }
+                    //$("#divload").css({ 'display': 'none' });
+                }
+            });
+        }
+    }
+
+
+
+
+
 
     function getdata(decription) {
         $('#txtdecription').val(decription.value);

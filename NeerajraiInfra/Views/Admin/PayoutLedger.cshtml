@@ -97,6 +97,10 @@
 
 }
 
+<script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
+
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
 
 
 <script src="../../WebsiteCss/js/jquery.min.js"></script>
@@ -119,11 +123,17 @@
         dateFormat: 'dd/mm/yy',
     });
 
+   
     $('#FromDate').datepicker({
         dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
     });
+
     $('#ToDate').datepicker({
         dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
     });
     function isNumberOrDecimal(evt) {
         var charCode = (evt.which) ? evt.which : evt.keyCode;
