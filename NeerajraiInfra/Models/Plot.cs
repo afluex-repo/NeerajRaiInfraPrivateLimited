@@ -243,7 +243,7 @@ namespace NeerajraiInfra.Models
                                         new SqlParameter("@Fk_PlanId" ,PaymentPlanID),
                                         new SqlParameter("@BookingDate"  ,BookingDate),
                                         new SqlParameter("@PlotAmount" ,PlotAmount),
-                                        new SqlParameter("@Discount", TotalDiscount),
+                                        new SqlParameter("@Discount", Discount),
                                         new SqlParameter("@ActualPlotRate"  , ActualPlotRate),
                                         new SqlParameter("@PlotRate"  , PlotRate),
                                         new SqlParameter("@BookingAmt"  , BookingAmount),
@@ -262,7 +262,7 @@ namespace NeerajraiInfra.Models
                                         new SqlParameter("@UTR_Number",UtrNumber),
                                         new SqlParameter("@UTR_Amount",UtrAmount),
                                         new SqlParameter("@AdjustmentId",AssociatesLoginID),
-                                        new SqlParameter("@CouponNumber",CouponNumber)
+                                        //new SqlParameter("@CouponNumber",CouponNumber)
                             };
             DataSet ds = Connection.ExecuteQuery("PlotBooking", para);
             return ds;

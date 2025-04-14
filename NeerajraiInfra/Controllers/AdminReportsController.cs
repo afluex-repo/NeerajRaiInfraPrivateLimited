@@ -3491,6 +3491,7 @@ namespace NeerajraiInfra.Controllers
                         obj.Remarks = r["Remarks"].ToString();
                         obj.PaymentStatus = r["PaymentStatus"].ToString();
                         obj.CouponStatus = r["CouponStatus"].ToString();
+                        obj.UpdatedCouponRemarks = r["CouponUpdateRemarks"].ToString();
                         lst.Add(obj);
                     }
                     model.lstEV = lst;
@@ -3536,6 +3537,7 @@ namespace NeerajraiInfra.Controllers
                         obj.Remarks = r["Remarks"].ToString();
                         obj.PaymentStatus = r["PaymentStatus"].ToString();
                         obj.CouponStatus = r["CouponStatus"].ToString();
+                        obj.UpdatedCouponRemarks = r["CouponUpdateRemarks"].ToString();
                         lst.Add(obj);
                     }
                     model.lstEV = lst;
@@ -3790,6 +3792,43 @@ namespace NeerajraiInfra.Controllers
         }
 
         #endregion
+
+
+
+        public ActionResult UpdateCouponStatus(string BookingID, string Remark,string CouponStatus)
+        {
+            Reports model = new Reports();
+           
+            try
+            {
+                model.Pk_EVBookingId = BookingID;
+                model.CouponRemark = Remark;
+                model.CouponStatusUpdate = CouponStatus;
+                model.UpdatedBy = Session["Pk_AdminId"].ToString();
+
+                DataSet ds = model.UpdateCouponStatus();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["msg"].ToString() == "1")
+                    {
+                        model.Result = "1";
+                      
+                    }
+                    else
+                    {
+                        model.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                      
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                model.Result = ex.Message;
+            }
+           
+
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
 
     }
 }
