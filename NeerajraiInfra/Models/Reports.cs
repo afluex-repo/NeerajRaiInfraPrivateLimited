@@ -14,13 +14,13 @@ namespace NeerajraiInfra.Models
         public string UserID { get; set; }
         //public string CustomerID { get; set; }
         public string CouponNumber { get; set; }
-       public string CouponStatus { get; set; }
-
-
+        public string CouponStatus { get; set; }
+        public string CouponRemark { get; set; }
+        public string CouponStatusUpdate { get; set; }
 
         public string TransactionDetails { get; set; }
         public List<Reports> lstEV { get; set; }
-
+        public string UpdatedCouponRemarks { get; set; }
 
 
 
@@ -632,6 +632,19 @@ namespace NeerajraiInfra.Models
                                  new SqlParameter("@ToDate",ToDate)
                             };
             DataSet ds = Connection.ExecuteQuery("GetSelftDownReportForEVBuisness", para);
+            return ds;
+        }
+
+        public DataSet UpdateCouponStatus()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@Pk_EVBookingId",Pk_EVBookingId),
+                new SqlParameter("@CouponRemark",CouponRemark),
+                new SqlParameter("@CouponStatusUpdate",CouponStatusUpdate),
+                new SqlParameter("@UpdatedBy",UpdatedBy)
+            };
+            DataSet ds = Connection.ExecuteQuery("UpdateCouponStatus", para);
             return ds;
         }
     }
