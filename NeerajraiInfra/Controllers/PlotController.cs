@@ -521,11 +521,11 @@ namespace NeerajraiInfra.Controllers
             string Controller = "";
             try
             {
-                decimal discountAmount = string.IsNullOrEmpty(obj.DiscountAmount) ? 0 : Convert.ToDecimal(obj.DiscountAmount);
-                decimal discount = string.IsNullOrEmpty(obj.Discount) ? 0 : Convert.ToDecimal(obj.Discount);
-                decimal totalDiscount = discountAmount + discount;
-                obj.TotalDiscount = totalDiscount.ToString();
-                //obj.Discount = string.IsNullOrEmpty(obj.Discount) ? "0" : obj.Discount;
+                //decimal discountAmount = string.IsNullOrEmpty(obj.DiscountAmount) ? 0 : Convert.ToDecimal(obj.DiscountAmount);
+                //decimal discount = string.IsNullOrEmpty(obj.Discount) ? 0 : Convert.ToDecimal(obj.Discount);
+                //decimal totalDiscount = discountAmount + discount;
+                //obj.TotalDiscount = totalDiscount.ToString();
+                obj.Discount = string.IsNullOrEmpty(obj.Discount) ? "0" : obj.Discount;
                 obj.TotalPLC = string.IsNullOrEmpty(obj.TotalPLC) ? "0" : obj.TotalPLC;
                 obj.Fk_BankId = string.IsNullOrEmpty(obj.Fk_BankId) ? "0" : obj.Fk_BankId;
                 obj.BookingDate = string.IsNullOrEmpty(obj.BookingDate) ? null : Common.ConvertToSystemDate(obj.BookingDate, "dd/MM/yyyy");
