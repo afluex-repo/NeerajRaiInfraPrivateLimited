@@ -138,12 +138,14 @@
                                     <th>Affiliate Info</th>
                                     <th>Customer Info</th>
                                     <th>Plot </th>
-                                    <th>Actual Plot Amount</th>
-                                    <th>Discount</th>
+                                    @*<th>Actual Plot Amount</th>*@
                                     <th>Net Plot Amount</th>
+                                    <th>Discount</th>
+                                    @*<th>Due Amount</th>*@
+                                    <th>Paid Amt</th>
                                     <th>Balance Amount</th>
                                     <th>Payment Date</th>
-                                    <th>Paid Amt</th>
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -162,12 +164,13 @@
                                                 <td>@Item.AssociateName (@Item.AssociateID)</td>
                                                 <td>@Item.CustomerName (@Item.CustomerID)</td>
                                                 <td>@Item.PlotNumber</td>
-                                                <td>@Item.Amount</td>
-                                                <td>@Item.Discount</td>
+                                                @*<td>@Item.Amount</td>*@
                                                 <td>@Item.PlotAmount</td>
+                                                <td>@Item.Discount</td>
+                                                <td>@Item.PaidAmount</td>
                                                 <td>@Item.Balance</td>
                                                 <td>@Item.PaymentDate</td>
-                                                <td>@Item.PaidAmount</td>
+
                                             </tr>
                                             i++;
                                         }
@@ -177,12 +180,14 @@
                             <tfoot>
                                 <tr class="table-active">
                                     <th colspan="6" style="text-align:end;">Total</th>
-                                    <th>@ViewBag.Amount</th>
-                                    <th>@ViewBag.Discount</th>
+                                    @*<th>@ViewBag.Amount</th>*@
+
                                     <th>@ViewBag.PlotAmount</th>
+                                    <th>@ViewBag.Discount</th>
+                                    <th>@ViewBag.PaidAmount</th>
                                     <th>@ViewBag.Balance</th>
                                     <th></th>
-                                    <th>@ViewBag.PaidAmount</th>
+
                                 </tr>
                             </tfoot>
                         </table>
