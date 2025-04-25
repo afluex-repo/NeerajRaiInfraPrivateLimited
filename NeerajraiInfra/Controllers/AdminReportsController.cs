@@ -3718,6 +3718,7 @@ namespace NeerajraiInfra.Controllers
                     obj.PlotNumber = r["PlotInfo"].ToString();
                     obj.PlotAmount = r["NetPlotAmount"].ToString();
                     obj.Balance = r["Balance"].ToString();
+                    
                     obj.Amount = r["PlotAmount"].ToString();
                     obj.BookingNumber = r["BookingNo"].ToString();
                     obj.Discount = r["Discount"].ToString();
