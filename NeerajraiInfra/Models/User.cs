@@ -7,6 +7,11 @@ namespace NeerajraiInfra.Models
 {
     public class User
     {
+        public DataSet GetSiteList()
+        {
+            DataSet ds = Connection.ExecuteQuery("SiteList");
+            return ds;
+        }
 
     }
 }
