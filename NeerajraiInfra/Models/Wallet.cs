@@ -40,10 +40,11 @@ namespace NeerajraiInfra.Models
         public List<Wallet> lstassociate { get; set; }
         public List<AssociateBooking> lstdistribute { get; set; }
         public List<Wallet> lstPayoutDetail { get; set; }
+        public string Remarks { get; set; }
 
-   
 
-        
+
+
         public string Package { get; set; }
         #region PaidPayout
         public DataSet GetPaidPayout()

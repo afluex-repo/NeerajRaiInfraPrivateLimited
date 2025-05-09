@@ -7652,6 +7652,7 @@
     <Content Include="Views\AdminReports\AssociateSelfdownEVBusinessReport.cshtml" />
     <Content Include="Views\AdminReports\SelfDownlineBusinessReport.cshtml" />
     <Content Include="Views\Plot\UpdatePlot.cshtml" />
+    <Content Include="Views\AssociateDashboard\AssociateSelfdownEVBusinessReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
