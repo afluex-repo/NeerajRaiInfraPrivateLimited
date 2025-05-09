@@ -36,10 +36,10 @@ namespace NeerajraiInfra.Controllers
                     Objload.LoginId = dr["Loginid"].ToString();
                     Objload.DisplayName = dr["Name"].ToString();
                     Objload.PaymentDate = dr["Paymentdate"].ToString();
-
                     Objload.Amount = dr["Amount"].ToString();
                     Objload.TransactionDate = dr["TransactionDate"].ToString();
                     Objload.TransactionNo = dr["TransactionNo"].ToString();
+                    Objload.Remarks = dr["Remarks"].ToString();
                     ViewBag.Total = Convert.ToDecimal(ViewBag.Total) + Convert.ToDecimal(dr["Amount"].ToString());
                     lst.Add(Objload);
                 }

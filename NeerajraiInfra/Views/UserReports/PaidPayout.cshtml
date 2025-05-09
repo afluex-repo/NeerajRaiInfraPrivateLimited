@@ -54,15 +54,16 @@
                                 <th>Amount</th>
                                 <th>Transaction Date</th>
                                 <th>TransactionNo</th>
+                                <th>Remarks</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th></th>
                                 <th></th>
-                            
                                 <th><b>Total</b></th>
                                 <th>@ViewBag.Total</th>
+                                <th></th>
                                 <th></th>
                                 <th></th>
                             </tr>
@@ -83,6 +84,7 @@
                                             <td>@Item.Amount</td>
                                             <td>@Item.TransactionDate</td>
                                             <td>@Item.TransactionNo</td>
+                                            <td>@Item.Remarks</td>
 
                                         </tr>
                                         i++;
@@ -110,9 +112,13 @@
 
     $('#FromDate').datepicker({
         dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
     });
     $('#ToDate').datepicker({
         dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
     });
 
     function isNumberOrDecimal(evt) {

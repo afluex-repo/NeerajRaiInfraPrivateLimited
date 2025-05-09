@@ -2484,5 +2484,39 @@ namespace NeerajraiInfra.Controllers
             }
             return View(model);
         }
+       
+        public ActionResult AssociateSelfdownEVBusinessReport()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        [ActionName("AssociateSelfdownEVBusinessReport")]
+        [OnAction(ButtonName = "GetList")]
+        public ActionResult AssociateSelfdownEVBusinessReportAction(AssociateBooking model)
+        {
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            model.AssociateID = Session["LoginId"].ToString();
+            List<AssociateBooking> lst = new List<AssociateBooking>();
+            DataSet ds = model.GetAssociateSelfdownEVBusinessReport();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    AssociateBooking obj = new AssociateBooking();
+                    obj.LoginId = r["LoginID"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.SelfBusiness = r["SelfBusiness"].ToString();
+                    obj.TeamBusiness = r["TeamBusiness"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstAssSelfdownEVBusiness = lst;
+            }
+            return View(model);
+        }
+
+       
     }
 }
