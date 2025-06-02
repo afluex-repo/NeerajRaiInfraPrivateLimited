@@ -816,7 +816,23 @@ namespace NeerajraiInfra.Models
 
         #endregion
 
-        
+        public List<AssociateBooking> lstAssSelfdownEVBusiness { get; set; }
+        public string SelfBusiness { get; set; }
+        public string TeamBusiness { get; set; }
+
+
+        public DataSet GetAssociateSelfdownEVBusinessReport()
+        {
+            SqlParameter[] para =
+                         {
+                                 new SqlParameter("@LoginId",AssociateID),
+                                 new SqlParameter("@FromDate",FromDate),
+                                 new SqlParameter("@ToDate",ToDate),
+                                 //new SqlParameter("@UserId",UserID)
+                            };
+            DataSet ds = Connection.ExecuteQuery("GetSelftDownReportForEVBuisnessforAssociate", para);
+            return ds;
+        }
     }
 
 }
