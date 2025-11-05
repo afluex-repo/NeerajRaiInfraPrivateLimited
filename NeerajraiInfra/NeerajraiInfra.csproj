@@ -38,7 +38,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <IntermediateOutputPath>C:\Users\AFLUEX\AppData\Local\Temp\vs4A94.tmp\Debug\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\DELL\AppData\Local\Temp\vs8E81.tmp\Debug\</IntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -47,7 +47,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <IntermediateOutputPath>C:\Users\AFLUEX\AppData\Local\Temp\vs4A94.tmp\Release\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\DELL\AppData\Local\Temp\vs8E81.tmp\Release\</IntermediateOutputPath>
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
@@ -201,6 +201,7 @@
     <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UserReportsController.cs" />
+    <Compile Include="Controllers\WebAPIController.cs" />
     <Compile Include="Controllers\WebsiteController.cs" />
     <Compile Include="Filters\SimpleAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -248,6 +249,7 @@
     <Compile Include="Models\Tree.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Wallet.cs" />
+    <Compile Include="Models\WebAPIModel.cs" />
     <Compile Include="Models\WebService\AgentServices.asmx.cs">
       <DependentUpon>AgentServices.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -6747,6 +6749,40 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\aadhar_new.png" />
+    <Content Include="images\Customerlogo.png" />
+    <Content Include="images\delete-icon.png" />
+    <Content Include="images\edit-icon.png" />
+    <Content Include="images\loader.gif" />
+    <Content Include="images\login_crm.jpg" />
+    <Content Include="images\logo.png" />
+    <Content Include="images\pancard_new.png" />
+    <Content Include="images\Printer.png" />
+    <Content Include="images\process.gif" />
+    <Content Include="images\ProfilePicture\04ae55ae-ef6b-434b-930c-d46eba52b0ac.jpg" />
+    <Content Include="images\ProfilePicture\26046d26-0ed9-4433-b243-de611672d027.jpg" />
+    <Content Include="images\ProfilePicture\3e901462-ecb4-4d0c-bb7d-f32c9cb670b2.jfif" />
+    <Content Include="images\ProfilePicture\e682fef1-bf9d-41aa-bbde-58c7cece226f.jpg" />
+    <Content Include="images\RewardImages\Alto.jpg" />
+    <Content Include="images\RewardImages\Bike.jpg" />
+    <Content Include="images\RewardImages\BMW.jpg" />
+    <Content Include="images\RewardImages\Bullet.jpg" />
+    <Content Include="images\RewardImages\Karisma.jpg" />
+    <Content Include="images\RewardImages\Laptop.jpg" />
+    <Content Include="images\RewardImages\Swift.jpg" />
+    <Content Include="images\RewardImages\TataSafari.jpg" />
+    <Content Include="images\RewardImages\VILLA.jpg" />
+    <Content Include="images\tick.png" />
+    <Content Include="images\treeicon.jpg" />
+    <Content Include="images\TreeIcon\default.png" />
+    <Content Include="images\TreeIcon\girl-active.png" />
+    <Content Include="images\TreeIcon\girl-block.png" />
+    <Content Include="images\TreeIcon\girl-inactive.png" />
+    <Content Include="images\TreeIcon\men-active.png" />
+    <Content Include="images\TreeIcon\men-block.png" />
+    <Content Include="images\TreeIcon\men-inactive.png" />
+    <Content Include="images\user.png" />
+    <Content Include="images\XwHw.gif" />
     <Content Include="LevelTree.aspx" />
     <Content Include="Models\WebService\AgentServices.asmx" />
     <Content Include="Views\Master\UpdatePlotStatus.cshtml" />
@@ -6754,8 +6790,6 @@
     <Content Include="WebsiteCss\images\grow_height.png" />
     <Content Include="WebsiteCss\images\neture_part.png" />
     <Content Include="WebsiteCss\images\neture_welness.png" />
-    <Content Include="Website\about.html" />
-    <Content Include="Website\contact.html" />
     <Content Include="Website\css\ace-responsive-menu.css" />
     <Content Include="Website\css\animate.css" />
     <Content Include="Website\css\bootstrap-select.min.css" />
@@ -6849,7 +6883,6 @@
     <Content Include="Website\images\testimonials\testimonial-1.png" />
     <Content Include="Website\images\testimonials\testimonial-2.png" />
     <Content Include="Website\images\testimonials\testimonial-3.png" />
-    <Content Include="Website\index.html" />
     <Content Include="Website\js\ace-responsive-menu.js" />
     <Content Include="Website\js\bootstrap-select.min.js" />
     <Content Include="Website\js\bootstrap.min.js" />
@@ -6877,9 +6910,6 @@
     <Content Include="Website\js\scrollbalance.js" />
     <Content Include="Website\js\swiper.js" />
     <Content Include="Website\js\wow.min.js" />
-    <Content Include="Website\login.html" />
-    <Content Include="Website\properties.html" />
-    <Content Include="Website\property-details.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery.min.js" />
@@ -6960,8 +6990,6 @@
     <Content Include="WebsiteCss\images\events\event7.jpeg" />
     <Content Include="WebsiteCss\images\events\event8.jpeg" />
     <Content Include="WebsiteCss\images\events\event9.jpeg" />
-    <Content Include="WebsiteCss\images\favicon.png" />
-    <Content Include="WebsiteCss\images\footer-logo.png" />
     <Content Include="WebsiteCss\images\free-2.png" />
     <Content Include="WebsiteCss\images\gallery\herbal-pharma-product-1.jpg" />
     <Content Include="WebsiteCss\images\gallery\herbal-pharma-product-2.jpg" />
@@ -6996,14 +7024,12 @@
     <Content Include="WebsiteCss\images\ipl\iplb.jpg" />
     <Content Include="WebsiteCss\images\ipl\iplc.jpg" />
     <Content Include="WebsiteCss\images\ipl\ipld.jpg" />
-    <Content Include="WebsiteCss\images\landing-logo.png" />
     <Content Include="WebsiteCss\images\legal-document\certificate.jpg" />
     <Content Include="WebsiteCss\images\legal-document\certification-1.jpeg" />
     <Content Include="WebsiteCss\images\legal-document\certification-2.jpeg" />
     <Content Include="WebsiteCss\images\legal-document\certification-3.jpeg" />
     <Content Include="WebsiteCss\images\legal-document\certification-4.jpeg" />
     <Content Include="WebsiteCss\images\legal-document\pan-card-dhara.jpg" />
-    <Content Include="WebsiteCss\images\logo-2.png" />
     <Content Include="WebsiteCss\images\main-slider\banner1.jpg" />
     <Content Include="WebsiteCss\images\main-slider\banner2.jpg" />
     <Content Include="WebsiteCss\images\main-slider\banner3.jpg" />
