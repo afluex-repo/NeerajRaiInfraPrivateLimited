@@ -2335,24 +2335,24 @@ namespace NeerajraiInfra.Controllers
                             //var fromAddress = new MailAddress("prakher.afluex@gmail.com");
                             //var toAddress = new MailAddress(model.Email);
 
-                            System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient
-                            {
-                                Host = "smtp.gmail.com",
-                                Port = 587,
-                                EnableSsl = true,
-                                DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network,
-                                UseDefaultCredentials = false,
-                                Credentials = new NetworkCredential("tejinfrazone@gmail.com", "awneesh1")
+                            //System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient
+                            //{
+                            //    Host = "smtp.gmail.com",
+                            //    Port = 587,
+                            //    EnableSsl = true,
+                            //    DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network,
+                            //    UseDefaultCredentials = false,
+                            //    Credentials = new NetworkCredential("tejinfrazone@gmail.com", "awneesh1")
 
-                            };
+                            //};
 
-                            using (var message = new MailMessage("tejinfrazone@gmail.com", model.Email)
-                            {
-                                IsBodyHtml = true,
-                                Subject = "Customer Registration",
-                                Body = mailbody
-                            })
-                                smtp.Send(message);
+                            //using (var message = new MailMessage("tejinfrazone@gmail.com", model.Email)
+                            //{
+                            //    IsBodyHtml = true,
+                            //    Subject = "Customer Registration",
+                            //    Body = mailbody
+                            //})
+                                //smtp.Send(message);
                             TempData["Message"] = "Registration Successfull !";
                         }
                         catch (Exception ex)

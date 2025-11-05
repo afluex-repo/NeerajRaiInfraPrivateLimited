@@ -1,22 +1,10 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "E:\\RISHI\\REPOSITORY\\NeerajRaiInfraPrivateLimited\\",
+  "WorkspaceRootPath": "E:\\Tanishq\\Repository\\NeerajRaiInfraPrivateLimited\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|e:\\rishi\\repository\\neerajraiinfraprivatelimited\\neerajraiinfra\\controllers\\associatedashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|solutionrelative:neerajraiinfra\\controllers\\associatedashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|e:\\rishi\\repository\\neerajraiinfraprivatelimited\\neerajraiinfra\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|solutionrelative:neerajraiinfra\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|e:\\rishi\\repository\\neerajraiinfraprivatelimited\\neerajraiinfra\\views\\shared\\associatelayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|solutionrelative:neerajraiinfra\\views\\shared\\associatelayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|e:\\rishi\\repository\\neerajraiinfraprivatelimited\\neerajraiinfra\\views\\associatedashboard\\newpage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|solutionrelative:neerajraiinfra\\views\\associatedashboard\\newpage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|e:\\tanishq\\repository\\neerajraiinfraprivatelimited\\neerajraiinfra\\models\\connection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|solutionrelative:neerajraiinfra\\models\\connection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,59 +14,30 @@
       "DocumentGroups": [
         {
           "DockedHeight": 286,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "User.cs",
-              "DocumentMoniker": "E:\\RISHI\\REPOSITORY\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Models\\User.cs",
-              "RelativeDocumentMoniker": "NeerajraiInfra\\Models\\User.cs",
-              "ToolTip": "E:\\RISHI\\REPOSITORY\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Models\\User.cs",
-              "RelativeToolTip": "NeerajraiInfra\\Models\\User.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-08T10:52:55.053Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AssociateLayout.cshtml",
-              "DocumentMoniker": "E:\\RISHI\\REPOSITORY\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Views\\Shared\\AssociateLayout.cshtml",
-              "RelativeDocumentMoniker": "NeerajraiInfra\\Views\\Shared\\AssociateLayout.cshtml",
-              "ToolTip": "E:\\RISHI\\REPOSITORY\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Views\\Shared\\AssociateLayout.cshtml",
-              "RelativeToolTip": "NeerajraiInfra\\Views\\Shared\\AssociateLayout.cshtml",
-              "ViewState": "AgIAAIkAAAAAAAAAAAAIwJwAAAB1AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-08T10:52:24.441Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "NewPage.cshtml",
-              "DocumentMoniker": "E:\\RISHI\\REPOSITORY\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Views\\AssociateDashboard\\NewPage.cshtml",
-              "RelativeDocumentMoniker": "NeerajraiInfra\\Views\\AssociateDashboard\\NewPage.cshtml",
-              "ToolTip": "E:\\RISHI\\REPOSITORY\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Views\\AssociateDashboard\\NewPage.cshtml",
-              "RelativeToolTip": "NeerajraiInfra\\Views\\AssociateDashboard\\NewPage.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-08T10:52:06.882Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "AssociateDashboardController.cs",
-              "DocumentMoniker": "E:\\RISHI\\REPOSITORY\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Controllers\\AssociateDashboardController.cs",
-              "RelativeDocumentMoniker": "NeerajraiInfra\\Controllers\\AssociateDashboardController.cs",
-              "ToolTip": "E:\\RISHI\\REPOSITORY\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Controllers\\AssociateDashboardController.cs",
-              "RelativeToolTip": "NeerajraiInfra\\Controllers\\AssociateDashboardController.cs",
-              "ViewState": "AgIAAKkJAAAAAAAAAAAAALcJAAA/AAAAAAAAAA==",
+              "Title": "Connection.cs",
+              "DocumentMoniker": "E:\\Tanishq\\Repository\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Models\\Connection.cs",
+              "RelativeDocumentMoniker": "NeerajraiInfra\\Models\\Connection.cs",
+              "ToolTip": "E:\\Tanishq\\Repository\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Models\\Connection.cs",
+              "RelativeToolTip": "NeerajraiInfra\\Models\\Connection.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-08T10:51:48.176Z",
+              "WhenOpened": "2025-09-22T09:36:14.717Z",
               "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedHeight": 200,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             }
           ]
         }
