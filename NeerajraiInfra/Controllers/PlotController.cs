@@ -2852,7 +2852,7 @@ namespace NeerajraiInfra.Controllers
             Plot model = new Plot();
             try
             {
-               
+
                 model.UserID = UserID;
                 model.Description = Description;
                 model.ApprovedDate = string.IsNullOrEmpty(ApprovedDate) ? null : Common.ConvertToSystemDate(ApprovedDate, "dd/MM/yyyy");
@@ -2861,7 +2861,7 @@ namespace NeerajraiInfra.Controllers
 
                 model.CalculationChecked = CalculationChecked;
 
-               
+
                 DataSet ds = model.ApprovePayment();
                 if (ds != null && ds.Tables.Count > 0)
                 {
@@ -2871,7 +2871,7 @@ namespace NeerajraiInfra.Controllers
                     }
                     else
                     {
-                        model.Result= ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        model.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
 
@@ -2880,7 +2880,7 @@ namespace NeerajraiInfra.Controllers
             {
                 model.Result = ex.Message;
             }
-             return Json(model, JsonRequestBehavior.AllowGet);
+            return Json(model, JsonRequestBehavior.AllowGet);
 
         }
 
@@ -4017,6 +4017,7 @@ namespace NeerajraiInfra.Controllers
                 obj.BookingDate = string.IsNullOrEmpty(obj.BookingDate) ? null : Common.ConvertToSystemDate(obj.BookingDate, "dd/MM/yyyy");
                 obj.TransactionDate = string.IsNullOrEmpty(obj.TransactionDate) ? null : Common.ConvertToSystemDate(obj.TransactionDate, "dd/MM/yyyy");
                 obj.AddedBy = Session["Pk_AdminId"].ToString();
+                obj.EntryType = "EVBooking";
                 DataSet ds = obj.SaveEVBooking();
                 if (ds != null && ds.Tables.Count > 0)
                 {
@@ -4074,7 +4075,7 @@ namespace NeerajraiInfra.Controllers
                     ViewBag.City = ds.Tables[0].Rows[0]["City"].ToString();
                     ViewBag.ReceiptNo = ds.Tables[0].Rows[0]["ReciptNo"].ToString();
                     ViewBag.customerMobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
-
+                    ViewBag.EntryType = ds.Tables[0].Rows[0]["EntryType"].ToString();
 
                     ViewBag.CompanyName = SoftwareDetails.CompanyName;
                     ViewBag.CompanyAddress = SoftwareDetails.CompanyAddress;
@@ -4180,7 +4181,7 @@ namespace NeerajraiInfra.Controllers
                     model.lstEV = lst;
                 }
             }
-        return View(model);
+            return View(model);
         }
 
         [HttpPost]
@@ -4354,7 +4355,7 @@ namespace NeerajraiInfra.Controllers
             ddlBlock.Add(new SelectListItem { Text = "Select Block", Value = "0" });
             ViewBag.ddlBlock = ddlBlock;
             return View(model);
-           
+
         }
 
         [HttpPost]
@@ -4532,5 +4533,92 @@ namespace NeerajraiInfra.Controllers
         }
 
         #endregion
+
+
+        public ActionResult Investment(string PK_BookingId)
+        {
+            Plot model = new Plot();
+            #region ddlBranch
+            Plot obj = new Plot();
+            int count = 0;
+            List<SelectListItem> ddlBranch = new List<SelectListItem>();
+            DataSet dsBranch = obj.GetBranchList();
+            if (dsBranch != null && dsBranch.Tables.Count > 0 && dsBranch.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsBranch.Tables[0].Rows)
+                {
+                    ddlBranch.Add(new SelectListItem { Text = "Lucknow", Value = "1" });
+                    count = count + 1;
+                }
+            }
+            ViewBag.ddlBranch = ddlBranch;
+            #endregion
+
+
+            #region ddlPaymentMode
+            int count3 = 0;
+            List<SelectListItem> ddlPaymentMode = new List<SelectListItem>();
+            DataSet dsPayMode = obj.GetPaymentModeList();
+            if (dsPayMode != null && dsPayMode.Tables.Count > 0 && dsPayMode.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsPayMode.Tables[0].Rows)
+                {
+                    if (count3 == 0)
+                    {
+                        ddlPaymentMode.Add(new SelectListItem { Text = "Select Payment Mode", Value = "0" });
+                    }
+                    ddlPaymentMode.Add(new SelectListItem { Text = r["PaymentMode"].ToString(), Value = r["PK_paymentID"].ToString() });
+                    count3 = count3 + 1;
+                }
+            }
+            ViewBag.ddlPaymentMode = ddlPaymentMode;
+            #endregion
+
+            return View(model);
+        }
+
+        [HttpPost]
+
+        public ActionResult SaveInvestment(Plot obj)
+        {
+
+
+            string FormName = "";
+            string Controller = "";
+            try
+            {
+                obj.BookingDate = string.IsNullOrEmpty(obj.BookingDate) ? null : Common.ConvertToSystemDate(obj.BookingDate, "dd/MM/yyyy");
+                obj.TransactionDate = string.IsNullOrEmpty(obj.TransactionDate) ? null : Common.ConvertToSystemDate(obj.TransactionDate, "dd/MM/yyyy");
+                obj.AddedBy = Session["Pk_AdminId"].ToString();
+                obj.EntryType = "Investment";
+                DataSet ds = obj.SaveEVBooking();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        if (ds.Tables[0].Rows[0]["Pk_EVBookingId"].ToString() != "")
+                        {
+                            TempData["PlotEVBookingSucesssMessage"] = "User Investment successfully !";
+                            Session["EVBookingId"] = ds.Tables[0].Rows[0]["Pk_EVBookingId"].ToString();
+                        }
+
+                        TempData["Plot"] = "Investment Done Successfully";
+                    }
+                    else
+                    {
+                        TempData["Plot"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Plot"] = ex.Message;
+            }
+            FormName = "Investment";
+            Controller = "Plot";
+            return RedirectToAction(FormName, Controller);
+
+
+        }
     }
 }

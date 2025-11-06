@@ -33,6 +33,7 @@ namespace NeerajraiInfra.Models
 
         #region Properties
         public string Type { get; set; }
+        public string EntryType { get; set; }
         public string PreviousBookingAmount { get; set; }
         public string PLC { get; set; }
         public string ReceiptNo { get; set; }
@@ -1050,6 +1051,7 @@ namespace NeerajraiInfra.Models
                                         new SqlParameter("@Remarks",Remark),
                                         new SqlParameter("@UTR_Number",UtrNumber),
                                         new SqlParameter("@UTR_Amount",UtrAmount),
+                                        new SqlParameter("@EntryType",EntryType),
                             };
             DataSet ds = Connection.ExecuteQuery("EVBooking", para);
             return ds;

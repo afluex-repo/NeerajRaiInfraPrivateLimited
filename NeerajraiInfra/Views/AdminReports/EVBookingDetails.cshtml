@@ -29,7 +29,7 @@
                 </a>
             </li>
             <li class="breadcrumb-item">Reports</li>
-            <li class="breadcrumb-item">EV Booking Details </li>
+            <li class="breadcrumb-item">EV Booking / Investment Details </li>
         </ul>
     </section>
 
@@ -38,7 +38,7 @@
 
         <div class="card">
             <div class="card-header">
-                <h4>EV Booking Details</h4>
+                <h4>EV Booking / Investment Details</h4>
                 <p style="color: red">
                     @TempData["Update"]
                 </p>
@@ -121,6 +121,7 @@
                                             <th>Transaction Details</th>
                                             <th>Payment Remarks</th>
                                             <th>Payment Status</th>
+                                            <th>Booking Type</th>
                                             <th>Coupon Status</th>
                                             <th>EV Coupon Remarks</th>
                                             <th>Action</th>
@@ -147,9 +148,10 @@
                                                         <td>@Item.TransactionDetails</td>
                                                         <td>@Item.Remarks</td>
                                                         <td>@Item.PaymentStatus</td>
+                                                        <td>@Item.EntryType</td>
                                                         <td>@Item.CouponStatus</td>
                                                         <td>@Item.UpdatedCouponRemarks</td>
-                                                       
+
                                                         <td>
                                                             <div class="badge badge-success badge-shadow"><a target="_blank" class="badge badge-success badge-shadow" href="/AdminReports/PrintEVBooking?PrintId=@Item.Pk_EVBookingId"><span>Print</span></a></div>
                                                         </td>
@@ -160,9 +162,9 @@
                                                         </td>
 
                                                         @*<td>
-                                                            <div class="badge badge-warning badge-shadow"><a class="badge badge-warning badge-shadow" onclick="openCouponPopup('@Item.Pk_EVBookingId');"><span>Update Coupon Status</span></a></div>
-                                                        </td>*@
-                                                       </tr>
+            <div class="badge badge-warning badge-shadow"><a class="badge badge-warning badge-shadow" onclick="openCouponPopup('@Item.Pk_EVBookingId');"><span>Update Coupon Status</span></a></div>
+        </td>*@
+                                                    </tr>
                                                     i++;
                                                 }
                                             }
