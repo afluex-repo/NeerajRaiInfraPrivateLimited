@@ -3492,6 +3492,7 @@ namespace NeerajraiInfra.Controllers
                         obj.PaymentStatus = r["PaymentStatus"].ToString();
                         obj.CouponStatus = r["CouponStatus"].ToString();
                         obj.UpdatedCouponRemarks = r["CouponUpdateRemarks"].ToString();
+                        obj.EntryType=r["EntryType"].ToString();
                         lst.Add(obj);
                     }
                     model.lstEV = lst;
@@ -3604,6 +3605,7 @@ namespace NeerajraiInfra.Controllers
                     ViewBag.TransactionDate = ds.Tables[0].Rows[0]["TransactionDate"].ToString();
                     ViewBag.BankName = ds.Tables[0].Rows[0]["BankName"].ToString();
                     ViewBag.BankBranch = ds.Tables[0].Rows[0]["BranchName"].ToString();
+                    ViewBag.EntryType = ds.Tables[0].Rows[0]["EntryType"].ToString();
                    
                     //ViewBag.AdjustmentloginId = ds.Tables[0].Rows[0]["AdjustmentloginId"].ToString();
 

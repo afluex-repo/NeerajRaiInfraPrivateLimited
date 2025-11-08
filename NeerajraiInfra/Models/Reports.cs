@@ -88,6 +88,7 @@ namespace NeerajraiInfra.Models
         public string PayAmount { get; set; }
         public string BookingDate { get; set; }
         public string BookingAmount { get; set; }
+        public string EntryType  { get; set; }
 
 
         public string Discount { get; set; }

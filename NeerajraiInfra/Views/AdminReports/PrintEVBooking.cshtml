@@ -69,14 +69,32 @@
                     <img src="~/WebsiteCss/assets/images/Neerajrai_logo.jpg" class="img-fluid" alt="logo1" style="max-width: 38%;" />
                     @*<br /><br /><br /><br /><br /><B>CIN : U74999UP2019PTC116517</B>*@
                 </td>
+                @*<td style="width:30%">
+            <h2 style="color:#00a654">EV Booking Receipt Acknowledgement</h2>
+        </td>*@
                 <td style="width:30%">
-                    <h2 style="color:#00a654">EV Booking Receipt Acknowledgement</h2>
+                    @if (ViewBag.EntryType != null && ViewBag.EntryType.ToString() == "Investment")
+                    {
+                        <h2 style="color:#00a654">Investment Receipt Acknowledgement</h2>
+                    }
+                    else if (ViewBag.EntryType != null && ViewBag.EntryType.ToString() == "EVBooking")
+                    {
+                        <h2 style="color:#00a654">EV Booking Receipt Acknowledgement</h2>
+                    }
+                    else
+                    {
+                        <h2 style="color:#00a654">Receipt Acknowledgement</h2> <!-- fallback -->
+                    }
                 </td>
+
+
+
+
                 <td style="width:30%">
                     @*@if (@ViewBag.ImageUrl != "#")
-                    {
-                        <img src="@ViewBag.ImageUrl" class="img-fluid" alt="logo1" style="max-width: 30%;" />
-                    }*@
+            {
+                <img src="@ViewBag.ImageUrl" class="img-fluid" alt="logo1" style="max-width: 30%;" />
+            }*@
 
 
                     @*<br /><B>CIN : U70200UP2019PTC116042</B>*@
@@ -382,14 +400,32 @@
                     <img src="~/WebsiteCss/assets/images/Neerajrai_logo.jpg" class="img-fluid" alt="logo1" style="max-width: 39%;" />
                     @*<br /><br /><br /><br /><br /><B>CIN : U74999UP2019PTC116517</B>*@
                 </td>
+                @*<td style="width:30%">
+            <h2 style="color:#00a654">EV Booking Receipt Acknowledgement</h2>
+        </td>*@
                 <td style="width:30%">
-                    <h2 style="color:#00a654">EV Booking Receipt Acknowledgement</h2>
+                    @if (ViewBag.EntryType != null && ViewBag.EntryType.ToString() == "Investment")
+                    {
+                        <h2 style="color:#00a654">Investment Receipt Acknowledgement</h2>
+                    }
+                    else if (ViewBag.EntryType != null && ViewBag.EntryType.ToString() == "EVBooking")
+                    {
+                        <h2 style="color:#00a654">EV Booking Receipt Acknowledgement</h2>
+                    }
+                    else
+                    {
+                        <h2 style="color:#00a654">Receipt Acknowledgement</h2> <!-- fallback -->
+                    }
                 </td>
+
+
+
+
                 <td style="width:30%">
                     @*@if (@ViewBag.ImageUrl != "#")
-                    {
-                        <img src="@ViewBag.ImageUrl" class="img-fluid" alt="logo1" style="max-width: 30%;" />
-                    }*@
+            {
+                <img src="@ViewBag.ImageUrl" class="img-fluid" alt="logo1" style="max-width: 30%;" />
+            }*@
 
 
                     @*<img src="~/WebsiteCss/assets/images/Neerajrai_logo.jpg" class="img-fluid" alt="logo1" style="max-width: 30%;" />*@
