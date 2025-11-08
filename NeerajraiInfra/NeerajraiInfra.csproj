@@ -7680,6 +7680,9 @@
     <Content Include="Views\Plot\UpdatePlot.cshtml" />
     <Content Include="Views\AssociateDashboard\AssociateSelfdownEVBusinessReport.cshtml" />
     <Content Include="Views\Plot\Investment.cshtml" />
+    <Content Include="Views\AdminReports\InvestmentSelfdownBussinessReport.cshtml" />
+    <Content Include="Views\Plot\ApprovInvestmentPayment.cshtml" />
+    <Content Include="Views\AssociateDashboard\AssociateSelfdownInvestmentBusinessReportAction.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

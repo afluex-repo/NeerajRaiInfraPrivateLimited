@@ -3511,6 +3511,7 @@ namespace NeerajraiInfra.Controllers
             model.UserID = model.CustomerId;
             model.LoginId = model.AssociateID;
             model.PaymentStatus = model.PaymentStatus;
+            model.EntryType = model.EntryType;
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
 
@@ -3537,6 +3538,7 @@ namespace NeerajraiInfra.Controllers
                         obj.TransactionDetails = r["TransactionDetails"].ToString();
                         obj.Remarks = r["Remarks"].ToString();
                         obj.PaymentStatus = r["PaymentStatus"].ToString();
+                        obj.EntryType = r["EntryType"].ToString();
                         obj.CouponStatus = r["CouponStatus"].ToString();
                         obj.UpdatedCouponRemarks = r["CouponUpdateRemarks"].ToString();
                         lst.Add(obj);
@@ -3833,5 +3835,29 @@ namespace NeerajraiInfra.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
+
+
+        public ActionResult InvestmentSelfdownBussinessReport(Reports model)
+        {
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+
+            List<Reports> lst = new List<Reports>();
+            DataSet ds = model.GetAssociateSelfdownInvestmentBusinessReport();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.LoginId = r["LoginID"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.SelfBusiness = r["SelfBusiness"].ToString();
+                    obj.TeamBusiness = r["TeamBusiness"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstAssSelfdownEVBusiness = lst;
+            }
+            return View(model);
+        }
     }
 }
