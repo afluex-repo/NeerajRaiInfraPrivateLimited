@@ -1076,7 +1076,7 @@ namespace NeerajraiInfra.Models
         }
 
         public DataSet GetEVBookingDetailsforApproval()
-        {
+                   {
             SqlParameter[] para = {
                                       //new SqlParameter("@Pk_EVBookingId", PK_EVBookingId),
                                       new SqlParameter("@PaymentMode",PaymentMode),
@@ -1084,7 +1084,8 @@ namespace NeerajraiInfra.Models
                                       //new SqlParameter("@AssociateID", LoginId),
                                       new SqlParameter("@CouponCode", CouponNumber),
                                       new SqlParameter("@FromDate", FromDate),
-                                      new SqlParameter("@ToDate", ToDate)
+                                      new SqlParameter("@ToDate", ToDate),
+                                      new SqlParameter("@EntryType", EntryType)
 
                                   };
 
@@ -1103,6 +1104,20 @@ namespace NeerajraiInfra.Models
                                  new SqlParameter("@ApprovedDate",ApprovedDate)
                             };
             DataSet ds = Connection.ExecuteQuery("ApprovePaymentEVBooking", para);
+            return ds;
+        }
+
+
+        public DataSet ApproveInvestmentPayment()
+        {
+            SqlParameter[] para =
+            {
+        new SqlParameter("@PK_BookingDetailsId", UserID),
+        new SqlParameter("@Description", Description),
+        new SqlParameter("@UpdatedBy", AddedBy),
+        new SqlParameter("@ApprovedDate", ApprovedDate)
+    };
+            DataSet ds = Connection.ExecuteQuery("ApprovePaymentInvestment", para);
             return ds;
         }
 

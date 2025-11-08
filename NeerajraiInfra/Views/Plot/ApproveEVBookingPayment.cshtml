@@ -91,6 +91,7 @@
                                     <th>Amount</th>
                                     <th>Remarks</th>
                                     <th>Payment Status</th>
+                                    <th>Booking Type</th>
                                     <th>Description</th>
                                     <th>Payment Clear Date</th>
                                     <th>Action</th>
@@ -118,18 +119,19 @@
                                                 <td>@Item.Amount</td>
                                                 <td>@Item.Remarks</td>
                                                 <td>@Item.PaymentStatus</td>
+                                                <td>@Item.EntryType</td>
                                                 <td>
                                                     <textarea type="text" id="txtDesc @i" name="txtDesc @i" onchange="getdata(this)"></textarea>
                                                 </td>
                                                 <td>
                                                     <input type="text" readonly="readonly" class="date" id="txtAppDate @i" name="txtAppDate @i" onchange="getdata2(this)" />
                                                 </td>
-                                                 <td>
-                                                        <a href="#" class="btn btn-success btn-sm" style="margin-top:5px" onclick="Approve('@i','@Item.UserID');">Approve</a>
-                                                        @*<a href="#" class="btn btn-warning btn-sm" style="margin-top:5px;margin-bottom:5px;" onclick="Bounce('@i','@Item.UserID');">Bounce</a>*@
-                                                        <a href="#" class="btn btn-danger btn-sm" style="margin-top:5px;margin-bottom:5px;" onclick="Reject('@i','@Item.UserID');">Reject</a>
-                                                 </td>
-                                               
+                                                <td>
+                                                    <a href="#" class="btn btn-success btn-sm" style="margin-top:5px" onclick="Approve('@i','@Item.UserID');">Approve</a>
+                                                    @*<a href="#" class="btn btn-warning btn-sm" style="margin-top:5px;margin-bottom:5px;" onclick="Bounce('@i','@Item.UserID');">Bounce</a>*@
+                                                    <a href="#" class="btn btn-danger btn-sm" style="margin-top:5px;margin-bottom:5px;" onclick="Reject('@i','@Item.UserID');">Reject</a>
+                                                </td>
+
 
                                             </tr>
                                             i++;
