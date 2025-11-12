@@ -99,7 +99,20 @@
                                     }, new { @class = "form-control" })
                                     </div>
                                 </div>
-                              <div class="col-md-3">
+                                <div class="input-field col m2 s12">
+                                    <div class="form-group">
+                                        Entry Type
+                                        @Html.DropDownListFor(m => m.EntryType, new List<SelectListItem>
+                                        {
+                                            new SelectListItem { Text = "Select", Value = "" },
+                                            new SelectListItem { Text = "EVBooking", Value = "EVBooking" },
+                                            new SelectListItem { Text = "Investment", Value = "Investment" }
+                                        }, new { @class = "form-control" })
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <br />
                                         <input class="btn btn-success" type="submit" value="Search" id="btnSearch" name="btnSearch" />

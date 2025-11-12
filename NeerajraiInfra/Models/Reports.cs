@@ -616,7 +616,8 @@ namespace NeerajraiInfra.Models
                                       new SqlParameter("@CouponCode", CouponNumber),
                                       new SqlParameter("@FromDate", FromDate),
                                       new SqlParameter("@ToDate", ToDate),
-                                      new SqlParameter("@PaymentStatus",PaymentStatus)
+                                      new SqlParameter("@PaymentStatus",PaymentStatus),
+                                      new SqlParameter("@EntryType",EntryType)
 
                                   };
 
@@ -636,6 +637,18 @@ namespace NeerajraiInfra.Models
             return ds;
         }
 
+
+        public DataSet GetAssociateSelfdownInvestmentBusinessReport()
+        {
+            SqlParameter[] para =
+                         {
+                                 new SqlParameter("@LoginId",AssociateID),
+                                 new SqlParameter("@FromDate",FromDate),
+                                 new SqlParameter("@ToDate",ToDate)
+                            };
+            DataSet ds = Connection.ExecuteQuery("GetSelftDownReportForInvestmentBuisness", para);
+            return ds;
+        }
         public DataSet UpdateCouponStatus()
         {
             SqlParameter[] para =

@@ -820,7 +820,7 @@ namespace NeerajraiInfra.Models
         public string SelfBusiness { get; set; }
         public string TeamBusiness { get; set; }
 
-
+        //ss
         public DataSet GetAssociateSelfdownEVBusinessReport()
         {
             SqlParameter[] para =
@@ -833,6 +833,20 @@ namespace NeerajraiInfra.Models
             DataSet ds = Connection.ExecuteQuery("GetSelftDownReportForEVBuisnessforAssociate", para);
             return ds;
         }
+
+        public DataSet GetAssociateSelfdownInvestmentBusinessReport()
+        {
+            SqlParameter[] para =
+                         {
+                                 new SqlParameter("@LoginId",AssociateID),
+                                 new SqlParameter("@FromDate",FromDate),
+                                 new SqlParameter("@ToDate",ToDate),
+                                 //new SqlParameter("@UserId",UserID)
+                            };
+            DataSet ds = Connection.ExecuteQuery("GetSelftDownReportForInvestmentBuisnessforAssociate", para);
+            return ds;
+        }
+
     }
 
 }
