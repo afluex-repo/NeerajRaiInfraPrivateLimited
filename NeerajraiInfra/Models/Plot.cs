@@ -227,6 +227,14 @@ namespace NeerajraiInfra.Models
             DataSet ds = Connection.ExecuteQuery("GetPaymentModeList", para);
             return ds;
         }
+
+
+        public DataSet GetInvestmentAmountList()
+        {
+            SqlParameter[] para = new SqlParameter[0]; 
+            DataSet ds = Connection.ExecuteQuery("GetInvestmentAmountList", para);
+            return ds;
+        }
         public DataSet GetExpenseTypeList()
         {
             DataSet ds = Connection.ExecuteQuery("GetExpenseType");
@@ -1056,7 +1064,29 @@ namespace NeerajraiInfra.Models
             DataSet ds = Connection.ExecuteQuery("EVBooking", para);
             return ds;
         }
-
+        public DataSet SaveNRIInvestMent()
+        {
+            SqlParameter[] para =
+                            {
+                                        new SqlParameter("@CustomerId ",UserID),
+                                        new SqlParameter("@AssociateId" , AssociateID),
+                                        new SqlParameter("@Fk_BranchId" , BranchID),
+                                        new SqlParameter("@BookingDate"  ,BookingDate),
+                                        new SqlParameter("@Amount" ,Amount),
+                                        new SqlParameter("@PaymentMode"  , PaymentMode),
+                                        new SqlParameter("@TransactionNo"  , TransactionNumber),
+                                        new SqlParameter("@TransactionDate"  , TransactionDate),
+                                        new SqlParameter("@BankName"  , BankName),
+                                        new SqlParameter("@BankBranch"   , BankBranch),
+                                        new SqlParameter("@AddedBy",AddedBy),
+                                        new SqlParameter("@Remarks",Remark),
+                                        new SqlParameter("@UTR_Number",UtrNumber),
+                                        new SqlParameter("@UTR_Amount",UtrAmount),
+                                        new SqlParameter("@EntryType",EntryType),
+                            };
+            DataSet ds = Connection.ExecuteQuery("NRIInvestment", para);
+            return ds;
+        }
 
         //public string Pk_EVBookingId { get; set; }
         public DataSet GetEVBookingDetailsList()

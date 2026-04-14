@@ -16,9 +16,9 @@ namespace NeerajraiInfra.Models
         {
             try
             {
-              // connectionString = "Data Source=101.53.150.222,1440;Initial Catalog=NeerajRaiInfraDB; User Id=sa; Password=Fx1479LVAPbF; Integrated Security=false;";
+              connectionString = "Data Source=101.53.150.222,1433;Initial Catalog=NeerajRaiInfraDB; User Id=sa; Password=J2q+NETi78M; Integrated Security=false;";
 
-               connectionString = "Data Source=101.53.150.222,1440;Initial Catalog=NeerajRaiInfraDBTest_22Apr24; User Id=sa; Password=Fx1479LVAPbF; Integrated Security=false;";
+               //connectionString = "Data Source=101.53.150.222,1440;Initial Catalog=NeerajRaiInfraDBTest_22Apr24; User Id=sa; Password=Fx1479LVAPbF; Integrated Security=false;";
             }
             catch (Exception)
             {   
@@ -48,6 +48,8 @@ namespace NeerajraiInfra.Models
         public static DataSet ExecuteQuery(string commandText, params SqlParameter[] parameters)
         {
             DataSet ds = new DataSet();
+            int commandTimeout = 240;
+           
             try
             {
                 using (var connection = new SqlConnection(connectionString))
@@ -55,6 +57,9 @@ namespace NeerajraiInfra.Models
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddRange(parameters);
+                 
+                    command.CommandTimeout = commandTimeout; // Set the timeout
+
                     SqlDataAdapter da = new SqlDataAdapter(command);
                     da.Fill(ds);
                     connection.Close();

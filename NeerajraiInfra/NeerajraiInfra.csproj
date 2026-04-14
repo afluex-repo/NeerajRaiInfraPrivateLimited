@@ -7683,6 +7683,7 @@
     <Content Include="Views\AdminReports\InvestmentSelfdownBussinessReport.cshtml" />
     <Content Include="Views\Plot\ApprovInvestmentPayment.cshtml" />
     <Content Include="Views\AssociateDashboard\AssociateSelfdownInvestmentBusinessReportAction.cshtml" />
+    <Content Include="Views\Plot\InvestmentNRI.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

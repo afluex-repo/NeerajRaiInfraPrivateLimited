@@ -4616,6 +4616,8 @@ namespace NeerajraiInfra.Controllers
             {
                 TempData["Plot"] = ex.Message;
             }
+
+
             FormName = "Investment";
             Controller = "Plot";
             return RedirectToAction(FormName, Controller);
@@ -4731,5 +4733,133 @@ namespace NeerajraiInfra.Controllers
         }
 
 
+        #region Royal Member Investment Plan 
+
+        public ActionResult InvestmentNRI(string PK_BookingId)
+        {
+            Plot model = new Plot();
+
+            Plot obj = new Plot();
+
+            // Bronch dropdown 
+            int count = 0;
+            List<SelectListItem> ddlBranch = new List<SelectListItem>();
+            DataSet dsBranch = obj.GetBranchList();
+            if (dsBranch != null && dsBranch.Tables.Count > 0 && dsBranch.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsBranch.Tables[0].Rows)
+                {
+                    ddlBranch.Add(new SelectListItem { Text = "Lucknow", Value = "1" });
+                    count = count + 1;
+                }
+            }
+            ViewBag.ddlBranch = ddlBranch;
+
+
+            // Payment Mode Dropdown 
+
+            int count3 = 0;
+
+            List<SelectListItem> ddlPaymentMode = new List<SelectListItem>();
+            DataSet dsPayMode = obj.GetPaymentModeList();
+            if (dsPayMode != null && dsPayMode.Tables.Count > 0 && dsPayMode.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsPayMode.Tables[0].Rows)
+                {
+                    if (count3 == 0)
+                    {
+                        ddlPaymentMode.Add(new SelectListItem { Text = "Select Payment Mode", Value = "0" });
+                    }
+                    ddlPaymentMode.Add(new SelectListItem { Text = r["PaymentMode"].ToString(), Value = r["PK_paymentID"].ToString() });
+                    count3 = count3 + 1;
+                }
+            }
+            ViewBag.ddlPaymentMode = ddlPaymentMode;
+
+            // Investment Amount Dropdown 
+            int countInv = 0;
+
+            List<SelectListItem> ddlInvestmentAmount = new List<SelectListItem>();
+            DataSet dsinvestAmount = obj.GetInvestmentAmountList();
+
+            if (dsinvestAmount != null && dsinvestAmount.Tables.Count > 0)
+            {
+                foreach (DataRow r in dsinvestAmount.Tables[0].Rows)
+                {
+                    if (countInv == 0)
+                    {
+                        ddlInvestmentAmount.Add(new SelectListItem { Text = "Select Investment Amount", Value = "0" });
+                    }
+                    ddlInvestmentAmount.Add(new SelectListItem
+                    {
+                        Text = r["InvestmentAmount"].ToString().ToString(),
+                        Value = r["PK_InvestmentId"].ToString()
+                    });
+                    countInv = countInv + 1;
+
+                }
+
+               
+
+            }
+            ViewBag.ddlInvestMentAmount=ddlInvestmentAmount;
+
+            return View();
+
+
+
+
+
+            
         }
+
+
+        [HttpPost]
+
+        public ActionResult SaveInvestmentNRIForm(Plot obj)
+        {
+            string FormName = "";
+            string Controller = "";
+            try
+            {
+                obj.BookingDate = string.IsNullOrEmpty(obj.BookingDate) ? null : Common.ConvertToSystemDate(obj.BookingDate, "dd/MM/yyyy");
+                obj.TransactionDate = string.IsNullOrEmpty(obj.TransactionDate) ? null : Common.ConvertToSystemDate(obj.TransactionDate, "dd/MM/yyyy");
+                obj.AddedBy = Session["Pk_AdminId"].ToString();
+                obj.EntryType = "NRI Investment";
+                DataSet ds = obj.SaveNRIInvestMent();
+
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        if (ds.Tables[0].Rows[0]["Pk_InvestmentId"].ToString() != "")
+                        {
+                            TempData["PlotInvestSucesssMessage"] = "User Investment successfully !";
+                            Session["InvestmentId"] = ds.Tables[0].Rows[0]["Pk_InvestmentId"].ToString();
+                        }
+
+                        TempData["Investment"] = "Investment Done Successfully";
+                    }
+                    else
+                    {
+                        TempData["Investment"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            FormName = "InvestmentNRI";
+            Controller = "Plot";
+
+
+
+            return RedirectToAction(FormName, Controller);
+
+        }
+
+        #endregion
+    }
 }
