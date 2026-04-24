@@ -38,7 +38,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <IntermediateOutputPath>C:\Users\DELL\AppData\Local\Temp\vs71B2.tmp\Debug\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\MUTILE~1\AppData\Local\Temp\vsAD1A.tmp\Debug\</IntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -47,7 +47,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <IntermediateOutputPath>C:\Users\DELL\AppData\Local\Temp\vs71B2.tmp\Release\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\MUTILE~1\AppData\Local\Temp\vsAD1A.tmp\Release\</IntermediateOutputPath>
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
@@ -60,6 +60,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -7683,6 +7685,14 @@
     <Content Include="Views\AdminReports\InvestmentSelfdownBussinessReport.cshtml" />
     <Content Include="Views\Plot\ApprovInvestmentPayment.cshtml" />
     <Content Include="Views\AssociateDashboard\AssociateSelfdownInvestmentBusinessReportAction.cshtml" />
+    <Content Include="Views\Plot\InvestmentNRI.cshtml" />
+    <Content Include="Views\Plot\InvestmentNRIReport.cshtml" />
+    <Content Include="Views\Plot\PrintNRIInvestmentBooking.cshtml" />
+    <Content Include="Views\Plot\ROIInvestmentNRIReport.cshtml" />
+    <Content Include="Views\Plot\ROIWalletNRIReport.cshtml" />
+    <Content Include="Views\Plot\ROIWalletNRIALlUserDetails.cshtml" />
+    <Content Include="Views\AssociateDashboard\InvestmentNRI.cshtml" />
+    <Content Include="Views\AssociateDashboard\InvestmentNRIReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

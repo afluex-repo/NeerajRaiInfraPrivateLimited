@@ -1,17 +1,19 @@
-﻿using System;
+﻿using NeerajraiInfra.Filter;
+using NeerajraiInfra.Models;
+
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
-using NeerajraiInfra.Models;
-using System.Data;
-using NeerajraiInfra.Filter;
-using System.Net;
-using System.Xml;
-using System.Text;
-using System.IO;
-using Newtonsoft.Json;
 using System.Web.Script.Serialization;
+using System.Xml;
 
 namespace NeerajraiInfra.Controllers
 {
@@ -4616,6 +4618,8 @@ namespace NeerajraiInfra.Controllers
             {
                 TempData["Plot"] = ex.Message;
             }
+
+
             FormName = "Investment";
             Controller = "Plot";
             return RedirectToAction(FormName, Controller);
@@ -4702,7 +4706,7 @@ namespace NeerajraiInfra.Controllers
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
                     string msg = ds.Tables[0].Rows[0]["MSG"].ToString();
-                   // string errorMessage = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    // string errorMessage = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
 
                     if (msg == "1")
                     {
@@ -4711,7 +4715,7 @@ namespace NeerajraiInfra.Controllers
                     else
                     {
                         // Show the actual server error message
-                        TempData["EVPayment"] = "Error: " ;
+                        TempData["EVPayment"] = "Error: ";
                     }
                 }
                 else
@@ -4731,5 +4735,353 @@ namespace NeerajraiInfra.Controllers
         }
 
 
+        #region Royal Member Investment Plan 
+
+        public ActionResult InvestmentNRI(string PK_BookingId)
+        {
+            Plot model = new Plot();
+
+            Plot obj = new Plot();
+
+            // Bronch dropdown 
+            int count = 0;
+            List<SelectListItem> ddlBranch = new List<SelectListItem>();
+            DataSet dsBranch = obj.GetBranchList();
+            if (dsBranch != null && dsBranch.Tables.Count > 0 && dsBranch.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsBranch.Tables[0].Rows)
+                {
+                    ddlBranch.Add(new SelectListItem { Text = "Lucknow", Value = "1" });
+                    count = count + 1;
+                }
+            }
+            ViewBag.ddlBranch = ddlBranch;
+
+
+            // Payment Mode Dropdown 
+
+            int count3 = 0;
+
+            List<SelectListItem> ddlPaymentMode = new List<SelectListItem>();
+            DataSet dsPayMode = obj.GetPaymentModeList();
+            if (dsPayMode != null && dsPayMode.Tables.Count > 0 && dsPayMode.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsPayMode.Tables[0].Rows)
+                {
+                    if (count3 == 0)
+                    {
+                        ddlPaymentMode.Add(new SelectListItem { Text = "Select Payment Mode", Value = "0" });
+                    }
+                    ddlPaymentMode.Add(new SelectListItem { Text = r["PaymentMode"].ToString(), Value = r["PK_paymentID"].ToString() });
+                    count3 = count3 + 1;
+                }
+            }
+            ViewBag.ddlPaymentMode = ddlPaymentMode;
+
+            // Investment Amount Dropdown 
+            int countInv = 0;
+
+            List<SelectListItem> ddlInvestmentAmount = new List<SelectListItem>();
+            DataSet dsinvestAmount = obj.GetInvestmentAmountList();
+
+            if (dsinvestAmount != null && dsinvestAmount.Tables.Count > 0)
+            {
+                foreach (DataRow r in dsinvestAmount.Tables[0].Rows)
+                {
+                    if (countInv == 0)
+                    {
+                        ddlInvestmentAmount.Add(new SelectListItem { Text = "Select Investment Amount", Value = "0" });
+                    }
+                    ddlInvestmentAmount.Add(new SelectListItem
+                    {
+                        Text = r["InvestmentAmount"].ToString(),
+                        Value = r["PK_AmountMasterId"].ToString()
+                    });
+
+
+                    countInv = countInv + 1;
+
+                }
+
+
+
+            }
+            ViewBag.ddlInvestMentAmount = ddlInvestmentAmount;
+
+            return View();
+
         }
+
+
+
+
+        [HttpPost]
+
+        public ActionResult SaveInvestmentNRIForm(Plot obj)
+        {
+            string FormName = "";
+            string Controller = "";
+            try
+            {
+
+
+
+                obj.BookingDate = string.IsNullOrEmpty(obj.BookingDate) ? null : Common.ConvertToSystemDate(obj.BookingDate, "dd/MM/yyyy");
+                obj.TransactionDate = string.IsNullOrEmpty(obj.TransactionDate) ? null : Common.ConvertToSystemDate(obj.TransactionDate, "dd/MM/yyyy");
+                obj.AddedBy = Session["Pk_AdminId"].ToString();
+                obj.EntryType = "NRI Investment";
+                DataSet ds = obj.SaveNRIInvestMent();
+
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        if (ds.Tables[0].Rows[0]["Pk_InvestmentId"].ToString() != "")
+                        {
+                            TempData["PlotInvestSucesssMessage"] = "User Investment successfully !";
+                            Session["InvestmentId"] = ds.Tables[0].Rows[0]["Pk_InvestmentId"].ToString();
+                        }
+
+                        TempData["Investment"] = "Investment Done Successfully";
+                    }
+                    else
+                    {
+                        TempData["Investment"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            FormName = "InvestmentNRI";
+            Controller = "Plot";
+
+
+
+            return RedirectToAction(FormName, Controller);
+
+        }
+
+
+
+        public ActionResult InvestmentNRIReport(Reports model)
+        {
+            List<Reports> lst = new List<Reports>();
+
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+
+            DataSet ds = model.GetInvestmentNRIDetailsList();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                {
+                    TempData["EVMessage"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+                else
+                {
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        Reports obj = new Reports();
+                        obj.Pk_InvestId = r["Pk_InvestId"].ToString();
+                        obj.CouponNumber = r["CouponCode"].ToString();
+                        obj.BookingDate = r["BookingDate"].ToString();
+                        obj.CustomerLoginID = r["CustomerDetails"].ToString();
+                        obj.AssociateLoginID = r["AssociateDetails"].ToString();
+                        obj.Amount = r["Amount"].ToString();
+                        obj.PaymentMode = r["PaymentMode"].ToString();
+                        obj.TransactionDetails = r["TransactionDetails"].ToString();
+                        obj.Remarks = r["Remarks"].ToString();
+                        obj.PaymentStatus = r["PaymentStatus"].ToString();
+                        obj.CouponStatus = r["CouponStatus"].ToString();
+                        obj.UpdatedCouponRemarks = r["CouponUpdateRemarks"].ToString();
+                        lst.Add(obj);
+                    }
+                    model.lstEV = lst;
+                }
+            }
+            return View(model);
+        }
+
+
+        public ActionResult PrintNRIInvestmentBooking(Plot newdata, string PrintId)
+        {
+            newdata.Pk_InvestId = PrintId;
+            DataSet ds = newdata.GetInvestmentNRIDetails();
+
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+
+                if (ds.Tables[0].Rows[0]["MSG"].ToString() == "1")
+                {
+
+                    newdata.Result = "yes";
+                    ViewBag.Pk_InvestId = ds.Tables[0].Rows[0]["Pk_InvestId"].ToString();
+                    ViewBag.CustomerName = ds.Tables[0].Rows[0]["CustomerName"].ToString();
+                    ViewBag.LoginId = ds.Tables[0].Rows[0]["LoginID"].ToString();
+                    ViewBag.CouponNumber = ds.Tables[0].Rows[0]["CouponCode"].ToString();
+                    ViewBag.BookingDate = ds.Tables[0].Rows[0]["BookingDate"].ToString();
+                    ViewBag.Amount = ds.Tables[0].Rows[0]["Amount"].ToString();
+                    ViewBag.PaymentMode = ds.Tables[0].Rows[0]["PaymentMode"].ToString();
+                    ViewBag.TransactionNo = ds.Tables[0].Rows[0]["TransactionNo"].ToString();
+                    ViewBag.TransactionDate = ds.Tables[0].Rows[0]["TransactionDate"].ToString();
+                    ViewBag.BankName = ds.Tables[0].Rows[0]["BankName"].ToString();
+                    ViewBag.BankBranch = ds.Tables[0].Rows[0]["BranchName"].ToString();
+                    ViewBag.Address = ds.Tables[0].Rows[0]["Address"].ToString();
+                    ViewBag.Pin = ds.Tables[0].Rows[0]["PinCode"].ToString();
+                    ViewBag.State = ds.Tables[0].Rows[0]["State"].ToString();
+                    ViewBag.City = ds.Tables[0].Rows[0]["City"].ToString();
+                    ViewBag.ReceiptNo = ds.Tables[0].Rows[0]["ReciptNo"].ToString();
+                    ViewBag.customerMobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                    ViewBag.EntryType = ds.Tables[0].Rows[0]["EntryType"].ToString();
+
+                    ViewBag.CompanyName = SoftwareDetails.CompanyName;
+                    ViewBag.CompanyAddress = SoftwareDetails.CompanyAddress;
+                    ViewBag.Pin1 = SoftwareDetails.Pin1;
+                    ViewBag.State1 = SoftwareDetails.State1;
+                    ViewBag.City1 = SoftwareDetails.City1;
+                    ViewBag.ContactNo = SoftwareDetails.ContactNo;
+                    ViewBag.LandLine = SoftwareDetails.LandLine;
+                    ViewBag.Website = SoftwareDetails.Website;
+                    ViewBag.EmailID = SoftwareDetails.EmailID;
+                }
+            }
+
+            return View(newdata);
+        }
+
+
+
+        public ActionResult ROIInvestmentNRIReport(long Id)
+        {
+            List<ROIModel> list = new List<ROIModel>();
+
+            ROIModel obj = new ROIModel();
+            DataSet ds = obj.GetROIReport(Id);
+
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    ROIModel model = new ROIModel();
+
+                    model.Fk_UserId = Convert.ToInt64(dr["Fk_UserId"]);
+                    model.LoginId = dr["LoginId"].ToString();
+                    model.FullName = dr["FullName"].ToString();
+                    model.Fk_InvestId = Convert.ToInt64(dr["Fk_InvestId"]);
+                    model.Fk_AmountMasterId = Convert.ToInt64(dr["Fk_AmountMasterId"]);
+
+                    model.InvestmentAmount = Convert.ToDecimal(dr["InvestmentAmount"]);
+                    model.ROIInstallment = Convert.ToInt32(dr["ROIInstallment"]);
+                    model.ROI = Convert.ToDecimal(dr["ROI"]);
+
+                    model.ROIDate = dr["ROIDate"].ToString();
+
+
+                    model.Status = Convert.ToInt32(dr["status"]);
+
+                    model.CalculationDate = dr["CalculationDate"] == DBNull.Value
+                        ? (DateTime?)null
+                        : Convert.ToDateTime(dr["CalculationDate"]);
+
+                    model.BookingDate = dr["BookingDate"].ToString();
+
+                    //model.BookingDateString = model.BookingDate.ToString("dd/MM/yyyy");
+
+                    list.Add(model);
+                }
+            }
+
+            return View(list);
+        }
+
+
+        public ActionResult ROIWalletNRIALlUserDetails(Reports model)
+        {
+            List<Reports> lst = new List<Reports>();
+
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+
+            DataSet ds = model.GetInvestmentNRIDetailsList();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                {
+                    TempData["EVMessage"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+                else
+                {
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        Reports obj = new Reports();
+                        obj.Pk_InvestId = r["Pk_InvestId"].ToString();
+                        obj.CouponNumber = r["CouponCode"].ToString();
+                        obj.BookingDate = r["BookingDate"].ToString();
+                        obj.CustomerLoginID = r["CustomerDetails"].ToString();
+                        obj.AssociateLoginID = r["AssociateDetails"].ToString();
+                        obj.Amount = r["Amount"].ToString();
+                        obj.PaymentMode = r["PaymentMode"].ToString();
+                        obj.TransactionDetails = r["TransactionDetails"].ToString();
+                        obj.Remarks = r["Remarks"].ToString();
+                        obj.PaymentStatus = r["PaymentStatus"].ToString();
+                        obj.CouponStatus = r["CouponStatus"].ToString();
+                        obj.UpdatedCouponRemarks = r["CouponUpdateRemarks"].ToString();
+                        lst.Add(obj);
+                    }
+                    model.lstEV = lst;
+                }
+            }
+            return View(model);
+        }
+
+
+        public ActionResult ROIWalletNRIReport(long Id)
+        {
+            List<ROIWalletModel> list = new List<ROIWalletModel>();
+
+            ROIWalletModel model = new ROIWalletModel();
+            DataSet ds = model.GetROIWalletReport(Id);
+
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    ROIWalletModel item = new ROIWalletModel();
+
+                    // item.Pk_ROIWalletId = Convert.ToInt64(dr["Pk_ROIWalletId"]);
+                    item.FK_UserId = Convert.ToInt64(dr["FK_UserId"]);
+                    item.LoginId = dr["LoginId"].ToString();
+                    item.FullName = dr["FullName"].ToString();
+
+                    item.FK_InvestId = Convert.ToInt64(dr["FK_InvestId"]);
+                    item.ROIInstallment = dr["ROIInstallment"] == DBNull.Value ? 0 : Convert.ToInt32(dr["ROIInstallment"]);
+                    item.ROI = dr["ROI"] == DBNull.Value ? 0 : Convert.ToDecimal(dr["ROI"]);
+
+                    item.Narration = dr["Narration"].ToString();
+                    item.CrAmount = Convert.ToDecimal(dr["CrAmount"]);
+                    item.DrAmount = Convert.ToDecimal(dr["DrAmount"]);
+
+                    item.TransactionDate = dr["TransactionDate"].ToString();
+                    // item.PayoutNo = dr["PayoutNo"].ToString();
+                    item.TransactionNo = dr["TransactionNo"].ToString();
+
+                    list.Add(item);
+                }
+            }
+
+            return View(list);
+        }
+
+
+
+
+
+
+        #endregion
+    }
 }

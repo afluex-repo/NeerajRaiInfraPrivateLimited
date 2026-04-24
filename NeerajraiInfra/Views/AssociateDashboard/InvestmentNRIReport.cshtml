@@ -1,0 +1,212 @@
+﻿@model NeerajraiInfra.Models.Reports
+
+@{
+    ViewBag.Title = "InvestmentNRIReport";
+    Layout = "~/Views/Shared/AssociateLayout.cshtml";
+}
+<style>
+    #divload {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        z-index: 9999;
+        background: url("../files/assets/images/login-gif-11.gif") no-repeat center center rgba(0,0,0,0.25);
+    }
+
+    .errortext {
+        border: 1px solid red !important;
+    }
+</style>
+<div class="loader" id="divload"></div>
+
+<div class="loader" id="divload"></div>
+@using (Html.BeginForm("InvestmentNRIReport", "Plot", FormMethod.Post, new { @id = "form1" }))
+{
+    <section class="section">
+        <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+                <a href="#">
+                    <i data-feather="home"></i>
+                </a>
+            </li>
+            <li class="breadcrumb-item">Reports</li>
+            <li class="breadcrumb-item">Royal Members Investment NRI Details </li>
+        </ul>
+    </section>
+
+
+    <div class="section-body">
+
+        <div class="card">
+            <div class="card-header">
+                <h4>Royal Members Investment NRI Details</h4>
+                <p style="color: red">
+                    @TempData["Update"]
+                </p>
+
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- HTML5 Export Buttons table start -->
+
+                        <div class="card-block" style="margin-left:5px;margin-right:5px">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        Customer ID
+                                        @Html.TextBoxFor(m => m.UserID, new { @class = "form-control", @Placeholder = "Search by Customer ID" })
+                                        @Html.HiddenFor(m => m.CustomerId)
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        Associate ID
+                                        @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Search by Associate ID" })
+                                        @Html.HiddenFor(m => m.AssociateID)
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        From Date
+                                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "From Date", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        To Date
+                                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @Placeholder = "To Date", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        Coupon No
+                                        @Html.TextBoxFor(m => m.CouponNumber, new { @class = "form-control", @Placeholder = "Coupon Number" })
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        Payment Status
+                                        @Html.DropDownListFor(m => m.PaymentStatus, new List<SelectListItem>
+                                        {
+                                    new SelectListItem { Text = "Select", Value = "" },
+                                    new SelectListItem { Text = "Pending", Value = "Pending" },
+                                    new SelectListItem { Text = "Approved", Value = "Approved" },
+                                    new SelectListItem { Text = "Rejected", Value = "Rejected" }
+                                    }, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                               
+
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <br />
+                                        <input class="btn btn-success" type="submit" value="Search" id="btnSearch" name="btnSearch" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-md" data-page-length='50' id="tableExport" style="width:100%;">
+                                    <thead>
+                                        <tr>
+                                            <th>S No.</th>
+                                            <td hidden></td>
+                                            <th>Coupon No.</th>
+                                            <th>Booking Date</th>
+                                            <th>Customer Detail</th>
+                                            <th>Associate Details</th>
+                                            <th>Amount</th>
+                                            <th>PaymentMode</th>
+                                            <th>Transaction Details</th>
+                                            <th>Payment Remarks</th>
+                                            <th>Payment Status</th>
+                                            @*<th>Booking Type</th>*@
+                                            @*<th>Coupon Status</th>*@
+                                            @*<th>Coupon Remarks</th>*@
+                                            @*<th>Action</th>*@
+                                            @*<th>Update Coupon Status</th>*@
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model != null)
+                                        {
+                                            if (Model.lstEV != null)
+                                            {
+                                                int i = 1;
+                                                foreach (var Item in Model.lstEV)
+                                                {
+                                                    <tr class="text-left">
+                                                        <td>@i</td>
+                                                        <td hidden>@Item.Pk_InvestId</td>
+                                                        <td>@Item.CouponNumber</td>
+                                                        <td>@Item.BookingDate</td>
+                                                        <td class="text-nowrap">@Item.CustomerLoginID</td>
+                                                        <td class="text-nowrap">@Item.AssociateLoginID</td>
+                                                        <td>@Item.Amount</td>
+                                                        <td>@Item.PaymentMode</td>
+                                                        <td>@Item.TransactionDetails</td>
+                                                        <td>@Item.Remarks</td>
+                                                        <td>@Item.PaymentStatus</td>
+                                                        @*<td>@Item.EntryType</td>*@
+                                                        @*<td>@Item.CouponStatus</td>*@
+                                                        @*<td>@Item.UpdatedCouponRemarks</td>*@
+
+                                                    @*<td>
+                                                        <div class="badge badge-success badge-shadow"><a target="_blank" class="badge badge-success badge-shadow" href="/Plot/PrintNRIInvestmentBooking?PrintId=@Item.Pk_InvestId"><span>Print</span></a></div>
+
+                                                        <div class="badge badge-success badge-shadow"><a target="_blank" class="badge badge-success badge-shadow" href="/Plot/ROIInvestmentNRIReport?Id=@Item.Pk_InvestId"><span>View ROI</span></a></div>
+
+                                                    </td>*@
+                                                        @*<td>
+                                                            <button type="button" class="btn btn-warning btn-sm shadow" onclick="openCouponPopup('@Item.Pk_EVBookingId');">
+                                                                Update Coupon Status
+                                                            </button>
+                                                        </td>*@
+
+
+                                                    </tr>
+                                                    i++;
+                                                }
+                                            }
+                                        }
+
+                                    </tbody>
+
+                                </table>
+                                @Html.HiddenFor(m => m.Pk_InvestId)
+                            </div>
+                            <input type="hidden" id="UserType" value="@Session["UserType"]" />
+                            <input type="hidden" id="UserTypeName" value="@Session["UserTypeName"]" />
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+ 
+}
+
+
+<script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+<script>
+
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
+    });
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
+    });
+
+</script>

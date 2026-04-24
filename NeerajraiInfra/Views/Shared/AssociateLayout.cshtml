@@ -33,13 +33,13 @@
                         </li>
                         <li>
                             @*<form class="form-inline mr-auto">
-                                <div class="search-element">
-                                    <input class="form-control" type="search" placeholder="Search" aria-label="Search" data-width="200">
-                                    <button class="btn" type="submit">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                </div>
-                            </form>*@
+                                    <div class="search-element">
+                                        <input class="form-control" type="search" placeholder="Search" aria-label="Search" data-width="200">
+                                        <button class="btn" type="submit">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </form>*@
                         </li>
                     </ul>
                 </div>
@@ -59,9 +59,9 @@
                         <div class="dropdown-menu dropdown-menu-right pullDown">
                             <div class="dropdown-title">Hello @Session["LoginId"]</div>
                             @*<a href="/AssociateDashboard/ViewProfile" class="dropdown-item has-icon">
-                                <i class="far
-										fa-user"></i> Profile
-                            </a>*@
+                                    <i class="far
+                                            fa-user"></i> Profile
+                                </a>*@
                             <div class="dropdown-divider"></div>
                             <a href="/Home/Login" class="dropdown-item has-icon text-danger">
                                 <i class="fas fa-sign-out-alt"></i>
@@ -81,10 +81,10 @@
                     <div class="sidebar-user">
                         <div class="sidebar-user-picture">
                             <img alt="image" src="~/AssociatePanelcss/assets/img/icon.png" title="@Session["FullName"]" class="header-logo" />
-                            </div>
+                        </div>
                         <div class="sidebar-user-details">
                             <div class="user-name">@Session["FullName"]</div>
-                              <div class="user-role" style="color:#fff;font-size:12px;font-weight:700">@Session["DesignationName"]</div>
+                            <div class="user-role" style="color:#fff;font-size:12px;font-weight:700">@Session["DesignationName"]</div>
 
                         </div>
                     </div>
@@ -107,8 +107,8 @@
                             </ul>
                         </li>
                         @*<li class="dropdown">
-                            <a href="/AssociateDashboard/Registration" class="nav-link"><i data-feather="check-circle"></i><span>Registration</span></a>
-                        </li>*@
+                                <a href="/AssociateDashboard/Registration" class="nav-link"><i data-feather="check-circle"></i><span>Registration</span></a>
+                            </li>*@
 
                         <li class="dropdown">
                             <a href="#" class="menu-toggle nav-link has-dropdown">
@@ -135,12 +135,25 @@
                             </a>
                             <ul class="dropdown-menu">
                                 @*<li><a class="nav-link" href="/User/BinaryTree">Binary Tree</a></li>
-                                <li><a class="nav-link" href="/Downline/DownLineList">DownLine</a></li>
-                                <li><a class="nav-link" href="/Downline/DirectList">Direct</a></li>*@
+                                    <li><a class="nav-link" href="/Downline/DownLineList">DownLine</a></li>
+                                    <li><a class="nav-link" href="/Downline/DirectList">Direct</a></li>*@
                                 <li><a class="nav-link" href="/AssociateDashboard/Tree">Level Tree</a></li>
-                    <li><a class="nav-link" href="/AssociateDashboard/AssociateTree">Down Team Tree</a></li>
+                                <li><a class="nav-link" href="/AssociateDashboard/AssociateTree">Down Team Tree</a></li>
                             </ul>
                         </li>
+
+
+                        <li class="dropdown">
+                            <a href="#" class="menu-toggle nav-link has-dropdown">
+                                <i data-feather="briefcase"></i><span>Royal Memeber Investment</span>
+                            </a>
+                            <ul class="dropdown-menu">
+
+                                @*<li><a class="nav-link" href="/AssociateDashboard/InvestmentNRI">Investment NRI</a></li>*@
+                                <li><a class="nav-link" href="/AssociateDashboard/InvestmentNRIReport">Investment NRI Report</a></li>
+                            </ul>
+                        </li>
+
                         <li class="dropdown">
                             <a href="#" class="menu-toggle nav-link has-dropdown">
                                 <i data-feather="copy"></i><span>
@@ -157,10 +170,10 @@
                                 <li><a class="nav-link" href="/AssociateDashboard/AssociateSelfdownEVBusinessReport"> Associate Selfdown EV Business Report</a></li>
                                 <li><a class="nav-link" href="/AssociateDashboard/AssociateSelfdownInvestmentBusinessReportAction"> Associate Selfdown Investment Business Report</a></li>
 
-                              
+
                                 @*<li><a class="nav-link" href="/AssociateDashboard/ReturnBenefitReport">Return Benefit Report</a></li>*@
                                 @*<li><a class="nav-link" href="/AssociateDashboard/AssociateUplineDetail">Associate Upline</a></li>
-                    <li><a class="nav-link" href="/AssociateDashboard/AssociateDownlineDetail">Associate Downline</a></li>*@
+                                    <li><a class="nav-link" href="/AssociateDashboard/AssociateDownlineDetail">Associate Downline</a></li>*@
                                 @*<li><a class="nav-link" href="/AssociateDashboard/UnpaidIncome">Unpaid Income</a></li>*@
                                 @*<li><a class="nav-link" href="/AssociateDashboard/PayoutRequestReport">Payout Request List</a></li>*@
                             </ul>
@@ -178,7 +191,7 @@
                                 <li><a class="nav-link" href="/AssociateDashboard/DirectLeadershipIncome">Direct Leadership Income</a></li>
                             </ul>
                         </li>
-                      
+
                         <li class="dropdown">
                             <a href="/AssociateDashboard/UserReward" class="nav-link"><i data-feather="check-circle"></i><span>User Rewards</span></a>
                         </li>
@@ -187,21 +200,21 @@
                             <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="mail"></i><span>Payout</span></a>
                             <ul class="dropdown-menu">
                                 @*<li><a class="nav-link" href="/UserReports/DirectIncome">Direct Income</a></li>
-                                <li><a class="nav-link" href="/UserReports/PairIncome">Pair Income</a></li>*@
+                                    <li><a class="nav-link" href="/UserReports/PairIncome">Pair Income</a></li>*@
                                 <li><a class="nav-link" href="/AssociateDashboard/PayoutRequest">Payout Request</a></li>
                                 <li><a class="nav-link" href="/AssociateDashboard/PayoutLedger">Payout Ledger</a></li>
                                 <li><a class="nav-link" href="/AssociateDashboard/PayoutDetails">Payout Details</a></li>
                                 <li><a class="nav-link" href="/UserReports/PaidPayout">Paid Payout</a></li>
-                           
+
 
                             </ul>
                         </li>
                         @*<li class="dropdown">
-                <a href="/AssociateDashboard/KYCDocuments" class="nav-link"><i data-feather="command"></i><span>Upload KYC</span></a>
-            </li>*@
+                                <a href="/AssociateDashboard/KYCDocuments" class="nav-link"><i data-feather="command"></i><span>Upload KYC</span></a>
+                            </li>*@
                         @*<li class="dropdown">
-                            <a href="/UserReports/LuckyDraw" class="nav-link"><i data-feather="check-circle"></i><span>Lucky Draw</span></a>
-                        </li>*@
+                                <a href="/UserReports/LuckyDraw" class="nav-link"><i data-feather="check-circle"></i><span>Lucky Draw</span></a>
+                            </li>*@
                         <li class="dropdown">
                             <a href="/UserReports/PlotAvailability" class="nav-link"><i data-feather="command"></i><span>Plot Availability</span></a>
                         </li>
@@ -213,13 +226,13 @@
                             <a href="/AssociateDashboard/EnquiryList" class="nav-link"><i data-feather="shopping-bag"></i><span>Support</span></a>
                         </li>
                         @*<li class="dropdown">
-                            <a href="#" class="menu-toggle nav-link has-dropdown">
-                                <i data-feather="shopping-bag"></i><span>Support</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="/AssociateDashboard/EnquiryList">Enquiry</a></li>
-                            </ul>
-                        </li>*@
+                                <a href="#" class="menu-toggle nav-link has-dropdown">
+                                    <i data-feather="shopping-bag"></i><span>Support</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="nav-link" href="/AssociateDashboard/EnquiryList">Enquiry</a></li>
+                                </ul>
+                            </li>*@
 
                     </ul>
                 </aside>
@@ -265,3 +278,4 @@
 </body>
 
 </html>
+@RenderSection("script", required: false)
