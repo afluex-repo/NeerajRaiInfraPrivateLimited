@@ -1,0 +1,352 @@
+﻿@model NeerajraiInfra.Models.Plot
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Royal Members Investment NRI Receipt</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
+    <style>
+        table, th, td {
+            font-size: small;
+         
+            border-collapse: collapse;
+        }
+
+        th, td {
+            font-size: small;
+            padding: 4px;
+        }
+
+        .table {
+            margin-bottom: 0px;
+        }
+   
+    </style>
+
+   
+
+</head>
+<body>
+    <div style="border:3px solid #a20e0e;padding-left:10px;padding-right:10px;">
+        <table style="width: 100%;text-align:center">
+            <tr>
+                <td style="width:30%">
+                    <img src="~/WebsiteCss/assets/images/Neerajrai_UpdateLogo.jpg" class="img-fluid" alt="logo1" style="max-width: 100%;" />
+                  
+                </td>
+               
+
+                <td style="width:30%">
+                   
+                    <h2 style="color:#00a654">Royal Members Investment NRI Receipt </h2>
+                   
+                    
+                      
+                </td>
+
+                <td style="width:30%">
+            
+                </td>
+            </tr>
+        </table>
+
+        <table style="width:100%;background:#a20e0e;color:white;">
+            <tr>
+           
+                <td style="text-align:center">
+
+                    Customer Copy
+                </td>
+            </tr>
+        </table>
+        <table style="width:100%;" class="table table-striped">
+            <tr>
+                <td colspan="3" style="border: 1px solid black;"><b>Receipt No. :   </b>@ViewBag.ReceiptNo</td>
+                <td colspan="3" style="border: 1px solid black;"><b>Coupon No. :    </b>@ViewBag.CouponNumber</td>  
+                <td colspan="3" style="border: 1px solid black;"><b>Booking Date : </b>@ViewBag.BookingDate</td>
+
+            </tr>
+            <tr>
+                <td colspan="4" style="border: 1px solid black;"><b>Received From :     </b>@ViewBag.CustomerName</td>
+                <td colspan="2" style="border: 1px solid black;"><b>ID :   </b>@ViewBag.LoginId</td>
+                <td colspan="3" style="border: 1px solid black;"><b>Mobile No :    </b>@ViewBag.customerMobile</td>
+
+            </tr>
+            <tr>
+                <td colspan="9" style="border: 1px solid black;"><b>Address :    </b>@ViewBag.Address</td>
+
+            </tr>
+
+            <tr>
+                <td colspan="3" style="border: 1px solid black;"><b>City:    </b>@ViewBag.City</td>
+                <td colspan="3" style="border: 1px solid black;"><b>State:    </b>@ViewBag.State</td>
+                <td colspan="3" style="border: 1px solid black;"><b>Pin Code:    </b>@ViewBag.Pin</td>
+            </tr>
+       
+            <tr>
+
+             
+                <td colspan="3" style="border: 1px solid black;"><b>Amount:  </b>@ViewBag.Amount</td>
+                <td style="border: 1px solid black;" colspan="6"><b>In Words:     </b>@ViewBag.AmountInWords</td>
+             
+            </tr>
+            <tr>
+               
+
+            </tr>
+            <tr>
+                @if (ViewBag.PaymentMode == "Cash")
+                {
+                    <td style="border: 1px solid black;" colspan="9"><b> Payment Mode:    </b>@ViewBag.PaymentMode</td>
+                }
+                else
+                {
+                    if (ViewBag.PaymentMode == "Cheque")
+                    {
+                        <td colspan="2" style="border: 1px solid black;"><b> Payment Mode:    </b>@ViewBag.PaymentMode</td>
+                        <td colspan="2" style="border: 1px solid black;"><b> Cheque No:    </b>@ViewBag.TransactionNo</td>
+                        <td colspan="5" style="border: 1px solid black;"><b> Cheque Date:    </b>@ViewBag.TransactionDate</td>
+                     
+                    }
+                    else if (ViewBag.PaymentMode == "NEFT")
+                    {
+                        <td colspan="2" style="border: 1px solid black;"><b> Payment Mode:    </b>@ViewBag.PaymentMode</td>
+                        <td colspan="1" style="border: 1px solid black;"><b> NEFT No:    </b>@ViewBag.TransactionNo</td>
+                        <td colspan="5" style="border: 1px solid black;"><b> NEFT Date:    </b>@ViewBag.TransactionDate</td>
+                     
+                    }
+                    else if (ViewBag.PaymentMode == "DD")
+                    {
+                        <td colspan="2" style="border: 1px solid black;"><b> Payment Mode:    </b>@ViewBag.PaymentMode</td>
+                        <td colspan="2" style="border: 1px solid black;"><b> DD No:    </b>@ViewBag.TransactionNo</td>
+                        <td colspan="5" style="border: 1px solid black;"><b> DD Date:    </b>@ViewBag.TransactionDate</td>
+                     
+                    }
+                    else if (ViewBag.PaymentMode == "RTGS")
+                    {
+                        <td colspan="2" style="border: 1px solid black;"><b> Payment Mode:    </b>@ViewBag.PaymentMode</td>
+                        <td colspan="2" style="border: 1px solid black;"><b> RTGS No:    </b>@ViewBag.TransactionNo</td>
+                        <td colspan="5" style="border: 1px solid black;"><b> RTGS Date:    </b>@ViewBag.TransactionDate</td>
+                      
+                    }
+                    else if (ViewBag.PaymentMode == "IMPS")
+                    {
+                        <td colspan="2" style="border: 1px solid black;"><b> Payment Mode:    </b>@ViewBag.PaymentMode</td>
+                        <td colspan="2" style="border: 1px solid black;"><b> IMPS No:    </b>@ViewBag.TransactionNo</td>
+                        <td colspan="5" style="border: 1px solid black;"><b> IMPS Date:    </b>@ViewBag.TransactionDate</td>
+                    
+                    }
+                    else if (ViewBag.PaymentMode == "BHIM" || ViewBag.PaymentMode == "Google Pay" || ViewBag.PaymentMode == "Paytm" || ViewBag.PaymentMode == "UPI")
+                    {
+                        <td colspan="2" style="border: 1px solid black;"><b> Payment Mode:    </b>@ViewBag.PaymentMode</td>
+                        <td colspan="2" style="border: 1px solid black;"><b> Transaction No:    </b>@ViewBag.TransactionNo</td>
+                        <td colspan="5" style="border: 1px solid black;"><b> Transaction Date:    </b>@ViewBag.PaymentDate</td>
+                      
+                    }
+                    else
+                    {
+                        <td colspan="2" style="border: 1px solid black;"><b> Payment Mode:    </b>@ViewBag.PaymentMode</td>
+                        <td colspan="2" style="border: 1px solid black;"><b> Transaction No:    </b>@ViewBag.TransactionNo</td>
+                        <td colspan="5" style="border: 1px solid black;"><b> Transaction Date:    </b>@ViewBag.TransactionDate</td>
+                      
+                    }
+                }
+
+            </tr>
+        </table>
+  
+
+
+
+
+      
+
+        <table style="width: 100%;" class="table table-striped">
+            
+            <tr>
+          
+                <td style="text-align:right;margin-right:100px;"><b style="margin-right: 40px;">Auth Signatory    </b></td>
+            </tr>
+        </table>
+        <br />
+        <br />
+        <br />
+        <table style="width: 100%;text-align:center">
+
+
+         
+
+            <tr>
+                <td>
+
+                    <b>LandLine no-</b>@ViewBag.LandLine
+
+                </td>
+                <td>
+                    <b>Website:</b>   @ViewBag.Website
+
+                </td>
+                <td><b>Email : </b>@ViewBag.EmailID</td>
+            </tr>
+        </table>
+
+        <table style="width:100%;background:#a20e0e;color:white;">
+            <tr>
+                <td style="text-align:center">
+                    @ViewBag.CompanyAddress
+                </td>
+            </tr>
+        </table>
+    </div>
+    <br />
+    <div style="border:3px solid #a20e0e;padding-left:10px;padding-right:10px;">
+        <table style="width: 100%;text-align:center">
+            <tr>
+                <td style="width:30%">
+                    <img src="~/WebsiteCss/assets/images/Neerajrai_UpdateLogo.jpg" class="img-fluid" alt="logo1" style="max-width: 100%;" />
+                  
+                </td>
+               
+                <td style="width:30%">
+                    
+                 <h2 style="color:#00a654">Royal Members Investment NRI Receipt</h2>
+                    
+                </td>
+
+                <td style="width:30%">
+                   
+                </td>
+            </tr>
+        </table>
+
+        <table style="width:100%;background:#a20e0e;color:white;">
+            <tr>
+                <td style="text-align:center">
+                    Office Copy
+                </td>
+            </tr>
+        </table>
+
+        <table style="width:100%;" class="table table-striped">
+            <tr>
+                <td colspan="3" style="border: 1px solid black;"><b>Receipt No. :   </b>@ViewBag.ReceiptNo</td>
+                <td colspan="3" style="border: 1px solid black;"><b>Coupon No. :    </b>@ViewBag.CouponNumber</td>
+                <td colspan="3" style="border: 1px solid black;"><b>Booking Date : </b>@ViewBag.BookingDate</td>
+
+            </tr>
+            <tr>
+                <td colspan="4" style="border: 1px solid black;"><b>Received From :     </b>@ViewBag.CustomerName</td>
+                <td colspan="2" style="border: 1px solid black;"><b>ID :   </b>@ViewBag.LoginId</td>
+                <td colspan="3" style="border: 1px solid black;"><b>Mobile No :    </b>@ViewBag.customerMobile</td>
+
+            </tr>
+            <tr>
+                <td colspan="9" style="border: 1px solid black;"><b>Address :    </b>@ViewBag.Address</td>
+
+            </tr>
+
+            <tr>
+                <td colspan="3" style="border: 1px solid black;"><b>City:    </b>@ViewBag.City</td>
+                <td colspan="3" style="border: 1px solid black;"><b>State:    </b>@ViewBag.State</td>
+                <td colspan="3" style="border: 1px solid black;"><b>Pin Code:    </b>@ViewBag.Pin</td>
+            </tr>
+         
+            <tr>
+               
+
+                <td colspan="3" style="border: 1px solid black;"><b>Amount:  </b>@ViewBag.Amount</td>
+                <td style="border: 1px solid black;" colspan="6"><b>In Words:     </b>@ViewBag.AmountInWords</td>
+              
+
+
+            </tr>
+            <tr>
+                @if (ViewBag.PaymentMode == "Cash")
+                {
+                    <td style="border: 1px solid black;" colspan="9"><b> Payment Mode:    </b>@ViewBag.PaymentMode</td>
+                }
+                else
+                {
+                    if (ViewBag.PaymentMode == "Cheque")
+                    {
+                        <td colspan="2" style="border: 1px solid black;"><b> Payment Mode:    </b>@ViewBag.PaymentMode</td>
+                        <td colspan="2" style="border: 1px solid black;"><b> Cheque No:    </b>@ViewBag.TransactionNo</td>
+                        <td colspan="5" style="border: 1px solid black;"><b> Cheque Date:    </b>@ViewBag.TransactionDate</td>
+                      
+                    }
+                    else if (ViewBag.PaymentMode == "NEFT")
+                    {
+                        <td colspan="2" style="border: 1px solid black;"><b> Payment Mode:    </b>@ViewBag.PaymentMode</td>
+                        <td colspan="1" style="border: 1px solid black;"><b> NEFT No:    </b>@ViewBag.TransactionNo</td>
+                        <td colspan="5" style="border: 1px solid black;"><b> NEFT Date:    </b>@ViewBag.TransactionDate</td>
+                       
+                    }
+                    else if (ViewBag.PaymentMode == "DD")
+                    {
+                        <td colspan="2" style="border: 1px solid black;"><b> Payment Mode:    </b>@ViewBag.PaymentMode</td>
+                        <td colspan="2" style="border: 1px solid black;"><b> DD No:    </b>@ViewBag.TransactionNo</td>
+                        <td colspan="5" style="border: 1px solid black;"><b> DD Date:    </b>@ViewBag.TransactionDate</td>
+                      
+                    }
+                    else if (ViewBag.PaymentMode == "RTGS")
+                    {
+                        <td colspan="2" style="border: 1px solid black;"><b> Payment Mode:    </b>@ViewBag.PaymentMode</td>
+                        <td colspan="2" style="border: 1px solid black;"><b> RTGS No:    </b>@ViewBag.TransactionNo</td>
+                        <td colspan="5" style="border: 1px solid black;"><b> RTGS Date:    </b>@ViewBag.TransactionDate</td>
+                       
+                    }
+                    else if (ViewBag.PaymentMode == "IMPS")
+                    {
+                        <td colspan="2" style="border: 1px solid black;"><b> Payment Mode:    </b>@ViewBag.PaymentMode</td>
+                        <td colspan="2" style="border: 1px solid black;"><b> IMPS No:    </b>@ViewBag.TransactionNo</td>
+                        <td colspan="5" style="border: 1px solid black;"><b> IMPS Date:    </b>@ViewBag.TransactionDate</td>
+                       
+                    }
+                    else if (ViewBag.PaymentMode == "BHIM" || ViewBag.PaymentMode == "Google Pay" || ViewBag.PaymentMode == "Paytm" || ViewBag.PaymentMode == "UPI")
+                    {
+                        <td colspan="2" style="border: 1px solid black;"><b> Payment Mode:    </b>@ViewBag.PaymentMode</td>
+                        <td colspan="2" style="border: 1px solid black;"><b> Transaction No:    </b>@ViewBag.TransactionNo</td>
+                        <td colspan="5" style="border: 1px solid black;"><b> Transaction Date:    </b>@ViewBag.PaymentDate</td>
+                       
+                    }
+                    else
+                    {
+                        <td colspan="2" style="border: 1px solid black;"><b> Payment Mode:    </b>@ViewBag.PaymentMode</td>
+                        <td colspan="2" style="border: 1px solid black;"><b> Transaction No:    </b>@ViewBag.TransactionNo</td>
+                        <td colspan="5" style="border: 1px solid black;"><b> Transaction Date:    </b>@ViewBag.PaymentDate</td>
+                    
+                    }
+                }
+
+            </tr>
+        </table>
+        <br />
+        <table style="width: 100%;text-align:center">
+            <tr>
+                <td>
+                    <b>LandLine no-</b>@ViewBag.LandLine
+                </td>
+                <td>
+                    <b>Website:</b>   @ViewBag.Website
+
+                </td>
+                <td><b>Email : </b>@ViewBag.EmailID</td>
+            </tr>
+        </table>
+
+        <table style="width:100%;background:#a20e0e;color:white;">
+            <tr>
+                <td style="text-align:center">
+                    @ViewBag.CompanyAddress
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

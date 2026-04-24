@@ -30,6 +30,7 @@ namespace NeerajraiInfra.Models
         public string Downline { get; set; }
 
         public string PK_PlotID { get; set; }
+        public string Pk_InvestId { get; set; }
 
         #region Properties
         public string Type { get; set; }
@@ -46,6 +47,7 @@ namespace NeerajraiInfra.Models
         public string PlotSize { get; set; }
         public string BookingPercent { get; set; }
         public string UserID { get; set; }
+        public string PK_AmountMasterId { get; set; }
         public string BranchID { get; set; }
         public string BranchName { get; set; }
         public string PlotID { get; set; }
@@ -1073,6 +1075,7 @@ namespace NeerajraiInfra.Models
                                         new SqlParameter("@Fk_BranchId" , BranchID),
                                         new SqlParameter("@BookingDate"  ,BookingDate),
                                         new SqlParameter("@Amount" ,Amount),
+                                        new SqlParameter("@AmountId" ,PK_AmountMasterId),
                                         new SqlParameter("@PaymentMode"  , PaymentMode),
                                         new SqlParameter("@TransactionNo"  , TransactionNumber),
                                         new SqlParameter("@TransactionDate"  , TransactionDate),
@@ -1102,6 +1105,23 @@ namespace NeerajraiInfra.Models
                                   };
 
             DataSet ds = Connection.ExecuteQuery("GetEVBooking", para);
+            return ds;
+        }
+        public DataSet GetInvestmentNRIDetails()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@Pk_InvestId", Pk_InvestId),
+                new SqlParameter("@CustomerID", UserID),
+                new SqlParameter("@AssociateID", LoginId),
+                new SqlParameter("@CouponCode", CouponNumber),
+                new SqlParameter("@FromDate", FromDate),
+                new SqlParameter("@ToDate",ToDate),
+                new SqlParameter("@PaymentStatus", DBNull.Value)
+            };
+
+            DataSet ds = Connection.ExecuteQuery("GetInvestmentNRIList", para);
+
+
             return ds;
         }
 
@@ -1214,6 +1234,89 @@ namespace NeerajraiInfra.Models
 
 
     }
+
+
+
+    public class ROIModel
+    {
+        public long Fk_UserId { get; set; }
+        public string LoginId { get; set; }
+        public string FullName { get; set; }
+        public long Fk_InvestId { get; set; }
+        public long Fk_AmountMasterId { get; set; }
+
+        // 🔹 Investment Details
+        public decimal InvestmentAmount { get; set; }
+        public string BookingDate { get; set; }
+       
+
+        // 🔹 ROI Details
+        public int ROIInstallment { get; set; }
+        public decimal ROI { get; set; }
+
+        public string ROIDate { get; set; }
+      
+
+        // 🔹 Status
+        public int Status { get; set; }
+
+        public DateTime? CalculationDate { get; set; }
+
+        // 🔹 Extra (Optional but useful)
+        public string PaymentStatus { get; set; }
+        public string Remarks { get; set; }
+
+        public DataSet GetROIReport(long? investId)
+        {
+            SqlParameter[] para =
+            {
+            new SqlParameter("@Pk_InvestId", investId ?? (object)DBNull.Value)
+            };
+
+            DataSet ds = Connection.ExecuteQuery("GetROIReport", para);
+            return ds;
+        }
+
+    }
+
+    public class ROIWalletModel
+    {
+        public long Pk_ROIWalletId { get; set; }
+        public long FK_UserId { get; set; }
+        public string LoginId { get; set; }
+        public string FullName { get; set; }
+
+        public long FK_InvestId { get; set; }
+        public int ROIInstallment { get; set; }
+        public decimal ROI { get; set; }
+
+        public string Narration { get; set; }
+        public decimal CrAmount { get; set; }
+        public decimal DrAmount { get; set; }
+        public string TransactionDate { get; set; }
+
+        public string PayoutNo { get; set; }
+        public string TransactionNo { get; set; }
+
+
+        // 🔹 Function to call procedure
+        public DataSet GetROIWalletReport(long? investId)
+        {
+            SqlParameter[] para =
+            {
+               new SqlParameter("@Fk_InvestId", investId ?? (object)DBNull.Value)
+             };
+
+            DataSet ds = Connection.ExecuteQuery("GetROIWalletReport", para);
+            return ds;
+        }
+
+
+    }
+
+
+
+
 }
 
 

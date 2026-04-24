@@ -31,7 +31,7 @@
         <div class="col-12 col-md-12 col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h4>Investment</h4>
+                    <h4>Royal Members Investment NRI</h4>
                     <p style="color: red">
                         @TempData["Plot"]
                     </p>
@@ -82,8 +82,12 @@
                                 Amount <span style="color: red">*</span>
                                 @*@Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @id = "txtAmount", @placeholder = "Amount", required = "required" })*@
 
-                                @Html.DropDownListFor(m => m.Amount, new SelectList(ViewBag.ddlInvestMentAmount, "Value", "Text"), new { @class = "form-control" })
+                                @*@Html.DropDownListFor(m => m.Amount, new SelectList(ViewBag.ddlInvestMentAmount, "Value", "Text"), new { @class = "form-control" })*@
+                                @Html.DropDownListFor(m => m.PK_AmountMasterId,
+                                    new SelectList(ViewBag.ddlInvestMentAmount, "Value", "Text"),
+                                    new { @class = "form-control", @onchange = "setAmount()" })
 
+                                @Html.HiddenFor(m => m.Amount)
 
                             </div>
                         </div>
@@ -175,6 +179,11 @@
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
 <script>
+
+    function setAmount() {
+        var selectedText = $("#PK_AmountMasterId option:selected").text(); // Amount
+        $("#Amount").val(selectedText);
+    }
     $(document).ready(function () {
         $("#divload").css({ 'display': 'none' });
         $("input").attr("autocomplete", "off");
@@ -805,7 +814,7 @@
 
 @section script{
  
-    @if (TempData["PlotInvestSucesssMessage"] != null && Session["Investment"] != null)
+    @if (TempData["PlotInvestSucesssMessage"] != null && Session["InvestmentId"] != null)
     {
 
         <script>
@@ -820,7 +829,7 @@
              if (willDelete) {
                  var a = window.location.href;
                  id = "@Session["InvestmentId"]";
-                 window.open('/Plot/PrintEVBooking' + '?PrintId=' + id + "");
+                 window.open('/Plot/PrintNRIInvestmentBooking' + '?PrintId=' + id + "");
              }
              else {
 
