@@ -1,0 +1,64 @@
+﻿
+
+@{
+    ViewBag.Title = "ROIWalletNRIReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="section">
+    <ul class="breadcrumb breadcrumb-style ">
+        <li class="breadcrumb-item">
+            <a href="#">
+                <i data-feather="home"></i>
+            </a>
+        </li>
+        <li class="breadcrumb-item">Reports</li>
+        <li class="breadcrumb-item">ROI Wallet Report </li>
+    </ul>
+</section>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Login ID</th>
+                <th>Name</th>
+                <th>Invest ID</th>
+                <th>Installment</th>
+                <th>ROI</th>
+                <th>Cr Amount</th>
+                <th>Dr Amount</th>
+                <th>Narration</th>
+                <th>Date</th>
+                @*<th>Payout</th>*@
+            </tr>
+        </thead>
+
+        <tbody>
+            @if (Model != null)
+            {
+                int i = 1;
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@i</td>
+                        <td>@item.LoginId</td>
+                        <td>@item.FullName</td>
+                        <td>@item.FK_InvestId</td>
+                        <td>@item.ROIInstallment</td>
+                        <td>₹@item.ROI</td>
+                        <td style="color:green;">₹@item.CrAmount</td>
+                        <td style="color:red;">₹@item.DrAmount</td>
+                        <td>@item.Narration</td>
+                        <td>@item.TransactionDate</td>
+                        @*<td>@item.PayoutNo</td>*@
+                    </tr>
+
+                    i++;
+                }
+            }
+        </tbody>
+    </table>
+</div>

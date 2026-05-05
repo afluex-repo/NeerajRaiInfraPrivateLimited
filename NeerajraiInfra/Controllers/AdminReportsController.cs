@@ -3463,7 +3463,7 @@ namespace NeerajraiInfra.Controllers
         {
 
             List<Reports> lst = new List<Reports>();
-          
+
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
 
@@ -3492,7 +3492,7 @@ namespace NeerajraiInfra.Controllers
                         obj.PaymentStatus = r["PaymentStatus"].ToString();
                         obj.CouponStatus = r["CouponStatus"].ToString();
                         obj.UpdatedCouponRemarks = r["CouponUpdateRemarks"].ToString();
-                        obj.EntryType=r["EntryType"].ToString();
+                        obj.EntryType = r["EntryType"].ToString();
                         lst.Add(obj);
                     }
                     model.lstEV = lst;
@@ -3547,7 +3547,7 @@ namespace NeerajraiInfra.Controllers
                 }
             }
             return View(model);
-            
+
         }
 
         public ActionResult GetUserList()
@@ -3581,46 +3581,46 @@ namespace NeerajraiInfra.Controllers
             {
 
                 //if (ds.Tables[0].Rows[0]["MSG"].ToString() == "1")
-                
 
-                    newdata.Result = "yes";
-                    ViewBag.PK_BookingId = ds.Tables[0].Rows[0]["Pk_EVBookingId"].ToString();
-                    ViewBag.CustomerName = ds.Tables[0].Rows[0]["CustomerName"].ToString();
-                  
-                    ViewBag.ReceiptNo = ds.Tables[0].Rows[0]["ReciptNo"].ToString();
-                    ViewBag.Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
-                    ViewBag.Address = ds.Tables[0].Rows[0]["Address"].ToString();
-                    ViewBag.CustomerID = ds.Tables[0].Rows[0]["LoginId"].ToString();
-                 
-                    ViewBag.Amount = ds.Tables[0].Rows[0]["Amount"].ToString();
-                    ViewBag.PaymentMode = ds.Tables[0].Rows[0]["PaymentMode"].ToString();
-                 
-                  
-                    ViewBag.CouponNumber = ds.Tables[0].Rows[0]["CouponCode"].ToString();
-                   
-                    ViewBag.City = ds.Tables[0].Rows[0]["City"].ToString();
-                    ViewBag.BookingDate = ds.Tables[0].Rows[0]["BookingDate"].ToString();
-                    ViewBag.State = ds.Tables[0].Rows[0]["State"].ToString();
-                    ViewBag.Pin = ds.Tables[0].Rows[0]["PinCode"].ToString();
 
-                    ViewBag.TransactionNo = ds.Tables[0].Rows[0]["TransactionNo"].ToString();
-                    ViewBag.TransactionDate = ds.Tables[0].Rows[0]["TransactionDate"].ToString();
-                    ViewBag.BankName = ds.Tables[0].Rows[0]["BankName"].ToString();
-                    ViewBag.BankBranch = ds.Tables[0].Rows[0]["BranchName"].ToString();
-                    ViewBag.EntryType = ds.Tables[0].Rows[0]["EntryType"].ToString();
-                   
-                    //ViewBag.AdjustmentloginId = ds.Tables[0].Rows[0]["AdjustmentloginId"].ToString();
+                newdata.Result = "yes";
+                ViewBag.PK_BookingId = ds.Tables[0].Rows[0]["Pk_EVBookingId"].ToString();
+                ViewBag.CustomerName = ds.Tables[0].Rows[0]["CustomerName"].ToString();
 
-                    ViewBag.CompanyName = SoftwareDetails.CompanyName;
-                    ViewBag.CompanyAddress = SoftwareDetails.CompanyAddress;
-                    ViewBag.Pin1 = SoftwareDetails.Pin1;
-                    ViewBag.State1 = SoftwareDetails.State1;
-                    ViewBag.City1 = SoftwareDetails.City1;
-                    ViewBag.ContactNo = SoftwareDetails.ContactNo;
-                    ViewBag.LandLine = SoftwareDetails.LandLine;
-                    ViewBag.Website = SoftwareDetails.Website;
-                    ViewBag.EmailID = SoftwareDetails.EmailID;
-                
+                ViewBag.ReceiptNo = ds.Tables[0].Rows[0]["ReciptNo"].ToString();
+                ViewBag.Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                ViewBag.Address = ds.Tables[0].Rows[0]["Address"].ToString();
+                ViewBag.CustomerID = ds.Tables[0].Rows[0]["LoginId"].ToString();
+
+                ViewBag.Amount = ds.Tables[0].Rows[0]["Amount"].ToString();
+                ViewBag.PaymentMode = ds.Tables[0].Rows[0]["PaymentMode"].ToString();
+
+
+                ViewBag.CouponNumber = ds.Tables[0].Rows[0]["CouponCode"].ToString();
+
+                ViewBag.City = ds.Tables[0].Rows[0]["City"].ToString();
+                ViewBag.BookingDate = ds.Tables[0].Rows[0]["BookingDate"].ToString();
+                ViewBag.State = ds.Tables[0].Rows[0]["State"].ToString();
+                ViewBag.Pin = ds.Tables[0].Rows[0]["PinCode"].ToString();
+
+                ViewBag.TransactionNo = ds.Tables[0].Rows[0]["TransactionNo"].ToString();
+                ViewBag.TransactionDate = ds.Tables[0].Rows[0]["TransactionDate"].ToString();
+                ViewBag.BankName = ds.Tables[0].Rows[0]["BankName"].ToString();
+                ViewBag.BankBranch = ds.Tables[0].Rows[0]["BranchName"].ToString();
+                ViewBag.EntryType = ds.Tables[0].Rows[0]["EntryType"].ToString();
+
+                //ViewBag.AdjustmentloginId = ds.Tables[0].Rows[0]["AdjustmentloginId"].ToString();
+
+                ViewBag.CompanyName = SoftwareDetails.CompanyName;
+                ViewBag.CompanyAddress = SoftwareDetails.CompanyAddress;
+                ViewBag.Pin1 = SoftwareDetails.Pin1;
+                ViewBag.State1 = SoftwareDetails.State1;
+                ViewBag.City1 = SoftwareDetails.City1;
+                ViewBag.ContactNo = SoftwareDetails.ContactNo;
+                ViewBag.LandLine = SoftwareDetails.LandLine;
+                ViewBag.Website = SoftwareDetails.Website;
+                ViewBag.EmailID = SoftwareDetails.EmailID;
+
             }
 
             return View(newdata);
@@ -3722,7 +3722,7 @@ namespace NeerajraiInfra.Controllers
                     obj.PlotNumber = r["PlotInfo"].ToString();
                     obj.PlotAmount = r["NetPlotAmount"].ToString();
                     obj.Balance = r["Balance"].ToString();
-                    
+
                     obj.Amount = r["PlotAmount"].ToString();
                     obj.BookingNumber = r["BookingNo"].ToString();
                     obj.Discount = r["Discount"].ToString();
@@ -3790,7 +3790,7 @@ namespace NeerajraiInfra.Controllers
                     blockcount = 1;
                 }
             }
-            
+
             ViewBag.ddlBlock = lstBlock;
             #endregion
             return View(model);
@@ -3800,10 +3800,10 @@ namespace NeerajraiInfra.Controllers
 
 
 
-        public ActionResult UpdateCouponStatus(string BookingID, string Remark,string CouponStatus)
+        public ActionResult UpdateCouponStatus(string BookingID, string Remark, string CouponStatus)
         {
             Reports model = new Reports();
-           
+
             try
             {
                 model.Pk_EVBookingId = BookingID;
@@ -3817,12 +3817,12 @@ namespace NeerajraiInfra.Controllers
                     if (ds.Tables[0].Rows[0]["msg"].ToString() == "1")
                     {
                         model.Result = "1";
-                      
+
                     }
                     else
                     {
                         model.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-                      
+
                     }
                 }
             }
@@ -3830,7 +3830,7 @@ namespace NeerajraiInfra.Controllers
             {
                 model.Result = ex.Message;
             }
-           
+
 
             return Json(model, JsonRequestBehavior.AllowGet);
         }
@@ -3859,5 +3859,8 @@ namespace NeerajraiInfra.Controllers
             }
             return View(model);
         }
+
+
+
     }
 }

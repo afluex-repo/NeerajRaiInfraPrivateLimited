@@ -89,6 +89,7 @@ namespace NeerajraiInfra.Models
         public string BookingDate { get; set; }
         public string BookingAmount { get; set; }
         public string EntryType  { get; set; }
+        public string Pk_InvestId { get; set; }
 
 
         public string Discount { get; set; }
@@ -622,6 +623,61 @@ namespace NeerajraiInfra.Models
                                   };
 
             DataSet ds = Connection.ExecuteQuery("GetEVBooking", para);
+            return ds;
+        }
+        public DataSet GetInvestmentNRIDetailsList()
+                {
+                    SqlParameter[] para = {
+                new SqlParameter("@Pk_InvestId", DBNull.Value),
+                new SqlParameter("@CustomerID", DBNull.Value),
+                new SqlParameter("@AssociateID", DBNull.Value),
+                new SqlParameter("@CouponCode", DBNull.Value),
+                new SqlParameter("@FromDate", DBNull.Value),
+                new SqlParameter("@ToDate", DBNull.Value),
+                new SqlParameter("@PaymentStatus", DBNull.Value)
+
+            };
+
+            DataSet ds = Connection.ExecuteQuery("GetInvestmentNRIList", para);
+
+            // 🔍 DEBUG START
+            if (ds == null)
+            {
+                Console.WriteLine("DataSet is NULL");
+            }
+            else if (ds.Tables.Count == 0)
+            {
+                Console.WriteLine("No Tables Found");
+            }
+            else
+            {
+                Console.WriteLine("Rows Count: " + ds.Tables[0].Rows.Count);
+            }
+            // 🔍 DEBUG END
+
+            return ds;
+        }
+
+        public DataSet GetInvestmentNRIDetailsListBYAddedBy(string AddedBy)
+            
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@Pk_InvestId", DBNull.Value),
+                new SqlParameter("@CustomerID", DBNull.Value),
+                new SqlParameter("@AssociateID", DBNull.Value),
+                new SqlParameter("@CouponCode", DBNull.Value),
+                new SqlParameter("@FromDate", DBNull.Value),
+                new SqlParameter("@ToDate", DBNull.Value),
+                new SqlParameter("@PaymentStatus", DBNull.Value),
+              new SqlParameter("@AddedBy", AddedBy)
+
+            };
+
+            DataSet ds = Connection.ExecuteQuery("GetInvestmentNRIList", para);
+
+
+
+
             return ds;
         }
 

@@ -1,0 +1,110 @@
+﻿
+
+@{
+    ViewBag.Title = "ROIWalletNRIALlUserDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="section">
+    <ul class="breadcrumb breadcrumb-style ">
+        <li class="breadcrumb-item">
+            <a href="#">
+                <i data-feather="home"></i>
+            </a>
+        </li>
+        <li class="breadcrumb-item">Reports</li>
+        <li class="breadcrumb-item">Royal Members Investment NRI Details </li>
+    </ul>
+</section>
+
+
+<div class="section-body">
+
+    <div class="card">
+        <div class="card-header">
+            <h4>Royal Members Investment NRI Details</h4>
+            <p style="color: red">
+                @TempData["Update"]
+            </p>
+
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- HTML5 Export Buttons table start -->
+
+                    <div class="card-block" style="margin-left:5px;margin-right:5px">
+                     
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-md" data-page-length='50' id="tableExport" style="width:100%;">
+                                <thead>
+                                    <tr>
+                                        <th>S No.</th>
+                                        <td hidden></td>
+                                        <th>Coupon No.</th>
+                                        <th>Booking Date</th>
+                                        <th>Customer Detail</th>
+                                        <th>Associate Details</th>
+                                        <th>Amount</th>
+                                        <th>PaymentMode</th>
+                                        <th>Transaction Details</th>
+                                        <th>Payment Remarks</th>
+                                        <th>Payment Status</th>
+                                    
+                                        <th>Action</th>
+                                      
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.lstEV != null)
+                                        {
+                                            int i = 1;
+                                            foreach (var Item in Model.lstEV)
+                                            {
+                                                <tr class="text-left">
+                                                    <td>@i</td>
+                                                    <td hidden>@Item.Pk_InvestId</td>
+                                                    <td>@Item.CouponNumber</td>
+                                                    <td>@Item.BookingDate</td>
+                                                    <td class="text-nowrap">@Item.CustomerLoginID</td>
+                                                    <td class="text-nowrap">@Item.AssociateLoginID</td>
+                                                    <td>@Item.Amount</td>
+                                                    <td>@Item.PaymentMode</td>
+                                                    <td>@Item.TransactionDetails</td>
+                                                    <td>@Item.Remarks</td>
+                                                    <td>@Item.PaymentStatus</td>
+                                                   
+                                      
+
+                                                    <td>
+                                                  
+
+                                                        <div class="badge badge-success badge-shadow"><a target="_blank" class="badge badge-success badge-shadow" href="/Plot/ROIWalletNRIReport?Id=@Item.Pk_InvestId"><span>View ROI Wallet</span></a></div>
+
+                                                    </td>
+                                                  
+
+
+                                                </tr>
+                                                i++;
+                                            }
+                                        }
+                                    }
+
+                                </tbody>
+
+                            </table>
+                            @*@Html.HiddenFor(m => m.Pk_InvestId)*@
+                        </div>
+                        <input type="hidden" id="UserType" value="@Session["UserType"]" />
+                        <input type="hidden" id="UserTypeName" value="@Session["UserTypeName"]" />
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
