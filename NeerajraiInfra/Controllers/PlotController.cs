@@ -4814,6 +4814,59 @@ namespace NeerajraiInfra.Controllers
 
 
 
+        [HttpGet]
+        public ActionResult UpdatKYC(string Id)
+        {
+            Reports model = new Reports();
+            model.UserID = Id;
+
+            DataSet ds = model.GetUserOtherInfo();   
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                DataRow r = ds.Tables[0].Rows[0];
+
+                model.BankHolderName = r["BankHolderName"].ToString();
+                model.MemberAccNo = r["MemberAccNo"].ToString();
+                model.BankName = r["MemberBankName"].ToString();
+                model.BankBranch = r["MemberBranch"].ToString();
+                model.IFSCCode = r["IFSCCode"].ToString();
+                model.IsUpdated = r["IsUpdated"] != DBNull.Value
+                     ? Convert.ToInt32(r["IsUpdated"])
+                     : 0;
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult UpdatKYC(Reports model)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(model.UserID))
+                {
+                    TempData["UpdateKYC"] = "Invalid User ID";
+                    return RedirectToAction("InvestmentNRIReport");
+                }
+
+                // ✅ Session value set karo
+                model.UpdatedBy = Session["UserID"]?.ToString();
+
+                // ✅ Model se SP call
+                DataSet ds = model.UpdateUserOtherInfo();
+
+                TempData["UpdateKYC"] = "KYC Updated Successfully";
+            }
+            catch (Exception ex)
+            {
+                TempData["UpdateKYC"] = ex.Message;
+            }
+
+           // return RedirectToAction("UpdatKYC", new { Id = model.UserID });
+            return RedirectToAction("InvestmentNRIReport");
+        }
+
 
         [HttpPost]
 
@@ -4898,6 +4951,7 @@ namespace NeerajraiInfra.Controllers
                         obj.PaymentStatus = r["PaymentStatus"].ToString();
                         obj.CouponStatus = r["CouponStatus"].ToString();
                         obj.UpdatedCouponRemarks = r["CouponUpdateRemarks"].ToString();
+                        obj.UserID = r["UserID"].ToString();
                         lst.Add(obj);
                     }
                     model.lstEV = lst;

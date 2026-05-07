@@ -7693,6 +7693,7 @@
     <Content Include="Views\Plot\ROIWalletNRIALlUserDetails.cshtml" />
     <Content Include="Views\AssociateDashboard\InvestmentNRI.cshtml" />
     <Content Include="Views\AssociateDashboard\InvestmentNRIReport.cshtml" />
+    <Content Include="Views\Plot\UpdatKYC.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

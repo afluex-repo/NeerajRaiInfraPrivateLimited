@@ -126,6 +126,7 @@
                                             @*<th>Coupon Status</th>*@
                                             @*<th>Coupon Remarks</th>*@
                                             <th>Action</th>
+                                            <th>Update KYC</th>
                                             @*<th>Update Coupon Status</th>*@
                                         </tr>
                                     </thead>
@@ -153,17 +154,22 @@
                                                         @*<td>@Item.CouponStatus</td>*@
                                                         @*<td>@Item.UpdatedCouponRemarks</td>*@
 
-                                                    <td>
-                                                        <div class="badge badge-success badge-shadow"><a target="_blank" class="badge badge-success badge-shadow" href="/Plot/PrintNRIInvestmentBooking?PrintId=@Item.Pk_InvestId"><span>Print</span></a></div>
+                                                        <td>
+                                                            <div class="badge badge-success badge-shadow"><a target="_blank" class="badge badge-success badge-shadow" href="/Plot/PrintNRIInvestmentBooking?PrintId=@Item.Pk_InvestId"><span>Print</span></a></div>
 
-                                                        <div class="badge badge-success badge-shadow"><a target="_blank" class="badge badge-success badge-shadow" href="/Plot/ROIInvestmentNRIReport?Id=@Item.Pk_InvestId"><span>View ROI</span></a></div>
+                                                            <div class="badge badge-success badge-shadow"><a target="_blank" class="badge badge-success badge-shadow" href="/Plot/ROIInvestmentNRIReport?Id=@Item.Pk_InvestId"><span>View ROI</span></a></div>
 
-                                                    </td>
-                                                        @*<td>
-                                                            <button type="button" class="btn btn-warning btn-sm shadow" onclick="openCouponPopup('@Item.Pk_EVBookingId');">
-                                                                Update Coupon Status
-                                                            </button>
-                                                        </td>*@
+                                                        </td>
+                                                        <td>
+                                                            <div class="badge badge-success badge-shadow"><a target="_blank" class="badge badge-success badge-shadow" href="/Plot/UpdatKYC?Id=@Item.UserID"><span>Update KYC</span></a></div>
+
+                                                        </td>
+
+                                                            @*<td>
+                <button type="button" class="btn btn-warning btn-sm shadow" onclick="openCouponPopup('@Item.Pk_EVBookingId');">
+                    Update Coupon Status
+                </button>
+            </td>*@
 
 
                                                     </tr>

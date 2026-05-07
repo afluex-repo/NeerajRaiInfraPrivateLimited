@@ -27,6 +27,7 @@ namespace NeerajraiInfra.Models
         public string ErrorMessage { get; set; }
         public string Downline { get; set; }
         public int hdRows1 { get; set; }
+        public int IsUpdated { get; set; }
         public string ReturnBenefitStartDate { get; set; }
         public string SponsorName { get; set; }
         public string SponsorId { get; set; }
@@ -471,6 +472,31 @@ namespace NeerajraiInfra.Models
 
 
 
+        public DataSet GetUserOtherInfo()
+        {
+            SqlParameter[] para = {
+            new SqlParameter("@FK_UserId", UserID)
+          }; 
+
+            DataSet ds = Connection.ExecuteQuery("GetUserOtherInfo", para);
+            return ds;
+        }
+
+        public DataSet UpdateUserOtherInfo()
+        {
+            SqlParameter[] para = {
+        new SqlParameter("@FK_UserId", UserID),
+        new SqlParameter("@BankHolderName", BankHolderName ?? (object)DBNull.Value),
+        new SqlParameter("@MemberAccNo", MemberAccNo ?? (object)DBNull.Value),
+        new SqlParameter("@MemberBankName", BankName ?? (object)DBNull.Value),
+        new SqlParameter("@MemberBranch", BankBranch ?? (object)DBNull.Value),
+        new SqlParameter("@IFSCCode", IFSCCode ?? (object)DBNull.Value),
+        new SqlParameter("@UpdatedBy", UpdatedBy ?? (object)DBNull.Value)
+    };
+
+            DataSet ds = Connection.ExecuteQuery("UpdateUserOtherInfo", para);
+            return ds;
+        }
 
         public DataSet GetKharijDakhilList()
         {
@@ -626,15 +652,15 @@ namespace NeerajraiInfra.Models
             return ds;
         }
         public DataSet GetInvestmentNRIDetailsList()
-                {
-                    SqlParameter[] para = {
-                new SqlParameter("@Pk_InvestId", DBNull.Value),
-                new SqlParameter("@CustomerID", DBNull.Value),
-                new SqlParameter("@AssociateID", DBNull.Value),
-                new SqlParameter("@CouponCode", DBNull.Value),
-                new SqlParameter("@FromDate", DBNull.Value),
-                new SqlParameter("@ToDate", DBNull.Value),
-                new SqlParameter("@PaymentStatus", DBNull.Value)
+            {
+                SqlParameter[] para = {
+                new SqlParameter("@Pk_InvestId", Pk_InvestId),
+                new SqlParameter("@CustomerID",UserID),
+                new SqlParameter("@AssociateID", LoginId),
+                new SqlParameter("@CouponCode", CouponNumber),
+                new SqlParameter("@FromDate", FromDate),
+                new SqlParameter("@ToDate", ToDate),
+                new SqlParameter("@PaymentStatus", PaymentStatus)
 
             };
 
@@ -662,13 +688,13 @@ namespace NeerajraiInfra.Models
             
         {
             SqlParameter[] para = {
-                new SqlParameter("@Pk_InvestId", DBNull.Value),
-                new SqlParameter("@CustomerID", DBNull.Value),
-                new SqlParameter("@AssociateID", DBNull.Value),
-                new SqlParameter("@CouponCode", DBNull.Value),
-                new SqlParameter("@FromDate", DBNull.Value),
-                new SqlParameter("@ToDate", DBNull.Value),
-                new SqlParameter("@PaymentStatus", DBNull.Value),
+                new SqlParameter("@Pk_InvestId",Pk_InvestId),
+                new SqlParameter("@CustomerID",UserID),
+                new SqlParameter("@AssociateID",LoginId),
+                new SqlParameter("@CouponCode", CouponNumber),
+                new SqlParameter("@FromDate", FromDate),
+                new SqlParameter("@ToDate", ToDate),
+                new SqlParameter("@PaymentStatus", PaymentStatus),
               new SqlParameter("@AddedBy", AddedBy)
 
             };
