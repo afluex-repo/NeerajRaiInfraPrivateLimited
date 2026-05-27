@@ -25,11 +25,12 @@
                 <th>#</th>
                 <th>Login ID</th>
                 <th>Name</th>
-                <th>Invest ID</th>
+                @*<th>Invest ID</th>*@
                 <th>Installment</th>
-                <th>ROI</th>
+                @*<th>ROI</th>*@
                 <th>Cr Amount</th>
                 <th>Dr Amount</th>
+                <th>Balance </th>
                 <th>Narration</th>
                 <th>Date</th>
                 @*<th>Payout</th>*@
@@ -46,11 +47,12 @@
                         <td>@i</td>
                         <td>@item.LoginId</td>
                         <td>@item.FullName</td>
-                        <td>@item.FK_InvestId</td>
-                        <td>@item.ROIInstallment</td>
+                        @*<td>@item.FK_InvestId</td>*@
+                        @*<td>@item.ROIInstallment</td>*@
                         <td>₹@item.ROI</td>
                         <td style="color:green;">₹@item.CrAmount</td>
                         <td style="color:red;">₹@item.DrAmount</td>
+                        <td>₹@item.TotalAmounts</td>
                         <td>@item.Narration</td>
                         <td>@item.TransactionDate</td>
                         @*<td>@item.PayoutNo</td>*@

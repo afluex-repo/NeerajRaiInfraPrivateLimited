@@ -87,8 +87,9 @@
                                     <th>Transaction No.</th>
                                     <th>Bank Details</th>
                                     <th>Amount</th>
-                                    <th>Allotment Remarks</th>
-                                    <th>Payment Mode Remarks</th>
+                                    <th>Allotment Remarks / Payment Mode Remarks</th>
+                                    @*<th>Payment Mode Remarks</th>*@
+                                    <th>Adjustment Id</th>
                                     <th>Status</th>
                                     <th> Not Generate Income</th>
                                     <th>Description</th>
@@ -121,7 +122,8 @@
                                                 <td>@Item.Remark</td>
                                                 <td>@Item.PaidAmount</td>
                                                 <td>@Item.AllotmentRemark</td>
-                                                <td>@Item.PaymentModeRemarks</td>
+                                                @*<td>@Item.PaymentModeRemarks</td>*@
+                                                <td>@Item.AdjustmentId</td>
                                                 <td>@Item.PaymentStatus</td>
                                                 <td>
                                               <input type="checkbox" id="calculation_@i" name="calculation">

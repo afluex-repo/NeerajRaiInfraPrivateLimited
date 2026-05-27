@@ -335,7 +335,6 @@ namespace NeerajraiInfra.Controllers
         }
 
 
-
         public ActionResult GetSiteDetails(string SiteID)
         {
             try
@@ -2823,6 +2822,7 @@ namespace NeerajraiInfra.Controllers
                     obj.BlockName = r["BlockName"].ToString();
                     obj.PlotNumber = r["PlotNumber"].ToString();
                     obj.PaymentModeRemarks = r["PaymentModeRemarks"].ToString();
+                    obj.AdjustmentId = r["AdjustmentId"].ToString();
                     lst.Add(obj);
                 }
                 model.lstPlot = lst;
@@ -4124,9 +4124,7 @@ namespace NeerajraiInfra.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
-
         #endregion
-
 
         public ActionResult ApproveEVBookingPayment(Plot model)
         {
@@ -4538,7 +4536,6 @@ namespace NeerajraiInfra.Controllers
 
         #endregion
 
-
         public ActionResult Investment(string PK_BookingId)
         {
             Plot model = new Plot();
@@ -4626,8 +4623,6 @@ namespace NeerajraiInfra.Controllers
 
 
         }
-
-
 
         public ActionResult ApprovInvestmentPayment(Plot model)
         {
@@ -4734,7 +4729,6 @@ namespace NeerajraiInfra.Controllers
             return RedirectToAction(FormName, Controller);
         }
 
-
         #region Royal Member Investment Plan 
 
         public ActionResult InvestmentNRI(string PK_BookingId)
@@ -4812,73 +4806,13 @@ namespace NeerajraiInfra.Controllers
 
         }
 
-
-
-        [HttpGet]
-        public ActionResult UpdatKYC(string Id)
-        {
-            Reports model = new Reports();
-            model.UserID = Id;
-
-            DataSet ds = model.GetUserOtherInfo();   
-
-            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
-            {
-                DataRow r = ds.Tables[0].Rows[0];
-
-                model.BankHolderName = r["BankHolderName"].ToString();
-                model.MemberAccNo = r["MemberAccNo"].ToString();
-                model.BankName = r["MemberBankName"].ToString();
-                model.BankBranch = r["MemberBranch"].ToString();
-                model.IFSCCode = r["IFSCCode"].ToString();
-                model.IsUpdated = r["IsUpdated"] != DBNull.Value
-                     ? Convert.ToInt32(r["IsUpdated"])
-                     : 0;
-            }
-
-            return View(model);
-        }
-
         [HttpPost]
-        public ActionResult UpdatKYC(Reports model)
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(model.UserID))
-                {
-                    TempData["UpdateKYC"] = "Invalid User ID";
-                    return RedirectToAction("InvestmentNRIReport");
-                }
-
-                // ✅ Session value set karo
-                model.UpdatedBy = Session["UserID"]?.ToString();
-
-                // ✅ Model se SP call
-                DataSet ds = model.UpdateUserOtherInfo();
-
-                TempData["UpdateKYC"] = "KYC Updated Successfully";
-            }
-            catch (Exception ex)
-            {
-                TempData["UpdateKYC"] = ex.Message;
-            }
-
-           // return RedirectToAction("UpdatKYC", new { Id = model.UserID });
-            return RedirectToAction("InvestmentNRIReport");
-        }
-
-
-        [HttpPost]
-
         public ActionResult SaveInvestmentNRIForm(Plot obj)
         {
             string FormName = "";
             string Controller = "";
             try
             {
-
-
-
                 obj.BookingDate = string.IsNullOrEmpty(obj.BookingDate) ? null : Common.ConvertToSystemDate(obj.BookingDate, "dd/MM/yyyy");
                 obj.TransactionDate = string.IsNullOrEmpty(obj.TransactionDate) ? null : Common.ConvertToSystemDate(obj.TransactionDate, "dd/MM/yyyy");
                 obj.AddedBy = Session["Pk_AdminId"].ToString();
@@ -4907,17 +4841,11 @@ namespace NeerajraiInfra.Controllers
             {
 
             }
-
             FormName = "InvestmentNRI";
             Controller = "Plot";
 
-
-
             return RedirectToAction(FormName, Controller);
-
         }
-
-
 
         public ActionResult InvestmentNRIReport(Reports model)
         {
@@ -4951,7 +4879,7 @@ namespace NeerajraiInfra.Controllers
                         obj.PaymentStatus = r["PaymentStatus"].ToString();
                         obj.CouponStatus = r["CouponStatus"].ToString();
                         obj.UpdatedCouponRemarks = r["CouponUpdateRemarks"].ToString();
-                        obj.UserID = r["UserID"].ToString();
+                        obj.BankDetailsSaved = r["BankDetailsSaved"].ToString();
                         lst.Add(obj);
                     }
                     model.lstEV = lst;
@@ -4959,7 +4887,6 @@ namespace NeerajraiInfra.Controllers
             }
             return View(model);
         }
-
 
         public ActionResult PrintNRIInvestmentBooking(Plot newdata, string PrintId)
         {
@@ -5007,8 +4934,6 @@ namespace NeerajraiInfra.Controllers
             return View(newdata);
         }
 
-
-
         public ActionResult ROIInvestmentNRIReport(long Id)
         {
             List<ROIModel> list = new List<ROIModel>();
@@ -5052,7 +4977,6 @@ namespace NeerajraiInfra.Controllers
             return View(list);
         }
 
-
         public ActionResult ROIWalletNRIALlUserDetails(Reports model)
         {
             List<Reports> lst = new List<Reports>();
@@ -5060,7 +4984,7 @@ namespace NeerajraiInfra.Controllers
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
 
-            DataSet ds = model.GetInvestmentNRIDetailsList();
+            DataSet ds = model.GetROINRIDetailsList();
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -5079,12 +5003,14 @@ namespace NeerajraiInfra.Controllers
                         obj.CustomerLoginID = r["CustomerDetails"].ToString();
                         obj.AssociateLoginID = r["AssociateDetails"].ToString();
                         obj.Amount = r["Amount"].ToString();
+                        obj.ROIAmount = r["ROIAmount"].ToString();
                         obj.PaymentMode = r["PaymentMode"].ToString();
                         obj.TransactionDetails = r["TransactionDetails"].ToString();
                         obj.Remarks = r["Remarks"].ToString();
                         obj.PaymentStatus = r["PaymentStatus"].ToString();
                         obj.CouponStatus = r["CouponStatus"].ToString();
                         obj.UpdatedCouponRemarks = r["CouponUpdateRemarks"].ToString();
+                        obj.UserID = r["UserID"].ToString();
                         lst.Add(obj);
                     }
                     model.lstEV = lst;
@@ -5092,7 +5018,6 @@ namespace NeerajraiInfra.Controllers
             }
             return View(model);
         }
-
 
         public ActionResult ROIWalletNRIReport(long Id)
         {
@@ -5119,6 +5044,7 @@ namespace NeerajraiInfra.Controllers
                     item.Narration = dr["Narration"].ToString();
                     item.CrAmount = Convert.ToDecimal(dr["CrAmount"]);
                     item.DrAmount = Convert.ToDecimal(dr["DrAmount"]);
+                    item.TotalAmounts = Convert.ToDecimal(dr["Amount"]);
 
                     item.TransactionDate = dr["TransactionDate"].ToString();
                     // item.PayoutNo = dr["PayoutNo"].ToString();
@@ -5131,11 +5057,60 @@ namespace NeerajraiInfra.Controllers
             return View(list);
         }
 
-
-
-
-
-
         #endregion
+
+        public ActionResult submitBankForm(string bankName,string AccountNumber, string IFSCCode,string BranchName,string BankHolderName, string InvestmentId)
+        {
+            Reports model = new Reports();
+            model.BankName = bankName;
+            model.MemberAccNo = AccountNumber;
+            model.IFSCCode = IFSCCode;
+            model.BankBranch=BranchName;
+            model.BankHolderName = BankHolderName;
+            model.Pk_InvestId=InvestmentId;
+            model.AddedBy = Session["Pk_AdminId"].ToString();
+            DataSet ds = model.submitBankForm();
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                {
+                    model.Result = "1";
+                }
+                else
+                {
+                    model.Result = "0";
+                }
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult PayROIAmount(int UserId, int InvestId, decimal Amount)
+        {
+            try
+            {
+                Reports model = new Reports();
+                model.FK_InvestmentID = InvestId.ToString();
+                model.Fk_UserId = UserId.ToString();
+                model.Amount = Amount.ToString();
+                model.AddedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.PayROIAmount();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        return Json(new { success = true });
+                    }
+                    else
+                    {
+                        return Json(new { success = false, message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString() });
+                    }
+                }
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
     }
 }

@@ -21,13 +21,13 @@ namespace NeerajraiInfra.Models
         public string TransactionDetails { get; set; }
         public List<Reports> lstEV { get; set; }
         public string UpdatedCouponRemarks { get; set; }
+        public string BankDetailsSaved { get; set; }
 
 
 
         public string ErrorMessage { get; set; }
         public string Downline { get; set; }
         public int hdRows1 { get; set; }
-        public int IsUpdated { get; set; }
         public string ReturnBenefitStartDate { get; set; }
         public string SponsorName { get; set; }
         public string SponsorId { get; set; }
@@ -70,6 +70,7 @@ namespace NeerajraiInfra.Models
         public string UpgradtionDate { get; set; }
         public string ProductName { get; set; }
         public string Amount { get; set; }
+        public string ROIAmount { get; set; }
         public string PlotNumber { get; set; }
         public List<Reports> lsttopupreport { get; set; }
 
@@ -472,31 +473,6 @@ namespace NeerajraiInfra.Models
 
 
 
-        public DataSet GetUserOtherInfo()
-        {
-            SqlParameter[] para = {
-            new SqlParameter("@FK_UserId", UserID)
-          }; 
-
-            DataSet ds = Connection.ExecuteQuery("GetUserOtherInfo", para);
-            return ds;
-        }
-
-        public DataSet UpdateUserOtherInfo()
-        {
-            SqlParameter[] para = {
-        new SqlParameter("@FK_UserId", UserID),
-        new SqlParameter("@BankHolderName", BankHolderName ?? (object)DBNull.Value),
-        new SqlParameter("@MemberAccNo", MemberAccNo ?? (object)DBNull.Value),
-        new SqlParameter("@MemberBankName", BankName ?? (object)DBNull.Value),
-        new SqlParameter("@MemberBranch", BankBranch ?? (object)DBNull.Value),
-        new SqlParameter("@IFSCCode", IFSCCode ?? (object)DBNull.Value),
-        new SqlParameter("@UpdatedBy", UpdatedBy ?? (object)DBNull.Value)
-    };
-
-            DataSet ds = Connection.ExecuteQuery("UpdateUserOtherInfo", para);
-            return ds;
-        }
 
         public DataSet GetKharijDakhilList()
         {
@@ -652,45 +628,47 @@ namespace NeerajraiInfra.Models
             return ds;
         }
         public DataSet GetInvestmentNRIDetailsList()
-            {
-                SqlParameter[] para = {
-                new SqlParameter("@Pk_InvestId", Pk_InvestId),
-                new SqlParameter("@CustomerID",UserID),
-                new SqlParameter("@AssociateID", LoginId),
-                new SqlParameter("@CouponCode", CouponNumber),
-                new SqlParameter("@FromDate", FromDate),
-                new SqlParameter("@ToDate", ToDate),
-                new SqlParameter("@PaymentStatus", PaymentStatus)
+                {
+                    SqlParameter[] para = {
+                new SqlParameter("@Pk_InvestId", DBNull.Value),
+                new SqlParameter("@CustomerID", DBNull.Value),
+                new SqlParameter("@AssociateID", DBNull.Value),
+                new SqlParameter("@CouponCode", DBNull.Value),
+                new SqlParameter("@FromDate", DBNull.Value),
+                new SqlParameter("@ToDate", DBNull.Value),
+                new SqlParameter("@PaymentStatus", DBNull.Value)
 
             };
 
             DataSet ds = Connection.ExecuteQuery("GetInvestmentNRIList", para);
 
-            // 🔍 DEBUG START
-            if (ds == null)
-            {
-                Console.WriteLine("DataSet is NULL");
-            }
-            else if (ds.Tables.Count == 0)
-            {
-                Console.WriteLine("No Tables Found");
-            }
-            else
-            {
-                Console.WriteLine("Rows Count: " + ds.Tables[0].Rows.Count);
-            }
-            // 🔍 DEBUG END
+            return ds;
+        }
+        public DataSet GetROINRIDetailsList()
+                {
+                    SqlParameter[] para = {
+                new SqlParameter("@Pk_InvestId", DBNull.Value),
+                new SqlParameter("@CustomerID", DBNull.Value),
+                new SqlParameter("@AssociateID", AssociateID),
+                new SqlParameter("@CouponCode", DBNull.Value),
+                new SqlParameter("@FromDate", DBNull.Value),
+                new SqlParameter("@ToDate", DBNull.Value),
+                new SqlParameter("@PaymentStatus", DBNull.Value)
+
+            };
+
+            DataSet ds = Connection.ExecuteQuery("GetROINRIList", para);
 
             return ds;
         }
 
-        public DataSet GetInvestmentNRIDetailsListBYAddedBy(string AddedBy)
+        public DataSet GetInvestmentNRIDetailsListBYAddedBy()
             
         {
             SqlParameter[] para = {
-                new SqlParameter("@Pk_InvestId",Pk_InvestId),
-                new SqlParameter("@CustomerID",UserID),
-                new SqlParameter("@AssociateID",LoginId),
+                new SqlParameter("@Pk_InvestId", DBNull.Value),
+                new SqlParameter("@CustomerID", UserID), 
+                new SqlParameter("@AssociateID", AssociateID),
                 new SqlParameter("@CouponCode", CouponNumber),
                 new SqlParameter("@FromDate", FromDate),
                 new SqlParameter("@ToDate", ToDate),
@@ -699,7 +677,7 @@ namespace NeerajraiInfra.Models
 
             };
 
-            DataSet ds = Connection.ExecuteQuery("GetInvestmentNRIList", para);
+            DataSet ds = Connection.ExecuteQuery("GetInvestmentNRIListByAssociate", para);
 
 
 
@@ -741,6 +719,47 @@ namespace NeerajraiInfra.Models
                 new SqlParameter("@UpdatedBy",UpdatedBy)
             };
             DataSet ds = Connection.ExecuteQuery("UpdateCouponStatus", para);
+            return ds;
+        }
+        public DataSet GetNRIPayPayout()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId)
+            };
+            DataSet ds = Connection.ExecuteQuery("GetBalanceNRIPayoutforPayment", para);
+            return ds;
+        }
+        public DataSet SaveNRIPayPayout()
+        {
+            SqlParameter[] para = { new SqlParameter("@Fk_UserId", Fk_UserId),
+                                    new SqlParameter("@TransactionNo", TransactionNo),
+                                    new SqlParameter("@TransactionDate", TransactionDate),
+                                    new SqlParameter("@Amount", Amount),
+                                    new SqlParameter("@AddedBy", AddedBy) };
+            DataSet ds = Connection.ExecuteQuery("PayNRIPayout", para);
+            return ds;
+        }
+        public DataSet submitBankForm()
+        {
+            SqlParameter[] para = { new SqlParameter("@BankName", BankName),
+            new SqlParameter("@MemberAccNo", MemberAccNo),
+            new SqlParameter("@IFSCCode", IFSCCode),
+            new SqlParameter("@BankBranch", BankBranch),
+            new SqlParameter("@BankHolderName", BankHolderName),
+            new SqlParameter("@Pk_InvestId", Pk_InvestId),
+            new SqlParameter("@AddedBy", AddedBy),
+            };
+            
+            DataSet ds = Connection.ExecuteQuery("SaveBankDetails", para);
+            return ds;
+        }
+        public DataSet PayROIAmount()
+        {
+            SqlParameter[] para = { new SqlParameter("@FK_InvestmentID", FK_InvestmentID),
+            new SqlParameter("@Fk_UserId", Fk_UserId),
+            new SqlParameter("@Amount", Amount),
+            new SqlParameter("@AddedBy", AddedBy),
+            };
+            DataSet ds = Connection.ExecuteQuery("PayROIAmount", para);
             return ds;
         }
     }

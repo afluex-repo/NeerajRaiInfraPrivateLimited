@@ -97,7 +97,7 @@
                                     }, new { @class = "form-control" })
                                     </div>
                                 </div>
-                               
+
 
 
                                 <div class="col-md-3">
@@ -126,7 +126,7 @@
                                             @*<th>Coupon Status</th>*@
                                             @*<th>Coupon Remarks</th>*@
                                             <th>Action</th>
-                                            <th>Update KYC</th>
+                                            <th>Bank Details</th>
                                             @*<th>Update Coupon Status</th>*@
                                         </tr>
                                     </thead>
@@ -149,27 +149,38 @@
                                                         <td>@Item.PaymentMode</td>
                                                         <td>@Item.TransactionDetails</td>
                                                         <td>@Item.Remarks</td>
-                                                        <td>@Item.PaymentStatus</td>
+                                                        <td>@Item.PaymentStatus</td> 
                                                         @*<td>@Item.EntryType</td>*@
                                                         @*<td>@Item.CouponStatus</td>*@
                                                         @*<td>@Item.UpdatedCouponRemarks</td>*@
 
                                                         <td>
-                                                            <div class="badge badge-success badge-shadow"><a target="_blank" class="badge badge-success badge-shadow" href="/Plot/PrintNRIInvestmentBooking?PrintId=@Item.Pk_InvestId"><span>Print</span></a></div>
+                                                            <div>
+                                                                <a target="_blank" class="btn btn-success mb-1" href="/Plot/PrintNRIInvestmentBooking?PrintId=@Item.Pk_InvestId">Print</a>
 
-                                                            <div class="badge badge-success badge-shadow"><a target="_blank" class="badge badge-success badge-shadow" href="/Plot/ROIInvestmentNRIReport?Id=@Item.Pk_InvestId"><span>View ROI</span></a></div>
-
-                                                        </td>
-                                                        <td>
-                                                            <div class="badge badge-success badge-shadow"><a target="_blank" class="badge badge-success badge-shadow" href="/Plot/UpdatKYC?Id=@Item.UserID"><span>Update KYC</span></a></div>
+                                                                <a target="_blank" class="btn btn-success mb-1" href="/Plot/ROIInvestmentNRIReport?Id=@Item.Pk_InvestId">View ROI</a>
+                                                            </div>
 
                                                         </td>
-
-                                                            @*<td>
-                <button type="button" class="btn btn-warning btn-sm shadow" onclick="openCouponPopup('@Item.Pk_EVBookingId');">
-                    Update Coupon Status
-                </button>
-            </td>*@
+                                                        @*<td>
+                                                                <button type="button" class="btn btn-warning btn-sm shadow" onclick="openCouponPopup('@Item.Pk_EVBookingId');">
+                                                                    Update Coupon Status
+                                                                </button>
+                                                            </td>*@
+                                                    <td>
+                                                        @if (Item.BankDetailsSaved == "1")
+                                                        {
+                                                            <button type="button" class="btn btn-primary" disabled>
+                                                                Add Details
+                                                            </button>
+                                                        }
+                                                        else
+                                                        {
+                                                            <button type="button" class="btn btn-primary" onclick="openBankModal(@Item.Pk_InvestId)">
+                                                                Add Details
+                                                            </button>
+                                                        }
+                                                    </td>
 
 
                                                     </tr>
@@ -193,8 +204,54 @@
         </div>
     </div>
 
+    <!-- Modal -->
+<div class="modal fade" id="bankModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
 
- 
+            <div class="modal-header">
+                <h5 class="modal-title">Bank Details</h5>
+                <button type="button" class="close" onclick="closeBankModal()">&times;</button>
+            </div>
+            <input type="hidden" id="InvestmentId" />
+            <div class="modal-body">
+                <form id="bankForm">
+                    <div class="form-group">
+                        <label>Bank Holder Name</label>
+                        <input type="text" class="form-control" name="BankHolderName" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Bank Name</label>
+                        <input type="text" class="form-control" name="BankName" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Account Number</label>
+                        <input type="text" class="form-control" name="AccountNumber" onkeypress="return /[0-9]/i.test(event.key)" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>IFSC Code</label>
+                        <input type="text" class="form-control" name="IFSCCode" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Branch Name</label>
+                        <input type="text" class="form-control" name="BranchName" />
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="submitBankForm()">Submit</button>
+                <button type="button" class="btn btn-secondary" onclick="closeBankModal()">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
 }
 
 
@@ -215,4 +272,69 @@
         changeMonth: true
     });
 
+</script>
+<script>
+    function openBankModal(Pk_InvestId) {
+        $('input[name="BankHolderName"]').val('');
+        $('input[name="BankName"]').val('');
+        $('input[name="AccountNumber"]').val('');
+        $('input[name="IFSCCode"]').val('');
+        $('input[name="BranchName"]').val('');
+        $('input[id="InvestmentId"]').val(Pk_InvestId);
+        $('#bankModal').modal('show');
+    }
+
+    function closeBankModal() {
+        $('#bankModal').modal('hide');
+    }
+
+    function submitBankForm() {
+        var BankHolderName = $('input[name="BankHolderName"]').val();
+        if (BankHolderName == "") {
+            alert("Please enter Bank Holder Name");
+            return;
+        }
+        var bankName = $('input[name="BankName"]').val();
+        if (bankName == "") {
+            alert("Please enter Bank Name");
+            return;
+        }
+        var AccountNumber = $('input[name="AccountNumber"]').val();
+        if (AccountNumber == "") {
+            alert("Please enter Account Number");
+            return;
+        }
+        var IFSCCode = $('input[name="IFSCCode"]').val();
+        if (IFSCCode == "") {
+            alert("Please enter IFSC Code");
+            return;
+        }
+        var BranchName = $('input[name="BranchName"]').val();
+        if (BranchName == "") {
+            alert("Please enter Branch Name");
+            return;
+        }
+        var InvestmentId = $('input[id="InvestmentId"]').val();
+        $.ajax({
+            url: '/Plot/submitBankForm', type: 'post', dataType: 'json',
+            data: { 'bankName': bankName, 'AccountNumber': AccountNumber, 'IFSCCode': IFSCCode, 'BranchName': BranchName, 'BankHolderName': BankHolderName, 'InvestmentId': InvestmentId },
+            success: function (data) {
+                if (data.Result == "1") {
+                    $('input[name="BankHolderName"]').val('');
+                    $('input[name="BankName"]').val('');
+                    $('input[name="AccountNumber"]').val('');
+                    $('input[name="IFSCCode"]').val('');
+                    $('input[name="BranchName"]').val('');
+                    $('input[id="InvestmentId"]').val('');
+                    alert("Bank details save Successfully!");
+                }
+                else {
+                    alert("Something went wrong!");
+                }
+            }
+        });
+
+
+        closeBankModal();
+    }
 </script>
