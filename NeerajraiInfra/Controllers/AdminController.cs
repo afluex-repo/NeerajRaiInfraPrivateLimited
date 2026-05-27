@@ -2510,10 +2510,525 @@ namespace NeerajraiInfra.Controllers
             return RedirectToAction("ContactList", "Admin");
         }
 
+        #region NRIPayout
+        public ActionResult NRIPayPayout()
+        {
+            Reports model = new Reports();
+
+            List<Reports> lst = new List<Reports>();
+            DataSet ds = model.GetNRIPayPayout();
+            ViewBag.Total = "0";
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.Name = r["Name"].ToString();
+                    obj.BankHolderName = r["BankHolderName"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.MemberAccNo = r["MemberAccNo"].ToString();
+                    obj.IFSCCode = (r["IFSCCode"].ToString());
+                    obj.BankName = (r["MemberBankName"].ToString());
+                    obj.Fk_UserId = (r["Pk_UserId"].ToString());
+                    obj.Amount = (r["Amount"].ToString());
+                    ViewBag.Total = Convert.ToDecimal(ViewBag.Total) + Convert.ToDecimal(r["Amount"].ToString());
+                    lst.Add(obj);
+                }
+                model.lstassociate = lst;
+            }
+            return View(model);
+        }
+        [HttpPost]
+        [ActionName("NRIPayPayout")]
+        [OnAction(ButtonName = "GetDetails")]
+        public ActionResult NRIPayPayout(Reports model)
+        {
+
+            model.LoginId = string.IsNullOrEmpty(model.LoginId) ? null : model.LoginId;
+            //model.Downline = model.IsDownline == true ? "1" : "0";
+            List<Reports> lst = new List<Reports>();
+            DataSet ds = model.GetNRIPayPayout();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.Name = r["Name"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.MemberAccNo = r["MemberAccNo"].ToString();
+                    obj.IFSCCode = (r["IFSCCode"].ToString());
+                    obj.BankName = (r["MemberBankName"].ToString());
+                    obj.Fk_UserId = (r["Pk_UserId"].ToString());
+                    obj.Amount = (r["Amount"].ToString());
+                    ViewBag.Total = Convert.ToDecimal(ViewBag.Total) + Convert.ToDecimal(r["Amount"].ToString());
+                    lst.Add(obj);
+                }
+                model.lstassociate = lst;
+            }
 
 
+            return View(model);
+        }
+        [HttpPost]
+        [ActionName("NRIPayPayout")]
+        [OnAction(ButtonName = "Save")]
+        public ActionResult PayNRIPayoutAction(Reports model)
+        {
+            string hdrows2 = Request["hdRows2"].ToString();
+            string amount = "";
+            string description = "";
+            string transactiono = "";
+            string transactiondate = "";
+            string Pk_PaidBoosterId_ = "";
+            for (int i = 1; i < int.Parse(hdrows2); i++)
+            {
+                Pk_PaidBoosterId_ = Request["Fk_UserId_ " + i].ToString();
+                amount = "";
+
+                transactiono = Request["txttranno_ " + i].ToString();
+                transactiondate = Request["txttransdate_ " + i].ToString();
+                model.Amount = Request["txtamount_ " + i].ToString();
+                model.Fk_UserId = Pk_PaidBoosterId_;
+
+                model.TransactionNo = transactiono;
+                DataSet ds = null;
+                if (!string.IsNullOrEmpty(transactiondate))
+                {
+                    model.TransactionDate = transactiondate;
+                    model.AddedBy = Session["Pk_AdminId"].ToString();
+                    ds = model.SaveNRIPayPayout();
+                }
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        TempData["NRIPayPayout"] = "Payment Done";
+                    }
+                    else
+                    {
+                        TempData["NRIPayPayout"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+
+            return RedirectToAction("NRIPayPayout");
+        }
+        #endregion
+        #region NRIPaidPayout
+        public ActionResult NRIPaidPayout()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ActionName("NRIPaidPayout")]
+        [OnAction(ButtonName = "GetDetails")]
+        public ActionResult GetNRIPaidPayout(Wallet objewallet)
+        {
+            List<Wallet> lst = new List<Wallet>();
+            objewallet.FromDate = string.IsNullOrEmpty(objewallet.FromDate) ? null : Common.ConvertToSystemDate(objewallet.FromDate, "dd/MM/yyyy");
+            objewallet.ToDate = string.IsNullOrEmpty(objewallet.ToDate) ? null : Common.ConvertToSystemDate(objewallet.ToDate, "dd/MM/yyyy");
+            DataSet ds = objewallet.GetNRIPaidPayout();
+            ViewBag.Total = "0";
+            if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Wallet Objload = new Wallet();
+                    Objload.LoginId = dr["Loginid"].ToString();
+                    Objload.DisplayName = dr["Name"].ToString();
+                    Objload.PaymentDate = dr["Paymentdate"].ToString();
+
+                    Objload.Amount = dr["Amount"].ToString();
+                    Objload.TransactionDate = dr["TransactionDate"].ToString();
+                    Objload.TransactionNo = dr["TransactionNo"].ToString();
+                    ViewBag.Total = Convert.ToDecimal(ViewBag.Total) + Convert.ToDecimal(dr["Amount"].ToString());
+                    lst.Add(Objload);
+                }
+                objewallet.lstpayoutledger = lst;
+            }
+            return View(objewallet);
+        }
+        #endregion
+        #region NRI Payout Ledger
+        public ActionResult NRIPayoutLedger()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ActionName("NRIPayoutLedger")]
+        [OnAction(ButtonName = "GetDetails")]
+        public ActionResult NRIPayoutLedgerBy(Wallet objewallet)
+        {
 
 
+            objewallet.FromDate = string.IsNullOrEmpty(objewallet.FromDate) ? null : Common.ConvertToSystemDate(objewallet.FromDate, "dd/MM/yyyy");
+            objewallet.ToDate = string.IsNullOrEmpty(objewallet.ToDate) ? null : Common.ConvertToSystemDate(objewallet.ToDate, "dd/MM/yyyy");
+            List<Wallet> lst = new List<Wallet>();
+            DataSet ds = objewallet.NRIPayoutLedger();
+            if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
+            {
 
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Wallet Objload = new Wallet();
+                    Objload.Narration = dr["Narration"].ToString();
+                    Objload.DrAmount = dr["Debit"].ToString();
+                    Objload.CrAmount = dr["Credit"].ToString();
+                    Objload.AddedOn = dr["TransactionDate"].ToString();
+                    Objload.PayoutBalance = dr["Balance"].ToString();
+
+                    lst.Add(Objload);
+                }
+                objewallet.lstpayoutledger = lst;
+            }
+            return View(objewallet);
+        }
+        #endregion
+        #region distributeNRIPayment
+
+        public ActionResult DistributeNRIPayment()
+        {
+            Wallet model = new Wallet();
+            List<AssociateBooking> lst = new List<AssociateBooking>();
+
+            //ViewBag.Binary = ViewBag.Direct = ViewBag.Gross = ViewBag.TDS = ViewBag.Processing = ViewBag.NetIncome = 0;
+            DataSet ds = model.GetDitributeNRIPaymentList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    AssociateBooking obj = new AssociateBooking();
+                    obj.ToID = r["LoginId"].ToString();
+                    obj.ToName = r["ToName"].ToString();
+                    obj.Income = r["Income"].ToString();
+                    obj.GrossAmount = r["GrossIncome"].ToString();
+                    //obj.DirectIncome = r["DirectIncome"].ToString();
+                    //obj.DifferentialIncome = r["DifferentialIncome"].ToString();
+                    //obj.DirectLeadershipIncome = r["DirectLeadershipIncome"].ToString();
+                    obj.Processing = r["Processing"].ToString();
+                    obj.TDS = r["TDS"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstdistribute = lst;
+                ViewBag.Total = double.Parse(ds.Tables[0].Compute("sum(Income)", "").ToString()).ToString("n2");
+            }
+            //if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            //{
+            //    foreach (DataRow r in ds.Tables[0].Rows)
+            //    {
+            //        Wallet obj = new Wallet();
+            //        obj.LoginId = r["LoginId"].ToString();
+            //        obj.FirstName = r["FirstName"].ToString();
+            //        obj.BinaryIncome = r["BinaryIncome"].ToString();
+            //        obj.DirectIncome = r["DirectIncome"].ToString();
+            //        obj.GrossIncome = (r["GrossIncome"].ToString());
+            //        obj.TDS = (r["TDS"].ToString());
+            //        obj.Processing = (r["Processing"].ToString());
+            //        obj.NetIncome = (r["NetIncome"].ToString());
+
+            //        obj.LeadershipBonus = r["DirectLeaderShipBonus"].ToString();
+            //        ViewBag.Binary = Convert.ToDecimal(ViewBag.Binary) + Convert.ToDecimal(r["BinaryIncome"].ToString());
+            //        ViewBag.Direct = Convert.ToDecimal(ViewBag.Direct) + Convert.ToDecimal(r["DirectIncome"].ToString());
+            //        ViewBag.Gross = Convert.ToDecimal(ViewBag.Gross) + Convert.ToDecimal(r["GrossIncome"].ToString());
+            //        ViewBag.TDS = Convert.ToDecimal(ViewBag.TDS) + Convert.ToDecimal(r["TDS"].ToString());
+            //        ViewBag.Processing = Convert.ToDecimal(ViewBag.Processing) + Convert.ToDecimal(r["Processing"].ToString());
+            //        ViewBag.NetIncome = Convert.ToDecimal(ViewBag.NetIncome) + Convert.ToDecimal(r["NetIncome"].ToString());
+
+            //        lst.Add(obj);
+            //    }
+            //    model.lstassociate = lst;
+
+            //}
+            model.LastClosingDate = ds.Tables[1].Rows[0]["ClosingDate"].ToString();
+            model.PayoutNo = ds.Tables[1].Rows[0]["PayoutNo"].ToString();
+            return View(model);
+        }
+
+        public ActionResult DistiributeNRIPayemntToMembers(Wallet obj)
+        {
+            string FormName = "";
+            string Controller = "";
+            try
+            {
+                obj.ClosingDate = Common.ConvertToSystemDate(obj.ClosingDate, "dd/MM/yyyy");
+                obj.UpdatedBy = Session["PK_AdminId"].ToString();
+                DataSet ds = obj.AutoDistributeNRIPayment();
+
+                TempData["DistributeNRIPayment"] = "NRI Payment distributed successfully";
+                FormName = "DistributeNRIPayment";
+                Controller = "Admin";
+            }
+            catch (Exception ex)
+            {
+                TempData["DistributeNRIPayment"] = ex.Message;
+                FormName = "DistributeNRIPayment";
+                Controller = "Admin";
+            }
+
+            return RedirectToAction(FormName, Controller);
+        }
+        #endregion
+
+        #region NRIPaymentApprove
+        public ActionResult NRIPaymentApprove(Plot model)
+        {
+            List<Plot> lst = new List<Plot>();
+            model.PaymentMode = model.PaymentMode == "0" ? null : model.PaymentMode;
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+           
+            #region ddlPaymentMode
+            int count3 = 0;
+            List<SelectListItem> ddlPaymentMode = new List<SelectListItem>();
+            DataSet dsPayMode = model.GetPaymentModeList();
+            if (dsPayMode != null && dsPayMode.Tables.Count > 0 && dsPayMode.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsPayMode.Tables[0].Rows)
+                {
+                    if (count3 == 0)
+                    {
+                        ddlPaymentMode.Add(new SelectListItem { Text = "Select Payment Mode", Value = "0" });
+                    }
+                    ddlPaymentMode.Add(new SelectListItem { Text = r["PaymentMode"].ToString(), Value = r["PK_paymentID"].ToString() });
+                    count3 = count3 + 1;
+                }
+            }
+            ViewBag.ddlPaymentMode = ddlPaymentMode;
+            #endregion
+            return View(model);
+        }
+        [HttpPost]
+        [ActionName("NRIPaymentApprove")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult GetList(Plot model)
+        {
+            List<Plot> lst = new List<Plot>();
+            model.PaymentMode = model.PaymentMode == "0" ? null : model.PaymentMode;
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+
+            DataSet ds = model.GetNRIPaymentList();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Plot obj = new Plot();
+                    obj.UserID = r["Pk_InvestId"].ToString();
+                    obj.CustomerID = r["CustomerLoginID"].ToString();
+                    obj.CustomerName = r["CustomerName"].ToString();
+                    obj.AssociateID = r["AssociateLoginID"].ToString();
+                    obj.AssociateName = r["AssociateName"].ToString();
+                    obj.PaymentMode = r["PaymentMode"].ToString();
+                    //obj.PlotInfo = r["Plotdetails"].ToString();
+                    obj.TransactionDate = r["TransactionDate"].ToString();
+                    obj.TransactionNumber = r["TransactionNo"].ToString();
+                    obj.Remark = r["Details"].ToString();
+                    obj.PaidAmount = r["Amount"].ToString();
+                    obj.PaymentStatus = r["PaymentStatus"].ToString();
+                    obj.PaymentDate = r["PaymentDate"].ToString();
+                    obj.AllotmentRemark = r["Remarks"].ToString();
+                    //obj.SiteName = r["SiteName"].ToString();
+                    //obj.SectorName = r["SectorName"].ToString();
+                    //obj.BlockName = r["BlockName"].ToString();
+                    //obj.PlotNumber = r["PlotNumber"].ToString();
+                    obj.PaymentModeRemarks = r["PaymentModeRemarks"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstPlot = lst;
+                ViewBag.TotalAmount = double.Parse(ds.Tables[0].Compute("sum(Amount)", "").ToString()).ToString("n2");
+            }
+            #region ddlPaymentMode
+            int count3 = 0;
+            List<SelectListItem> ddlPaymentMode = new List<SelectListItem>();
+            DataSet dsPayMode = model.GetPaymentModeList();
+            if (dsPayMode != null && dsPayMode.Tables.Count > 0 && dsPayMode.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsPayMode.Tables[0].Rows)
+                {
+                    if (count3 == 0)
+                    {
+                        ddlPaymentMode.Add(new SelectListItem { Text = "Select Payment Mode", Value = "0" });
+                    }
+                    ddlPaymentMode.Add(new SelectListItem { Text = r["PaymentMode"].ToString(), Value = r["PK_paymentID"].ToString() });
+                    count3 = count3 + 1;
+                }
+            }
+            ViewBag.ddlPaymentMode = ddlPaymentMode;
+            #endregion
+            return View(model);
+        }
+        public ActionResult ApproveNRIPayment(string UserID, string Description, string ApprovedDate, bool CalculationChecked)
+        {
+            Plot model = new Plot();
+            try
+            {
+                model.UserID = UserID;
+                model.Description = Description;
+                model.ApprovedDate = string.IsNullOrEmpty(ApprovedDate) ? null : Common.ConvertToSystemDate(ApprovedDate, "dd/MM/yyyy");
+                model.AddedBy = Session["Pk_AdminId"].ToString();
+                model.CalculationChecked = CalculationChecked;
+                DataSet ds = model.ApproveNRIPayment();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        model.Result = "Yes";
+                    }
+                    else
+                    {
+                        model.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                model.Result = ex.Message;
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult RejectNRIPayment(string UserID, string Description, string ApprovedDate)
+        {
+            Plot model = new Plot();
+            try
+            {
+                
+
+                model.UserID = UserID;
+                model.Description = Description;
+                model.ApprovedDate = string.IsNullOrEmpty(ApprovedDate) ? null : Common.ConvertToSystemDate(ApprovedDate, "dd/MM/yyyy");
+                model.AddedBy = Session["Pk_AdminId"].ToString();
+
+                DataSet ds = model.RejectNRIPayment();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        model.Result = "Yes";
+                    }
+                    else
+                    {
+                        model.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Plot"] = ex.Message;
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult NRIRejectedPayment(Plot model)
+        {
+            #region ddlPaymentMode
+            int count3 = 0;
+            List<SelectListItem> ddlPaymentMode = new List<SelectListItem>();
+            DataSet dsPayMode = model.GetPaymentModeList();
+            if (dsPayMode != null && dsPayMode.Tables.Count > 0 && dsPayMode.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsPayMode.Tables[0].Rows)
+                {
+                    if (count3 == 0)
+                    {
+                        ddlPaymentMode.Add(new SelectListItem { Text = "Select Payment Mode", Value = "0" });
+                    }
+                    ddlPaymentMode.Add(new SelectListItem { Text = r["PaymentMode"].ToString(), Value = r["PK_paymentID"].ToString() });
+                    count3 = count3 + 1;
+                }
+            }
+            ViewBag.ddlPaymentMode = ddlPaymentMode;
+            #endregion
+            return View(model);
+        }
+        [HttpPost]
+        [ActionName("NRIRejectedPayment")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult GetListOfNRIRejectedPayment(Plot model)
+        {
+            List<Plot> lst = new List<Plot>();
+            model.PaymentMode = model.PaymentMode == "0" ? null : model.PaymentMode;
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+
+            DataSet ds = model.GetNRIRejctedList();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Plot obj = new Plot();
+                    obj.UserID = r["Pk_InvestId"].ToString();
+                    obj.CustomerID = r["CustomerLoginID"].ToString();
+                    obj.CustomerName = r["CustomerName"].ToString();
+                    obj.PaymentMode = r["PaymentMode"].ToString();
+                    obj.TransactionDate = r["TransactionDate"].ToString();
+                    obj.TransactionNumber = r["TransactionNo"].ToString();
+                    obj.Remark = r["Details"].ToString();
+                    obj.PaidAmount = r["Amount"].ToString();
+                    obj.PaymentStatus = r["PaymentStatus"].ToString();
+                    obj.PaymentDate = r["PaymentDate"].ToString();
+                    obj.AssociateID = r["AssociateLoginID"].ToString();
+                    obj.AssociateName = r["AssociateName"].ToString();
+                    obj.AllotmentRemark = r["AllotmentRemarks"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstPlot = lst;
+            }
+            #region ddlPaymentMode
+            int count3 = 0;
+            List<SelectListItem> ddlPaymentMode = new List<SelectListItem>();
+            DataSet dsPayMode = model.GetPaymentModeList();
+            if (dsPayMode != null && dsPayMode.Tables.Count > 0 && dsPayMode.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsPayMode.Tables[0].Rows)
+                {
+                    if (count3 == 0)
+                    {
+                        ddlPaymentMode.Add(new SelectListItem { Text = "Select Payment Mode", Value = "0" });
+                    }
+                    ddlPaymentMode.Add(new SelectListItem { Text = r["PaymentMode"].ToString(), Value = r["PK_paymentID"].ToString() });
+                    count3 = count3 + 1;
+                }
+            }
+            ViewBag.ddlPaymentMode = ddlPaymentMode;
+            #endregion
+            return View(model);
+        }
+        public ActionResult NRIApproveRejPayment(string UserID, string Description, string ApprovedDate)
+        {
+            Plot model = new Plot();
+            try
+            {
+               
+
+                model.UserID = UserID;
+                model.Description = Description;
+                model.ApprovedDate = ApprovedDate;
+                model.AddedBy = Session["Pk_AdminId"].ToString();
+
+                DataSet ds = model.NRIApproveRejectPayment();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["Plot"] = "Payment Approved successfully !";
+                        model.Result = "Yes";
+                    }
+                    else
+                    {
+                        model.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Plot"] = ex.Message;
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
     }
 }

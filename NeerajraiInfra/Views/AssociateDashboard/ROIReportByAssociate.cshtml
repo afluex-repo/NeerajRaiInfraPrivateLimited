@@ -1,8 +1,7 @@
 ﻿
-
 @{
-    ViewBag.Title = "ROIWalletNRIALlUserDetails";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "ROIReportByAssociate";
+    Layout = "~/Views/Shared/AssociateLayout.cshtml";
 }
 
 
@@ -13,8 +12,8 @@
                 <i data-feather="home"></i>
             </a>
         </li>
-        <li class="breadcrumb-item">Reports</li>
-        <li class="breadcrumb-item">Royal Members Investment NRI Details </li>
+        <li class="breadcrumb-item">Royal Memeber Investment</li>
+        <li class="breadcrumb-item">ROI Report</li>
     </ul>
 </section>
 
@@ -23,7 +22,7 @@
 
     <div class="card">
         <div class="card-header">
-            <h4>Royal Members Investment NRI Details</h4>
+            <h4>Royal Members ROI Details</h4>
             <p style="color: red">
                 @TempData["Update"]
             </p>
@@ -47,13 +46,11 @@
                                         <th>Customer Detail</th>
                                         <th>Associate Details</th>
                                         <th>Investment Amount</th>
-                                        <th>PaymentMode</th>
                                         <th>ROI Amount</th>
-                                        <th>Pay_Amount</th>
-
-                                        @*<th>Transaction Details</th>
-                                            <th>Payment Remarks</th>
-                                            <th>Payment Status</th>*@
+                                        @*<th>PaymentMode</th>
+                                        <th>Transaction Details</th>
+                                        <th>Payment Remarks</th>
+                                        <th>Payment Status</th>*@
 
                                         <th>Action</th>
 
@@ -75,18 +72,19 @@
                                                     <td class="text-nowrap">@Item.CustomerLoginID</td>
                                                     <td class="text-nowrap">@Item.AssociateLoginID</td>
                                                     <td>@Item.Amount</td>
-                                                    <td>@Item.PaymentMode</td>
                                                     <td>@Item.ROIAmount</td>
-                                                    <td><input type="text" name="PayROIAmount" class="form-control form-control-sm payROIAmount" /></td>
-                                                    @*<td>@Item.TransactionDetails</td>
-                                                        <td>@Item.Remarks</td>
-                                                        <td>@Item.PaymentStatus</td>*@
+                                                    @*<td>@Item.PaymentMode</td>
+                                                    <td>@Item.TransactionDetails</td>
+                                                    <td>@Item.Remarks</td>
+                                                    <td>@Item.PaymentStatus</td>*@
+
+
 
                                                     <td>
-                                                        <div class="badge badge-success badge-shadow"><a target="_blank" class="badge badge-success badge-shadow" href="/Plot/ROIWalletNRIReport?Id=@Item.Pk_InvestId"><span>View ROI Wallet</span></a></div>
-                                                        <div class="badge badge-primary badge-shadow">
-                                                            <button type="button" class="badge badge-primary badge-shadow" onclick="PayROIAmount(this,'@Item.UserID','@Item.Pk_InvestId')">Pay ROI Amount</button>
-                                                        </div>
+
+
+                                                        <div class="badge badge-success badge-shadow"><a target="_blank" class="badge badge-success badge-shadow" href="/AssociateDashboard/ROIWalletNRIReport?Id=@Item.Pk_InvestId"><span>View ROI Wallet</span></a></div>
+
                                                     </td>
 
 
@@ -111,41 +109,4 @@
         </div>
     </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<script>
-    function PayROIAmount(btn, userId, investId) {
-
-        var row = $(btn).closest('tr');
-        var amount = row.find('.payROIAmount').val();
-        if (amount == null || amount.trim() == "") {
-            alert("Please enter Pay ROI Amount");
-            return false;
-        }
-
-        if (!confirm("Are you sure you want to pay ROI?")) {
-            return false;
-        }
-
-        $.ajax({
-            url: '/Plot/PayROIAmount',
-            type: 'POST',
-            data: {
-                UserId: userId,
-                InvestId: investId,
-                Amount: amount
-            },
-            success: function (response) {
-                if (response.success) {
-                    alert("ROI Paid Successfully");
-                    location.reload();
-                } else {
-                    alert(response.message);
-                }
-            },
-            error: function () {
-                alert("Something went wrong");
-            }
-        });
-    }
-</script>
