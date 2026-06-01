@@ -2954,13 +2954,15 @@ namespace NeerajraiInfra.Controllers
                     item.LoginId = dr["LoginId"].ToString();
                     item.FullName = dr["FullName"].ToString();
 
-                    item.FK_InvestId = Convert.ToInt64(dr["FK_InvestId"]);
-                    item.ROIInstallment = dr["ROIInstallment"] == DBNull.Value ? 0 : Convert.ToInt32(dr["ROIInstallment"]);
-                    item.ROI = dr["ROI"] == DBNull.Value ? 0 : Convert.ToDecimal(dr["ROI"]);
+                    item.FK_InvestId = Convert.ToInt64(dr["Pk_InvestId"]);
+                    //item.ROIInstallment = dr["ROIInstallment"] == DBNull.Value ? 0 : Convert.ToInt32(dr["ROIInstallment"]);
+                    //item.ROI = dr["ROI"] == DBNull.Value ? 0 : Convert.ToDecimal(dr["ROI"]);
 
+                    item.InvestmentAmount = dr["InvestmentAmount"].ToString();
                     item.Narration = dr["Narration"].ToString();
                     item.CrAmount = Convert.ToDecimal(dr["CrAmount"]);
                     item.DrAmount = Convert.ToDecimal(dr["DrAmount"]);
+                    item.TotalAmounts = Convert.ToDecimal(dr["Amount"]);
 
                     item.TransactionDate = dr["TransactionDate"].ToString();
                     // item.PayoutNo = dr["PayoutNo"].ToString();

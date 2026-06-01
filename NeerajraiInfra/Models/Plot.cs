@@ -1350,7 +1350,7 @@ namespace NeerajraiInfra.Models
         public decimal DrAmount { get; set; }
         public decimal TotalAmounts { get; set; }
         public string TransactionDate { get; set; }
-
+        public string InvestmentAmount { get; set; }
         public string PayoutNo { get; set; }
         public string TransactionNo { get; set; }
 

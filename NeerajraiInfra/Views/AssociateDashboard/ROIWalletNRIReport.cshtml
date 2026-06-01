@@ -24,12 +24,13 @@
                 <th>#</th>
                 <th>Login ID</th>
                 <th>Name</th>
-                <th>Invest ID</th>
-                <th>Installment</th>
-                <th>ROI</th>
+                @*<th>Invest ID</th>
+                <th>Installment</th>*@
+                <th>Investment Amount</th>
                 <th>Cr Amount</th>
                 <th>Dr Amount</th>
-                @*<th>Narration</th>*@
+                <th>Balance </th>
+                <th>Narration</th>
                 <th>Date</th>
                 @*<th>Payout</th>*@
             </tr>
@@ -37,7 +38,7 @@
 
         <tbody>
             @if (Model != null)
-            { 
+            {
                 int i = 1;
                 foreach (var item in Model)
                 {
@@ -45,12 +46,13 @@
                         <td>@i</td>
                         <td>@item.LoginId</td>
                         <td>@item.FullName</td>
-                        <td>@item.FK_InvestId</td>
-                        <td>@item.ROIInstallment</td>
-                        <td>₹@item.ROI</td>
+                        @*<td>@item.FK_InvestId</td>*@
+                        @*<td>@item.ROIInstallment</td>*@
+                        <td>₹@item.InvestmentAmount</td>
                         <td style="color:green;">₹@item.CrAmount</td>
                         <td style="color:red;">₹@item.DrAmount</td>
-                        @*<td>@item.Narration</td>*@
+                        <td>₹@item.TotalAmounts</td>
+                        <td>@item.Narration</td>
                         <td>@item.TransactionDate</td>
                         @*<td>@item.PayoutNo</td>*@
                     </tr>
