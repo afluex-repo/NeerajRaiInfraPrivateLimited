@@ -335,7 +335,6 @@ namespace NeerajraiInfra.Controllers
         }
 
 
-
         public ActionResult GetSiteDetails(string SiteID)
         {
             try
@@ -2823,6 +2822,7 @@ namespace NeerajraiInfra.Controllers
                     obj.BlockName = r["BlockName"].ToString();
                     obj.PlotNumber = r["PlotNumber"].ToString();
                     obj.PaymentModeRemarks = r["PaymentModeRemarks"].ToString();
+                    obj.AdjustmentId = r["AdjustmentId"].ToString();
                     lst.Add(obj);
                 }
                 model.lstPlot = lst;
