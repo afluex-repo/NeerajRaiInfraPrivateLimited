@@ -31,6 +31,7 @@ namespace NeerajraiInfra.Models
 
         public string PK_PlotID { get; set; }
         public string Pk_InvestId { get; set; }
+        public string AdjustmentId { get; set; }
 
         #region Properties
         public string Type { get; set; }
@@ -518,7 +519,7 @@ namespace NeerajraiInfra.Models
                                         new SqlParameter("@AddedBy",AddedBy),
                                         new SqlParameter("@AllotmentRemarks",Remark),
                                         new SqlParameter("@Fk_BankId",Fk_BankId),
-                                          new SqlParameter("@UTR_Number",UtrNumber),
+                                        new SqlParameter("@UTR_Number",UtrNumber),
                                         new SqlParameter("@UTR_Amount",UtrAmount),
                                         new SqlParameter("@AdjustmentId",AssociatesLoginID)
 
@@ -1366,6 +1367,9 @@ namespace NeerajraiInfra.Models
             DataSet ds = Connection.ExecuteQuery("GetROIWalletReport", para);
             return ds;
         }
+
+
+     
 
 
     }
