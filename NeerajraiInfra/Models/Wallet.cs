@@ -116,7 +116,39 @@ namespace NeerajraiInfra.Models
             DataSet ds = Connection.ExecuteQuery("PayoutReportForMember", para);
             return ds;
         }
-
-      
+        #region NRIPaidPayout
+        public DataSet GetNRIPaidPayout()
+        {
+            SqlParameter[] para = { new SqlParameter("@Fk_UserId", Fk_UserId),
+                                    new SqlParameter("@LoginId", LoginId),
+                                    new SqlParameter("@FromDate", FromDate),
+                                    new SqlParameter("@ToDate", ToDate), };
+            DataSet ds = Connection.ExecuteQuery("GetNRIPaidPayoutDetails", para);
+            return ds;
+        }
+        #endregion
+        public DataSet NRIPayoutLedger()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@Fk_UserId", Fk_UserId),
+                                       new SqlParameter("@FromDate", FromDate),
+                                        new SqlParameter("@ToDate", ToDate),
+                                         new SqlParameter("@LoginId", LoginId),
+                                     };
+            DataSet ds = Connection.ExecuteQuery("GetNRIPayoutLedger", para);
+            return ds;
+        }
+        public DataSet GetDitributeNRIPaymentList()
+        {
+            //SqlParameter[] para = { new SqlParameter("@LoginId", LoginID) };
+            DataSet ds = Connection.ExecuteQuery("GetDetailsForDistributeNRIPayment");
+            return ds;
+        }
+        public DataSet AutoDistributeNRIPayment()
+        {
+            SqlParameter[] para = { new SqlParameter("@ClosingDate", ClosingDate) };
+            DataSet ds = Connection.ExecuteQuery("_AutoDistributeNRIPayment", para);
+            return null;
+        }
     }
 }

@@ -16,7 +16,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NeerajraiInfra</RootNamespace>
     <AssemblyName>NeerajraiInfra</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -38,7 +38,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <IntermediateOutputPath>C:\Users\DELL\AppData\Local\Temp\vs878E.tmp\Debug\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\DELL\AppData\Local\Temp\vsA907.tmp\Debug\</IntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -47,7 +47,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <IntermediateOutputPath>C:\Users\DELL\AppData\Local\Temp\vs878E.tmp\Release\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\DELL\AppData\Local\Temp\vsA907.tmp\Release\</IntermediateOutputPath>
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
@@ -66,9 +66,9 @@
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
@@ -7693,6 +7693,18 @@
     <Content Include="Views\Plot\ROIWalletNRIALlUserDetails.cshtml" />
     <Content Include="Views\AssociateDashboard\InvestmentNRI.cshtml" />
     <Content Include="Views\AssociateDashboard\InvestmentNRIReport.cshtml" />
+    <Content Include="Views\Admin\NRIPayPayout.cshtml" />
+    <Content Include="Views\Admin\NRIPaidPayout.cshtml" />
+    <Content Include="Views\Admin\NRIPayoutLedger.cshtml" />
+    <Content Include="Views\Admin\DistributeNRIPayment.cshtml" />
+    <Content Include="Views\Admin\NRIPaymentApprove.cshtml" />
+    <Content Include="Views\Admin\NRIRejectedPayment.cshtml" />
+    <Content Include="Views\AdminReports\DistributeUnpaidNRIIncome.cshtml" />
+    <Content Include="Views\AdminReports\NRIPayoutDetails.cshtml" />
+    <Content Include="Views\AssociateDashboard\AssociateNRIPayoutDetails.cshtml" />
+    <Content Include="Views\AdminReports\ClosingWiseNRIPayoutDetails.cshtml" />
+    <Content Include="Views\AssociateDashboard\ROIReportByAssociate.cshtml" />
+    <Content Include="Views\AssociateDashboard\ROIWalletNRIReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

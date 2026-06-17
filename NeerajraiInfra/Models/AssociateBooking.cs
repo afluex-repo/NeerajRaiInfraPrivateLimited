@@ -500,6 +500,32 @@ namespace NeerajraiInfra.Models
             DataSet ds = Connection.ExecuteQuery("PayoutDetails", para);
             return ds;
         }
+        public DataSet NRIPayoutDetails()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@Fk_Userid", UserID),
+                  new SqlParameter("@PayoutNo", PayOutNo),
+                    new SqlParameter("@FromDate", FromDate),
+                     new SqlParameter("@ToDate", ToDate),
+                      new SqlParameter("@LoginId", LoginId),
+
+                                      };
+            DataSet ds = Connection.ExecuteQuery("NRIPayoutDetails", para);
+            return ds;
+        }
+        public DataSet AssociateNRIPayoutDetails()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@Fk_Userid", UserID),
+                  new SqlParameter("@PayoutNo", PayOutNo),
+                    new SqlParameter("@FromDate", FromDate),
+                     new SqlParameter("@ToDate", ToDate),
+                      new SqlParameter("@LoginId", LoginId),
+
+                                      };
+            DataSet ds = Connection.ExecuteQuery("NRIPayoutDetails", para);
+            return ds;
+        }
         public DataSet GetPayoutBalance()
         {
             SqlParameter[] para = { new SqlParameter("@Fk_UserId", UserID),
@@ -624,6 +650,15 @@ namespace NeerajraiInfra.Models
 
                                       };
             DataSet ds = Connection.ExecuteQuery("GetPayoutWiseIncomeDetails", para);
+            return ds;
+        }
+        public DataSet GetNRIPayoutWiseIncomeDetails()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@Fk_PaidPayoutId", PK_PaidPayoutId)
+
+                                      };
+            DataSet ds = Connection.ExecuteQuery("GetNRIPayoutWiseIncomeDetails", para);
             return ds;
         }
 

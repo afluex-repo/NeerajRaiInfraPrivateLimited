@@ -1,0 +1,106 @@
+﻿@model NeerajraiInfra.Models.Reports
+
+@{
+    ViewBag.Title = "UpdatKYC";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("UpdatKYC", "Plot", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(m => m.UserID)
+    <div class="page-content">
+        <section class="section">
+            <ul class="breadcrumb breadcrumb-style ">
+                <li class="breadcrumb-item">
+                    <a href="#">
+                        <i data-feather="home"></i>
+                    </a>
+                </li>
+                <li class="breadcrumb-item">Royal Memeber Investment</li>
+                <li class="breadcrumb-item">Update KYC</li>
+
+            </ul>
+        </section>
+
+        <div class="section-body">
+            <div class="col-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Update KYC Royal Memeber Investment</h4>
+                        <p style="color: red">
+                            @TempData["UpdateKYC"]
+
+                        </p>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+
+                            <div class="col-md-3">
+                                Bank Holder Name <span style="color: red">*</span>
+
+                                @Html.TextBoxFor(m => m.BankHolderName, new { @class = "form-control", @Placeholder = " Bank Holder Name", })
+                            </div>
+
+                            <div class="form-group">
+                                Member Account Number
+                                @Html.TextBoxFor(m => m.MemberAccNo, new
+                                {
+                                    @class = "form-control",
+                                    @Placeholder = "Member Account Number",@*@readonly = "readonly"*@})
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    Member Bank Name
+                                    @Html.TextBoxFor(m => m.BankName, new
+                                    {
+                                        @class = "form-control",
+                                        @Placeholder = " Member Bank Name",@*@readonly = "abc"*@})
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    Member Branch
+                                    @Html.TextBoxFor(m => m.BankBranch, new
+                                    {
+                                        @class = "form-control",
+                                        @Placeholder = "Member Branch",@*@readonly = "readonly"*@})
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    IFSC Code
+                                    @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control", @Placeholder = "IFSC Code", })
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 d-flex align-items-end">
+                                <div class="form-group">
+                                    @*<input class="btn btn-success" type="submit" onclick="return validateform();" value="Update" id="btnUpdate" name="btnUpdate" />*@
+
+                                    @if (Model.IsUpdated == 0)
+                                    {
+                                        <input class="btn btn-success" type="submit"
+                                               onclick="return validateform();"
+                                               value="Update" id="btnUpdate" name="btnUpdate" />
+                                    }
+                                    else
+                                    {
+                                        <input class="btn btn-secondary" type="button"
+                                               value="Already Updated" disabled />
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+}

@@ -273,6 +273,15 @@ namespace NeerajraiInfra.Models
             DataSet ds = Connection.ExecuteQuery("GetUnPaidForDistribute", para);
             return ds;
         }
+        public DataSet GetUnPaidNRIForDistribute()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@ToLoginId", ToID),
+
+                                      };
+            DataSet ds = Connection.ExecuteQuery("GetUnPaidNRIForDistribute", para);
+            return ds;
+        }
 
         public DataSet GetRankList()
         {

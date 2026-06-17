@@ -1845,12 +1845,8 @@ namespace NeerajraiInfra.Controllers
             return View();
         }
 
-
-       
         /////////////////////////////////////////////////////////////////////////////////////
       
-
-
         public ActionResult GetStateCity(string Pincode)
         {
             try
@@ -1963,7 +1959,6 @@ namespace NeerajraiInfra.Controllers
             }
         }
         
-
         public ActionResult GetUserList()
         {
             AssociateBooking obj = new AssociateBooking();
@@ -1982,8 +1977,6 @@ namespace NeerajraiInfra.Controllers
             }
             return Json(lst, JsonRequestBehavior.AllowGet);
         }
-
-        
 
         public ActionResult GetSponsorNameFOrCustomer(string SponsorID)
         {
@@ -2014,11 +2007,6 @@ namespace NeerajraiInfra.Controllers
                 return View(ex.Message);
             }
         }
-
-
-
-
-
 
         public ActionResult GetSponsorNames(string SponsorID)
         {
@@ -2073,15 +2061,7 @@ namespace NeerajraiInfra.Controllers
         }
 
 
-
-
-
-
-
-
         /////////////////////////////////////////////////////////////////////////////////////
-
-
 
         public ActionResult AssociateRegistration()
         {
@@ -2148,7 +2128,6 @@ namespace NeerajraiInfra.Controllers
 
         }
 
-        
         [HttpPost]
         [ActionName("AssociateRegistration")]
         [OnAction(ButtonName = "btnRegistration")]
@@ -2265,7 +2244,6 @@ namespace NeerajraiInfra.Controllers
             return View();
         }
 
-
         public ActionResult CustomerRegistration(string UserID)
         {
             List<SelectListItem> ddlAbbreviation = Common.Abbreviation();
@@ -2307,8 +2285,6 @@ namespace NeerajraiInfra.Controllers
             }
 
         }
-
-
 
         [HttpPost]
         [ActionName("CustomerRegistration")]
@@ -2400,12 +2376,10 @@ namespace NeerajraiInfra.Controllers
             return RedirectToAction(FormName, Controller);
         }
 
-
         public ActionResult ConfirmRegistrationForCustomer()
         {
             return View();
         }
-
 
         public ActionResult DirectIncome(AssociateBooking model)
         {
@@ -2432,8 +2406,6 @@ namespace NeerajraiInfra.Controllers
             return View(model);
         }
 
-
-
         public ActionResult DifferentialIncome(AssociateBooking model)
         {
             model.UserID = Session["LoginId"].ToString();
@@ -2458,8 +2430,6 @@ namespace NeerajraiInfra.Controllers
             }
             return View(model);
         }
-
-
 
         public ActionResult DirectLeadershipIncome(AssociateBooking model)
         {
@@ -2491,7 +2461,6 @@ namespace NeerajraiInfra.Controllers
             return View();
         }
 
-
         [HttpPost]
         [ActionName("AssociateSelfdownEVBusinessReport")]
         [OnAction(ButtonName = "GetList")]
@@ -2518,8 +2487,6 @@ namespace NeerajraiInfra.Controllers
             return View(model);
         }
 
-
-
         public ActionResult AssociateSelfdownInvestmentBusinessReportAction(AssociateBooking model)
         {
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
@@ -2543,8 +2510,6 @@ namespace NeerajraiInfra.Controllers
             return View(model);
 
         }
-
-
 
         #region AssociateDashboard
 
@@ -2769,9 +2734,9 @@ namespace NeerajraiInfra.Controllers
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
 
-            string AddedBy = Session["Pk_userId"].ToString();
+            model.AssociateID = Session["Pk_userId"].ToString();
 
-            DataSet ds = model.GetInvestmentNRIDetailsListBYAddedBy(AddedBy);
+            DataSet ds = model.GetInvestmentNRIDetailsListBYAddedBy();
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -2803,9 +2768,212 @@ namespace NeerajraiInfra.Controllers
             }
             return View(model);
         }
+        [HttpPost]
+        [ActionName("InvestmentNRIReport")]
+        [OnAction(ButtonName = "btnSearch")]
+        public ActionResult InvestmentNRIReportBy(Reports model)
+        {
+            List<Reports> lst = new List<Reports>();
 
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+
+            model.AssociateID = Session["Pk_userId"].ToString();
+
+            DataSet ds = model.GetInvestmentNRIDetailsListBYAddedBy();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                {
+                    TempData["EVMessage"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+                else
+                {
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        Reports obj = new Reports();
+                        obj.Pk_InvestId = r["Pk_InvestId"].ToString();
+                        obj.CouponNumber = r["CouponCode"].ToString();
+                        obj.BookingDate = r["BookingDate"].ToString();
+                        obj.CustomerLoginID = r["CustomerDetails"].ToString();
+                        obj.AssociateLoginID = r["AssociateDetails"].ToString();
+                        obj.Amount = r["Amount"].ToString();
+                        obj.PaymentMode = r["PaymentMode"].ToString();
+                        obj.TransactionDetails = r["TransactionDetails"].ToString();
+                        obj.Remarks = r["Remarks"].ToString();
+                        obj.PaymentStatus = r["PaymentStatus"].ToString();
+                        obj.CouponStatus = r["CouponStatus"].ToString();
+                        obj.UpdatedCouponRemarks = r["CouponUpdateRemarks"].ToString();
+                        lst.Add(obj);
+                    }
+                    model.lstEV = lst;
+                }
+            }
+            return View(model);
+        }
         #endregion
 
+        public ActionResult AssociateNRIPayoutDetails(AssociateBooking model, string PK_PaidPayoutId)
+        {
+
+            //model.FromDate = Common.ConvertToSystemDate(DateTime.Today.ToShortDateString(), "MM/dd/yyyy");
+            //model.ToDate = Common.ConvertToSystemDate(DateTime.Today.ToShortDateString(), "MM/dd/yyyy");
+            model.UserID = Session["Pk_userId"].ToString();
+            List<AssociateBooking> lst = new List<AssociateBooking>();
+            DataSet ds = model.AssociateNRIPayoutDetails();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    AssociateBooking obj = new AssociateBooking();
+                    obj.PK_PaidPayoutId = r["PK_PaidPayoutId"].ToString();
+                    obj.PayOutNo = r["PayoutNo"].ToString();
+                    obj.ClosingDate = r["ClosingDate"].ToString();
+                    obj.AssociateLoginID = r["LoginId"].ToString();
+                    obj.FirstName = r["FirstName"].ToString();
+                    obj.GrossAmount = r["GrossAmount"].ToString();
+                    obj.DirectIncome = r["DirectIncome"].ToString();
+                    obj.DifferentialIncome = r["DifferentialIncome"].ToString();
+                    obj.DirectLeadershipIncome = r["DirectLeadershipIncome"].ToString();
+                    obj.TDS = r["TDS"].ToString();
+                    obj.Processing = r["Processing"].ToString();
+                    obj.NetAmount = r["NetAmount"].ToString();
+
+                    lst.Add(obj);
+                }
+                model.lstPlot = lst;
+                ViewBag.GrossAmount = double.Parse(ds.Tables[0].Compute("sum(GrossAmount)", "").ToString()).ToString("n2");
+                ViewBag.TDS = double.Parse(ds.Tables[0].Compute("sum(TDS)", "").ToString()).ToString("n2");
+                ViewBag.Processing = double.Parse(ds.Tables[0].Compute("sum(Processing)", "").ToString()).ToString("n2");
+                ViewBag.NetAmount = double.Parse(ds.Tables[0].Compute("sum(NetAmount)", "").ToString()).ToString("n2");
+                ViewBag.DirectIncome = double.Parse(ds.Tables[0].Compute("sum(DirectIncome)", "").ToString()).ToString("n2");
+                ViewBag.DifferentialIncome = double.Parse(ds.Tables[0].Compute("sum(DifferentialIncome)", "").ToString()).ToString("n2");
+                ViewBag.DirectLeadershipIncome = double.Parse(ds.Tables[0].Compute("sum(DirectLeadershipIncome)", "").ToString()).ToString("n2");
+            }
+            return View(model);
+        }
+        [HttpPost]
+        [ActionName("AssociateNRIPayoutDetails")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult AssociateNRIPayoutDetailsBy(AssociateBooking model)
+        {
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            model.UserID = Session["Pk_userId"].ToString();
+            List<AssociateBooking> lst = new List<AssociateBooking>();
+            DataSet ds = model.AssociateNRIPayoutDetails();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    AssociateBooking obj = new AssociateBooking();
+                    obj.PayOutNo = r["PayoutNo"].ToString();
+                    obj.ClosingDate = r["ClosingDate"].ToString();
+                    obj.AssociateLoginID = r["LoginId"].ToString();
+                    obj.FirstName = r["FirstName"].ToString();
+                    obj.GrossAmount = r["GrossAmount"].ToString();
+                    obj.DirectIncome = r["DirectIncome"].ToString();
+                    obj.DifferentialIncome = r["DifferentialIncome"].ToString();
+                    obj.DirectLeadershipIncome = r["DirectLeadershipIncome"].ToString();
+                    obj.TDS = r["TDS"].ToString();
+                    obj.Processing = r["Processing"].ToString();
+                    obj.NetAmount = r["NetAmount"].ToString();
+
+                    lst.Add(obj);
+                }
+                model.lstPlot = lst;
+                ViewBag.GrossAmount = double.Parse(ds.Tables[0].Compute("sum(GrossAmount)", "").ToString()).ToString("n2");
+                ViewBag.TDS = double.Parse(ds.Tables[0].Compute("sum(TDS)", "").ToString()).ToString("n2");
+                ViewBag.Processing = double.Parse(ds.Tables[0].Compute("sum(Processing)", "").ToString()).ToString("n2");
+                ViewBag.NetAmount = double.Parse(ds.Tables[0].Compute("sum(NetAmount)", "").ToString()).ToString("n2");
+                ViewBag.DirectIncome = double.Parse(ds.Tables[0].Compute("sum(DirectIncome)", "").ToString()).ToString("n2");
+                ViewBag.DifferentialIncome = double.Parse(ds.Tables[0].Compute("sum(DifferentialIncome)", "").ToString()).ToString("n2");
+                ViewBag.DirectLeadershipIncome = double.Parse(ds.Tables[0].Compute("sum(DirectLeadershipIncome)", "").ToString()).ToString("n2");
+            }
+
+            return View(model);
+        }
+        public ActionResult ROIReportByAssociate(Reports model)
+        {
+            List<Reports> lst = new List<Reports>();
+
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            model.AssociateID = Session["Pk_userId"].ToString();
+            DataSet ds = model.GetROINRIDetailsList();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                {
+                    TempData["EVMessage"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+                else
+                {
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        Reports obj = new Reports();
+                        obj.Pk_InvestId = r["Pk_InvestId"].ToString();
+                        obj.CouponNumber = r["CouponCode"].ToString();
+                        obj.BookingDate = r["BookingDate"].ToString();
+                        obj.CustomerLoginID = r["CustomerDetails"].ToString();
+                        obj.AssociateLoginID = r["AssociateDetails"].ToString();
+                        obj.Amount = r["Amount"].ToString();
+                        obj.ROIAmount = r["ROIAmount"].ToString();
+                        obj.PaymentMode = r["PaymentMode"].ToString();
+                        obj.TransactionDetails = r["TransactionDetails"].ToString();
+                        obj.Remarks = r["Remarks"].ToString();
+                        obj.PaymentStatus = r["PaymentStatus"].ToString();
+                        obj.CouponStatus = r["CouponStatus"].ToString();
+                        obj.UpdatedCouponRemarks = r["CouponUpdateRemarks"].ToString();
+                        lst.Add(obj);
+                    }
+                    model.lstEV = lst;
+                }
+            }
+            return View(model);
+        }
+        public ActionResult ROIWalletNRIReport(long Id)
+        {
+            List<ROIWalletModel> list = new List<ROIWalletModel>();
+
+            ROIWalletModel model = new ROIWalletModel();
+            DataSet ds = model.GetROIWalletReport(Id);
+
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    ROIWalletModel item = new ROIWalletModel();
+
+                    // item.Pk_ROIWalletId = Convert.ToInt64(dr["Pk_ROIWalletId"]);
+                    item.FK_UserId = Convert.ToInt64(dr["FK_UserId"]);
+                    item.LoginId = dr["LoginId"].ToString();
+                    item.FullName = dr["FullName"].ToString();
+
+                    item.FK_InvestId = Convert.ToInt64(dr["Pk_InvestId"]);
+                    //item.ROIInstallment = dr["ROIInstallment"] == DBNull.Value ? 0 : Convert.ToInt32(dr["ROIInstallment"]);
+                    //item.ROI = dr["ROI"] == DBNull.Value ? 0 : Convert.ToDecimal(dr["ROI"]);
+
+                    item.InvestmentAmount = dr["InvestmentAmount"].ToString();
+                    item.Narration = dr["Narration"].ToString();
+                    item.CrAmount = Convert.ToDecimal(dr["CrAmount"]);
+                    item.DrAmount = Convert.ToDecimal(dr["DrAmount"]);
+                    item.TotalAmounts = Convert.ToDecimal(dr["Amount"]);
+
+                    item.TransactionDate = dr["TransactionDate"].ToString();
+                    // item.PayoutNo = dr["PayoutNo"].ToString();
+                    item.TransactionNo = dr["TransactionNo"].ToString();
+
+                    list.Add(item);
+                }
+            }
+
+            return View(list);
+        }
 
     }
 }

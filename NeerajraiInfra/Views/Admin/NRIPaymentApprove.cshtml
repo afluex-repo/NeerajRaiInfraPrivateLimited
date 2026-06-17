@@ -1,9 +1,10 @@
 ﻿@model NeerajraiInfra.Models.Plot
-
 @{
-    ViewBag.Title = "Payment";
+    ViewBag.Title = "NRIPaymentApprove";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+
 <style>
     #divload {
         width: 100%;
@@ -12,14 +13,15 @@
         z-index: 9999;
         background: url("../../images/login-gif-11.gif") no-repeat center center rgba(0,0,0,0.25);
     }
+
     .errortext {
         border: 1px solid red !important;
     }
 </style>
 <div class="loader" id="divload"></div>
-@using (Html.BeginForm("Payment", "Plot", FormMethod.Post, new { @id = "form1" }))
+@using (Html.BeginForm("NRIPaymentApprove", "Admin", FormMethod.Post, new { @id = "form1" }))
 {
- <section class="section">
+    <section class="section">
         <ul class="breadcrumb breadcrumb-style ">
             <li class="breadcrumb-item">
                 <a href="#">
@@ -39,7 +41,7 @@
                     <h4>Approve Payment Detail</h4>
 
                     <p style="color: red" id="Plot">
-                        @TempData["Plot"]
+                        @TempData["NRIPaymentApprove"]
                     </p>
                 </div>
                 <div class="card-body">
@@ -78,18 +80,17 @@
                                     <th>S No.</th>
                                     <th>Customer ID</th>
                                     <th>Associate ID</th>
-                                    <th>Site</th>
+                                    @*<th>Site</th>
                                     <th>Phase</th>
                                     <th>Block </th>
-                                    <th>Plot Number</th>
+                                    <th>Plot Number</th>*@
                                     <th>Mode</th>
                                     <th>Payment Date</th>
                                     <th>Transaction No.</th>
                                     <th>Bank Details</th>
                                     <th>Amount</th>
-                                    <th>Allotment Remarks / Payment Mode Remarks</th>
-                                    @*<th>Payment Mode Remarks</th>*@
-                                    <th>Adjustment Id</th>
+                                    <th>Allotment Remarks</th>
+                                    <th>Payment Mode Remarks</th>
                                     <th>Status</th>
                                     <th> Not Generate Income</th>
                                     <th>Description</th>
@@ -109,24 +110,23 @@
 
                                             <tr class="text-left">
                                                 @*  <td hidden>@Item.UserID</td>*@
-                                                <td>@i</td> 
+                                                <td>@i</td>
                                                 <td>@Item.CustomerID (@Item.CustomerName)</td>
                                                 <td>@Item.AssociateID (@Item.AssociateName)</td>
-                                                <td>@Item.SiteName </td>
+                                                @*<td>@Item.SiteName </td>
                                                 <td>@Item.SectorName </td>
                                                 <td>@Item.BlockName </td>
-                                                <td>@Item.PlotNumber</td>
+                                                <td>@Item.PlotNumber</td>*@
                                                 <td>@Item.PaymentMode</td>
                                                 <td>@Item.PaymentDate</td>
                                                 <td>@Item.TransactionNumber</td>
                                                 <td>@Item.Remark</td>
                                                 <td>@Item.PaidAmount</td>
                                                 <td>@Item.AllotmentRemark</td>
-                                                @*<td>@Item.PaymentModeRemarks</td>*@
-                                                <td>@Item.AdjustmentId</td>
+                                                <td>@Item.PaymentModeRemarks</td>
                                                 <td>@Item.PaymentStatus</td>
                                                 <td>
-                                              <input type="checkbox" id="calculation_@i" name="calculation">
+                                                    <input type="checkbox" id="calculation_@i" name="calculation">
                                                 </td>
                                                 <td>
                                                     <textarea type="text" id="txtDesc @i" name="txtDesc @i" onchange="getdata(this)"></textarea>
@@ -136,7 +136,7 @@
                                                 </td>
                                                 <td>
                                                     <a href="#" class="btn btn-success btn-sm" style="margin-top:5px" onclick="Approve('@i','@Item.UserID');">Cleared</a>
-                                                    <a href="#" class="btn btn-warning btn-sm" style="margin-top:5px;margin-bottom:5px;" onclick="Bounce('@i','@Item.UserID');">Bounce</a>
+                                                    @*<a href="#" class="btn btn-warning btn-sm" style="margin-top:5px;margin-bottom:5px;" onclick="Bounce('@i','@Item.UserID');">Bounce</a>*@
                                                     <a href="#" class="btn btn-danger btn-sm" style="margin-top:5px;margin-bottom:5px;" onclick="Reject('@i','@Item.UserID');">Cancel</a>
                                                 </td>
 
@@ -151,10 +151,6 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
                                     <th></th>
                                     <th></th>
                                     <th></th>
@@ -178,8 +174,8 @@
         </div>
     </div>
 
-                    <input type="hidden" id="txtdecription" />
-                    <input type="hidden" id="txtAppDt" />
+    <input type="hidden" id="txtdecription" />
+    <input type="hidden" id="txtAppDt" />
 
 }
 <script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
@@ -235,7 +231,7 @@
             var isChecked = $(checkboxId).is(":checked"); // Check if checkbox is selected
 
             $.ajax({
-                url: "/Plot/ApprovePayment",
+                url: "/Admin/ApproveNRIPayment",
                 type: "GET",
                 dataType: "JSON",
                 data: {
@@ -252,6 +248,7 @@
                     }
                     else {
                         alert("Something went wrong !!");
+                        location.reload();
                     }
                     //$("#divload").css({ 'display': 'none' });
                 }
@@ -300,7 +297,7 @@
             var Description = $('#txtdecription').val();
             var Date = $('#txtAppDt').val();
             $.ajax({
-                url: "/Plot/RejectPayment",
+                url: "/Admin/RejectNRIPayment",
                 Type: "Get",
                 DataType: "JSON",
                 data: { UserID: userid, Description: $('#txtdecription').val(), ApprovedDate: $('#txtAppDt').val() },

@@ -31,6 +31,7 @@ namespace NeerajraiInfra.Models
 
         public string PK_PlotID { get; set; }
         public string Pk_InvestId { get; set; }
+        public string AdjustmentId { get; set; }
 
         #region Properties
         public string Type { get; set; }
@@ -518,7 +519,7 @@ namespace NeerajraiInfra.Models
                                         new SqlParameter("@AddedBy",AddedBy),
                                         new SqlParameter("@AllotmentRemarks",Remark),
                                         new SqlParameter("@Fk_BankId",Fk_BankId),
-                                          new SqlParameter("@UTR_Number",UtrNumber),
+                                        new SqlParameter("@UTR_Number",UtrNumber),
                                         new SqlParameter("@UTR_Amount",UtrAmount),
                                         new SqlParameter("@AdjustmentId",AssociatesLoginID)
 
@@ -675,7 +676,19 @@ namespace NeerajraiInfra.Models
             DataSet ds = Connection.ExecuteQuery("ApprovePayment", para);
             return ds;
         }
-
+        public DataSet ApproveNRIPayment()
+        {
+            SqlParameter[] para =
+                            {
+                                 new SqlParameter("@PK_BookingDetailsId",UserID),
+                                  new SqlParameter("@Description",Description),
+                                   new SqlParameter("@UpdatedBy",AddedBy),
+                                    new SqlParameter("@ApprovedDate",ApprovedDate),
+                                    new SqlParameter("@CalculationChecked",CalculationChecked)
+                            };
+            DataSet ds = Connection.ExecuteQuery("ApproveNRIPayment", para);
+            return ds;
+        }
 
         public string DeletedBy { get; set; }
         public string DeletedOn { get; set; }
@@ -702,6 +715,18 @@ namespace NeerajraiInfra.Models
                                      new SqlParameter("@ApprovedDate",ApprovedDate)
                             };
             DataSet ds = Connection.ExecuteQuery("RejectPayment", para);
+            return ds;
+        }
+        public DataSet RejectNRIPayment()
+        {
+            SqlParameter[] para =
+                            {
+                                 new SqlParameter("@PK_BookingDetailsId",UserID),
+                                  new SqlParameter("@Description",Description),
+                                   new SqlParameter("@UpdatedBy",AddedBy),
+                                     new SqlParameter("@ApprovedDate",ApprovedDate)
+                            };
+            DataSet ds = Connection.ExecuteQuery("RejectNRIPayment", para);
             return ds;
         }
         public DataSet BouncePayment()
@@ -752,6 +777,17 @@ namespace NeerajraiInfra.Models
             DataSet ds = Connection.ExecuteQuery("GetDetailsOfRejectedPayment", para);
             return ds;
         }
+        public DataSet GetNRIRejctedList()
+        {
+            SqlParameter[] para =
+                            {
+                                new SqlParameter("@PaymentMode",PaymentMode),
+                                  new SqlParameter("@FromDate",FromDate),
+                                   new SqlParameter("@ToDate",ToDate)
+                            };
+            DataSet ds = Connection.ExecuteQuery("GetDetailsOfNRIRejectedPayment", para);
+            return ds;
+        }
 
         public DataSet ApproveRejectPayment()
         {
@@ -761,6 +797,16 @@ namespace NeerajraiInfra.Models
                                         new SqlParameter("@ApprovedDate",ApprovedDate)
                                   };
             DataSet ds = Connection.ExecuteQuery("ApproveRejectedPayment", para);
+            return ds;
+        }
+        public DataSet NRIApproveRejectPayment()
+        {
+            SqlParameter[] para = { new SqlParameter("@PK_BookingDetailsId",UserID),
+                                      new SqlParameter("@Description",Description),
+                                      new SqlParameter("@UpdatedBy",AddedBy),
+                                        new SqlParameter("@ApprovedDate",ApprovedDate)
+                                  };
+            DataSet ds = Connection.ExecuteQuery("NRIApproveRejectedPayment", para);
             return ds;
         }
 
@@ -1232,7 +1278,17 @@ namespace NeerajraiInfra.Models
             return ds;
         }
 
-
+        public DataSet GetNRIPaymentList()
+        {
+            SqlParameter[] para =
+                            {
+                                 new SqlParameter("@PaymentMode",PaymentMode),
+                                  new SqlParameter("@FromDate",FromDate),
+                                   new SqlParameter("@ToDate",ToDate)
+                            };
+            DataSet ds = Connection.ExecuteQuery("GetDeatilsNRIForChequeCashPayment", para);
+            return ds;
+        }
     }
 
 
@@ -1293,8 +1349,9 @@ namespace NeerajraiInfra.Models
         public string Narration { get; set; }
         public decimal CrAmount { get; set; }
         public decimal DrAmount { get; set; }
+        public decimal TotalAmounts { get; set; }
         public string TransactionDate { get; set; }
-
+        public string InvestmentAmount { get; set; }
         public string PayoutNo { get; set; }
         public string TransactionNo { get; set; }
 
@@ -1310,6 +1367,9 @@ namespace NeerajraiInfra.Models
             DataSet ds = Connection.ExecuteQuery("GetROIWalletReport", para);
             return ds;
         }
+
+
+     
 
 
     }

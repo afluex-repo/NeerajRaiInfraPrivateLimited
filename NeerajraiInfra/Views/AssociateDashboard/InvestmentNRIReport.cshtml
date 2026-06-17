@@ -20,7 +20,7 @@
 <div class="loader" id="divload"></div>
 
 <div class="loader" id="divload"></div>
-@using (Html.BeginForm("InvestmentNRIReport", "Plot", FormMethod.Post, new { @id = "form1" }))
+@using (Html.BeginForm("InvestmentNRIReport", "AssociateDashboard", FormMethod.Post, new { @id = "form1" }))
 {
     <section class="section">
         <ul class="breadcrumb breadcrumb-style ">
@@ -59,13 +59,13 @@
                                         @Html.HiddenFor(m => m.CustomerId)
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                @*<div class="col-md-3">
                                     <div class="form-group">
                                         Associate ID
                                         @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Search by Associate ID" })
                                         @Html.HiddenFor(m => m.AssociateID)
                                     </div>
-                                </div>
+                                </div>*@
 
                                 <div class="col-md-3">
                                     <div class="form-group">
