@@ -4880,6 +4880,7 @@ namespace NeerajraiInfra.Controllers
                         obj.CouponStatus = r["CouponStatus"].ToString();
                         obj.UpdatedCouponRemarks = r["CouponUpdateRemarks"].ToString();
                         obj.BankDetailsSaved = r["BankDetailsSaved"].ToString();
+                        obj.BankDetails = r["BankDetails"].ToString();
                         lst.Add(obj);
                     }
                     model.lstEV = lst;
@@ -5011,6 +5012,7 @@ namespace NeerajraiInfra.Controllers
                         obj.CouponStatus = r["CouponStatus"].ToString();
                         obj.UpdatedCouponRemarks = r["CouponUpdateRemarks"].ToString();
                         obj.UserID = r["UserID"].ToString();
+                        obj.BankDetails = r["BankDetails"].ToString();
                         lst.Add(obj);
                     }
                     model.lstEV = lst;
@@ -5085,13 +5087,16 @@ namespace NeerajraiInfra.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public JsonResult PayROIAmount(int UserId, int InvestId, decimal Amount)
+        public JsonResult PayROIAmount(int UserId, int InvestId, decimal Amount,string TransactionNO,string TransactionDate)
         {
             try
             {
                 Reports model = new Reports();
                 model.FK_InvestmentID = InvestId.ToString();
                 model.Fk_UserId = UserId.ToString();
+                model.Amount = Amount.ToString();
+                model.TransactionNo = TransactionNO.ToString();
+                model.TransactionDate = TransactionDate.ToString();
                 model.Amount = Amount.ToString();
                 model.AddedBy = Session["Pk_AdminId"].ToString();
                 DataSet ds = model.PayROIAmount();

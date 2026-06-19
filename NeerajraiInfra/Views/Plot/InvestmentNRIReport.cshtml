@@ -122,11 +122,12 @@
                                             <th>Transaction Details</th>
                                             <th>Payment Remarks</th>
                                             <th>Payment Status</th>
+                                            <th>Customer Bank Details</th>
                                             @*<th>Booking Type</th>*@
                                             @*<th>Coupon Status</th>*@
                                             @*<th>Coupon Remarks</th>*@
                                             <th>Action</th>
-                                            <th>Bank Details</th>
+                                            <th>Add Bank Details</th>
                                             @*<th>Update Coupon Status</th>*@
                                         </tr>
                                     </thead>
@@ -150,6 +151,7 @@
                                                         <td>@Item.TransactionDetails</td>
                                                         <td>@Item.Remarks</td>
                                                         <td>@Item.PaymentStatus</td> 
+                                                        <td>@Item.BankDetails</td> 
                                                         @*<td>@Item.EntryType</td>*@
                                                         @*<td>@Item.CouponStatus</td>*@
                                                         @*<td>@Item.UpdatedCouponRemarks</td>*@
@@ -170,9 +172,9 @@
                                                     <td>
                                                         @if (Item.BankDetailsSaved == "1")
                                                         {
-                                                            <button type="button" class="btn btn-primary" disabled>
+                                                            @*<button type="button" class="btn btn-primary" disabled>
                                                                 Add Details
-                                                            </button>
+                                                            </button>*@
                                                         }
                                                         else
                                                         {
