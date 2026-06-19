@@ -22,6 +22,7 @@ namespace NeerajraiInfra.Models
         public List<Reports> lstEV { get; set; }
         public string UpdatedCouponRemarks { get; set; }
         public string BankDetailsSaved { get; set; }
+        public string BankDetails { get; set; }
 
 
 
@@ -623,7 +624,7 @@ namespace NeerajraiInfra.Models
                                       new SqlParameter("@EntryType",EntryType)
 
                                   };
-
+             
             DataSet ds = Connection.ExecuteQuery("GetEVBooking", para);
             return ds;
         }
@@ -757,6 +758,8 @@ namespace NeerajraiInfra.Models
             SqlParameter[] para = { new SqlParameter("@FK_InvestmentID", FK_InvestmentID),
             new SqlParameter("@Fk_UserId", Fk_UserId),
             new SqlParameter("@Amount", Amount),
+            new SqlParameter("@TransactionNo", TransactionNo),
+            new SqlParameter("@TransactionDate", TransactionDate),
             new SqlParameter("@AddedBy", AddedBy),
             };
             DataSet ds = Connection.ExecuteQuery("PayROIAmount", para);

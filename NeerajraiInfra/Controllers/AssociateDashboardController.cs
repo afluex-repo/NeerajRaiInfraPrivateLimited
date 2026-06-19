@@ -2974,6 +2974,118 @@ namespace NeerajraiInfra.Controllers
 
             return View(list);
         }
+        public ActionResult NRIPayoutDetails(AssociateBooking model, string PK_PaidPayoutId)
+        {
+            model.AssociateID = Session["Pk_userId"].ToString();
+            List<AssociateBooking> lst = new List<AssociateBooking>();
+            DataSet ds = model.NRIPayoutDetailsByAssosiate();
 
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    AssociateBooking obj = new AssociateBooking();
+                    obj.PK_PaidPayoutId = r["PK_PaidPayoutId"].ToString();
+                    obj.PayOutNo = r["PayoutNo"].ToString();
+                    obj.ClosingDate = r["ClosingDate"].ToString();
+                    obj.AssociateLoginID = r["LoginId"].ToString();
+                    obj.FirstName = r["FirstName"].ToString();
+                    obj.GrossAmount = r["GrossAmount"].ToString();
+                    obj.DirectIncome = r["DirectIncome"].ToString();
+                    obj.DifferentialIncome = r["DifferentialIncome"].ToString();
+                    obj.DirectLeadershipIncome = r["DirectLeadershipIncome"].ToString();
+                    obj.TDS = r["TDS"].ToString();
+                    obj.Processing = r["Processing"].ToString();
+                    obj.NetAmount = r["NetAmount"].ToString();
+
+                    lst.Add(obj);
+                }
+                model.lstPlot = lst;
+                ViewBag.GrossAmount = double.Parse(ds.Tables[0].Compute("sum(GrossAmount)", "").ToString()).ToString("n2");
+                ViewBag.TDS = double.Parse(ds.Tables[0].Compute("sum(TDS)", "").ToString()).ToString("n2");
+                ViewBag.Processing = double.Parse(ds.Tables[0].Compute("sum(Processing)", "").ToString()).ToString("n2");
+                ViewBag.NetAmount = double.Parse(ds.Tables[0].Compute("sum(NetAmount)", "").ToString()).ToString("n2");
+                ViewBag.DirectIncome = double.Parse(ds.Tables[0].Compute("sum(DirectIncome)", "").ToString()).ToString("n2");
+                ViewBag.DifferentialIncome = double.Parse(ds.Tables[0].Compute("sum(DifferentialIncome)", "").ToString()).ToString("n2");
+                ViewBag.DirectLeadershipIncome = double.Parse(ds.Tables[0].Compute("sum(DirectLeadershipIncome)", "").ToString()).ToString("n2");
+            }
+            return View(model);
+        }
+        [HttpPost]
+        [ActionName("NRIPayoutDetails")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult NRIPayoutDetailsBy(AssociateBooking model, string PK_PaidPayoutId)
+        {
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            model.AssociateID = Session["Pk_userId"].ToString();
+            List<AssociateBooking> lst = new List<AssociateBooking>();
+            DataSet ds = model.NRIPayoutDetailsByAssosiate();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    AssociateBooking obj = new AssociateBooking();
+                    obj.PK_PaidPayoutId = r["PK_PaidPayoutId"].ToString();
+                    obj.PayOutNo = r["PayoutNo"].ToString();
+                    obj.ClosingDate = r["ClosingDate"].ToString();
+                    obj.AssociateLoginID = r["LoginId"].ToString();
+                    obj.FirstName = r["FirstName"].ToString();
+                    obj.GrossAmount = r["GrossAmount"].ToString();
+                    obj.DirectIncome = r["DirectIncome"].ToString();
+                    obj.DifferentialIncome = r["DifferentialIncome"].ToString();
+                    obj.DirectLeadershipIncome = r["DirectLeadershipIncome"].ToString();
+                    obj.TDS = r["TDS"].ToString();
+                    obj.Processing = r["Processing"].ToString();
+                    obj.NetAmount = r["NetAmount"].ToString();
+
+                    lst.Add(obj);
+                }
+                model.lstPlot = lst;
+                ViewBag.GrossAmount = double.Parse(ds.Tables[0].Compute("sum(GrossAmount)", "").ToString()).ToString("n2");
+                ViewBag.TDS = double.Parse(ds.Tables[0].Compute("sum(TDS)", "").ToString()).ToString("n2");
+                ViewBag.Processing = double.Parse(ds.Tables[0].Compute("sum(Processing)", "").ToString()).ToString("n2");
+                ViewBag.NetAmount = double.Parse(ds.Tables[0].Compute("sum(NetAmount)", "").ToString()).ToString("n2");
+                ViewBag.DirectIncome = double.Parse(ds.Tables[0].Compute("sum(DirectIncome)", "").ToString()).ToString("n2");
+                ViewBag.DifferentialIncome = double.Parse(ds.Tables[0].Compute("sum(DifferentialIncome)", "").ToString()).ToString("n2");
+                ViewBag.DirectLeadershipIncome = double.Parse(ds.Tables[0].Compute("sum(DirectLeadershipIncome)", "").ToString()).ToString("n2");
+            }
+            return View(model);
+        }
+        public ActionResult ClosingWiseNRIPayoutDetails(string PK_PaidPayoutId)
+        {
+            AssociateBooking model = new AssociateBooking();
+            model.PK_PaidPayoutId = PK_PaidPayoutId;
+            List<AssociateBooking> lst = new List<AssociateBooking>();
+            DataSet ds = model.GetNRIPayoutWiseIncomeDetails();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                ViewBag.DisplayName = ds.Tables[0].Rows[0]["Name"].ToString();
+                ViewBag.ClosingDate = ds.Tables[0].Rows[0]["ClosingDate"].ToString();
+                ViewBag.PayoutNo = ds.Tables[0].Rows[0]["PayoutNo"].ToString();
+                ViewBag.UserId = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    AssociateBooking obj = new AssociateBooking();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.PK_PaidPayoutId = r["PK_PaidPayoutId"].ToString();
+                    obj.DisplayName = r["Name"].ToString();
+                    obj.CustomerID = r["CustomerId"].ToString();
+                    obj.CustomerName = r["CustomerName"].ToString();
+                    obj.AssociateID = r["AssociateId"].ToString();
+                    obj.AssociateName = r["AssociateName"].ToString();
+                    obj.PlotNumber = r["PlotNumber"].ToString();
+                    obj.PaymentDate = r["PaymentDate"].ToString();
+                    obj.PaidAmount = r["Amount"].ToString();
+                    obj.Income = r["Income"].ToString();
+                    obj.CommPercentage = r["DifferencePerc"].ToString();
+                    lst.Add(obj);
+                }
+                model.ClosingWisePayoutlist = lst;
+            }
+            return View(model);
+        }
     }
 }
