@@ -7725,6 +7725,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\AssociateDashboard\NRIPayoutDetails.cshtml" />
     <Content Include="Views\AssociateDashboard\ClosingWiseNRIPayoutDetails.cshtml" />
+    <Content Include="Views\Website\NRIROICalculate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -79,5 +79,10 @@ namespace NeerajraiInfra.Controllers
         {
             return View();
         }
+        public ActionResult NRIROICalculate(Website model)
+        {
+            DataSet ds = model.NRIROICalculate();
+            return View();
+        }
     }
 }

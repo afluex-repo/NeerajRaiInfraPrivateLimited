@@ -45,9 +45,9 @@
                                         <th>Coupon No.</th>
                                         <th>Booking Date</th>
                                         <th>Customer Detail</th>
-                                        <th>Associate Details</th>
+                                        @*<th>Associate Details</th>*@
                                         <th>Investment Amount</th>
-                                        <th>PaymentMode</th>
+                                        @*<th>PaymentMode</th>*@
                                         <th>Customer Bank Details</th>
                                         <th>ROI Amount</th>
                                         <th>Pay_Amount</th>
@@ -75,10 +75,10 @@
                                                     <td>@Item.CouponNumber</td>
                                                     <td>@Item.BookingDate</td>
                                                     <td class="text-nowrap">@Item.CustomerLoginID</td>
-                                                    <td class="text-nowrap">@Item.AssociateLoginID</td>
+                                                    @*<td class="text-nowrap">@Item.AssociateLoginID</td>*@
                                                     <td>@Item.Amount</td>
-                                                    <td>@Item.PaymentMode</td>
-                                                    <td>@Item.BankDetails</td>
+                                                    @*<td>@Item.PaymentMode</td>*@
+                                                    <td class="text-nowrap">@Item.BankDetails</td>
                                                     <td>@Item.ROIAmount</td>
                                                     <td><input type="text" name="PayROIAmount" class="form-control form-control-sm payROIAmount" placeholder="Enter pay Amount" /></td>
                                                     <td>
