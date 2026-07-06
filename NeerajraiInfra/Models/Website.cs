@@ -28,6 +28,12 @@ namespace NeerajraiInfra.Models
             DataSet ds = Connection.ExecuteQuery("SaveContact",para);
             return ds;
         }
+        public DataSet NRIROICalculate()
+        {
+            DataSet ds = Connection.ExecuteQuery("GenerateMonthlyNRIROI");
+            DataSet ds1 = Connection.ExecuteQuery("GenerateROIWalletEntry");
+            return ds;
+        }
         
     }
 }
