@@ -5057,6 +5057,11 @@ namespace NeerajraiInfra.Controllers
                         obj.UpdatedCouponRemarks = r["CouponUpdateRemarks"].ToString();
                         obj.UserID = r["UserID"].ToString();
                         obj.BankDetails = r["BankDetails"].ToString();
+                        obj.BankHolderName = r["BankHolderName"].ToString();
+                        obj.BankName = r["MemberBankName"].ToString();
+                        obj.MemberAccNo = r["MemberAccNo"].ToString();
+                        obj.BankBranch = r["MemberBranch"].ToString();
+                        obj.IFSCCode = r["IFSCCode"].ToString();
                         lst.Add(obj);
                     }
                     model.lstEV = lst;

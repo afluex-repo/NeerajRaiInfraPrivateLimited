@@ -46,13 +46,17 @@
                                         <th>Booking Date</th>
                                         <th>Customer Detail</th>
                                         @*<th>Associate Details</th>*@
-                                        <th>Investment Amount</th>
+                                        <th class="text-nowrap">Investment Amount</th>
                                         @*<th>PaymentMode</th>*@
-                                        <th>Customer Bank Details</th>
-                                        <th>ROI Amount</th>
-                                        <th>Pay_Amount</th>
-                                        <th>Transaction No</th>
-                                        <th>Transaction Date</th>
+                                    <th class="text-nowrap">Bank Holder Name</th>
+                                    <th class="text-nowrap">Member Bank Name</th>
+                                    <th class="text-nowrap">Member AccNo</th>
+                                    <th class="text-nowrap">Member Branch</th>
+                                    <th class="text-nowrap">IFSC Code</th>
+                                        <th class="text-nowrap">ROI Amount</th>
+                                        <th class="text-nowrap">Pay Amount</th>
+                                        <th class="text-nowrap">Transaction No</th>
+                                        <th class="text-nowrap">Transaction Date</th>
                                         @*<th>Transaction Details</th>
         <th>Payment Remarks</th>
         <th>Payment Status</th>*@
@@ -78,7 +82,11 @@
                                                     @*<td class="text-nowrap">@Item.AssociateLoginID</td>*@
                                                     <td>@Item.Amount</td>
                                                     @*<td>@Item.PaymentMode</td>*@
-                                                    <td class="text-nowrap">@Item.BankDetails</td>
+                                                    <td class="text-nowrap">@Item.BankHolderName</td>
+                                                    <td class="text-nowrap">@Item.BankName</td>
+                                                    <td class="text-nowrap">@Item.MemberAccNo</td>
+                                                    <td class="text-nowrap">@Item.BankBranch</td>
+                                                    <td class="text-nowrap">@Item.IFSCCode</td>
                                                     <td>@Item.ROIAmount</td>
                                                     <td><input type="text" name="PayROIAmount" class="form-control form-control-sm payROIAmount" placeholder="Enter pay Amount" /></td>
                                                     <td>
