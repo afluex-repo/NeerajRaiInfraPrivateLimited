@@ -1,4 +1,4 @@
-﻿
+﻿@model NeerajraiInfra.Models.Reports
 
 @{
     ViewBag.Title = "ROIWalletNRIALlUserDetails";
@@ -35,6 +35,37 @@
                     <!-- HTML5 Export Buttons table start -->
 
                     <div class="card-block" style="margin-left:5px;margin-right:5px">
+                        @using (Html.BeginForm("ROIWalletNRIALlUserDetails", "Plot", FormMethod.Get))
+                        {
+                            <div class="row">
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        Booking Date
+                                        @Html.TextBoxFor(m => m.BookingDate,
+                                                 new
+                                                 {
+                                                     @class = "form-control",
+                                                     @type = "date"
+                                                 })
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        Customer Details
+                                        @Html.TextBoxFor(m => m.Customername,
+                                            new { @class = "form-control", @placeholder = "Customer Name / Login ID" })
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <br />
+                                    <input type="submit" class="btn btn-success" value="Search" />
+                                </div>
+
+                            </div>
+                        }
 
                         <div class="table-responsive">
                             <table class="table table-bordered table-md" data-page-length='50' id="tableExport" style="width:100%;">
@@ -52,8 +83,8 @@
                                         <th>Pay_Amount</th>
 
                                         @*<th>Transaction Details</th>
-                                            <th>Payment Remarks</th>
-                                            <th>Payment Status</th>*@
+                        <th>Payment Remarks</th>
+                        <th>Payment Status</th>*@
 
                                         <th>Action</th>
 
@@ -79,8 +110,8 @@
                                                     <td>@Item.ROIAmount</td>
                                                     <td><input type="text" name="PayROIAmount" class="form-control form-control-sm payROIAmount" /></td>
                                                     @*<td>@Item.TransactionDetails</td>
-                                                        <td>@Item.Remarks</td>
-                                                        <td>@Item.PaymentStatus</td>*@
+                                    <td>@Item.Remarks</td>
+                                    <td>@Item.PaymentStatus</td>*@
 
                                                     <td>
                                                         <div class="badge badge-success badge-shadow"><a target="_blank" class="badge badge-success badge-shadow" href="/Plot/ROIWalletNRIReport?Id=@Item.Pk_InvestId"><span>View ROI Wallet</span></a></div>

@@ -1,34 +1,74 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "E:\\Tanishq\\Repository\\NeerajRaiInfraPrivateLimited\\",
+  "WorkspaceRootPath": "F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|e:\\tanishq\\repository\\neerajraiinfraprivatelimited\\neerajraiinfra\\models\\connection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|solutionrelative:neerajraiinfra\\models\\connection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|E:\\Tanishq\\Repository\\NeerajRaiInfraPrivateLimited\\neerajraiinfra\\views\\plot\\plotallotment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|solutionrelative:neerajraiinfra\\views\\plot\\plotallotment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|E:\\Tanishq\\Repository\\NeerajRaiInfraPrivateLimited\\neerajraiinfra\\controllers\\plotcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|solutionrelative:neerajraiinfra\\controllers\\plotcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|E:\\Tanishq\\Repository\\NeerajRaiInfraPrivateLimited\\neerajraiinfra\\models\\plot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|solutionrelative:neerajraiinfra\\models\\plot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|E:\\Tanishq\\Repository\\NeerajRaiInfraPrivateLimited\\neerajraiinfra\\views\\plot\\payment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|solutionrelative:neerajraiinfra\\views\\plot\\payment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|E:\\Tanishq\\Repository\\NeerajRaiInfraPrivateLimited\\neerajraiinfra\\models\\reports.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\neerajraiinfra\\models\\reports.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|solutionrelative:neerajraiinfra\\models\\reports.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|E:\\Tanishq\\Repository\\NeerajRaiInfraPrivateLimited\\neerajraiinfra\\views\\plot\\roiwalletnrialluserdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\neerajraiinfra\\controllers\\plotcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|solutionrelative:neerajraiinfra\\controllers\\plotcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|f:\\sakshipandey\\neerajraiinfraprivatelimited\\neerajraiinfra\\controllers\\associatedashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|solutionrelative:neerajraiinfra\\controllers\\associatedashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\neerajraiinfra\\models\\plot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|solutionrelative:neerajraiinfra\\models\\plot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\neerajraiinfra\\views\\plot\\plotallotment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|solutionrelative:neerajraiinfra\\views\\plot\\plotallotment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\neerajraiinfra\\views\\plot\\roiwalletnrialluserdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|solutionrelative:neerajraiinfra\\views\\plot\\roiwalletnrialluserdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\neerajraiinfra\\views\\adminreports\\closingwisenripayoutdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|solutionrelative:neerajraiinfra\\views\\adminreports\\closingwisenripayoutdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\neerajraiinfra\\controllers\\adminreportscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|solutionrelative:neerajraiinfra\\controllers\\adminreportscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\neerajraiinfra\\models\\connection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|solutionrelative:neerajraiinfra\\models\\connection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|f:\\sakshipandey\\neerajraiinfraprivatelimited\\neerajraiinfra\\views\\plot\\investmentnrireport.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|solutionrelative:neerajraiinfra\\views\\plot\\investmentnrireport.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|f:\\sakshipandey\\neerajraiinfraprivatelimited\\neerajraiinfra\\views\\admin\\nripayoutledger.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|solutionrelative:neerajraiinfra\\views\\admin\\nripayoutledger.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\neerajraiinfra\\views\\admin\\nripaypayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|solutionrelative:neerajraiinfra\\views\\admin\\nripaypayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\neerajraiinfra\\views\\admin\\nrirejectedpayment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|solutionrelative:neerajraiinfra\\views\\admin\\nrirejectedpayment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\neerajraiinfra\\views\\adminreports\\nripayoutdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|solutionrelative:neerajraiinfra\\views\\adminreports\\nripayoutdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\neerajraiinfra\\views\\shared\\associatelayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|solutionrelative:neerajraiinfra\\views\\shared\\associatelayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\neerajraiinfra\\views\\associatedashboard\\associatenripayoutdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|solutionrelative:neerajraiinfra\\views\\associatedashboard\\associatenripayoutdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\neerajraiinfra\\views\\plot\\payment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{99494C9F-A867-47BC-B21C-84D5BB226770}|NeerajraiInfra\\NeerajraiInfra.csproj|solutionrelative:neerajraiinfra\\views\\plot\\payment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,19 +78,257 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 41,
           "Children": [
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+              "Name": "ST:135:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:133:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:134:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:133:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:136:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:135:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:137:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:138:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:139:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:140:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:141:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:142:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:143:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:144:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:145:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:151:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:152:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:134:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
+              "Title": "AssociateDashboardController.cs",
+              "DocumentMoniker": "F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Controllers\\AssociateDashboardController.cs",
+              "RelativeDocumentMoniker": "NeerajraiInfra\\Controllers\\AssociateDashboardController.cs",
+              "ToolTip": "F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Controllers\\AssociateDashboardController.cs",
+              "RelativeToolTip": "NeerajraiInfra\\Controllers\\AssociateDashboardController.cs",
+              "ViewState": "AgIAAE0LAAAAAAAAAAAkwFkLAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-28T06:39:50.025Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "InvestmentNRIReport.cshtml",
+              "DocumentMoniker": "F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Views\\Plot\\InvestmentNRIReport.cshtml",
+              "RelativeDocumentMoniker": "NeerajraiInfra\\Views\\Plot\\InvestmentNRIReport.cshtml",
+              "ToolTip": "F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Views\\Plot\\InvestmentNRIReport.cshtml",
+              "RelativeToolTip": "NeerajraiInfra\\Views\\Plot\\InvestmentNRIReport.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-07-28T06:43:43.049Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ROIWalletNRIALlUserDetails.cshtml",
+              "DocumentMoniker": "F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Views\\Plot\\ROIWalletNRIALlUserDetails.cshtml",
+              "RelativeDocumentMoniker": "NeerajraiInfra\\Views\\Plot\\ROIWalletNRIALlUserDetails.cshtml",
+              "ToolTip": "F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Views\\Plot\\ROIWalletNRIALlUserDetails.cshtml",
+              "RelativeToolTip": "NeerajraiInfra\\Views\\Plot\\ROIWalletNRIALlUserDetails.cshtml",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAACUAAABKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-21T12:24:49.158Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "NRIPayoutLedger.cshtml",
+              "DocumentMoniker": "F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Views\\Admin\\NRIPayoutLedger.cshtml",
+              "RelativeDocumentMoniker": "NeerajraiInfra\\Views\\Admin\\NRIPayoutLedger.cshtml",
+              "ToolTip": "F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Views\\Admin\\NRIPayoutLedger.cshtml",
+              "RelativeToolTip": "NeerajraiInfra\\Views\\Admin\\NRIPayoutLedger.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-07-28T06:35:44.587Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "NRIRejectedPayment.cshtml",
+              "DocumentMoniker": "F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Views\\Admin\\NRIRejectedPayment.cshtml",
+              "RelativeDocumentMoniker": "NeerajraiInfra\\Views\\Admin\\NRIRejectedPayment.cshtml",
+              "ToolTip": "F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Views\\Admin\\NRIRejectedPayment.cshtml",
+              "RelativeToolTip": "NeerajraiInfra\\Views\\Admin\\NRIRejectedPayment.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-07-28T06:35:40.757Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "NRIPayPayout.cshtml",
+              "DocumentMoniker": "F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Views\\Admin\\NRIPayPayout.cshtml",
+              "RelativeDocumentMoniker": "NeerajraiInfra\\Views\\Admin\\NRIPayPayout.cshtml",
+              "ToolTip": "F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Views\\Admin\\NRIPayPayout.cshtml",
+              "RelativeToolTip": "NeerajraiInfra\\Views\\Admin\\NRIPayPayout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-07-28T06:35:34.503Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ClosingWiseNRIPayoutDetails.cshtml",
+              "DocumentMoniker": "F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Views\\AdminReports\\ClosingWiseNRIPayoutDetails.cshtml",
+              "RelativeDocumentMoniker": "NeerajraiInfra\\Views\\AdminReports\\ClosingWiseNRIPayoutDetails.cshtml",
+              "ToolTip": "F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Views\\AdminReports\\ClosingWiseNRIPayoutDetails.cshtml",
+              "RelativeToolTip": "NeerajraiInfra\\Views\\AdminReports\\ClosingWiseNRIPayoutDetails.cshtml",
+              "ViewState": "AgIAADUAAAAAAAAAAAAwwEkAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-17T12:59:32.393Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "AssociateLayout.cshtml",
+              "DocumentMoniker": "F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Views\\Shared\\AssociateLayout.cshtml",
+              "RelativeDocumentMoniker": "NeerajraiInfra\\Views\\Shared\\AssociateLayout.cshtml",
+              "ToolTip": "F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Views\\Shared\\AssociateLayout.cshtml",
+              "RelativeToolTip": "NeerajraiInfra\\Views\\Shared\\AssociateLayout.cshtml",
+              "ViewState": "AgIAAMAAAAAAAAAAAAAQwM8AAABrAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-17T10:04:08.565Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "AssociateNRIPayoutDetails.cshtml",
+              "DocumentMoniker": "F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Views\\AssociateDashboard\\AssociateNRIPayoutDetails.cshtml",
+              "RelativeDocumentMoniker": "NeerajraiInfra\\Views\\AssociateDashboard\\AssociateNRIPayoutDetails.cshtml",
+              "ToolTip": "F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Views\\AssociateDashboard\\AssociateNRIPayoutDetails.cshtml",
+              "RelativeToolTip": "NeerajraiInfra\\Views\\AssociateDashboard\\AssociateNRIPayoutDetails.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-17T10:03:02.647Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "NRIPayoutDetails.cshtml",
+              "DocumentMoniker": "F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Views\\AdminReports\\NRIPayoutDetails.cshtml",
+              "RelativeDocumentMoniker": "NeerajraiInfra\\Views\\AdminReports\\NRIPayoutDetails.cshtml",
+              "ToolTip": "F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Views\\AdminReports\\NRIPayoutDetails.cshtml",
+              "RelativeToolTip": "NeerajraiInfra\\Views\\AdminReports\\NRIPayoutDetails.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAABjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-17T10:00:54.702Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AdminReportsController.cs",
+              "DocumentMoniker": "F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Controllers\\AdminReportsController.cs",
+              "RelativeDocumentMoniker": "NeerajraiInfra\\Controllers\\AdminReportsController.cs",
+              "ToolTip": "F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Controllers\\AdminReportsController.cs",
+              "RelativeToolTip": "NeerajraiInfra\\Controllers\\AdminReportsController.cs",
+              "ViewState": "AgIAABwPAAAAAAAAAAAmwIsPAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-17T09:58:55.192Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
               "Title": "Payment.cshtml",
-              "DocumentMoniker": "E:\\Tanishq\\Repository\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Views\\Plot\\Payment.cshtml",
+              "DocumentMoniker": "F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Views\\Plot\\Payment.cshtml",
               "RelativeDocumentMoniker": "NeerajraiInfra\\Views\\Plot\\Payment.cshtml",
-              "ToolTip": "E:\\Tanishq\\Repository\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Views\\Plot\\Payment.cshtml",
+              "ToolTip": "F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Views\\Plot\\Payment.cshtml",
               "RelativeToolTip": "NeerajraiInfra\\Views\\Plot\\Payment.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -60,74 +338,66 @@
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "Plot.cs",
-              "DocumentMoniker": "E:\\Tanishq\\Repository\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Models\\Plot.cs",
+              "DocumentMoniker": "F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Models\\Plot.cs",
               "RelativeDocumentMoniker": "NeerajraiInfra\\Models\\Plot.cs",
-              "ToolTip": "E:\\Tanishq\\Repository\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Models\\Plot.cs",
+              "ToolTip": "F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Models\\Plot.cs",
               "RelativeToolTip": "NeerajraiInfra\\Models\\Plot.cs",
-              "ViewState": "AgIAAPUBAAAAAAAAAAAAAPoBAAAKAAAAAAAAAA==",
+              "ViewState": "AgIAAAcFAAAAAAAAAAAnwBgFAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-27T07:55:34.063Z"
+              "WhenOpened": "2026-05-27T07:55:34.063Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "PlotAllotment.cshtml",
-              "DocumentMoniker": "E:\\Tanishq\\Repository\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Views\\Plot\\PlotAllotment.cshtml",
+              "DocumentMoniker": "F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Views\\Plot\\PlotAllotment.cshtml",
               "RelativeDocumentMoniker": "NeerajraiInfra\\Views\\Plot\\PlotAllotment.cshtml",
-              "ToolTip": "E:\\Tanishq\\Repository\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Views\\Plot\\PlotAllotment.cshtml",
+              "ToolTip": "F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Views\\Plot\\PlotAllotment.cshtml",
               "RelativeToolTip": "NeerajraiInfra\\Views\\Plot\\PlotAllotment.cshtml",
-              "ViewState": "AgIAAGkDAAAAAAAAAAAQwIADAAALAAAAAAAAAA==",
+              "ViewState": "AgIAABQBAAAAAAAAAAAQwIADAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-05-27T07:59:20.902Z"
+              "WhenOpened": "2026-05-27T07:59:20.902Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 8,
               "Title": "Connection.cs",
-              "DocumentMoniker": "E:\\Tanishq\\Repository\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Models\\Connection.cs",
+              "DocumentMoniker": "F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Models\\Connection.cs",
               "RelativeDocumentMoniker": "NeerajraiInfra\\Models\\Connection.cs",
-              "ToolTip": "E:\\Tanishq\\Repository\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Models\\Connection.cs",
+              "ToolTip": "F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Models\\Connection.cs",
               "RelativeToolTip": "NeerajraiInfra\\Models\\Connection.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAABEAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABkAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-27T07:56:09.815Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
               "Title": "Reports.cs",
-              "DocumentMoniker": "E:\\Tanishq\\Repository\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Models\\Reports.cs",
+              "DocumentMoniker": "F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Models\\Reports.cs",
               "RelativeDocumentMoniker": "NeerajraiInfra\\Models\\Reports.cs",
-              "ToolTip": "E:\\Tanishq\\Repository\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Models\\Reports.cs",
+              "ToolTip": "F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Models\\Reports.cs",
               "RelativeToolTip": "NeerajraiInfra\\Models\\Reports.cs",
-              "ViewState": "AgIAAFsAAAAAAAAAAAAIwAIAAAAPAAAAAAAAAA==",
+              "ViewState": "AgIAAIcCAAAAAAAAAAD4v6ACAABWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-26T05:27:04.387Z"
+              "WhenOpened": "2026-05-26T05:27:04.387Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ROIWalletNRIALlUserDetails.cshtml",
-              "DocumentMoniker": "E:\\Tanishq\\Repository\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Views\\Plot\\ROIWalletNRIALlUserDetails.cshtml",
-              "RelativeDocumentMoniker": "NeerajraiInfra\\Views\\Plot\\ROIWalletNRIALlUserDetails.cshtml",
-              "ToolTip": "E:\\Tanishq\\Repository\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Views\\Plot\\ROIWalletNRIALlUserDetails.cshtml",
-              "RelativeToolTip": "NeerajraiInfra\\Views\\Plot\\ROIWalletNRIALlUserDetails.cshtml",
-              "ViewState": "AgIAAC8AAAAAAAAAAMBtwFUAAAD9AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-05-21T12:24:49.158Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "PlotController.cs",
-              "DocumentMoniker": "E:\\Tanishq\\Repository\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Controllers\\PlotController.cs",
+              "DocumentMoniker": "F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Controllers\\PlotController.cs",
               "RelativeDocumentMoniker": "NeerajraiInfra\\Controllers\\PlotController.cs",
-              "ToolTip": "E:\\Tanishq\\Repository\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Controllers\\PlotController.cs",
+              "ToolTip": "F:\\SakshiPandey\\NeerajRaiInfraPrivateLimited\\NeerajraiInfra\\Controllers\\PlotController.cs",
               "RelativeToolTip": "NeerajraiInfra\\Controllers\\PlotController.cs",
-              "ViewState": "AgIAAMAEAAAAAAAAAAAuwI0EAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAAHsTAAAAAAAAAAAnwIcTAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-20T06:53:53.995Z"
+              "WhenOpened": "2026-05-20T06:53:53.995Z",
+              "EditorCaption": ""
             }
           ]
         },
