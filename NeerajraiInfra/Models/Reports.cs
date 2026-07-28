@@ -22,6 +22,7 @@ namespace NeerajraiInfra.Models
         public List<Reports> lstEV { get; set; }
         public string UpdatedCouponRemarks { get; set; }
         public string BankDetailsSaved { get; set; }
+        public string BankDetails { get; set; }
 
 
 
@@ -623,22 +624,27 @@ namespace NeerajraiInfra.Models
                                       new SqlParameter("@EntryType",EntryType)
 
                                   };
-
+             
             DataSet ds = Connection.ExecuteQuery("GetEVBooking", para);
             return ds;
         }
         public DataSet GetInvestmentNRIDetailsList()
                 {
-                    SqlParameter[] para = {
-                new SqlParameter("@Pk_InvestId", DBNull.Value),
-                new SqlParameter("@CustomerID", DBNull.Value),
-                new SqlParameter("@AssociateID", DBNull.Value),
-                new SqlParameter("@CouponCode", DBNull.Value),
-                new SqlParameter("@FromDate", DBNull.Value),
-                new SqlParameter("@ToDate", DBNull.Value),
-                new SqlParameter("@PaymentStatus", DBNull.Value)
+            SqlParameter[] para = {
+    new SqlParameter("@Pk_InvestId", DBNull.Value),
 
-            };
+    new SqlParameter("@CustomerID", string.IsNullOrEmpty(UserID) ? (object)DBNull.Value : UserID),
+
+    new SqlParameter("@AssociateID", string.IsNullOrEmpty(LoginId) ? (object)DBNull.Value : LoginId),
+
+    new SqlParameter("@CouponCode", string.IsNullOrEmpty(CouponNumber) ? (object)DBNull.Value : CouponNumber),
+
+    new SqlParameter("@FromDate", string.IsNullOrEmpty(FromDate) ? (object)DBNull.Value : FromDate),
+
+    new SqlParameter("@ToDate", string.IsNullOrEmpty(ToDate) ? (object)DBNull.Value : ToDate),
+
+    new SqlParameter("@PaymentStatus", string.IsNullOrEmpty(PaymentStatus) ? (object)DBNull.Value : PaymentStatus)
+};
 
             DataSet ds = Connection.ExecuteQuery("GetInvestmentNRIList", para);
 
@@ -784,6 +790,8 @@ namespace NeerajraiInfra.Models
             SqlParameter[] para = { new SqlParameter("@FK_InvestmentID", FK_InvestmentID),
             new SqlParameter("@Fk_UserId", Fk_UserId),
             new SqlParameter("@Amount", Amount),
+            new SqlParameter("@TransactionNo", TransactionNo),
+            new SqlParameter("@TransactionDate", TransactionDate),
             new SqlParameter("@AddedBy", AddedBy),
             };
             DataSet ds = Connection.ExecuteQuery("PayROIAmount", para);

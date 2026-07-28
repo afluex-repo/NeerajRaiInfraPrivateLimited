@@ -4880,6 +4880,51 @@ namespace NeerajraiInfra.Controllers
                         obj.CouponStatus = r["CouponStatus"].ToString();
                         obj.UpdatedCouponRemarks = r["CouponUpdateRemarks"].ToString();
                         obj.BankDetailsSaved = r["BankDetailsSaved"].ToString();
+                        obj.BankDetails = r["BankDetails"].ToString();
+                        lst.Add(obj);
+                    }
+                    model.lstEV = lst;
+                }
+            }
+            return View(model);
+        }
+        [HttpPost]
+        [ActionName("InvestmentNRIReport")]
+        [OnAction(ButtonName = "btnSearch")]
+        public ActionResult SearchInvestmentNRIReport(Reports model)
+        {
+            List<Reports> lst = new List<Reports>();
+
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+
+            DataSet ds = model.GetInvestmentNRIDetailsList();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                {
+                    TempData["EVMessage"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+                else
+                {
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        Reports obj = new Reports();
+                        obj.Pk_InvestId = r["Pk_InvestId"].ToString();
+                        obj.CouponNumber = r["CouponCode"].ToString();
+                        obj.BookingDate = r["BookingDate"].ToString();
+                        obj.CustomerLoginID = r["CustomerDetails"].ToString();
+                        obj.AssociateLoginID = r["AssociateDetails"].ToString();
+                        obj.Amount = r["Amount"].ToString();
+                        obj.PaymentMode = r["PaymentMode"].ToString();
+                        obj.TransactionDetails = r["TransactionDetails"].ToString();
+                        obj.Remarks = r["Remarks"].ToString();
+                        obj.PaymentStatus = r["PaymentStatus"].ToString();
+                        obj.CouponStatus = r["CouponStatus"].ToString();
+                        obj.UpdatedCouponRemarks = r["CouponUpdateRemarks"].ToString();
+                        obj.BankDetailsSaved = r["BankDetailsSaved"].ToString();
+                        obj.BankDetails = r["BankDetails"].ToString();
                         lst.Add(obj);
                     }
                     model.lstEV = lst;
@@ -5024,6 +5069,12 @@ namespace NeerajraiInfra.Controllers
                         obj.CouponStatus = r["CouponStatus"].ToString();
                         obj.UpdatedCouponRemarks = r["CouponUpdateRemarks"].ToString();
                         obj.UserID = r["UserID"].ToString();
+                        obj.BankDetails = r["BankDetails"].ToString();
+                        obj.BankHolderName = r["BankHolderName"].ToString();
+                        obj.BankName = r["MemberBankName"].ToString();
+                        obj.MemberAccNo = r["MemberAccNo"].ToString();
+                        obj.BankBranch = r["MemberBranch"].ToString();
+                        obj.IFSCCode = r["IFSCCode"].ToString();
                         lst.Add(obj);
                     }
                     model.lstEV = lst;
@@ -5104,13 +5155,16 @@ namespace NeerajraiInfra.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public JsonResult PayROIAmount(int UserId, int InvestId, decimal Amount)
+        public JsonResult PayROIAmount(int UserId, int InvestId, decimal Amount,string TransactionNO,string TransactionDate)
         {
             try
             {
                 Reports model = new Reports();
                 model.FK_InvestmentID = InvestId.ToString();
                 model.Fk_UserId = UserId.ToString();
+                model.Amount = Amount.ToString();
+                model.TransactionNo = TransactionNO.ToString();
+                model.TransactionDate = TransactionDate.ToString();
                 model.Amount = Amount.ToString();
                 model.AddedBy = Session["Pk_AdminId"].ToString();
                 DataSet ds = model.PayROIAmount();

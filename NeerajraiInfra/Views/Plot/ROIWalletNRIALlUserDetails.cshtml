@@ -76,12 +76,18 @@
                                         <th>Coupon No.</th>
                                         <th>Booking Date</th>
                                         <th>Customer Detail</th>
-                                        <th>Associate Details</th>
-                                        <th>Investment Amount</th>
-                                        <th>PaymentMode</th>
-                                        <th>ROI Amount</th>
-                                        <th>Pay_Amount</th>
-
+                                        @*<th>Associate Details</th>*@
+                                        <th class="text-nowrap">Investment Amount</th>
+                                        @*<th>PaymentMode</th>*@
+                                    <th class="text-nowrap">Bank Holder Name</th>
+                                    <th class="text-nowrap">Member Bank Name</th>
+                                    <th class="text-nowrap">Member AccNo</th>
+                                    <th class="text-nowrap">Member Branch</th>
+                                    <th class="text-nowrap">IFSC Code</th>
+                                        <th class="text-nowrap">ROI Amount</th>
+                                        <th class="text-nowrap">Pay Amount</th>
+                                        <th class="text-nowrap">Transaction No</th>
+                                        <th class="text-nowrap">Transaction Date</th>
                                         @*<th>Transaction Details</th>
                         <th>Payment Remarks</th>
                         <th>Payment Status</th>*@
@@ -104,11 +110,22 @@
                                                     <td>@Item.CouponNumber</td>
                                                     <td>@Item.BookingDate</td>
                                                     <td class="text-nowrap">@Item.CustomerLoginID</td>
-                                                    <td class="text-nowrap">@Item.AssociateLoginID</td>
+                                                    @*<td class="text-nowrap">@Item.AssociateLoginID</td>*@
                                                     <td>@Item.Amount</td>
-                                                    <td>@Item.PaymentMode</td>
+                                                    @*<td>@Item.PaymentMode</td>*@
+                                                    <td class="text-nowrap">@Item.BankHolderName</td>
+                                                    <td class="text-nowrap">@Item.BankName</td>
+                                                    <td class="text-nowrap">@Item.MemberAccNo</td>
+                                                    <td class="text-nowrap">@Item.BankBranch</td>
+                                                    <td class="text-nowrap">@Item.IFSCCode</td>
                                                     <td>@Item.ROIAmount</td>
-                                                    <td><input type="text" name="PayROIAmount" class="form-control form-control-sm payROIAmount" /></td>
+                                                    <td><input type="text" name="PayROIAmount" class="form-control form-control-sm payROIAmount" placeholder="Enter pay Amount" /></td>
+                                                    <td>
+                                                        <input type="text" name="TransactionNO" class="form-control form-control-sm transactionNO" placeholder="Transaction no"/>
+                                                    </td>
+                                                    <td>
+                                                        <input type="date" class="form-control transactionDate" id="txttransdate" name="TransactionDate" placeholder="Transaction date"/>
+                                                    </td>
                                                     @*<td>@Item.TransactionDetails</td>
                                     <td>@Item.Remarks</td>
                                     <td>@Item.PaymentStatus</td>*@
@@ -149,10 +166,20 @@
 
         var row = $(btn).closest('tr');
         var amount = row.find('.payROIAmount').val();
+        var transNO = row.find('.transactionNO').val();
+        var transDate = row.find('.transactionDate').val();
         if (amount == null || amount.trim() == "") {
             alert("Please enter Pay ROI Amount");
             return false;
         }
+        if (transNO == null || transNO.trim() == "") {
+            alert("Please enter transaction no");
+            return false;
+        }
+        if (transDate == null || transDate.trim() == "") {
+            alert("Please enter transaction date");
+            return false;
+        } 
 
         if (!confirm("Are you sure you want to pay ROI?")) {
             return false;
@@ -164,7 +191,9 @@
             data: {
                 UserId: userId,
                 InvestId: investId,
-                Amount: amount
+                Amount: amount,
+                TransactionNO: transNO,
+                TransactionDate: transDate,
             },
             success: function (response) {
                 if (response.success) {

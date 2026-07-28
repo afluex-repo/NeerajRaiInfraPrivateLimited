@@ -513,6 +513,19 @@ namespace NeerajraiInfra.Models
             DataSet ds = Connection.ExecuteQuery("NRIPayoutDetails", para);
             return ds;
         }
+        public DataSet NRIPayoutDetailsByAssosiate()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@Fk_Userid", AssociateID),
+                  new SqlParameter("@PayoutNo", PayOutNo),
+                    new SqlParameter("@FromDate", FromDate),
+                     new SqlParameter("@ToDate", ToDate),
+                      new SqlParameter("@LoginId", LoginId),
+
+                                      };
+            DataSet ds = Connection.ExecuteQuery("NRIPayoutDetailsByAssosiate", para);
+            return ds;
+        }
         public DataSet AssociateNRIPayoutDetails()
         {
             SqlParameter[] para = {
