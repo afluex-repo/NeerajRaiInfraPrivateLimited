@@ -785,6 +785,16 @@ namespace NeerajraiInfra.Models
             DataSet ds = Connection.ExecuteQuery("SaveBankDetails", para);
             return ds;
         }
+
+        public DataSet GetBankDetails()
+        {
+            SqlParameter[] para =
+            {
+        new SqlParameter("@Pk_InvestId", Pk_InvestId)
+        };
+
+            return Connection.ExecuteQuery("GetBankDetails", para);
+        }
         public DataSet PayROIAmount()
         {
             SqlParameter[] para = { new SqlParameter("@FK_InvestmentID", FK_InvestmentID),

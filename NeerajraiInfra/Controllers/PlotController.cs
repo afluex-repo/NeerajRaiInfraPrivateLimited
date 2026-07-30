@@ -4888,6 +4888,8 @@ namespace NeerajraiInfra.Controllers
             }
             return View(model);
         }
+
+
         [HttpPost]
         [ActionName("InvestmentNRIReport")]
         [OnAction(ButtonName = "btnSearch")]
@@ -4932,6 +4934,8 @@ namespace NeerajraiInfra.Controllers
             }
             return View(model);
         }
+
+
 
         public ActionResult PrintNRIInvestmentBooking(Plot newdata, string PrintId)
         {
@@ -5154,6 +5158,33 @@ namespace NeerajraiInfra.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+
+
+
+        public JsonResult GetBankDetails(string InvestmentId)
+        {
+            Reports model = new Reports();
+            model.Pk_InvestId = InvestmentId;
+
+            DataSet ds = model.GetBankDetails();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                return Json(new
+                {
+                    Result = "1",
+                    BankHolderName = ds.Tables[0].Rows[0]["BankHolderName"].ToString(),
+                    BankName = ds.Tables[0].Rows[0]["MemberBankName"].ToString(),
+                    AccountNumber = ds.Tables[0].Rows[0]["MemberAccNo"].ToString(),
+                    IFSCCode = ds.Tables[0].Rows[0]["IFSCCode"].ToString(),
+                    BranchName = ds.Tables[0].Rows[0]["MemberBranch"].ToString()
+                }, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(new { Result = "0" }, JsonRequestBehavior.AllowGet);
+        }
+
+
         [HttpPost]
         public JsonResult PayROIAmount(int UserId, int InvestId, decimal Amount,string TransactionNO,string TransactionDate)
         {
