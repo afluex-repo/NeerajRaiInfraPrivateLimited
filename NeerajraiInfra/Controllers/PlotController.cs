@@ -4888,6 +4888,8 @@ namespace NeerajraiInfra.Controllers
             }
             return View(model);
         }
+
+
         [HttpPost]
         [ActionName("InvestmentNRIReport")]
         [OnAction(ButtonName = "btnSearch")]
@@ -4932,6 +4934,8 @@ namespace NeerajraiInfra.Controllers
             }
             return View(model);
         }
+
+
 
         public ActionResult PrintNRIInvestmentBooking(Plot newdata, string PrintId)
         {
@@ -5026,8 +5030,21 @@ namespace NeerajraiInfra.Controllers
         {
             List<Reports> lst = new List<Reports>();
 
-            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
-            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+
+            // Booking Date Filter
+            if (!string.IsNullOrEmpty(model.BookingDate))
+            {
+                // HTML5 date input yyyy-MM-dd format bhejta hai
+                model.FromDate = Convert.ToDateTime(model.BookingDate).ToString("yyyy-MM-dd");
+                model.ToDate = Convert.ToDateTime(model.BookingDate).ToString("yyyy-MM-dd");
+            }
+            else
+            {
+                model.FromDate = null;
+                model.ToDate = null;
+            }
+            //model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+           // model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
 
             DataSet ds = model.GetROINRIDetailsList();
 
@@ -5069,6 +5086,12 @@ namespace NeerajraiInfra.Controllers
             }
             return View(model);
         }
+
+
+
+
+
+
 
         public ActionResult ROIWalletNRIReport(long Id)
         {
@@ -5135,6 +5158,33 @@ namespace NeerajraiInfra.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+
+
+
+        public JsonResult GetBankDetails(string InvestmentId)
+        {
+            Reports model = new Reports();
+            model.Pk_InvestId = InvestmentId;
+
+            DataSet ds = model.GetBankDetails();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                return Json(new
+                {
+                    Result = "1",
+                    BankHolderName = ds.Tables[0].Rows[0]["BankHolderName"].ToString(),
+                    BankName = ds.Tables[0].Rows[0]["MemberBankName"].ToString(),
+                    AccountNumber = ds.Tables[0].Rows[0]["MemberAccNo"].ToString(),
+                    IFSCCode = ds.Tables[0].Rows[0]["IFSCCode"].ToString(),
+                    BranchName = ds.Tables[0].Rows[0]["MemberBranch"].ToString()
+                }, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(new { Result = "0" }, JsonRequestBehavior.AllowGet);
+        }
+
+
         [HttpPost]
         public JsonResult PayROIAmount(int UserId, int InvestId, decimal Amount,string TransactionNO,string TransactionDate)
         {

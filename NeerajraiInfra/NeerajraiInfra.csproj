@@ -38,7 +38,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <IntermediateOutputPath>C:\Users\u1\AppData\Local\Temp\vs328A.tmp\Debug\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\MUTILEVEL COMPUTER\AppData\Local\Temp\vsE733.tmp\Debug\</IntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -47,7 +47,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <IntermediateOutputPath>C:\Users\u1\AppData\Local\Temp\vs328A.tmp\Release\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\MUTILEVEL COMPUTER\AppData\Local\Temp\vsE733.tmp\Release\</IntermediateOutputPath>
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>

@@ -172,9 +172,11 @@
                                                     <td>
                                                         @if (Item.BankDetailsSaved == "1")
                                                         {
-                                                            @*<button type="button" class="btn btn-primary" disabled>
-                                                                Add Details
-                                                            </button>*@
+                                                           <button type="button"
+                                                                   class="btn btn-warning"
+                                                                   onclick="openBankModalForUpdate(@Item.Pk_InvestId)">
+                                                               Update Details
+                                                           </button>
                                                         }
                                                         else
                                                         {
@@ -339,5 +341,40 @@
 
 
         closeBankModal();
+    }
+
+    function openBankModalForUpdate(Pk_InvestId) {
+
+        $('#InvestmentId').val(Pk_InvestId);
+
+        $.ajax({
+            url: '/Plot/GetBankDetails',
+            type: 'GET',
+            data: { InvestmentId: Pk_InvestId },
+            success: function (data) {
+
+                if (data.Result == "1") {
+
+                    $('input[name="BankHolderName"]').val(data.BankHolderName);
+                    $('input[name="BankName"]').val(data.BankName);
+                    $('input[name="AccountNumber"]').val(data.AccountNumber);
+                    $('input[name="IFSCCode"]').val(data.IFSCCode);
+                    $('input[name="BranchName"]').val(data.BranchName);
+
+                }
+                else {
+
+                    $('input[name="BankHolderName"]').val('');
+                    $('input[name="BankName"]').val('');
+                    $('input[name="AccountNumber"]').val('');
+                    $('input[name="IFSCCode"]').val('');
+                    $('input[name="BranchName"]').val('');
+
+                }
+
+                $('#bankModal').modal('show');
+            }
+        });
+
     }
 </script>

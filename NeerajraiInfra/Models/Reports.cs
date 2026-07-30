@@ -650,22 +650,49 @@ namespace NeerajraiInfra.Models
 
             return ds;
         }
+        //public DataSet GetROINRIDetailsList()
+        //        {
+        //            SqlParameter[] para = {
+        //        new SqlParameter("@Pk_InvestId", DBNull.Value),
+        //        new SqlParameter("@CustomerID", DBNull.Value),
+        //        new SqlParameter("@AssociateID", AssociateID),
+        //        new SqlParameter("@CouponCode", DBNull.Value),
+        //        new SqlParameter("@FromDate", DBNull.Value),
+        //        new SqlParameter("@ToDate", DBNull.Value),
+        //        new SqlParameter("@PaymentStatus", DBNull.Value)
+
+        //    };
+
+        //    DataSet ds = Connection.ExecuteQuery("GetROINRIList", para);
+
+        //    return ds;
+        //}
+
         public DataSet GetROINRIDetailsList()
-                {
-                    SqlParameter[] para = {
-                new SqlParameter("@Pk_InvestId", DBNull.Value),
-                new SqlParameter("@CustomerID", DBNull.Value),
-                new SqlParameter("@AssociateID", AssociateID),
-                new SqlParameter("@CouponCode", DBNull.Value),
-                new SqlParameter("@FromDate", DBNull.Value),
-                new SqlParameter("@ToDate", DBNull.Value),
-                new SqlParameter("@PaymentStatus", DBNull.Value)
+        {
+            SqlParameter[] para =
+            {
+        new SqlParameter("@Pk_InvestId",
+            string.IsNullOrEmpty(Pk_InvestId) ? (object)DBNull.Value : Pk_InvestId),
 
-            };
+        new SqlParameter("@CustomerID",
+            string.IsNullOrEmpty(Customername) ? (object)DBNull.Value : Customername),
 
-            DataSet ds = Connection.ExecuteQuery("GetROINRIList", para);
+        new SqlParameter("@AssociateID",
+            string.IsNullOrEmpty(AssociateID) ? (object)DBNull.Value : AssociateID),
 
-            return ds;
+        new SqlParameter("@CouponCode", DBNull.Value),
+
+        new SqlParameter("@FromDate",
+            string.IsNullOrEmpty(FromDate) ? (object)DBNull.Value : FromDate),
+
+        new SqlParameter("@ToDate",
+            string.IsNullOrEmpty(ToDate) ? (object)DBNull.Value : ToDate),
+
+        new SqlParameter("@PaymentStatus", DBNull.Value)
+       };
+
+            return Connection.ExecuteQuery("GetROINRIList", para);
         }
 
         public DataSet GetInvestmentNRIDetailsListBYAddedBy()
@@ -757,6 +784,16 @@ namespace NeerajraiInfra.Models
             
             DataSet ds = Connection.ExecuteQuery("SaveBankDetails", para);
             return ds;
+        }
+
+        public DataSet GetBankDetails()
+        {
+            SqlParameter[] para =
+            {
+        new SqlParameter("@Pk_InvestId", Pk_InvestId)
+        };
+
+            return Connection.ExecuteQuery("GetBankDetails", para);
         }
         public DataSet PayROIAmount()
         {
